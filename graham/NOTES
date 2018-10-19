@@ -1,6 +1,6 @@
 On DESY
 
-source ~/gitwork/init_ilcsoft_v02-00-02.sh
+source ~/gitwork/ilcsoft_v02-00-02.sh
 
 Navigate to ILDbench_WWqqlnu directory
 

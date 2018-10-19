@@ -283,15 +283,19 @@ int WWAnalysis::getLeptonJetCharge( ReconstructedParticle* ljet ){
 void WWAnalysis::getAngleOfljetandMCLepton(){
 	TVector3 ljet( _jets.at(ljet_index)->getMomentum()[0], _jets.at(ljet_index)->getMomentum()[1], _jets.at(ljet_index)->getMomentum()[2] ); 
 	
-	int mclindex;
+	int mclindex=-1;
 	for(int i=0; i<4; i++){
 		if( abs(_MCfpdg[i]) == 13 || abs(_MCfpdg[i])== 15){
 			mclindex = i;
 		}
 	}
-	TVector3 mcl( _MCf[mclindex]->Px(), _MCf[mclindex]->Py(), _MCf[mclindex]->Pz() );
-
-	psi_mcl_ljet = ljet.Dot(mcl)/( ljet.Mag() * mcl.Mag());
+        if(mclindex!=-1){
+           TVector3 mcl( _MCf[mclindex]->Px(), _MCf[mclindex]->Py(), _MCf[mclindex]->Pz() );
+	   psi_mcl_ljet = ljet.Dot(mcl)/( ljet.Mag() * mcl.Mag());
+        }
+        else{
+           psi_mcl_ljet = -1.0;    // Set default value of -1 if no muon or tau found
+        }
 	
 }
 bool WWAnalysis::allChildrenAreSimulation(MCParticle* p){
