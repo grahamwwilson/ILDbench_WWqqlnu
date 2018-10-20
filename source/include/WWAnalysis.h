@@ -74,6 +74,8 @@ using namespace lcio;
   bool allChildrenAreSimulation(MCParticle* p);
   void analyzeLeadingTracks();
 
+  void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus);
+
   //classify the type of lepton decay and retrieve the
   //mcparticles for qqlnu
 //  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq);
@@ -115,6 +117,9 @@ using namespace lcio;
   bool isMuon;
  //the true lepton charge
   int trueq;
+  unsigned int _nJets;
+  float _yMinus;
+  float _yPlus;
 
 //Lepton Jet variables
  //index of the identified lepton on jet vector

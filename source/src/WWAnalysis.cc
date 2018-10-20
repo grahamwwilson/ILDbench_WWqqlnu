@@ -134,6 +134,9 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	 name << "_PDG";
 	 _tree->Branch(name.str().c_str(), &_MCfpdg[i], (name.str()+"/I").c_str());
        }
+     _tree->Branch("nJets",&_nJets, "nJets/i");
+     _tree->Branch("yMinus",&_yMinus, "yMinus/F");
+     _tree->Branch("yPlus",&_yPlus, "yPlus/F");
 }
 
 void WWAnalysis::processRunHeader( LCRunHeader* run) {
@@ -208,6 +211,18 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
    
 	return collectionFound;
 }
+
+/* Evaluates jet collection variables for the TTree */
+void WWAnalysis::EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus){
+
+        nJets = _jets.size();
+        yMinus = evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" );
+        yPlus  = evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" );
+//        yMinus = 0.0f;
+//        yPlus  = 0.0f;
+
+}
+
 /* identifies the lepton jet with the minimum particle multiplicity */
 int WWAnalysis::identifyLeptonJet( std::vector<ReconstructedParticle*> jets){
 
@@ -223,8 +238,9 @@ int WWAnalysis::identifyLeptonJet( std::vector<ReconstructedParticle*> jets){
 	}
 	
 	return indexofminjet;
-
 }
+
+
 int WWAnalysis::identifyLeptonJet_bySeparation(std::vector<ReconstructedParticle*> jets){
 
 	double pi = 3.14159;
@@ -532,8 +548,6 @@ void WWAnalysis::analyzeLeadingTracks(){
 /* also tallies the number of muon/electron/tau events */
 /* also retrieves the mcparticle which has daughters qqlnu */
 MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[4], int (&_MCfpdg)[4]){
-
-//MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]){
 	
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -842,6 +856,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
  FindMCParticles(evt);
  FindJets(evt);
+ EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus);
  std::cout << "======================================== event " << nEvt << std::endl ;
 
 
