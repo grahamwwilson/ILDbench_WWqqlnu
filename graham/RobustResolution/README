@@ -1,0 +1,11 @@
+example.cpp explores the various statistics
+
+run.sh makes the executable and analyses 5 data-sets 
+
+(three toy MC ones - that are generated here, 
+ and two provided reconstructed MC samples).
+
+Not all statistics have been fully calibrated in terms of Gaussian consistency and 
+small sample correction. 
+
+Graham W. Wilson,  October 20th, 2018.
