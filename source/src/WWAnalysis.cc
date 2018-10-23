@@ -59,6 +59,13 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								weight,
 								(double) 1.0);
 
+	registerProcessorParameter("Njets",
+								"number of jets",
+								_njets,
+								(int) 3);
+
+
+
 }
 
 void WWAnalysis::init() {
@@ -177,6 +184,16 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	 name << "_PDG";
 	 _tree->Branch(name.str().c_str(), &_MCfpdg[i], (name.str()+"/I").c_str());
        }
+	
+	//add jet TLVS to 
+	std::vector<TLorentzVector*> temp(_njets);
+	jets = temp;
+	for(int i=0; i<jets.size(); i++){
+		jets.at(i) = new TLorentzVector();
+		std::stringstream name;
+		name << "jet"<<i;
+		_tree->Branch(name.str().c_str(),"TLorentzVector", &jets.at(i),16000,0);
+	}
 
 	_tree->Branch("tauDecayMode",&tauDecayMode,"tauDecayMode/I");
 	_tree->Branch("lepTrackMult",&lnmctracks,"lepTrackMult/I");
@@ -350,7 +367,7 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
 }
 /* Evaluates jet collection variables for the TTree */
 void WWAnalysis::EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus){
-        nJets = _jets.size();
+       // nJets = _jets.size();
         yMinus = std::log( evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
         yPlus  = std::log(evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 //        yMinus = 0.0f;
@@ -894,32 +911,32 @@ void WWAnalysis::classifyTauDecay(MCParticle* mctau){
 /* populate the tlvs based on the identified lepton jet */
 void WWAnalysis::populateTLVs(int lindex){
 
-	std::vector<TLorentzVector*> tempjets(_jets.size());
+//	std::vector<TLorentzVector*> tempjets(_jets.size());
 	for(unsigned int i=0; i<_jets.size(); i++){
 	
-		TLorentzVector* j = new TLorentzVector();
-		j->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
+	//	TLorentzVector* j = new TLorentzVector();
+		jets->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
 		tempjets.at(i) = j;
 
 		std::cout<<_jets.at(i)->getMomentum()[0]<<" "<< _jets.at(i)->getMomentum()[1]<<" "<<_jets.at(i)->getMomentum()[2]<< " "<< _jets.at(i)->getMass()<<std::endl;
 	}
 	
 	//save the tlv vector globally
-	jets = tempjets;
+	//jets = tempjets;
 	
 	//Wl = new TLorentzVector();
 	Wqq = new TLorentzVector();
 	TLorentzVector temp1;
 
 	//loop over the new tlv jets and make wl and wqq
-	for(unsigned int i=0; i<tempjets.size(); i++){
+	for(unsigned int i=0; i<jets.size(); i++){
 		if( i == lindex ){
 			//right now Wl will be missing its neutrino
 			Wl = new TLorentzVector();
-			Wl->SetXYZM( tempjets.at(i)->Px(), tempjets.at(i)->Py(), tempjets.at(i)->Pz(), tempjets.at(i)->M());
+			Wl->SetXYZM( jets.at(i)->Px(), jets.at(i)->Py(), jets.at(i)->Pz(), jets.at(i)->M());
 		}
 		else{
-			temp1 += *tempjets.at(i);
+			temp1 += *jets.at(i);
 		}
 	}
 	Wqq->SetXYZM(temp1.Px(), temp1.Py(), temp1.Pz(), temp1.M() );
