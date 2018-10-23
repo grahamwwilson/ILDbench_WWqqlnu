@@ -187,7 +187,7 @@ using namespace lcio;
   double leadingd0relerrqjet; //relative error of d0 of leading track in lepton jet
 
 	//jet y variabls //log jet variables
-  unsigned int _nJets;
+  int _nJets;
   float _yMinus;
   float _yPlus;
 
