@@ -62,7 +62,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 	registerProcessorParameter("Njets",
 								"number of jets from fast jet",
 								_nJets,
-								(int) 3);
+								(unsigned int) 3);
 
 
 
