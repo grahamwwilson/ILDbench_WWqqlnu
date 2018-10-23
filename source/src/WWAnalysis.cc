@@ -61,7 +61,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 	registerProcessorParameter("Njets",
 								"number of jets",
-								_njets,
+								_nJets,
 								(int) 3);
 
 
@@ -186,7 +186,7 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
        }
 	
 	//add jet TLVS to 
-	std::vector<TLorentzVector*> temp(_njets);
+	std::vector<TLorentzVector*> temp(_nJets);
 	jets = temp;
 	for(int i=0; i<jets.size(); i++){
 		jets.at(i) = new TLorentzVector();
