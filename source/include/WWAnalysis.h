@@ -80,7 +80,7 @@ using namespace lcio;
   void exploreDaughterParticles(MCParticle* p, std::vector<MCParticle*>& FSP);
   bool allChildrenAreSimulation(MCParticle* p);
   void analyzeLeadingTracks();
-  void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus); 
+  void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, int& nJets, float& yMinus, float& yPlus); 
 
   //classify the type of lepton decay and retrieve the
   //mcparticles for qqlnu
