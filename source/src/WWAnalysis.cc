@@ -521,8 +521,9 @@ void WWAnalysis::getMultiplicityOfTrueljet(){
 			ntracks++;
 		}
 	}	
-	trueljetntracks = ntracks
+	trueljetntracks = ntracks;
 }
+
 bool WWAnalysis::allChildrenAreSimulation(MCParticle* p){
 	std::vector<MCParticle*> d = p->getDaughters();
 	bool flag = true;
