@@ -118,7 +118,7 @@ using namespace lcio;
 
   //TLorentzVector* _MCf[nferm];
   //int _MCfpdg[nferm];
-	std::vector<TLorentzVector> _MCf;
+	std::vector<TLorentzVector*> _MCf;
 	std::vector<int> _MCfpdg;
 
 //event number
