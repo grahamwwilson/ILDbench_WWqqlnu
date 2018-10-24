@@ -20,7 +20,7 @@
 
 #define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
-#define nferm 4
+//#define nferm 4
 
 using namespace lcio;
 
@@ -85,8 +85,10 @@ using namespace lcio;
   //classify the type of lepton decay and retrieve the
   //mcparticles for qqlnu
 //  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq);
-  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
-  MCParticle* classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+//  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+	MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCfpdg);
+//  MCParticle* classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+	MCParticle* classifyEvent( std::vector<TLorentzVector*>& _MCf, std::vector<TLorentzVector*>& _MCfpdg );
 //  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]);
 
 	//event selection variables
@@ -114,8 +116,10 @@ using namespace lcio;
 //  float _xsec;
 //  TString *_Process;
 
-  TLorentzVector* _MCf[nferm];
-  int _MCfpdg[nferm];
+  //TLorentzVector* _MCf[nferm];
+  //int _MCfpdg[nferm];
+	std::vector<TLorentzVector> _MCf;
+	std::vector<int> _MCfpdg;
 
 //event number
   int nEvt{};

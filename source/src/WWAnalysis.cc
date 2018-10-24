@@ -175,14 +175,19 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
      _tree->Branch("isTau", &isTau, "isTau/O");
      _tree->Branch("leptonCharge", &trueq,"leptonCharge/I");
 
-     for(int i = 0 ; i < nferm ; i++)
+	//init vector size
+	std::vector<TLorentzVector*> tempmcf(_nfermions);
+	_MCf = tempmcf;
+	std::vector<int> tempmcfpdg(_nfermions);
+	_MCfpdg = tempmcfpdg;
+     for(int i = 0 ; i < _nfermions ; i++)
        {
-	 _MCf[i] = new TLorentzVector();
+	 _MCf.at(i) = new TLorentzVector();
 	 std::stringstream name;
 	 name << "MCf" << i;
 	 _tree->Branch(name.str().c_str(),"TLorentzVector",&_MCf[i],16000,0);
 	 name << "_PDG";
-	 _tree->Branch(name.str().c_str(), &_MCfpdg[i], (name.str()+"/I").c_str());
+	 _tree->Branch(name.str().c_str(), &_MCfpdg.at(i), (name.str()+"/I").c_str());
        }
 	
 	//add jet TLVS to 
@@ -194,6 +199,7 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 		name << "jet"<<i;
 		_tree->Branch(name.str().c_str(),"TLorentzVector", &jets.at(i),16000,0);
 	}
+
 
 	_tree->Branch("tauDecayMode",&tauDecayMode,"tauDecayMode/I");
 	_tree->Branch("lepTrackMult",&lnmctracks,"lepTrackMult/I");
@@ -470,7 +476,7 @@ void WWAnalysis::getAngleOfljetandMCLepton(){
 	TVector3 ljet( _jets.at(ljet_index)->getMomentum()[0], _jets.at(ljet_index)->getMomentum()[1], _jets.at(ljet_index)->getMomentum()[2] ); 
 	
 	int mclindex = -1;
-	for(int i=0; i<nferm; i++){
+	for(int i=0; i<_nfermions; i++){
 		if( abs(_MCfpdg[i]) == 13 || abs(_MCfpdg[i])== 15){
 			mclindex = i;
 		}
@@ -711,8 +717,8 @@ void WWAnalysis::analyzeLeadingTracks(){
 /* classify the the event based on the type of lepton in MCParticle info, also set the true charge for that lepton */
 /* also tallies the number of muon/electron/tau events */
 /* also retrieves the mcparticle which has daughters qqlnu */
-MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
-
+//MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
+MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector>& _MCf, std::vector<int>& _MCfpdg){
 //MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]){
 	
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
@@ -810,8 +816,8 @@ MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLo
 
 }
 /* deal with 2f backgrounds */
-MCParticle* WWAnalysis::classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
-	
+//MCParticle* WWAnalysis::classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
+MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCFpdg){
 	for(int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
 		std::vector<int> daughterpdgs{};
