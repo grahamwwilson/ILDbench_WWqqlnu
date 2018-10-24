@@ -500,7 +500,7 @@ int WWAnalysis::getJetNearMCLepton(){
 	double angle;
 	int minindex = -1;
 	for(unsigned int i=0; i<_jets.size(); i++){
-		angle = getAngleofjetandMCLepton(i);
+		angle = getAngleOfjetandMCLepton(i);
 		if( angle < minangle ){
 			minangle = angle;
 			minindex = i;
@@ -515,7 +515,7 @@ void WWAnalysis::getMultiplicityOfTrueljet(){
 	std::vector<ReconstructedParticle*> d;
 	p = _jets.at(true_ljet_index);
 	d = p->getParticles();
-	for(unsigned int = 0; i<d.size(); i++){
+	for(unsigned int i = 0; i<d.size(); i++){
 		if(d.at(i)->getCharge() != 0){
 			//found a charged pfo
 			ntracks++;
