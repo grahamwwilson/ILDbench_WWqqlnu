@@ -76,6 +76,7 @@
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />  
 		<parameter name="Normalization" value="0.784017" />
+		<parameter name="Njets" value="3" />
 		
  	</processor>
 
