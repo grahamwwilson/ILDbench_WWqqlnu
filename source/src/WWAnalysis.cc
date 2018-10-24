@@ -718,7 +718,7 @@ void WWAnalysis::analyzeLeadingTracks(){
 /* also tallies the number of muon/electron/tau events */
 /* also retrieves the mcparticle which has daughters qqlnu */
 //MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
-MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector>& _MCf, std::vector<int>& _MCfpdg){
+MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCfpdg){
 //MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]){
 	
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
