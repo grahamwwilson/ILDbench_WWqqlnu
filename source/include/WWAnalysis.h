@@ -69,7 +69,9 @@ using namespace lcio;
   // lepton jet functions
   int identifyLeptonJet( std::vector<ReconstructedParticle*> jets);
   int identifyLeptonJet_bySeparation(std::vector<ReconstructedParticle*> jets);
-  void getAngleOfljetandMCLepton();
+  double getAngleOfjetandMCLepton(int jet_index);
+  int getJetNearMCLepton(); //return index of jet closest to mclepton
+  void  getMultiplicityOfTrueljet();
   void classifyTauDecay(MCParticle* mctau);
   MCParticle* getMClepton(MCParticle* parent);
 
@@ -144,6 +146,8 @@ using namespace lcio;
   int ljet_index;
  //the assigned charge for identifed lepton jet
   int lq;
+ //the index of the jet which is closest to the true mc lepton
+  int true_ljet_index;
 
 //tallies for the number of each type of true lepton per event
   int ntau=0;
@@ -184,6 +188,10 @@ using namespace lcio;
   double leadingptljet; //pt of the leading track in the lepton jet
   double leadingd0ljet; //d0 of the leading track in the lepton jet
   double leadingd0relerrljet; //relative error of d0 of leading track in lepton jet
+
+  int trueljetntracks; //number of tracks in the jet matched with true lepton 
+  int jetleastntracks; //number of tracks in the jet with the least tracks
+  int jetleastntracks_index;
 
 
   double leadingptqjet; //pt of the leading track in a quark jet

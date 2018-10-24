@@ -224,6 +224,10 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	_tree->Branch("total_E",&total_E,"total_E/D");
 	_tree->Branch("total_M",&total_M,"total_M/D");
 
+	_tree->Branch("jetleastntracks",&jetleastntracks,"jetleastntracks/I");
+	_tree->Branch("trueljetntracks",&trueljetntracks,"trueljetntracks/I");
+
+
 }
 
 void WWAnalysis::processRunHeader( LCRunHeader* run) {
@@ -472,8 +476,8 @@ int WWAnalysis::getLeptonJetCharge( ReconstructedParticle* ljet ){
 	return leadingcharge;
 
 }
-void WWAnalysis::getAngleOfljetandMCLepton(){
-	TVector3 ljet( _jets.at(ljet_index)->getMomentum()[0], _jets.at(ljet_index)->getMomentum()[1], _jets.at(ljet_index)->getMomentum()[2] ); 
+double WWAnalysis::getAngleOfjetandMCLepton(int jet_index){
+	TVector3 jet( _jets.at(jet_index)->getMomentum()[0], _jets.at(jet_index)->getMomentum()[1], _jets.at(jet_index)->getMomentum()[2] ); 
 	
 	int mclindex = -1;
 	for(int i=0; i<_nfermions; i++){
@@ -483,14 +487,42 @@ void WWAnalysis::getAngleOfljetandMCLepton(){
 	}
 	 if(mclindex!=-1){
            TVector3 mcl( _MCf[mclindex]->Px(), _MCf[mclindex]->Py(), _MCf[mclindex]->Pz() );
-	   psi_mcl_ljet = ljet.Dot(mcl)/( ljet.Mag() * mcl.Mag());
+	    return jet.Dot(mcl)/( jet.Mag() * mcl.Mag());
         }
         else{
-           psi_mcl_ljet = -1.0;    // Set default value of -1 if no muon or tau found
+           return -1.0;    // Set default value of -1 if no muon or tau found
         }
 	
 }
-
+int WWAnalysis::getJetNearMCLepton(){
+		
+	double minangle = 99999;
+	double angle;
+	int minindex = -1;
+	for(unsigned int i=0; i<_jets.size(); i++){
+		angle = getAngleofjetandMCLepton(i);
+		if( angle < minangle ){
+			minangle = angle;
+			minindex = i;
+		}
+	}
+	return minindex;
+}
+void WWAnalysis::getMultiplicityOfTrueljet(){
+	
+	int ntracks=0;
+	ReconstructedParticle* p;
+	std::vector<ReconstructedParticle*> d;
+	p = _jets.at(true_ljet_index);
+	d = p->getParticles();
+	for(unsigned int = 0; i<d.size(); i++){
+		if(d.at(i)->getCharge() != 0){
+			//found a charged pfo
+			ntracks++;
+		}
+	}	
+	trueljetntracks = ntracks
+}
 bool WWAnalysis::allChildrenAreSimulation(MCParticle* p){
 	std::vector<MCParticle*> d = p->getDaughters();
 	bool flag = true;
@@ -628,6 +660,18 @@ void WWAnalysis::getJetMultiplicities(){
   jetNparts = nparts;
   jetNtracks = ntrks;
 
+
+	int min=999;
+	int minindex;
+	//find the jet with the minimum amount of charged particles, save this number of particles
+	for(unsigned int i=0; i<jetNtracks.size(); i++){
+		if(jetNtracks.at(i) < min){
+			min = jetNtracks.at(i);
+			minindex = i;
+		}
+	}
+		jetleastntracks = min;
+		 jetleastntracks_index = minindex;
 
 }
 void WWAnalysis::analyzeLeadingTracks(){
@@ -1178,7 +1222,11 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ljet_index = identifyLeptonJet_bySeparation(_jets);
 
 	
-	getAngleOfljetandMCLepton();
+	psi_mcl_ljet = getAngleOfjetandMCLepton(ljet_index);
+
+	//assess jet that is closest to mclepton
+	true_ljet_index = getJetNearMCLepton();
+	getMultiplicityOfTrueljet();//TODO make this 
 
 
 	//get the charge of the lepton jet
