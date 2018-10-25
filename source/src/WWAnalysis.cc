@@ -59,6 +59,13 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								weight,
 								(double) 1.0);
 
+	registerProcessorParameter("Njets",
+								"number of jets from fast jet",
+								_nJets,
+								(int) 3);
+
+
+
 }
 
 void WWAnalysis::init() {
@@ -168,15 +175,31 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
      _tree->Branch("isTau", &isTau, "isTau/O");
      _tree->Branch("leptonCharge", &trueq,"leptonCharge/I");
 
-     for(int i = 0 ; i < nferm ; i++)
+	//init vector size
+	std::vector<TLorentzVector*> tempmcf(_nfermions);
+	_MCf = tempmcf;
+	std::vector<int> tempmcfpdg(_nfermions);
+	_MCfpdg = tempmcfpdg;
+     for(int i = 0 ; i < _nfermions ; i++)
        {
-	 _MCf[i] = new TLorentzVector();
+	 _MCf.at(i) = new TLorentzVector();
 	 std::stringstream name;
 	 name << "MCf" << i;
 	 _tree->Branch(name.str().c_str(),"TLorentzVector",&_MCf[i],16000,0);
 	 name << "_PDG";
-	 _tree->Branch(name.str().c_str(), &_MCfpdg[i], (name.str()+"/I").c_str());
+	 _tree->Branch(name.str().c_str(), &_MCfpdg.at(i), (name.str()+"/I").c_str());
        }
+	
+	//add jet TLVS to 
+	std::vector<TLorentzVector*> temp(_nJets);
+	jets = temp;
+	for(int i=0; i<jets.size(); i++){
+		jets.at(i) = new TLorentzVector();
+		std::stringstream name;
+		name << "jet"<<i;
+		_tree->Branch(name.str().c_str(),"TLorentzVector", &jets.at(i),16000,0);
+	}
+
 
 	_tree->Branch("tauDecayMode",&tauDecayMode,"tauDecayMode/I");
 	_tree->Branch("lepTrackMult",&lnmctracks,"lepTrackMult/I");
@@ -200,6 +223,10 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	_tree->Branch("total_Pt",&total_Pt,"total_Pt/D");
 	_tree->Branch("total_E",&total_E,"total_E/D");
 	_tree->Branch("total_M",&total_M,"total_M/D");
+
+	_tree->Branch("jetleastntracks",&jetleastntracks,"jetleastntracks/I");
+	_tree->Branch("trueljetntracks",&trueljetntracks,"trueljetntracks/I");
+
 
 }
 
@@ -314,7 +341,9 @@ bool WWAnalysis::FindMCParticles( LCEvent* evt ){
   
   	return collectionFound;
 }
-
+/*bool WWAnalysis::FindMCTruthToRecoLink( LCEvent* evt ){
+	
+}*/
 bool WWAnalysis::FindJets( LCEvent* evt ) {
 
 	bool collectionFound = false;
@@ -349,8 +378,8 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
 	return collectionFound;
 }
 /* Evaluates jet collection variables for the TTree */
-void WWAnalysis::EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus){
-        nJets = _jets.size();
+void WWAnalysis::EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets,  int& nJets, float& yMinus, float& yPlus){
+       // nJets = _jets.size();
         yMinus = std::log( evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
         yPlus  = std::log(evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 //        yMinus = 0.0f;
@@ -449,23 +478,52 @@ int WWAnalysis::getLeptonJetCharge( ReconstructedParticle* ljet ){
 	return leadingcharge;
 
 }
-void WWAnalysis::getAngleOfljetandMCLepton(){
-	TVector3 ljet( _jets.at(ljet_index)->getMomentum()[0], _jets.at(ljet_index)->getMomentum()[1], _jets.at(ljet_index)->getMomentum()[2] ); 
+double WWAnalysis::getAngleOfjetandMCLepton(int jet_index){
+	TVector3 jet( _jets.at(jet_index)->getMomentum()[0], _jets.at(jet_index)->getMomentum()[1], _jets.at(jet_index)->getMomentum()[2] ); 
 	
 	int mclindex = -1;
-	for(int i=0; i<nferm; i++){
+	for(int i=0; i<_nfermions; i++){
 		if( abs(_MCfpdg[i]) == 13 || abs(_MCfpdg[i])== 15){
 			mclindex = i;
 		}
 	}
 	 if(mclindex!=-1){
            TVector3 mcl( _MCf[mclindex]->Px(), _MCf[mclindex]->Py(), _MCf[mclindex]->Pz() );
-	   psi_mcl_ljet = ljet.Dot(mcl)/( ljet.Mag() * mcl.Mag());
+	    return jet.Dot(mcl)/( jet.Mag() * mcl.Mag()); // cos(theta)
         }
         else{
-           psi_mcl_ljet = -1.0;    // Set default value of -1 if no muon or tau found
+           return -1.0;    // Set default value of -1 if no muon or tau found
         }
 	
+}
+int WWAnalysis::getJetNearMCLepton(){
+		
+	double minangle = -99999;
+	double angle;
+	int minindex = -1;
+	for(unsigned int i=0; i<_jets.size(); i++){
+		angle = getAngleOfjetandMCLepton(i);
+		if( angle > minangle ){ //greater than because cos(psi)
+			minangle = angle;
+			minindex = i;
+		}
+	}
+	return minindex;
+}
+void WWAnalysis::getMultiplicityOfTrueljet(){
+	
+	int ntracks=0;
+	ReconstructedParticle* p;
+	std::vector<ReconstructedParticle*> d;
+	p = _jets.at(true_ljet_index);
+	d = p->getParticles();
+	for(unsigned int i = 0; i<d.size(); i++){
+		if(d.at(i)->getCharge() != 0){
+			//found a charged pfo
+			ntracks++;
+		}
+	}	
+	trueljetntracks = ntracks;
 }
 
 bool WWAnalysis::allChildrenAreSimulation(MCParticle* p){
@@ -606,6 +664,18 @@ void WWAnalysis::getJetMultiplicities(){
   jetNtracks = ntrks;
 
 
+	int min=999;
+	int minindex;
+	//find the jet with the minimum amount of charged particles, save this number of particles
+	for(unsigned int i=0; i<jetNtracks.size(); i++){
+		if(jetNtracks.at(i) < min){
+			min = jetNtracks.at(i);
+			minindex = i;
+		}
+	}
+		jetleastntracks = min;
+		 jetleastntracks_index = minindex;
+
 }
 void WWAnalysis::analyzeLeadingTracks(){
 	ReconstructedParticle* leader;
@@ -694,8 +764,8 @@ void WWAnalysis::analyzeLeadingTracks(){
 /* classify the the event based on the type of lepton in MCParticle info, also set the true charge for that lepton */
 /* also tallies the number of muon/electron/tau events */
 /* also retrieves the mcparticle which has daughters qqlnu */
-MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
-
+//MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
+MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCfpdg){
 //MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]){
 	
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
@@ -793,8 +863,8 @@ MCParticle* WWAnalysis::classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLo
 
 }
 /* deal with 2f backgrounds */
-MCParticle* WWAnalysis::classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
-	
+//MCParticle* WWAnalysis::classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
+MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCFpdg){
 	for(int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
 		std::vector<int> daughterpdgs{};
@@ -894,32 +964,32 @@ void WWAnalysis::classifyTauDecay(MCParticle* mctau){
 /* populate the tlvs based on the identified lepton jet */
 void WWAnalysis::populateTLVs(int lindex){
 
-	std::vector<TLorentzVector*> tempjets(_jets.size());
+//	std::vector<TLorentzVector*> tempjets(_jets.size());
 	for(unsigned int i=0; i<_jets.size(); i++){
 	
-		TLorentzVector* j = new TLorentzVector();
-		j->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
-		tempjets.at(i) = j;
+	//	TLorentzVector* j = new TLorentzVector();
+		jets.at(i)->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
+		//tempjets.at(i) = j;
 
 		std::cout<<_jets.at(i)->getMomentum()[0]<<" "<< _jets.at(i)->getMomentum()[1]<<" "<<_jets.at(i)->getMomentum()[2]<< " "<< _jets.at(i)->getMass()<<std::endl;
 	}
 	
 	//save the tlv vector globally
-	jets = tempjets;
+	//jets = tempjets;
 	
 	//Wl = new TLorentzVector();
 	Wqq = new TLorentzVector();
 	TLorentzVector temp1;
 
 	//loop over the new tlv jets and make wl and wqq
-	for(unsigned int i=0; i<tempjets.size(); i++){
+	for(unsigned int i=0; i<jets.size(); i++){
 		if( i == lindex ){
 			//right now Wl will be missing its neutrino
 			Wl = new TLorentzVector();
-			Wl->SetXYZM( tempjets.at(i)->Px(), tempjets.at(i)->Py(), tempjets.at(i)->Pz(), tempjets.at(i)->M());
+			Wl->SetXYZM( jets.at(i)->Px(), jets.at(i)->Py(), jets.at(i)->Pz(), jets.at(i)->M());
 		}
 		else{
-			temp1 += *tempjets.at(i);
+			temp1 += *jets.at(i);
 		}
 	}
 	Wqq->SetXYZM(temp1.Px(), temp1.Py(), temp1.Pz(), temp1.M() );
@@ -999,6 +1069,33 @@ double WWAnalysis::getCosThetaW(){
 		Wm = Wm * (1/Wm.Mag());
 		return Wm.Dot(z);
 	}
+
+}
+void WWAnalysis::AnalyzeOverlay( ){
+
+	//look at mcparticles
+	//add to tree all particles marked 'o'
+	//look at distributions: for montecarlo
+	//#neutrals #charged
+	//#total energy contribution
+	//#costheta neutrals/ charged
+	std::vector<MCParticle*> overlaymcparts{};
+	for(unsigned int i =0; i<_mcpartvec.size(); i++){
+		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<" ";
+		std::cout<<_mcpartvec.at(i)->isOverlay()<<std::endl;;
+		
+	}
+
+
+	//use mc ids and truthlinker to find the reco overlay
+	//plot distributions for reco
+	//#total energy contribution
+	//#cos theta neutrals/ charged
+	
+
+	//possible next steps//
+	/* remove all id'd particles and look at everything with no gg overlay */
+	
 
 }
 void WWAnalysis::FillHistos(int histNumber){
@@ -1132,6 +1229,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	isTau = false;
 	isMuon = false;
 
+	//AnalyzeOverlay( );
+
 	//from the MCParticles find what type of semileptonic decay is present
         //return the parent mcparticle that has the qqlnu decay
 //	parent = classifyEvent(isTau, isMuon, trueq, _MCf[0], _MCfpdg[0]);
@@ -1155,7 +1254,11 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ljet_index = identifyLeptonJet_bySeparation(_jets);
 
 	
-	getAngleOfljetandMCLepton();
+	psi_mcl_ljet = getAngleOfjetandMCLepton(ljet_index);
+
+	//assess jet that is closest to mclepton
+	true_ljet_index = getJetNearMCLepton();
+	getMultiplicityOfTrueljet();//TODO make this 
 
 
 	//get the charge of the lepton jet
