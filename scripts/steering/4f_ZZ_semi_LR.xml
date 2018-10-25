@@ -18,8 +18,7 @@
  	</execute>
 
 	<global>
-		<parameter name="LCIOInputFiles"> /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/2f_Z_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250114.P2f_z_h.eL.pR.n001.d_dstm_10410_0.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/2f_Z_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250114.P2f_z_h.eL.pR.n001.d_dstm_10410_1.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/2f_Z_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250114.P2f_z_h.eL.pR.n001.d_dstm_10410_2.slcio
- </parameter>
+		<parameter name="LCIOInputFiles"> /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_ZZ_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250014.P4f_zz_sl.eL.pR.n001.d_dstm_10301_0.slcio  </parameter>
    		<parameter name="SkipNEvents" value="0" />
    		<parameter name="MaxRecordNumber" value="0" /> <!-- 0 is all events -->
    		<parameter name="SupressCheck" value="false" />
@@ -65,7 +64,7 @@
   
   </processor>
 
-
+    
 	<processor name="MyWWAnalysis" type="WWAnalysis">   
 
 		<!-- input/output collection names -->
@@ -75,8 +74,9 @@
 
 		<parameter name="InputJetCollectionName" value="FastJets" />
 		<parameter name="NFermions" value="2" />
-		<parameter name="Nleptons" value="0" />
-		<parameter name="Normalization" value="1.06611" />   
+		<parameter name="Nleptons" value="2" />
+		<parameter name="Normalization" value="0.05433" />
+		<parameter name="Njets" value="3" />
 		
  	</processor>
 

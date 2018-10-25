@@ -20,7 +20,7 @@
 
 #define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
-#define nferm 4
+//#define nferm 4
 
 using namespace lcio;
 
@@ -69,24 +69,31 @@ using namespace lcio;
   // lepton jet functions
   int identifyLeptonJet( std::vector<ReconstructedParticle*> jets);
   int identifyLeptonJet_bySeparation(std::vector<ReconstructedParticle*> jets);
-  void getAngleOfljetandMCLepton();
+  double getAngleOfjetandMCLepton(int jet_index);
+  int getJetNearMCLepton(); //return index of jet closest to mclepton
+  void  getMultiplicityOfTrueljet();
   void classifyTauDecay(MCParticle* mctau);
   MCParticle* getMClepton(MCParticle* parent);
 
   int getLeptonJetCharge( ReconstructedParticle* ljet );
+
+	//overlay analysis
+	void AnalyzeOverlay( );
 
   //jet analysis helpers
   void getJetMultiplicities();
   void exploreDaughterParticles(MCParticle* p, std::vector<MCParticle*>& FSP);
   bool allChildrenAreSimulation(MCParticle* p);
   void analyzeLeadingTracks();
-  void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, unsigned int& nJets, float& yMinus, float& yPlus); 
+  void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, int& nJets, float& yMinus, float& yPlus); 
 
   //classify the type of lepton decay and retrieve the
   //mcparticles for qqlnu
 //  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq);
-  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
-  MCParticle* classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+//  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+	MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCfpdg);
+//  MCParticle* classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]);
+	MCParticle* classifyEvent2fermion( std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCfpdg );
 //  MCParticle* classifyEvent(bool& isTau, bool& isMuon, int& trueq, int (&_MCfpdg)[4]);
 
 	//event selection variables
@@ -114,8 +121,10 @@ using namespace lcio;
 //  float _xsec;
 //  TString *_Process;
 
-  TLorentzVector* _MCf[nferm];
-  int _MCfpdg[nferm];
+  //TLorentzVector* _MCf[nferm];
+  //int _MCfpdg[nferm];
+	std::vector<TLorentzVector*> _MCf;
+	std::vector<int> _MCfpdg;
 
 //event number
   int nEvt{};
@@ -140,6 +149,8 @@ using namespace lcio;
   int ljet_index;
  //the assigned charge for identifed lepton jet
   int lq;
+ //the index of the jet which is closest to the true mc lepton
+  int true_ljet_index;
 
 //tallies for the number of each type of true lepton per event
   int ntau=0;
@@ -181,13 +192,17 @@ using namespace lcio;
   double leadingd0ljet; //d0 of the leading track in the lepton jet
   double leadingd0relerrljet; //relative error of d0 of leading track in lepton jet
 
+  int trueljetntracks; //number of tracks in the jet matched with true lepton 
+  int jetleastntracks; //number of tracks in the jet with the least tracks
+  int jetleastntracks_index;
+
 
   double leadingptqjet; //pt of the leading track in a quark jet
   double leadingd0qjet; //d0 of the leading track in a quark jet
   double leadingd0relerrqjet; //relative error of d0 of leading track in lepton jet
 
 	//jet y variabls //log jet variables
-  unsigned int _nJets;
+  int _nJets;
   float _yMinus;
   float _yPlus;
 
