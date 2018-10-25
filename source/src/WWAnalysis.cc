@@ -1079,7 +1079,8 @@ void WWAnalysis::AnalyzeOverlay( ){
 	//#costheta neutrals/ charged
 	std::vector<MCParticle*> overlaymcparts{};
 	for(unsigned int i =0; i<_mcpartvec.size(); i++){
-		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<std::endl;
+		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<" ";
+		std::cout<<_mcpartvec.at(i)->isOverlay()<<std::endl;;
 		
 	}
 
