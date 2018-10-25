@@ -487,7 +487,7 @@ double WWAnalysis::getAngleOfjetandMCLepton(int jet_index){
 	}
 	 if(mclindex!=-1){
            TVector3 mcl( _MCf[mclindex]->Px(), _MCf[mclindex]->Py(), _MCf[mclindex]->Pz() );
-	    return jet.Dot(mcl)/( jet.Mag() * mcl.Mag());
+	    return jet.Dot(mcl)/( jet.Mag() * mcl.Mag()); // cos(theta)
         }
         else{
            return -1.0;    // Set default value of -1 if no muon or tau found
@@ -496,12 +496,12 @@ double WWAnalysis::getAngleOfjetandMCLepton(int jet_index){
 }
 int WWAnalysis::getJetNearMCLepton(){
 		
-	double minangle = 99999;
+	double minangle = -99999;
 	double angle;
 	int minindex = -1;
 	for(unsigned int i=0; i<_jets.size(); i++){
 		angle = getAngleOfjetandMCLepton(i);
-		if( angle < minangle ){
+		if( angle > minangle ){ //greater than because cos(psi)
 			minangle = angle;
 			minindex = i;
 		}
