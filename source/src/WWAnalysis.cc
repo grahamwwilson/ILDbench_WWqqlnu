@@ -1080,7 +1080,7 @@ void WWAnalysis::AnalyzeOverlay( ){
 	std::vector<MCParticle*> overlaymcparts{};
 	for(unsigned int i =0; i<_mcpartvec.size(); i++){
 		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<std::endl;
-		}	
+		
 	}
 
 
