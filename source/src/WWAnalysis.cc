@@ -341,7 +341,9 @@ bool WWAnalysis::FindMCParticles( LCEvent* evt ){
   
   	return collectionFound;
 }
-
+/*bool WWAnalysis::FindMCTruthToRecoLink( LCEvent* evt ){
+	
+}*/
 bool WWAnalysis::FindJets( LCEvent* evt ) {
 
 	bool collectionFound = false;
@@ -1227,7 +1229,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	isTau = false;
 	isMuon = false;
 
-	AnalyzeOverlay( );
+	//AnalyzeOverlay( );
 
 	//from the MCParticles find what type of semileptonic decay is present
         //return the parent mcparticle that has the qqlnu decay
