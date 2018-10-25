@@ -1069,6 +1069,38 @@ double WWAnalysis::getCosThetaW(){
 	}
 
 }
+void WWAnalysis::AnalyzeOverlay( ){
+
+	//look at mcparticles
+	//add to tree all particles marked 'o'
+	//look at distributions: for montecarlo
+	//#neutrals #charged
+	//#total energy contribution
+	//#costheta neutrals/ charged
+	std::vector<MCParticle*> overlaymcparts{};
+	for(unsigned int i =0; i<_mcpartvec.size(); i++){
+		if(_mcpartvec.at(i)->id== 447 || _mcpartvec.at(i)->id==448){
+		std::cout<<"overlay part"<<std::endl;
+		std::cout<<_mcpartvec.at(i)->getSimulatorStatus();
+		}
+		if(_mcpartvec.at(i)->id==353 || _mcpartvec.at(i)->id==229){
+		std::cout<<"non overlay part"<<std::endl;
+		std::cout<<_mcpartvec.at(i)->getSimulatorStatus();
+		}	
+	}
+
+
+	//use mc ids and truthlinker to find the reco overlay
+	//plot distributions for reco
+	//#total energy contribution
+	//#cos theta neutrals/ charged
+	
+
+	//possible next steps//
+	/* remove all id'd particles and look at everything with no gg overlay */
+	
+
+}
 void WWAnalysis::FillHistos(int histNumber){
 	if(isTau){
 		FillTauHistos(histNumber);
@@ -1199,6 +1231,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	//bools to characterize the true lepton decay for this event
 	isTau = false;
 	isMuon = false;
+
+	AnalyzeOverlay( );
 
 	//from the MCParticles find what type of semileptonic decay is present
         //return the parent mcparticle that has the qqlnu decay

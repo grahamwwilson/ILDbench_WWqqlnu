@@ -77,6 +77,9 @@ using namespace lcio;
 
   int getLeptonJetCharge( ReconstructedParticle* ljet );
 
+	//overlay analysis
+	void AnalyzeOverlay( );
+
   //jet analysis helpers
   void getJetMultiplicities();
   void exploreDaughterParticles(MCParticle* p, std::vector<MCParticle*>& FSP);
