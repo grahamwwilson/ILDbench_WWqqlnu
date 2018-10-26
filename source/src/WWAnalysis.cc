@@ -1088,7 +1088,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	OverlayPairBgOverlaynEvents = (evt->getParameters()).getIntVal(key);
 
 	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
-	std::cout<<"npairbg "< OverlayPairBgOverlaynEvents <<std::endl;
+	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;
 	//look at mcparticles
 	//add to tree all particles marked 'o'
 	//look at distributions: for montecarlo
