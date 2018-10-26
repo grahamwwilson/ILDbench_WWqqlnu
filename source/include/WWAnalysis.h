@@ -161,6 +161,7 @@ using namespace lcio;
 
  //the number of overlay events present in the event
 	int OverlaynTotalEvents=-1;
+	int OverlayPairBgOverlaynEvents=-1;
 
 //the total number of unique cuts applied (for histogram indexing)
 //  int ncuts = 1;
