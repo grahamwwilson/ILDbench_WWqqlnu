@@ -1074,11 +1074,11 @@ double WWAnalysis::getCosThetaW(){
 void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 
- LCParameters param = evt->getParameters();
+ //LCParameters param = evt->getParameters();
 	//tag events with no overlay
 	std::string key = "Overlay.nTotalEvents";
 	//the global: 
-	OverlaynTotalEvents = getIntVal(key);
+	OverlaynTotalEvents = (evt->getParameters()).getIntVal(key);
 
 	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
 
