@@ -1071,7 +1071,16 @@ double WWAnalysis::getCosThetaW(){
 	}
 
 }
-void WWAnalysis::AnalyzeOverlay( ){
+void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
+
+
+ LCParameters param = evt->getParameters();
+	//tag events with no overlay
+	std::string key = "Overlay.nTotalEvents";
+	//the global: 
+	OverlaynTotalEvents = getIntVal(key);
+
+	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
 
 	//look at mcparticles
 	//add to tree all particles marked 'o'
@@ -1079,12 +1088,14 @@ void WWAnalysis::AnalyzeOverlay( ){
 	//#neutrals #charged
 	//#total energy contribution
 	//#costheta neutrals/ charged
-	std::vector<MCParticle*> overlaymcparts{};
+/*	std::vector<MCParticle*> overlaymcparts{};
 	for(unsigned int i =0; i<_mcpartvec.size(); i++){
 		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<" ";
 		std::cout<<_mcpartvec.at(i)->isOverlay()<<std::endl;;
 		
-	}
+	}  */
+
+  
 
 
 	//use mc ids and truthlinker to find the reco overlay
@@ -1229,7 +1240,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	isTau = false;
 	isMuon = false;
 
-	//AnalyzeOverlay( );
+	AnalyzeOverlay( evt);
 
 	//from the MCParticles find what type of semileptonic decay is present
         //return the parent mcparticle that has the qqlnu decay

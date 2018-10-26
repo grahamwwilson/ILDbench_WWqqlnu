@@ -17,6 +17,8 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include <LCParameters.h>
+
 
 #define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
@@ -156,6 +158,9 @@ using namespace lcio;
   int ntau=0;
   int nmuon=0;
   int nelec=0;
+
+ //the number of overlay events present in the event
+	int OverlaynTotalEvents=-1;
 
 //the total number of unique cuts applied (for histogram indexing)
 //  int ncuts = 1;
