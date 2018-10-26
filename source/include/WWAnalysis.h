@@ -17,7 +17,7 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
-#include <LCParameters.h>
+#include "EVENT/LCParameters.h"
 
 
 #define ncuts 7
