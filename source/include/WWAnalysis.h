@@ -80,7 +80,7 @@ using namespace lcio;
   int getLeptonJetCharge( ReconstructedParticle* ljet );
 
 	//overlay analysis
-	void AnalyzeOverlay( );
+	void AnalyzeOverlay(LCEvent* evt );
 
   //jet analysis helpers
   void getJetMultiplicities();
