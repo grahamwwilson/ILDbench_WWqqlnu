@@ -228,7 +228,7 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	_tree->Branch("trueljetntracks",&trueljetntracks,"trueljetntracks/I");
 
 	//overlay!
-	_tree->Branch("OverlaynTotalEvents"&OverlaynTotalEvents,"OverlaynTotalEvents/I");
+	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
 
 
 }
