@@ -1130,7 +1130,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	for(int i=0; i<overlayFSP.size(); i++){
 		for(int j=i; j<overlayFSP.size(); j++){
 			if(overlayFSP.at(i)->id() == overlayFSP.at(j)->id()){
-				overlatFSP.erase(j);
+				overlayFSP.erase(j);
 			}
 		}
 	}
