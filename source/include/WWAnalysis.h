@@ -81,6 +81,7 @@ using namespace lcio;
 
 	//overlay analysis
 	void AnalyzeOverlay(LCEvent* evt );
+	void FindMCOverlay( (MCParticle* p , std::vector<MCParticle*>& FSP){
 
   //jet analysis helpers
   void getJetMultiplicities();

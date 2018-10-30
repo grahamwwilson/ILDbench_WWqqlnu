@@ -1074,6 +1074,29 @@ double WWAnalysis::getCosThetaW(){
 	}
 
 }
+void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
+	if(p->isCreatedInSimulation()) return;
+	if(! (p->isOverlay())) return;
+
+	//std::cout<<p->id()<<" ";
+	//std::cout<<p->getPDG()<<" -> ";
+	std::vector<MCParticle*> d = p->getDaughters();
+	
+	for(unsigned int i=0; i< d.size(); i++){
+		if( (! d.at(i)->isCreatedInSimulation() ) && ( allChildrenAreSimulation(d.at(i)) || (d.at(i)->getDaughters().size()==0)  ) && (d.at(i)->isOverlay() ) ){
+		//this is an initial final state particle
+			FSP.push_back(d.at(i));
+		}
+		if( (! d.at(i)->isCreatedInSimulation()) &&  d.at(i)->isOverlay() ){//&& (d.at(i)->getCharge() != 0) ){
+			std::cout<< "( "<< d.at(i)->id()<<" "<<d.at(i)->getPDG() <<" "<< d.at(i)->isDecayedInTracker()<<" "<< d.at(i)->isDecayedInCalorimeter()<<" ) ";
+		}
+	}
+	//std::cout<<std::endl;
+	for(unsigned int i=0; i<d.size(); i++){
+		FindMCOverlay(d.at(i), FSP);
+	}
+
+}
 void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 
@@ -1088,7 +1111,25 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	OverlayPairBgOverlaynEvents = (evt->getParameters()).getIntVal(key);
 
 	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
-	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;
+	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;`
+
+
+	//find relevant visible overlay particles at generator level
+	std::vector<MCParticle*> overlayFSP{};
+	//only insert overlays with no parents
+	std::vector<MCParticle*> overlayparents;
+	for(int i=0; i<_mcpartvec.size(); i++){
+		overlayparents = _mcpartvec.at(i)->getParents();
+		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() ){
+			FindMCOverlay( _mcpartvec.at(i) , overlayFSP);
+		}
+	}
+
+	std::cout<<"Printing overlay fsp"<<std::endl;
+	for(int i=0; i<overlayFSP.size(); i++){
+		std::cout<<overlayFSP.at(i)->id()<<" "<<overlayFSP.at(i)->getPDG()<<std::endl;
+	}
+	
 	//look at mcparticles
 	//add to tree all particles marked 'o'
 	//look at distributions: for montecarlo
