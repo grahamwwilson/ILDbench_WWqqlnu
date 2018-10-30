@@ -1125,6 +1125,17 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 		}
 	}
 
+	//remove the duplicates, this happens because my recursively explore both parents of initial overlay events
+	//currently use erase.. this is inefficient 
+	for(int i=0; i<overlayFSP.size(); i++){
+		for(int j=i; j<overlayFSP.size(); j++){
+			if(overlayFSP.at(i)->id() == overlayFSP.at(j)->id()){
+				overlatFSP.erase(j);
+			}
+		}
+	}
+	
+
 	std::cout<<"Printing overlay fsp"<<std::endl;
 	for(int i=0; i<overlayFSP.size(); i++){
 		std::cout<<overlayFSP.at(i)->id()<<" "<<overlayFSP.at(i)->getPDG()<<std::endl;
