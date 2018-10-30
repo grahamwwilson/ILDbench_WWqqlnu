@@ -1111,7 +1111,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	OverlayPairBgOverlaynEvents = (evt->getParameters()).getIntVal(key);
 
 	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
-	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;`
+	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;
 
 
 	//find relevant visible overlay particles at generator level
