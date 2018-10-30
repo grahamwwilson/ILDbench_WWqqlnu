@@ -1075,7 +1075,7 @@ double WWAnalysis::getCosThetaW(){
 
 }
 void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
-	if(p->isCreatedInSimulation()) return;
+/*	if(p->isCreatedInSimulation()) return;
 	if(! (p->isOverlay())) return;
 
 	//std::cout<<p->id()<<" ";
@@ -1084,6 +1084,7 @@ void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
 	
 	for(unsigned int i=0; i< d.size(); i++){
 		if( (! d.at(i)->isCreatedInSimulation() ) && ( allChildrenAreSimulation(d.at(i)) || (d.at(i)->getDaughters().size()==0)  ) && (d.at(i)->isOverlay() ) ){
+		
 		//this is an initial final state particle
 			FSP.push_back(d.at(i));
 		}
@@ -1095,6 +1096,8 @@ void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
 	for(unsigned int i=0; i<d.size(); i++){
 		FindMCOverlay(d.at(i), FSP);
 	}
+*/
+
 
 }
 void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
@@ -1120,8 +1123,9 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	std::vector<MCParticle*> overlayparents;
 	for(int i=0; i<_mcpartvec.size(); i++){
 		overlayparents = _mcpartvec.at(i)->getParents();
-		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() ){
-			FindMCOverlay( _mcpartvec.at(i) , overlayFSP);
+		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() && !(_mcpartvec.at(i)->isCreatedInSimulation()) ){
+			//FindMCOverlay( _mcpartvec.at(i) , overlayFSP);
+			overlayparents.push_back(_mcpartvec.at(i));
 		}
 	}
 
