@@ -1123,7 +1123,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	std::vector<MCParticle*> overlayparents;
 	for(int i=0; i<_mcpartvec.size(); i++){
 		overlayparents = _mcpartvec.at(i)->getParents();
-		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() && !(_mcpartvec.at(i)->isCreatedInSimulation()) ){
+		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() && (_mcpartvec.at(i)->getGeneratorStatus() == 1)){
 			//FindMCOverlay( _mcpartvec.at(i) , overlayFSP);
 			overlayparents.push_back(_mcpartvec.at(i));
 		}
