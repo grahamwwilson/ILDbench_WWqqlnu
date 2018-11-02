@@ -205,10 +205,10 @@ using namespace lcio;
   int jetleastntracks_index;
 
 	//montecarlo dijet (qq) variables
-	double mcqqmass;
-	double mcqqE;
-	double mcqqcostheta;
-	double mcqqphi;
+	double mcqqmass= -5;
+	double mcqqE =-5;
+	double mcqqcostheta =-5;
+	double mcqqphi = -5;
 
   double leadingptqjet; //pt of the leading track in a quark jet
   double leadingd0qjet; //d0 of the leading track in a quark jet

@@ -1211,6 +1211,7 @@ void WWAnalysis::AnalyzeDijet(){
 			qrksum += *(_MCf.at(i));
 		}
 	}
+	std::cout<<"qq quantities "<< qrksum.M() <<" " <<qrksum.E()<<" "<<qrksum.CosTheta()<<" "<<qrksum.Phi()<<std::endl;
 	mcqqmass = qrksum.M();
 	mcqqE = qrksum.E();
 	mcqqcostheta = qrksum.CosTheta();
