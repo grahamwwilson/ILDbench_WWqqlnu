@@ -76,6 +76,7 @@ using namespace lcio;
   void  getMultiplicityOfTrueljet();
   void classifyTauDecay(MCParticle* mctau);
   MCParticle* getMClepton(MCParticle* parent);
+  void AnalyzeDijet();
 
   int getLeptonJetCharge( ReconstructedParticle* ljet );
 
@@ -203,6 +204,11 @@ using namespace lcio;
   int jetleastntracks; //number of tracks in the jet with the least tracks
   int jetleastntracks_index;
 
+	//montecarlo dijet (qq) variables
+	double mcqqmass;
+	double mcqqE;
+	double mcqqcostheta;
+	double mcqqphi;
 
   double leadingptqjet; //pt of the leading track in a quark jet
   double leadingd0qjet; //d0 of the leading track in a quark jet
@@ -215,6 +221,8 @@ using namespace lcio;
 
   //opening angle between the lepton jet and mc lepton
   double psi_mcl_ljet;
+  //opening angle between mc lepton and closest jet
+  double true_psi_mcl_ljet;
 
   int qnparts;
   int qntracks;

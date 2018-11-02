@@ -44,7 +44,7 @@
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
     <parameter name="algorithm" type="StringVec"> kt_algorithm 1.5 </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
-    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 2  </parameter>
     <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
     <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
@@ -53,7 +53,7 @@
   <processor name="MyFastJetProcessor" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
-    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PFOsFromOverlayJets </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->

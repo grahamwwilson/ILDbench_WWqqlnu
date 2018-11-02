@@ -206,6 +206,12 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 	_tree->Branch("lepPFOMult",&lnmcparts,"lepPFOMult/I");
 
 	
+	//dijet variable (true dijet)
+	//montecarlo quantities
+	_tree->Branch("mcqqmass",&mcqqmass,"mcqqmass/D");
+	_tree->Branch("mcqqE",&mcqqE,"mcqqE/D");
+	_tree->Branch("mcqqcostheta",&mcqqcostheta,"mcqqcostheta/D");
+	_tree->Branch("mcqqphi",&mcqqphi,"mcqqphi/D");	
 
      
 	//variables from daniels code
@@ -226,6 +232,7 @@ minjetNpartsMuon[i] = new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Par
 
 	_tree->Branch("jetleastntracks",&jetleastntracks,"jetleastntracks/I");
 	_tree->Branch("trueljetntracks",&trueljetntracks,"trueljetntracks/I");
+	_tree->Branch("true_psi_mcl_ljet",&true_psi_mcl_ljet,"true_psi_mcl_ljet/D");
 
 	//overlay!
 	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
@@ -511,7 +518,13 @@ int WWAnalysis::getJetNearMCLepton(){
 			minindex = i;
 		}
 	}
+
+	//save the costheta for this particle
+	
 	return minindex;
+
+
+
 }
 void WWAnalysis::getMultiplicityOfTrueljet(){
 	
@@ -1118,7 +1131,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 
 	//find relevant visible overlay particles at generator level
-	std::vector<MCParticle*> overlayFSP{};
+	/*std::vector<MCParticle*> overlayFSP{};
 	//only insert overlays with no parents
 	std::vector<MCParticle*> overlayparents;
 	for(int i=0; i<_mcpartvec.size(); i++){
@@ -1143,7 +1156,9 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	std::cout<<"Printing overlay fsp"<<std::endl;
 	for(int i=0; i<overlayFSP.size(); i++){
 		std::cout<<overlayFSP.at(i)->id()<<" "<<overlayFSP.at(i)->getPDG()<<std::endl;
-	}
+	} 
+
+*/
 	
 	//look at mcparticles
 	//add to tree all particles marked 'o'
@@ -1169,6 +1184,37 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	//possible next steps//
 	/* remove all id'd particles and look at everything with no gg overlay */
+	
+
+}
+void WWAnalysis::AnalyzeDijet(){
+	
+		///look at mcf
+
+
+		std::vector<bool> quarks(_MCfpdg.size());
+		
+	for(int i=0; i<quarks.size(); i++){
+		int pdg = abs(_MCFpdg.at(i));
+		if( pdg >= 1 || pdg <= 5 ){
+			quarks.at(i)=true;
+		}
+		else{
+			quarks.at(i)=false;
+		}
+	}
+
+
+	TLorentzVector qrksum;
+	for(int i=0; i<quarks.size(); i++){
+		if(quarks.at(i) ==true){
+			qrksum += *(_MCf.at(i));
+		}
+	}
+	mcqqmass = qrksum.M();
+	mcqqE = qrksum.E();
+	mcqqcostheta = qrksum.CosTheta();
+	mcqqphi = qrksum.Phi();
 	
 
 }
@@ -1333,7 +1379,11 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	//assess jet that is closest to mclepton
 	true_ljet_index = getJetNearMCLepton();
 	getMultiplicityOfTrueljet();//TODO make this 
+	true_psi_mcl_ljet = getAngleOfjetandMCLepton(true_ljet_index);
 
+	//do some dijet analysis
+	AnalyzeDijet();
+	
 
 	//get the charge of the lepton jet
 	lq = getLeptonJetCharge( _jets.at(ljet_index) );
@@ -1361,6 +1411,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
 	//build up all the different tlvs for calculation
   	populateTLVs(ljet_index);
+
+	
 
     //boost jets to cm for TGC observables
 	populateCMTLVs();
