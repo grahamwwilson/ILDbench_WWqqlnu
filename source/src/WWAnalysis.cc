@@ -1340,6 +1340,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	//happens if we look for jets with eekt after using kt
 	if(_jets.size() == 0){ 
 		std::cout<<"NO JETS HERE!!!!!!!!"<<std::endl;
+		return;
 	}
 
  EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus);
