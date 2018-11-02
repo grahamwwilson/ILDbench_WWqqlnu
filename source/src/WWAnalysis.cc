@@ -1196,7 +1196,7 @@ void WWAnalysis::AnalyzeDijet(){
 		
 	for(int i=0; i<quarks.size(); i++){
 		int pdg = abs(_MCfpdg.at(i));
-		if( pdg >= 1 || pdg <= 5 ){
+		if( pdg >= 1 && pdg <= 5 ){
 			quarks.at(i)=true;
 			std::cout<<"found q "<<_MCfpdg.at(i)<<std::endl;
 		}
@@ -1336,10 +1336,18 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
  FindMCParticles(evt);
  FindJets(evt);
+//quickfix:::: if there are no jets... !!!!cant do anything TODO explore this phenomenon more
+	//happens if we look for jets with eekt after using kt
+	if(_jets.size() == 0){ 
+		std::cout<<"NO JETS HERE!!!!!!!!"<<std::endl;
+	}
+
  EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus);
 
  FindTracks(evt);
  FindPFOs(evt);
+
+
 	EvaluateEventSelectionVariables(totaltracks,total_Pt,total_E,total_M);
 
 	fillEventSelectionHistos(weight);
