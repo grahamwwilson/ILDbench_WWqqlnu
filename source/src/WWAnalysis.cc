@@ -1195,7 +1195,7 @@ void WWAnalysis::AnalyzeDijet(){
 		std::vector<bool> quarks(_MCfpdg.size());
 		
 	for(int i=0; i<quarks.size(); i++){
-		int pdg = abs(_MCFpdg.at(i));
+		int pdg = abs(_MCfpdg.at(i));
 		if( pdg >= 1 || pdg <= 5 ){
 			quarks.at(i)=true;
 		}
