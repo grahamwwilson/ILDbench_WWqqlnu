@@ -1192,12 +1192,13 @@ void WWAnalysis::AnalyzeDijet(){
 		///look at mcf
 
 
-		std::vector<bool> quarks(_MCfpdg.size());
+		std::vector<bool> quarks(_nfermions);
 		
 	for(int i=0; i<quarks.size(); i++){
 		int pdg = abs(_MCfpdg.at(i));
 		if( pdg >= 1 || pdg <= 5 ){
 			quarks.at(i)=true;
+			std::cout<<"found q "<<_MCfpdg.at(i)<<std::endl;
 		}
 		else{
 			quarks.at(i)=false;
