@@ -72,7 +72,47 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 
 }
+void WWAnalysis::initHistograms(){
+	WmassMuon = new TH1D[ncuts];
+	WmassTau = new TH1D[ncuts]; 
+	qqmassMuon = new TH1D[ncuts];
+	qqmassTau = new TH1D[ncuts];
+	WEMuon = new TH1D[ncuts];
+	WETau = new TH1D[ncuts];
+	EtotalMuon = new TH1D[ncuts];
+	EtotalTau = new TH1D[ncuts];
+	Wm_cosTheta = new TH1D[ncuts];
 
+	LjetMassMuon = new TH1D[ncuts];
+	LjetMassTau = new TH1D[ncuts];
+
+	//tgc hists
+	costhetawMuon = new TH1D[ncuts]; 
+	costhetawTau = new TH1D[ncuts];
+	thetaLMuon = new TH1D[ncuts];
+	thetaLTau = new TH1D[ncuts];
+	phiLMuon = new TH1D[ncuts];
+	phiLTau = new TH1D[ncuts];
+	thetaHMuon = new TH1D[ncuts];
+	thetaHTau = new TH1D[ncuts];
+	phiHMuon = new TH1D[ncuts];
+	phiHTau= new TH1D[ncuts];
+
+    //jet information histograms
+    leptonMCNPartsMuon = new TH1D[ncuts]; leptonMCNTracksMuon  = new TH1D[ncuts]; leptonMCNPartsTau = new TH1D[ncuts]; leptonMCNTracksTau = new TH1D[ncuts];
+	jetNpartsMuon  = new TH1D[ncuts]; minjetNpartsMuon = new TH1D[ncuts]; jetNpartsTau = new TH1D[ncuts]; minjetNpartsTau = new TH1D[ncuts];
+    jetNtracksMuon = new TH1D[ncuts]; minjetNtracksMuon  = new TH1D[ncuts]; jetNtracksTau = new TH1D[ncuts]; minjetNtracksTau = new TH1D[ncuts];
+
+    //lepton jet info
+	ljetleadingd0Muon = new TH1D[ncuts]; ljetleadingd0Tau = new TH1D[ncuts]; ljetleadingptMuon = new TH1D[ncuts]; ljetleadingptTau = new TH1D[ncuts];
+    ljetd0relerrMuon = new TH1D[ncuts]; ljetd0relerrTau = new TH1D[ncuts]; 
+    qjetleadingd0Muon = new TH1D[ncuts]; qjetleadingd0Tau = new TH1D[ncuts]; qjetleadingptMuon = new TH1D[ncuts]; qjetleadingptTau = new TH1D[ncuts];
+    qjetd0relerrMuon = new TH1D[ncuts]; qjetd0relerrTau = new TH1D[ncuts];
+	
+	    psiljetmclMuon = new TH1D[ncuts]; psiljetmclTau = new TH1D[ncuts];
+
+	htotalTracks = new TH1D[ncuts];
+}
 void WWAnalysis::init() {
 
   streamlog_out(DEBUG) << "   init called  " << std::endl;
@@ -84,7 +124,9 @@ void WWAnalysis::init() {
 
   nEvt = 0;
 
-	
+	initHistograms();
+
+
 	file = new TFile("file.root","RECREATE");
 	double pi = 3.1416;
 
