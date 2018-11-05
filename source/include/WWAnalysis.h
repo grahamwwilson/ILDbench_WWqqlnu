@@ -20,7 +20,7 @@
 #include "EVENT/LCParameters.h"
 
 
-#define ncuts 7
+//#define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
 //#define nferm 4
 
@@ -166,7 +166,8 @@ using namespace lcio;
 	int OverlayPairBgOverlaynEvents=-1;
 
 //the total number of unique cuts applied (for histogram indexing)
-//  int ncuts = 1;
+
+	int ncuts = 7;
 
   //how many times do we get the proper lepton charge?
   //for muons and for leptons separately

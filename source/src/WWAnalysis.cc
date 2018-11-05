@@ -64,6 +64,11 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								_nJets,
 								(int) 3);
 
+	registerProcessorParameter("Ncuts",
+								"nmber of event selection cuts",
+								ncuts,
+								(int) 0);
+
 
 
 }

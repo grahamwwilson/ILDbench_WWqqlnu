@@ -100,6 +100,7 @@
 		<parameter name="Nleptons" value="2" />  
 		<parameter name="Normalization" value="0.784017" />
 		<parameter name="Njets" value="3" />
+		<parameter name="Ncuts" value="7" />
 		
  	</processor>
 
