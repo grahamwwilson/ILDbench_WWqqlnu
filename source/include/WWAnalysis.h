@@ -48,6 +48,7 @@ using namespace lcio;
    *  Use to initialize the proscessor, e.g. book histograms.
    */
   virtual void init() ;
+	void initHistograms(); // init all the hists arrays
   /** Called for every run.
    */
   virtual void processRunHeader( LCRunHeader* run ) ;
@@ -253,6 +254,7 @@ using namespace lcio;
 
 
   /* histograms split between muon/tau true events */
+/*
 	TFile* file;
 
 	TH1D *WmassMuon[ncuts+1], *WmassTau[ncuts+1], *qqmassMuon[ncuts+1], *qqmassTau[ncuts+1];
@@ -282,10 +284,46 @@ using namespace lcio;
 	    TH1D *psiljetmclMuon[ncuts+1], *psiljetmclTau[ncuts+1];
 
 	TH1D *htotalTracks[ncuts+1];
+
+*/
 	int ljetmatchmctau;
 	int ljetmatchmcmuon;
 
-     
+     /* TESTING AREA !!! */
+	TFile* file;
+
+	TH1D *WmassMuon, *WmassTau, *qqmassMuon, *qqmassTau;
+	TH1D *WEMuon, *WETau, *EtotalMuon, *EtotalTau;
+	TH1D *Wm_cosTheta;
+
+	TH1D *LjetMassMuon, *LjetMassTau;
+
+	//tgc hists
+	TH1D *costhetawMuon , *costhetawTau;
+	TH1D *thetaLMuon, *thetaLTau;
+	TH1D *phiLMuon, *phiLTau;
+	TH1D *thetaHMuon, *thetaHTau;
+	TH1D *phiHMuon, *phiHTau;
+
+    //jet information histograms
+    TH1D  *leptonMCNPartsMuon, *leptonMCNTracksMuon, *leptonMCNPartsTau, *leptonMCNTracksTau;
+	TH1D  *jetNpartsMuon, *minjetNpartsMuon, *jetNpartsTau, *minjetNpartsTau;
+    TH1D  *jetNtracksMuon, *minjetNtracksMuon,  *jetNtracksTau, *minjetNtracksTau;
+
+    //lepton jet info
+	TH1D *ljetleadingd0Muon, *ljetleadingd0Tau, *ljetleadingptMuon, *ljetleadingptTau;
+    TH1D *ljetd0relerrMuon, *ljetd0relerrTau; 
+    TH1D *qjetleadingd0Muon, *qjetleadingd0Tau, *qjetleadingptMuon, *qjetleadingptTau;
+    TH1D *qjetd0relerrMuon, *qjetd0relerrTau;
+	
+	    TH1D *psiljetmclMuon, *psiljetmclTau;
+
+	TH1D *htotalTracks;
+
+
+	/* END HISTO TEST */
+
+	//these are populated directly from pandora pfos
 	TH1D* htotaltracks;
 	TH1D* htotalPt;
 	TH1D* htotalE;
