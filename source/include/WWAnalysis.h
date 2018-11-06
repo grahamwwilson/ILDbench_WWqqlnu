@@ -292,33 +292,33 @@ using namespace lcio;
      /* TESTING AREA !!! */
 	TFile* file;
 
-	TH1D *WmassMuon, *WmassTau, *qqmassMuon, *qqmassTau;
-	TH1D *WEMuon, *WETau, *EtotalMuon, *EtotalTau;
-	TH1D *Wm_cosTheta;
+	std::vector<TH1D*> WmassMuon, WmassTau, qqmassMuon, qqmassTau;
+	std::vector<TH1D*> WEMuon, WETau, EtotalMuon, EtotalTau;
+	std::vector<TH1D*> Wm_cosTheta;
 
-	TH1D *LjetMassMuon, *LjetMassTau;
+	std::vector<TH1D*> LjetMassMuon, LjetMassTau;
 
 	//tgc hists
-	TH1D *costhetawMuon , *costhetawTau;
-	TH1D *thetaLMuon, *thetaLTau;
-	TH1D *phiLMuon, *phiLTau;
-	TH1D *thetaHMuon, *thetaHTau;
-	TH1D *phiHMuon, *phiHTau;
+	std::vector<TH1D*> costhetawMuon , costhetawTau;
+	std::vector<TH1D*> thetaLMuon, thetaLTau;
+	std::vector<TH1D*> phiLMuon, phiLTau;
+	std::vector<TH1D*> thetaHMuon, thetaHTau;
+	std::vector<TH1D*> phiHMuon, phiHTau;
 
     //jet information histograms
-    TH1D  *leptonMCNPartsMuon, *leptonMCNTracksMuon, *leptonMCNPartsTau, *leptonMCNTracksTau;
-	TH1D  *jetNpartsMuon, *minjetNpartsMuon, *jetNpartsTau, *minjetNpartsTau;
-    TH1D  *jetNtracksMuon, *minjetNtracksMuon,  *jetNtracksTau, *minjetNtracksTau;
+    std::vector<TH1D*>  leptonMCNPartsMuon, leptonMCNTracksMuon, leptonMCNPartsTau, leptonMCNTracksTau;
+	std::vector<TH1D*>  jetNpartsMuon, minjetNpartsMuon, jetNpartsTau, minjetNpartsTau;
+    std::vector<TH1D*>  jetNtracksMuon, minjetNtracksMuon,  jetNtracksTau, minjetNtracksTau;
 
     //lepton jet info
-	TH1D *ljetleadingd0Muon, *ljetleadingd0Tau, *ljetleadingptMuon, *ljetleadingptTau;
-    TH1D *ljetd0relerrMuon, *ljetd0relerrTau; 
-    TH1D *qjetleadingd0Muon, *qjetleadingd0Tau, *qjetleadingptMuon, *qjetleadingptTau;
-    TH1D *qjetd0relerrMuon, *qjetd0relerrTau;
+	std::vector<TH1D*> ljetleadingd0Muon, ljetleadingd0Tau, ljetleadingptMuon, ljetleadingptTau;
+    std::vector<TH1D*> ljetd0relerrMuon, ljetd0relerrTau; 
+    std::vector<TH1D*> qjetleadingd0Muon, qjetleadingd0Tau, qjetleadingptMuon, qjetleadingptTau;
+    std::vector<TH1D*> qjetd0relerrMuon, qjetd0relerrTau;
 	
-	    TH1D *psiljetmclMuon, *psiljetmclTau;
+	std::vector<TH1D*> psiljetmclMuon, psiljetmclTau;
 
-	TH1D *htotalTracks;
+	std::vector<TH1D*> htotalTracks;
 
 
 	/* END HISTO TEST */
