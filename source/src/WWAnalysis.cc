@@ -140,66 +140,66 @@ void WWAnalysis::init() {
 
 		/* init histograms */
 		//some general plots
-		WmassMuon[i].push_back( new TH1D(("Wmassmuon"+cutnum).c_str(),"W^{#pm} Mass from l #nu, with true #mu",100, 50.0, 120.0 ));
-		WmassTau[i].push_back( new TH1D(("Wmasstau"+cutnum).c_str(),"W^{#pm} Mass from l #nu, with true #tau",100, 50.0, 120.0 ));
-                qqmassMuon[i].push_back( new TH1D(("qqmassmuon"+cutnum).c_str(),"qq Mass, with true #mu",100,50.0,120.0));
-		qqmassTau[i].push_back( new TH1D(("qqmasstau"+cutnum).c_str(),"qq Mass, with true #tau",100,50.0,120.0));
-		WEMuon[i].push_back( new TH1D(("WEmuon"+cutnum).c_str(),"W^{#pm} Energy, with true #mu",100, 25.0, 300.0));
-		WETau[i].push_back( new TH1D(("WEtau"+cutnum).c_str(),"W^{#pm} Energy, with true #tau ",100, 25.0, 300.0 ));
-		EtotalMuon[i].push_back( new TH1D(("EtotalMuon"+cutnum).c_str(),"WW Total Energy, with true #mu",100,100,550)); 
-		EtotalTau[i].push_back( new TH1D(("EtotalTau"+cutnum).c_str(),"WW Total Energy, with true #tau",100,100,550));
+		WmassMuon.push_back( new TH1D(("Wmassmuon"+cutnum).c_str(),"W^{#pm} Mass from l #nu, with true #mu",100, 50.0, 120.0 ));
+		WmassTau.push_back( new TH1D(("Wmasstau"+cutnum).c_str(),"W^{#pm} Mass from l #nu, with true #tau",100, 50.0, 120.0 ));
+                qqmassMuon.push_back( new TH1D(("qqmassmuon"+cutnum).c_str(),"qq Mass, with true #mu",100,50.0,120.0));
+		qqmassTau.push_back( new TH1D(("qqmasstau"+cutnum).c_str(),"qq Mass, with true #tau",100,50.0,120.0));
+		WEMuon.push_back( new TH1D(("WEmuon"+cutnum).c_str(),"W^{#pm} Energy, with true #mu",100, 25.0, 300.0));
+		WETau.push_back( new TH1D(("WEtau"+cutnum).c_str(),"W^{#pm} Energy, with true #tau ",100, 25.0, 300.0 ));
+		EtotalMuon.push_back( new TH1D(("EtotalMuon"+cutnum).c_str(),"WW Total Energy, with true #mu",100,100,550)); 
+		EtotalTau.push_back( new TH1D(("EtotalTau"+cutnum).c_str(),"WW Total Energy, with true #tau",100,100,550));
 		
 		//TGC stuff
-		LjetMassMuon[i].push_back(new TH1D(("Ljetmassmuon"+cutnum).c_str(),"Mass of Lepton Jet with true #mu",100, 0.0 ,20.0 ));
-		LjetMassTau[i].push_back(new TH1D(("Ljetmasstau"+cutnum).c_str(),"Mass of Lepton Jet with true #tau",100, 0.0, 20.0 ));
+		LjetMassMuon.push_back(new TH1D(("Ljetmassmuon"+cutnum).c_str(),"Mass of Lepton Jet with true #mu",100, 0.0 ,20.0 ));
+		LjetMassTau.push_back(new TH1D(("Ljetmasstau"+cutnum).c_str(),"Mass of Lepton Jet with true #tau",100, 0.0, 20.0 ));
 
-		costhetawMuon[i].push_back( new TH1D(("costhetawMuon"+cutnum).c_str(), "production angle of W^- in Muon event",100,-1.0,1.0));
-		thetaLMuon[i].push_back( new TH1D(("thetaLMuon"+cutnum).c_str(), "polar angle of CM lepton in Muon event",100, 0.0,  pi));
-		phiLMuon[i].push_back( new TH1D(("phiLMuon"+cutnum).c_str(), "azimuthal angle of CM Lepton in Muon event", 100,-pi,pi));
-		thetaHMuon[i].push_back( new TH1D(("thetaHMuon"+cutnum).c_str(), "polar angle of CM quark in Muon event",100,0.0,pi));
-		phiHMuon[i].push_back( new TH1D(("phiHMuon"+cutnum).c_str(),"azimuthal angle of CM quark in Muon event", 100,-pi,pi));
+		costhetawMuon.push_back( new TH1D(("costhetawMuon"+cutnum).c_str(), "production angle of W^- in Muon event",100,-1.0,1.0));
+		thetaLMuon.push_back( new TH1D(("thetaLMuon"+cutnum).c_str(), "polar angle of CM lepton in Muon event",100, 0.0,  pi));
+		phiLMuon.push_back( new TH1D(("phiLMuon"+cutnum).c_str(), "azimuthal angle of CM Lepton in Muon event", 100,-pi,pi));
+		thetaHMuon.push_back( new TH1D(("thetaHMuon"+cutnum).c_str(), "polar angle of CM quark in Muon event",100,0.0,pi));
+		phiHMuon.push_back( new TH1D(("phiHMuon"+cutnum).c_str(),"azimuthal angle of CM quark in Muon event", 100,-pi,pi));
 
-		costhetawTau[i].push_back( new TH1D(("costhetawTau"+cutnum).c_str(), "production angle of W^- in Tau event",100,-1.0,1.0));
-		thetaLTau[i].push_back( new TH1D(("thetaLTau"+cutnum).c_str(), "polar angle of CM lepton in Tau event",100, 0.0, pi));
-		phiLTau[i].push_back( new TH1D(("phiLTau"+cutnum).c_str(), "azimuthal angle of CM Lepton in Tau event", 100,-pi,pi));
-		thetaHTau[i].push_back( new TH1D(("thetaHTau"+cutnum).c_str(), "polar angle of CM quark in Tau event",100,0.0,pi));
-		phiHTau[i].push_back( new TH1D(("phiHTau"+cutnum).c_str(),"azimuthal angle of CM quark in Tau event", 100,-pi,pi));
+		costhetawTau.push_back( new TH1D(("costhetawTau"+cutnum).c_str(), "production angle of W^- in Tau event",100,-1.0,1.0));
+		thetaLTau.push_back( new TH1D(("thetaLTau"+cutnum).c_str(), "polar angle of CM lepton in Tau event",100, 0.0, pi));
+		phiLTau.push_back( new TH1D(("phiLTau"+cutnum).c_str(), "azimuthal angle of CM Lepton in Tau event", 100,-pi,pi));
+		thetaHTau.push_back( new TH1D(("thetaHTau"+cutnum).c_str(), "polar angle of CM quark in Tau event",100,0.0,pi));
+		phiHTau.push_back( new TH1D(("phiHTau"+cutnum).c_str(),"azimuthal angle of CM quark in Tau event", 100,-pi,pi));
 
 
         
 	 //jet information histograms
-   		leptonMCNPartsMuon[i].push_back( new TH1D(("leptonMCNPartsMuon"+cutnum).c_str(), "True Visible Particles Radiated/Decayed from Lepton in Muon Event", 20,0.5,20.5));
-		leptonMCNTracksMuon[i].push_back( new TH1D(("leptonMCNTracksMuon"+cutnum).c_str(), "True Visible Tracks Decayed from Lepton in Muon Event",20,0.5,20.5));
-		jetNpartsMuon[i].push_back( new TH1D(("jetNpartsMuon"+cutnum).c_str(), "Visible Particles per Jet in Muon Event",50,0.5,50.5));
-        jetNtracksMuon[i].push_back( new TH1D(("jetNtracksMuon"+cutnum).c_str(), "Visible Tracks per Jet in Muon Event", 50,0.5,50.5));		
-minjetNpartsMuon[i].push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Particle of Jet with least Particles in Muon Event",25,0.5,25.5));
-		minjetNtracksMuon[i].push_back( new TH1D(("minjetNtracksMuon"+cutnum).c_str(), "Visible Tracks of Jet with least Particlesin Muon Event",25,0.5,25.5));
+   		leptonMCNPartsMuon.push_back( new TH1D(("leptonMCNPartsMuon"+cutnum).c_str(), "True Visible Particles Radiated/Decayed from Lepton in Muon Event", 20,0.5,20.5));
+		leptonMCNTracksMuon.push_back( new TH1D(("leptonMCNTracksMuon"+cutnum).c_str(), "True Visible Tracks Decayed from Lepton in Muon Event",20,0.5,20.5));
+		jetNpartsMuon.push_back( new TH1D(("jetNpartsMuon"+cutnum).c_str(), "Visible Particles per Jet in Muon Event",50,0.5,50.5));
+        jetNtracksMuon.push_back( new TH1D(("jetNtracksMuon"+cutnum).c_str(), "Visible Tracks per Jet in Muon Event", 50,0.5,50.5));		
+minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visible Particle of Jet with least Particles in Muon Event",25,0.5,25.5));
+		minjetNtracksMuon.push_back( new TH1D(("minjetNtracksMuon"+cutnum).c_str(), "Visible Tracks of Jet with least Particlesin Muon Event",25,0.5,25.5));
 
-		leptonMCNPartsTau[i].push_back( new TH1D(("leptonMCNPartsTau"+cutnum).c_str(), "True Visible Particles Radiated/Decayed from Lepton in Tau Event", 20,0.5,20.5));
-		leptonMCNTracksTau[i].push_back( new TH1D(("leptonMCNTracksTau"+cutnum).c_str(), "True Visible Tracks Decayed from Lepton in Tau Event",20,0.5,20.5));
-		jetNpartsTau[i].push_back( new TH1D(("jetNpartsTau"+cutnum).c_str(), "Visible Particles per Jet in Tau Event",20,0.5,20.5));
-        jetNtracksTau[i].push_back( new TH1D(("jetNtracksTau"+cutnum).c_str(), "Visible Tracks per Jet in Tau Event", 20,0.5,50.5));
-		minjetNpartsTau[i].push_back( new TH1D(("minjetNpartsTau"+cutnum).c_str(), "Visible Particle of Jet with least Particles in Tau Event",25,0.5,25.5));
-		minjetNtracksTau[i].push_back( new TH1D(("minjetNtracksTau"+cutnum).c_str(), "Visible Tracks of Jet with least Particlesin Tau Event",25,0.5,25.5));
+		leptonMCNPartsTau.push_back( new TH1D(("leptonMCNPartsTau"+cutnum).c_str(), "True Visible Particles Radiated/Decayed from Lepton in Tau Event", 20,0.5,20.5));
+		leptonMCNTracksTau.push_back( new TH1D(("leptonMCNTracksTau"+cutnum).c_str(), "True Visible Tracks Decayed from Lepton in Tau Event",20,0.5,20.5));
+		jetNpartsTau.push_back( new TH1D(("jetNpartsTau"+cutnum).c_str(), "Visible Particles per Jet in Tau Event",20,0.5,20.5));
+        jetNtracksTau.push_back( new TH1D(("jetNtracksTau"+cutnum).c_str(), "Visible Tracks per Jet in Tau Event", 20,0.5,50.5));
+		minjetNpartsTau.push_back( new TH1D(("minjetNpartsTau"+cutnum).c_str(), "Visible Particle of Jet with least Particles in Tau Event",25,0.5,25.5));
+		minjetNtracksTau.push_back( new TH1D(("minjetNtracksTau"+cutnum).c_str(), "Visible Tracks of Jet with least Particlesin Tau Event",25,0.5,25.5));
 
 		//some jet leading track parameters
-		ljetleadingd0Muon[i].push_back( new TH1D(("ljetleadingd0Muon"+cutnum).c_str(), "d0 of the leading track of lepton jet in muon event",50,-0.1,0.1));
-		ljetleadingptMuon[i].push_back( new TH1D(("ljetleadingptMuon"+cutnum).c_str(), "p of the leading track of lepton jet in muon event", 100,0.0, 200.0));
-		ljetd0relerrMuon[i].push_back( new TH1D(("ljetd0relerrMuon"+cutnum).c_str(),"d0/ #delta d0  of leading track of lepton jet in muon event",20,0.0,100));
-		qjetleadingd0Muon[i].push_back( new TH1D(("qjetleadingd0Muon"+cutnum).c_str(), "d0 of the leading track of q jet in muon event",50,-0.1,0.1));
-		qjetleadingptMuon[i].push_back( new TH1D(("qjetleadingptMuon"+cutnum).c_str(), "p of the leading track of q jet in muon event", 100,0.0, 200.0));
-		qjetd0relerrMuon[i].push_back( new TH1D(("qjetd0relerrMuon"+cutnum).c_str(),"d0/ #delta d0  of leading track of q jet in muon event",100,0.0,100));
-		ljetleadingd0Tau[i].push_back( new TH1D(("ljetleadingd0Tau"+cutnum).c_str(), "d0 of the leading track of lepton jet in Tau event",50,-.1,.1));
-		ljetleadingptTau[i].push_back( new TH1D(("ljetleadingptTau"+cutnum).c_str(), "p of the leading track of lepton jet in Tau event", 100,0.0, 200.0));
-		ljetd0relerrTau[i].push_back( new TH1D(("ljetd0relerrTau"+cutnum).c_str(),"d0/ #delta d0  of leading track of lepton jet in Tau event",100,0.0,100));
-		qjetleadingd0Tau[i].push_back( new TH1D(("qjetleadingd0Tau"+cutnum).c_str(), "d0 of the leading track of q jet in Tau event",50,-.1,.1));
-		qjetleadingptTau[i].push_back( new TH1D(("qjetleadingptTau"+cutnum).c_str(), "p of the leading track of q jet in Tau event", 100,0.0, 200.0));
-		qjetd0relerrTau[i].push_back( new TH1D(("qjetd0relerrTau"+cutnum).c_str(),"d0/ #delta d0  of leading track of q jet in Tau event",100,0.0,100));
+		ljetleadingd0Muon.push_back( new TH1D(("ljetleadingd0Muon"+cutnum).c_str(), "d0 of the leading track of lepton jet in muon event",50,-0.1,0.1));
+		ljetleadingptMuon.push_back( new TH1D(("ljetleadingptMuon"+cutnum).c_str(), "p of the leading track of lepton jet in muon event", 100,0.0, 200.0));
+		ljetd0relerrMuon.push_back( new TH1D(("ljetd0relerrMuon"+cutnum).c_str(),"d0/ #delta d0  of leading track of lepton jet in muon event",20,0.0,100));
+		qjetleadingd0Muon.push_back( new TH1D(("qjetleadingd0Muon"+cutnum).c_str(), "d0 of the leading track of q jet in muon event",50,-0.1,0.1));
+		qjetleadingptMuon.push_back( new TH1D(("qjetleadingptMuon"+cutnum).c_str(), "p of the leading track of q jet in muon event", 100,0.0, 200.0));
+		qjetd0relerrMuon.push_back( new TH1D(("qjetd0relerrMuon"+cutnum).c_str(),"d0/ #delta d0  of leading track of q jet in muon event",100,0.0,100));
+		ljetleadingd0Tau.push_back( new TH1D(("ljetleadingd0Tau"+cutnum).c_str(), "d0 of the leading track of lepton jet in Tau event",50,-.1,.1));
+		ljetleadingptTau.push_back( new TH1D(("ljetleadingptTau"+cutnum).c_str(), "p of the leading track of lepton jet in Tau event", 100,0.0, 200.0));
+		ljetd0relerrTau.push_back( new TH1D(("ljetd0relerrTau"+cutnum).c_str(),"d0/ #delta d0  of leading track of lepton jet in Tau event",100,0.0,100));
+		qjetleadingd0Tau.push_back( new TH1D(("qjetleadingd0Tau"+cutnum).c_str(), "d0 of the leading track of q jet in Tau event",50,-.1,.1));
+		qjetleadingptTau.push_back( new TH1D(("qjetleadingptTau"+cutnum).c_str(), "p of the leading track of q jet in Tau event", 100,0.0, 200.0));
+		qjetd0relerrTau.push_back( new TH1D(("qjetd0relerrTau"+cutnum).c_str(),"d0/ #delta d0  of leading track of q jet in Tau event",100,0.0,100));
 	
-		psiljetmclMuon[i].push_back( new TH1D(("psiljetmclMuon"+cutnum).c_str(),"angle between the lepton jet and the true lepton muon",100,-1.0,1.0));
-		psiljetmclTau[i].push_back( new TH1D(("psiljetmclTau"+cutnum).c_str(),"angle between the lepton jet and the true lepton muon",100,-1.0,1.0));	
+		psiljetmclMuon.push_back( new TH1D(("psiljetmclMuon"+cutnum).c_str(),"angle between the lepton jet and the true lepton muon",100,-1.0,1.0));
+		psiljetmclTau.push_back( new TH1D(("psiljetmclTau"+cutnum).c_str(),"angle between the lepton jet and the true lepton muon",100,-1.0,1.0));	
 	
-		htotalTracks[i].push_back( new TH1D(("htotalTracks"+cutnum).c_str(),"total charged pfos",141,-0.5,140));
+		htotalTracks.push_back( new TH1D(("htotalTracks"+cutnum).c_str(),"total charged pfos",141,-0.5,140));
 		/* end init histograms */
 		}
 
