@@ -15,8 +15,10 @@ Marlin ./steering/${DATASET}.xml > ${DATASET}.out
 
 gzip ${DATASET}.out
 
-mv ${DATASET}.out.gz /afs/desy.de/group/flc/pool/anguiano/WWFiles/
-mv file.root /afs/desy.de/group/flc/pool/anguiano/WWFiles/${DATASET}.root
-mv jets.slcio /afs/desy.de/group/flc/pool/anguiano/WWFiles/${DATASET}_jets.slcio
+mv ${DATASET}.out.gz /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/RunLogs
+mv file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/RootFiles/${DATASET}.root
 
- 
+#slcio tends to be really big so normally just overwrite it
+#mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/slcioFiles/${DATASET}_jets.slcio
+mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/slcioFiles/
+

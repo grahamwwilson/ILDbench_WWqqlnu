@@ -48,7 +48,6 @@ using namespace lcio;
    *  Use to initialize the proscessor, e.g. book histograms.
    */
   virtual void init() ;
-	void initHistograms(); // init all the hists arrays
   /** Called for every run.
    */
   virtual void processRunHeader( LCRunHeader* run ) ;
