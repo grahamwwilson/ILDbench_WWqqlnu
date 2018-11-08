@@ -17,8 +17,10 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include "EVENT/LCParameters.h"
 
-#define ncuts 7
+
+//#define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
 //#define nferm 4
 
@@ -74,11 +76,13 @@ using namespace lcio;
   void  getMultiplicityOfTrueljet();
   void classifyTauDecay(MCParticle* mctau);
   MCParticle* getMClepton(MCParticle* parent);
+  void AnalyzeDijet();
 
   int getLeptonJetCharge( ReconstructedParticle* ljet );
 
 	//overlay analysis
-	void AnalyzeOverlay( );
+	void AnalyzeOverlay(LCEvent* evt );
+	void FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP);
 
   //jet analysis helpers
   void getJetMultiplicities();
@@ -157,8 +161,13 @@ using namespace lcio;
   int nmuon=0;
   int nelec=0;
 
+ //the number of overlay events present in the event
+	int OverlaynTotalEvents=-1;
+	int OverlayPairBgOverlaynEvents=-1;
+
 //the total number of unique cuts applied (for histogram indexing)
-//  int ncuts = 1;
+
+	int ncuts = 7;
 
   //how many times do we get the proper lepton charge?
   //for muons and for leptons separately
@@ -196,6 +205,11 @@ using namespace lcio;
   int jetleastntracks; //number of tracks in the jet with the least tracks
   int jetleastntracks_index;
 
+	//montecarlo dijet (qq) variables
+	double mcqqmass= -5;
+	double mcqqE =-5;
+	double mcqqcostheta =-5;
+	double mcqqphi = -5;
 
   double leadingptqjet; //pt of the leading track in a quark jet
   double leadingd0qjet; //d0 of the leading track in a quark jet
@@ -208,6 +222,8 @@ using namespace lcio;
 
   //opening angle between the lepton jet and mc lepton
   double psi_mcl_ljet;
+  //opening angle between mc lepton and closest jet
+  double true_psi_mcl_ljet;
 
   int qnparts;
   int qntracks;
@@ -237,6 +253,7 @@ using namespace lcio;
 
 
   /* histograms split between muon/tau true events */
+/*
 	TFile* file;
 
 	TH1D *WmassMuon[ncuts+1], *WmassTau[ncuts+1], *qqmassMuon[ncuts+1], *qqmassTau[ncuts+1];
@@ -266,10 +283,46 @@ using namespace lcio;
 	    TH1D *psiljetmclMuon[ncuts+1], *psiljetmclTau[ncuts+1];
 
 	TH1D *htotalTracks[ncuts+1];
+
+*/
 	int ljetmatchmctau;
 	int ljetmatchmcmuon;
 
-     
+     /* TESTING AREA !!! */
+	TFile* file;
+
+	std::vector<TH1D*> WmassMuon, WmassTau, qqmassMuon, qqmassTau;
+	std::vector<TH1D*> WEMuon, WETau, EtotalMuon, EtotalTau;
+	std::vector<TH1D*> Wm_cosTheta;
+
+	std::vector<TH1D*> LjetMassMuon, LjetMassTau;
+
+	//tgc hists
+	std::vector<TH1D*> costhetawMuon , costhetawTau;
+	std::vector<TH1D*> thetaLMuon, thetaLTau;
+	std::vector<TH1D*> phiLMuon, phiLTau;
+	std::vector<TH1D*> thetaHMuon, thetaHTau;
+	std::vector<TH1D*> phiHMuon, phiHTau;
+
+    //jet information histograms
+    std::vector<TH1D*>  leptonMCNPartsMuon, leptonMCNTracksMuon, leptonMCNPartsTau, leptonMCNTracksTau;
+	std::vector<TH1D*>  jetNpartsMuon, minjetNpartsMuon, jetNpartsTau, minjetNpartsTau;
+    std::vector<TH1D*>  jetNtracksMuon, minjetNtracksMuon,  jetNtracksTau, minjetNtracksTau;
+
+    //lepton jet info
+	std::vector<TH1D*> ljetleadingd0Muon, ljetleadingd0Tau, ljetleadingptMuon, ljetleadingptTau;
+    std::vector<TH1D*> ljetd0relerrMuon, ljetd0relerrTau; 
+    std::vector<TH1D*> qjetleadingd0Muon, qjetleadingd0Tau, qjetleadingptMuon, qjetleadingptTau;
+    std::vector<TH1D*> qjetd0relerrMuon, qjetd0relerrTau;
+	
+	std::vector<TH1D*> psiljetmclMuon, psiljetmclTau;
+
+	std::vector<TH1D*> htotalTracks;
+
+
+	/* END HISTO TEST */
+
+	//these are populated directly from pandora pfos
 	TH1D* htotaltracks;
 	TH1D* htotalPt;
 	TH1D* htotalE;
