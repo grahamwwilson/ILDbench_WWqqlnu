@@ -80,7 +80,7 @@
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> FastJets </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> FastJetsWithOverlay </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
