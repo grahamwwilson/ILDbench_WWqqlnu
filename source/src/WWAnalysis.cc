@@ -34,7 +34,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 			     	"InputJetWithOverlayCollectionName" , 
 			     	"Input Jet With Overlay Collection Name "  ,
 			     	_inputJetWithOverlayCollectionName,
-			      	inputJetwithOverlayCollectionName);
+			      	inputJetWithOverlayCollectionName);
 
 	//input track and particle collections:
 	std::string inputParticleCollectionName = "x";
