@@ -102,6 +102,7 @@
 		<parameter name="InputParticleCollectionName" type="string" lcioInType="ReconstructedParticle">PandoraPFOs</parameter>
 		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
 		<parameter name="InputJetCollectionName" value="FastJets" />
+		<parameter name="InputJetWithOverlayCollectionName" value="FastJetsWithOverlay" />
 
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />  
