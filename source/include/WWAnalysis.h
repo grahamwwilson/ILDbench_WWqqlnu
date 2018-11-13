@@ -66,6 +66,8 @@ using namespace lcio;
   bool FindJets( LCEvent* evt ) ;
   bool FindPFOs( LCEvent* evt ) ;
   bool FindTracks( LCEvent* evt );
+  bool FindJetsWithOverlay( LCEvent* evt );
+
 
 
   // lepton jet functions
@@ -179,6 +181,7 @@ using namespace lcio;
   std::vector<ReconstructedParticle*> _jets{};
   std::vector<Track*> _trackvec{};
   std::vector<ReconstructedParticle*> _pfovec{};
+  std::vector<ReconstructedParticle*> _jetswithoverlay{};
   
   //useful structures for calculation/ readability
   std::vector<TLorentzVector*> jets{};
@@ -248,6 +251,7 @@ using namespace lcio;
   //input collections
   std::string _inputMcParticleCollectionName{};
   std::string _inputJetCollectionName{};
+  std::string _inputJetWithOverlayCollectionName{};
   std::string _inputParticleCollectionName{};
   std::string _inputTrackCollectionName{};
 

@@ -28,6 +28,14 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 			     	_inputJetCollectionName,
 			      	inputJetCollectionName);
 
+	//collection for fast jet with no prior overlay removal
+	std::string inputJetWithOverlayCollectionName = "x";
+  	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
+			     	"InputJetWithOverlayCollectionName" , 
+			     	"Input Jet With Overlay Collection Name "  ,
+			     	_inputJetWithOverlayCollectionName,
+			      	inputJetwithOverlayCollectionName);
+
 	//input track and particle collections:
 	std::string inputParticleCollectionName = "x";
   	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
@@ -431,6 +439,39 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
 	
 	if(!collectionFound){
 		std::cout<<"Jet Collection "<< _inputJetCollectionName << "not found"<<std::endl;
+	}
+
+   
+	return collectionFound;
+}
+bool WWAnalysis::FindJetsWithOverlay( LCEvent* evt ) {
+
+	bool collectionFound = false;
+
+  	// clear old global pfovector
+	_jetswithoverlay.clear();
+  	typedef const std::vector<std::string> StringVec ;
+  	StringVec* strVec = evt->getCollectionNames() ;
+	
+	//iterate over collections, find the matching name
+  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){
+     
+		//if found print name and number of elements
+    		if(*itname==_inputJetWithOverlayCollectionName){ 
+			LCCollection* collection = evt->getCollection(*itname);
+			std::cout<< "Located Jets With Overlay Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
+			collectionFound = true;
+
+ 			//add the collection elements to the global vector
+      			for(unsigned int i=0; i<collection->getNumberOfElements(); i++){
+				ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(collection->getElementAt(i));
+				_jetswithoverlay.push_back(recoPart);
+      			}
+    		}
+  	}
+	
+	if(!collectionFound){
+		std::cout<<"Jet Collection "<< _inputJetWithOverlayCollectionName << "not found"<<std::endl;
 	}
 
    
@@ -1178,7 +1219,8 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
 	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;
 
-
+	std::cout<<"finding jets with overlay "<<std::endl;
+	 FindJetsWithOverlay( evt );
 	//find relevant visible overlay particles at generator level
 	/*std::vector<MCParticle*> overlayFSP{};
 	//only insert overlays with no parents
