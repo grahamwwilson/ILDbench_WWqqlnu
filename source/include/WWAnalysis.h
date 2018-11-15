@@ -110,7 +110,7 @@ using namespace lcio;
   void populateTLVs(int lindex);
   void populateCMTLVs();
 	//for the extra overlay analysis jets
-  void populateJetsWithOverlayTLVS(std::vector<ReconstructedParticle*> j);
+  void populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*> j);
 
   //helper function to get production angle of W-
   double getCosThetaW();
