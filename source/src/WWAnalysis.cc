@@ -1209,6 +1209,9 @@ void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*>
 	for(unsigned int i=0; i<_jetswithoverlay.size(); i++){
 	
 	//	TLorentzVector* j = new TLorentzVector();
+
+		jetswithoverlay.at(i) = new TLorentzVector();
+
 		jetswithoverlay.at(i)->SetXYZM(_jetswithoverlay.at(i)->getMomentum()[0], _jetswithoverlay.at(i)->getMomentum()[1], _jetswithoverlay.at(i)->getMomentum()[2], _jetswithoverlay.at(i)->getMass() );
 		//tempjets.at(i) = j;
 
