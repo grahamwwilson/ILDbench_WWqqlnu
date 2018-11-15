@@ -525,7 +525,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 			//skip neutrinos
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
-			angle = cos( mcp.at(j).Angle(js.at(i));
+			angle = cos( mcp.at(j)->Angle(*js.at(i));
 			if(angle > maxangle ){
 				maxangle = angle;
 				maxindex = j;
@@ -1291,11 +1291,11 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	//go through mcf, from this particle go through and tag a jet that corresponds for the mc particle, for both sets of jets
 
 	//tag jets
-	std::vector<int> jetmctags(_njets);
-	std::vector<int> jetwithoverlaymctags(_njets);
+	std::vector<int> jetmctags(_nJets);
+	std::vector<int> jetwithoverlaymctags(_nJets);
 
-	MCTagjets(_MCf, MCf_pdg, jets, jetmctags);
-	MCTagjets(_MCf, MCf_pdg, jets, jetwithoverlaymctags);
+	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
+	MCTagjets(_MCf, _MCfpdg, jets, jetwithoverlaymctags);
 
 	for(int i=0; i< jetmctags.size(); i++){
 		//find the corresponding jet with overlay
