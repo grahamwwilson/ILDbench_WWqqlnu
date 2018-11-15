@@ -505,6 +505,51 @@ void WWAnalysis::EvaluateEventSelectionVariables(int& _totaltracks,double& _tota
 	_totaltracks = ntrk;
 
 }
+void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mcp_pdg, std::vector<TLorentzVector*> js, std::vector<int>& j_indices){
+
+	//j_indices elements contain the corresponding mcp index of the i-th jet
+
+
+	//save the costheta for this particle
+	
+
+	double maxangle = -9999;
+		double angle;
+		int maxindex = -1;
+	for(unsigned int i=0; i<js.size(); i++){
+		//match each particle
+
+		//get jet closest to the mcparticle
+		for(unsigned int j=0; j<mcp.size(); j++){
+				int pdg = mcp_pdg.at(j);
+			//skip neutrinos
+			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
+			
+			angle = cos( mcp.at(j).Angle(js.at(i));
+			if(angle > maxangle ){
+				maxangle = angle;
+				maxindex = j;
+			}			
+
+
+		}
+		//take the matched particle and save it
+		j_indices.at(i) = maxindex;
+	}
+
+		//check and see if anything is double matched
+		for(unsigned int i=0; i<j_indices.size(); i++){
+			for(unsigned int j=i+1; j<j_indices.size(); j++){
+				if(j_indices.at(i) == j_indices.at(j)){
+					int pdg = mcp_pdg.at(j_indices.at(i));
+					std::cout<<"pdg "<<pdg <<"matched to jets "<<i<<" "<<j<<std::endl;
+				}
+			}
+		}
+
+
+
+}
 /* identifies the lepton jet with the minimum particle multiplicity */
 int WWAnalysis::identifyLeptonJet( std::vector<ReconstructedParticle*> jets){
 
@@ -1157,6 +1202,21 @@ void WWAnalysis::populateCMTLVs(){
 	CMnu->Boost(Wlboost);
 	
 }
+void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*> j){
+	
+	std::vector<TLorentzVector*> temp(_jetswithoverlay.size());
+	jetswithoverlay=temp;
+	for(unsigned int i=0; i<_jetswithoverlay.size(); i++){
+	
+	//	TLorentzVector* j = new TLorentzVector();
+		jetswithoverlay.at(i)->SetXYZM(_jetswithoverlay.at(i)->getMomentum()[0], _jetswithoverlay.at(i)->getMomentum()[1], _jetswithoverlay.at(i)->getMomentum()[2], _jetswithoverlay.at(i)->getMass() );
+		//tempjets.at(i) = j;
+
+		std::cout<<_jetswithoverlay.at(i)->getMomentum()[0]<<" "<< _jetswithoverlay.at(i)->getMomentum()[1]<<" "<<_jetswithoverlay.at(i)->getMomentum()[2]<< " "<< _jetswithoverlay.at(i)->getMass()<<std::endl;
+	}
+
+
+}
 //get the production angle for W-  (W- . z)
 double WWAnalysis::getCosThetaW(){
 	
@@ -1221,61 +1281,83 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	std::cout<<"finding jets with overlay "<<std::endl;
 	 FindJetsWithOverlay( evt );
-	//find relevant visible overlay particles at generator level
-	/*std::vector<MCParticle*> overlayFSP{};
-	//only insert overlays with no parents
-	std::vector<MCParticle*> overlayparents;
-	for(int i=0; i<_mcpartvec.size(); i++){
-		overlayparents = _mcpartvec.at(i)->getParents();
-		if(overlayparents.size()==0  && _mcpartvec.at(i)->isOverlay() && (_mcpartvec.at(i)->getGeneratorStatus() == 1)){
-			//FindMCOverlay( _mcpartvec.at(i) , overlayFSP);
-			overlayparents.push_back(_mcpartvec.at(i));
+	populateJetsWithOverlayTLVs(_jetswithoverlay);
+
+	//relevant quantities to find...
+	//-- cos theta of particles that are thrown out by kt
+	std::vector<ReconstructedParticle*> rejectedbeamparticles{};
+	std::vector<std::vector<ReconstructedParticle*> >  rejectjets{};
+
+	//go through mcf, from this particle go through and tag a jet that corresponds for the mc particle, for both sets of jets
+
+	//tag jets
+	std::vector<int> jetmctags(_njets);
+	std::vector<int> jetwithoverlaymctags(_njets);
+
+	MCTagjets(_MCf, MCf_pdg, jets, jetmctags);
+	MCTagjets(_MCf, MCf_pdg, jets, jetwithoverlaymctags);
+
+	for(int i=0; i< jetmctags.size(); i++){
+		//find the corresponding jet with overlay
+		for(int j=0; j< jetwithoverlaymctags.size(); j++){
+			if(jetmctags.at(i) == jetwithoverlaymctags.at(j)){
+				//both jets refer to same mc particle
+
+				//figure out what particles got rejected and save them
+				std::vector<ReconstructedParticle*> p = _jets.at(i)->getParticles();
+				std::vector<ReconstructedParticle*> pwo = _jetswithoverlay.at(j)->getParticles();
+				
+				 //loop over the sets of particles and find whats missing
+				for(int k = 0; k < pwo.size(); k++){
+					bool containsParticle = false;
+					for(int l = 0; l < p.size(); l++){
+						if( p.at(l)->id() == pwo.at(k)->id() ){
+							containsParticle = true;
+						}
+					}
+					if(!containsParticle){
+						//particle k is a reject
+						rejectedbeamparticles.push_back(pwo.at(k));
+					}
+				}//end loops over 2 sets of particles
+				
+			}//end if we matched the two jets
+			//add the rejects to reject jet vector
+			rejectjets.push_back(rejectedbeamparticles);
+			rejectedbeamparticles.clear();
 		}
 	}
 
-	//remove the duplicates, this happens because my recursively explore both parents of initial overlay events
-	//currently use erase.. this is inefficient 
-	for(int i=0; i<overlayFSP.size(); i++){
-		for(int j=i; j<overlayFSP.size(); j++){
-			if(overlayFSP.at(i)->id() == overlayFSP.at(j)->id()){
-				overlayFSP.erase(overlayFSP.begin()+j);
-			}
+
+	//debug check
+	for(int i=0; i<_jets.size(); i++){
+		std::cout<<"jets "<<i<<std::endl;
+		std::vector<ReconstructedParticle*> p{};
+		p = _jets.at(i)->getParticles();
+		for(int j=0; j<p.size(); j++){
+			std::cout<<p.at(j)->id()<<" ";
 		}
+				std::cout<<std::endl;
+	}
+	for(int i=0; i<_jetswithoverlay.size(); i++){
+		std::cout<<"jets with o "<<i<<std::endl;
+		std::vector<ReconstructedParticle*> p{};
+		p = _jetswithoverlay.at(i)->getParticles();
+		for(int j=0; j<p.size(); j++){
+			std::cout<<p.at(j)->id()<<" ";
+		}
+		std::cout<<std::endl;
+	}
+	for(int i=0; i<rejectjets.size(); i++){
+		std::cout<<"reject "<<i<<std::endl;
+		for(int j=0; j<rejectjets.at(i).size(); j++){
+			std::cout<<rejectjects.at(i).at(j)->id()<<" ";
+		}
+				std::cout<<std::endl;
 	}
 	
 
-	std::cout<<"Printing overlay fsp"<<std::endl;
-	for(int i=0; i<overlayFSP.size(); i++){
-		std::cout<<overlayFSP.at(i)->id()<<" "<<overlayFSP.at(i)->getPDG()<<std::endl;
-	} 
-
-*/
-	
-	//look at mcparticles
-	//add to tree all particles marked 'o'
-	//look at distributions: for montecarlo
-	//#neutrals #charged
-	//#total energy contribution
-	//#costheta neutrals/ charged
-/*	std::vector<MCParticle*> overlaymcparts{};
-	for(unsigned int i =0; i<_mcpartvec.size(); i++){
-		std::cout<<_mcpartvec.at(i)->id()<<" "<<std::cout<<_mcpartvec.at(i)->getSimulatorStatus()<<" ";
-		std::cout<<_mcpartvec.at(i)->isOverlay()<<std::endl;;
-		
-	}  */
-
-  
-
-
-	//use mc ids and truthlinker to find the reco overlay
-	//plot distributions for reco
-	//#total energy contribution
-	//#cos theta neutrals/ charged
-	
-
-	//possible next steps//
-	/* remove all id'd particles and look at everything with no gg overlay */
-	
+	//end debug check
 
 }
 void WWAnalysis::AnalyzeDijet(){

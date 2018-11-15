@@ -92,6 +92,7 @@ using namespace lcio;
   bool allChildrenAreSimulation(MCParticle* p);
   void analyzeLeadingTracks();
   void EvaluateJetVariables( LCEvent* evt, std::vector<ReconstructedParticle*> jets, int& nJets, float& yMinus, float& yPlus); 
+ void MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mcp_pdg, std::vector<TLorentzVector*> js, std::vector<int>& j_indices);
 
   //classify the type of lepton decay and retrieve the
   //mcparticles for qqlnu
@@ -108,6 +109,8 @@ using namespace lcio;
   //populate local datastructures (TLVS)
   void populateTLVs(int lindex);
   void populateCMTLVs();
+	//for the extra overlay analysis jets
+  void populateJetsWithOverlayTLVS(std::vector<ReconstructedParticle*> j);
 
   //helper function to get production angle of W-
   double getCosThetaW();
@@ -190,6 +193,9 @@ using namespace lcio;
   TLorentzVector* nu; //made from missing p with m=0
   std::vector<TLorentzVector*> CMJets{}; //q,q,l boosted into W rest frame
   TLorentzVector* CMnu;//nu boosted into W restframe
+
+	//structure for jets with no overlay removal
+  std::vector<TLorentzVector*> jetswithoverlay{};
 
 
   //jet matching and jet multiplicity variables
