@@ -534,7 +534,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 
 		}
 		//take the matched particle and save it
-		j_indices.at(i) = maxindex;
+		j_indices.at(i) =  ;
 	}
 
 		//check and see if anything is double matched
@@ -1536,7 +1536,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	isTau = false;
 	isMuon = false;
 
-	AnalyzeOverlay( evt);
+
 
 	//from the MCParticles find what type of semileptonic decay is present
         //return the parent mcparticle that has the qqlnu decay
@@ -1553,6 +1553,10 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	if(isTau){
 		classifyTauDecay(getMClepton(parent));
 	}
+
+	//overlay requires mc information so must be called
+	//after event classification
+	AnalyzeOverlay( evt);
 	
 	//now assess jets
 	//keep the index on _jets of the jet we consider to be the lepton
