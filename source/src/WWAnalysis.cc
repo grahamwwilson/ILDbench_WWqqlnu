@@ -527,7 +527,8 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
 			angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
-			std::cout<<"angle "<<angle<<std::endl;
+			std::cout<<"angle "<<angle<<std::endl;	
+			std::cout<< mcp.at(j)->Angle(js.at(i)->Vect() ) <<std::endl;
 			if(angle > maxangle ){
 				maxangle = angle;
 				maxindex = j;
