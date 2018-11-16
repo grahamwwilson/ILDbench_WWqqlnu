@@ -520,13 +520,14 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		//match each particle
 		maxangle = -9999;
 		maxindex = -1;
-		//get jet closest to the mcparticle
+		//get  mcparticle closest to jet
 		for(unsigned int j=0; j<mcp.size(); j++){
 				int pdg = mcp_pdg.at(j);
 			//skip neutrinos
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
 			angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
+			std::cout<<"angle "<<angle<<std::endl;
 			if(angle > maxangle ){
 				maxangle = angle;
 				maxindex = j;
