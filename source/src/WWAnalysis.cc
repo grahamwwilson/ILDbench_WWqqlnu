@@ -518,7 +518,8 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		int maxindex = -1;
 	for(unsigned int i=0; i<js.size(); i++){
 		//match each particle
-
+		maxangle = -9999;
+		maxindex = -1;
 		//get jet closest to the mcparticle
 		for(unsigned int j=0; j<mcp.size(); j++){
 				int pdg = mcp_pdg.at(j);
