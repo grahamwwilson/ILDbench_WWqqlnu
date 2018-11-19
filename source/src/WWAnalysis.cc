@@ -1333,7 +1333,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	for(int i=0; i< jetmctags.size(); i++){
 		//find the corresponding jet with overlay
-		for(int j=0; j< jetwithoverlaymctags.size(); j++){
+		for(int j=i; j< jetwithoverlaymctags.size(); j++){
 			if(jetmctags.at(i) == jetwithoverlaymctags.at(j)){
 				//both jets refer to same mc particle
 
@@ -1354,11 +1354,11 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 						rejectedbeamparticles.push_back(pwo.at(k));
 					}
 				}//end loops over 2 sets of particles
-				
+				rejectjets.push_back(rejectedbeamparticles);
+				rejectedbeamparticles.clear();
 			}//end if we matched the two jets
 			//add the rejects to reject jet vector
-			rejectjets.push_back(rejectedbeamparticles);
-			rejectedbeamparticles.clear();
+			
 		}
 	}
 
