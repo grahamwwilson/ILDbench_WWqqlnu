@@ -526,9 +526,13 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 			//skip neutrinos
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
-			angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
+			/*angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
 			std::cout<<"angle "<<angle<<std::endl;	
-			std::cout<< mcp.at(j)->Angle(js.at(i)->Vect() ) <<std::endl;
+			std::cout<< mcp.at(j)->Angle(js.at(i)->Vect() ) <<std::endl;*/
+			angle = mcp.at(j)->Vect().Dot( js.at(i)->Vect() )/ (mcp.at(j)->Vect().Mag() * js.at(i)->Vect().Mag() );
+
+			std::cout<<"angle "<<angle<<std::endl;	
+
 			if(angle > maxangle ){
 				maxangle = angle;
 				maxindex = j;
