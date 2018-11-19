@@ -551,7 +551,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		//take the matched particle and save it
 		j_indices.at(i) = maxindex ;
 	}
-
+		std::cout<<"j indices size "<<j_indices.size()<<std::endl;
 		//check and see if anything is double matched
 		for(unsigned int i=0; i<j_indices.size(); i++){
 			for(unsigned int j=i+1; j<j_indices.size(); j++){
