@@ -1312,7 +1312,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	std::vector<int> jetwithoverlaymctags(_nJets);
 
 	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
-	MCTagjets(_MCf, _MCfpdg, jets, jetwithoverlaymctags);
+	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
 
 	for(int i=0; i< jetmctags.size(); i++){
 		//find the corresponding jet with overlay
@@ -1568,8 +1568,11 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		classifyTauDecay(getMClepton(parent));
 	}
 
+	//build up all the different tlvs for calculation
+  	populateTLVs(ljet_index);
+
 	//overlay requires mc information so must be called
-	//after event classification
+	//after event classification, TLVs must also be populated
 	AnalyzeOverlay( evt);
 	
 	//now assess jets
@@ -1614,8 +1617,6 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	}
 
 
-	//build up all the different tlvs for calculation
-  	populateTLVs(ljet_index);
 
 	
 
