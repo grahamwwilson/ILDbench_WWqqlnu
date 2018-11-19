@@ -531,7 +531,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		for(unsigned int j=0; j<mcp.size(); j++){
 				int pdg = mcp_pdg.at(j);
 			//skip neutrinos
-			std::cout<<"pdg "<<pdg<<std::endl;
+			//std::cout<<"pdg "<<pdg<<std::endl;
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
 			/*angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
@@ -550,8 +550,9 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		}
 		//take the matched particle and save it
 		j_indices.at(i) = maxindex ;
-	}
-		std::cout<<"j indices size "<<j_indices.size()<<std::endl;
+	}//end match
+
+		//std::cout<<"j indices size "<<j_indices.size()<<std::endl;
 		//check and see if anything is double matched
 		for(unsigned int i=0; i<j_indices.size(); i++){
 			for(unsigned int j=i+1; j<j_indices.size(); j++){
@@ -1314,6 +1315,21 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
 	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
+
+
+	//print out the mctags to see what is matched to what
+	std::cout<<"jet tags ";
+	for(int i=0; i<jetmctags.size();i++){
+		std::cout<< _MCfpdg.at( jetmctags.at(i) )<<" ";
+	}
+	std::cout<<std::endl;
+
+	std::cout<<"jetwith overlay tags ";
+	for(int i=0; i<jetwithoverlaymctags.size();i++){
+		std::cout<< _MCfpdg.at( jetwithoverlaymctags.at(i) )<<" ";
+	}
+	std::cout<<std::endl;
+	
 
 	for(int i=0; i< jetmctags.size(); i++){
 		//find the corresponding jet with overlay
