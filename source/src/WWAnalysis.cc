@@ -511,6 +511,13 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 
 
 	//save the costheta for this particle
+
+
+	//print for debugging
+		std::cout<<"begin debugging jets"<<std::endl;
+	for(int i=0; i< js.size(); i++){
+		std::cout<<" jet "<< i <<" "<<js->Px()<<" "<<js->Py()<<" "<<js->Pz()<<" "<<js->E()<<std::endl;
+	}
 	
 
 	double maxangle = -9999;
