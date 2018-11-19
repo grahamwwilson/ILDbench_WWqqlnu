@@ -514,11 +514,11 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 
 
 	//print for debugging
-		std::cout<<"begin debugging jets"<<std::endl;
+/*		std::cout<<"begin debugging jets"<<std::endl;
 	for(int i=0; i< js.size(); i++){
 		std::cout<<" jet "<< i <<" "<<js.at(i)->Px()<<" "<<js.at(i)->Py()<<" "<<js.at(i)->Pz()<<" "<<js.at(i)->E()<<std::endl;
 	}
-	
+*/
 
 	double maxangle = -9999;
 		double angle;
@@ -531,6 +531,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 		for(unsigned int j=0; j<mcp.size(); j++){
 				int pdg = mcp_pdg.at(j);
 			//skip neutrinos
+			std::cout<<"pdg "<<pdg<<std::endl;
 			if( abs(pdg) == 14 || abs(pdg) == 16 ) continue;
 			
 			/*angle = cos( mcp.at(j)->Angle(js.at(i)->Vect() ));
@@ -538,7 +539,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 			std::cout<< mcp.at(j)->Angle(js.at(i)->Vect() ) <<std::endl;*/
 			angle = mcp.at(j)->Vect().Dot( js.at(i)->Vect() )/ (mcp.at(j)->Vect().Mag() * js.at(i)->Vect().Mag() );
 
-			std::cout<<"angle "<<angle<<std::endl;	
+			//std::cout<<"angle "<<angle<<std::endl;	
 
 			if(angle > maxangle ){
 				maxangle = angle;
