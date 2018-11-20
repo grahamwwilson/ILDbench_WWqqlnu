@@ -1330,9 +1330,16 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	//if we double tag a jet just return ignore this event
 	// right now these break the code
 	
-	for(unsigned int i=0; i<j_indices.size(); i++){
-			for(unsigned int j=i+1; j<j_indices.size(); j++){
-				if(j_indices.at(i) == j_indices.at(j)){
+	for(unsigned int i=0; i<jetmctags.size(); i++){
+			for(unsigned int j=i+1; j<jetmctags.size(); j++){
+				if(jetmctags.at(i) == jetmctags.at(j)){
+					return;
+				}
+			}
+		}
+		for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
+			for(unsigned int j=i+1; j<jetwithoverlaymctags.size(); j++){
+				if(jetwithoverlaymctags.at(i) == jetwithoverlaymctags.at(j)){
 					return;
 				}
 			}
