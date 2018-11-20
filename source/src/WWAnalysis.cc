@@ -1333,7 +1333,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	for(int i=0; i< jetmctags.size(); i++){
 		//find the corresponding jet with overlay
-		for(int j=i; j< jetwithoverlaymctags.size(); j++){
+		for(int j=0; j< jetwithoverlaymctags.size(); j++){
 			if(jetmctags.at(i) == jetwithoverlaymctags.at(j)){
 				//both jets refer to same mc particle
 
