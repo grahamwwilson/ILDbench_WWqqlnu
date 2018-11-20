@@ -1406,7 +1406,7 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	//categorize by flavor the rejected particles
 	//indices of mctags/reject jets/ jets w/ overlay removal should match
 	TLorentzVector temp;
-	double* momtemp;
+	const double* momtemp;
 	double masstemp;
 	for(int i=0; i<rejectjets.size(); i++){
 		//jet associated pdg
