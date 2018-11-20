@@ -569,7 +569,7 @@ void WWAnalysis::MCTagjets(std::vector<TLorentzVector*> mcp, std::vector<int> mc
 			for(unsigned int j=i+1; j<j_indices.size(); j++){
 				if(j_indices.at(i) == j_indices.at(j)){
 					int pdg = mcp_pdg.at(j_indices.at(i));
-					std::cout<<"pdg "<<pdg <<"matched to jets "<<i<<" "<<j<<std::endl;
+					std::cout<<"pdg "<<pdg <<" double matched to jets "<<i<<" "<<j<<std::endl;
 				}
 			}
 		}
@@ -1327,6 +1327,16 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
 	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
 
+	//if we double tag a jet just return ignore this event
+	// right now these break the code
+	
+	for(unsigned int i=0; i<j_indices.size(); i++){
+			for(unsigned int j=i+1; j<j_indices.size(); j++){
+				if(j_indices.at(i) == j_indices.at(j)){
+					return;
+				}
+			}
+		}
 
 	//print out the mctags to see what is matched to what
 	std::cout<<"jet tags ";
@@ -1776,9 +1786,24 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
   _tree->Fill();
 
+	//clear vectors for next event
+	uplike_rejects_costheta.clear();
+	downlike_rejects_costheta.clear();
+	lepton_rejects_costheta.clear();
+
+	uplike_rejects_pt.clear(); 
+	downlike_rejects_pt.clear();
+	lepton_rejects_pt.clear();
+	
+	uplike_rejects_P.clear();
+	downlike_rejects_P.clear();
+	lepton_rejects_P.clear();
+
  nEvt++;
 }
 void WWAnalysis::end(){
+
+	
 
 	/* print out stuff */
 	std::cout<<" nelec "<<nelec<<" nmuon "<< nmuon <<" ntau "<< ntau << std::endl;
