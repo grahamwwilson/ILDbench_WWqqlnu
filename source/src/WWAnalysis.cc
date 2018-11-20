@@ -1417,8 +1417,8 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 			//uplike quark
 			for(int j=0; j<rejectjets.at(i).size(); j++){
 				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j).getMomentum();
-				masstemp = rejectjets.at(i).at(j).getMass();
+				momtemp = rejectjets.at(i).at(j)->getMomentum();
+				masstemp = rejectjets.at(i).at(j)->getMass();
 				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
 				
 				uplike_rejects_costheta.push_back( temp.CosTheta() );
@@ -1431,8 +1431,8 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 			//downlike quark
 				for(int j=0; j<rejectjets.at(i).size(); j++){
 				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j).getMomentum();
-				masstemp = rejectjets.at(i).at(j).getMass();
+				momtemp = rejectjets.at(i).at(j)->getMomentum();
+				masstemp = rejectjets.at(i).at(j)->getMass();
 				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
 				
 				downlike_rejects_costheta.push_back( temp.CosTheta() );
@@ -1445,8 +1445,8 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 			//lepton 
 			for(int j=0; j<rejectjets.at(i).size(); j++){
 				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j).getMomentum();
-				masstemp = rejectjets.at(i).at(j).getMass();
+				momtemp = rejectjets.at(i).at(j)->getMomentum();
+				masstemp = rejectjets.at(i).at(j)->getMass();
 				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
 				
 				downlike_rejects_costheta.push_back( temp.CosTheta() );
