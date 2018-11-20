@@ -169,6 +169,19 @@ using namespace lcio;
  //the number of overlay events present in the event
 	int OverlaynTotalEvents=-1;
 	int OverlayPairBgOverlaynEvents=-1;
+	//overlay rejected particle variables separated by flavour
+	//these vectors need to be cleared for each event
+	std::vector<double> uplike_rejects_costheta{};
+	std::vector<double> downlike_rejects_costheta{};
+	std::vector<double> lepton_rejects_costheta{};
+
+	std::vector<double> uplike_rejects_pt{}; 
+	std::vector<double> downlike_rejects_pt{};
+	std::vector<double> lepton_rejects_pt{};
+	
+	std::vector<double> uplike_rejects_P{};
+	std::vector<double> downlike_rejects_P{};
+	std::vector<double> lepton_rejects_P{};
 
 //the total number of unique cuts applied (for histogram indexing)
 

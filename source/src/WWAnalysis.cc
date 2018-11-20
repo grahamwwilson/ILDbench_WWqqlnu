@@ -294,6 +294,17 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 	//overlay!
 	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
 	_tree->Branch("OverlayPairBgOverlaynEvents",&OverlayPairBgOverlaynEvents,"OverlayPairBgOverlaynEvents/I");
+	_tree->Branch("uplike_rejects_costheta.",&uplike_rejects_costheta);
+	_tree->Branch("downlike_rejects_costheta.",&downlike_rejects_costheta);
+	_tree->Branch("lepton_rejects_costheta.",&lepton_rejects_costheta);
+	_tree->Branch("uplike_rejects_pt.",&uplike_rejects_pt);
+	_tree->Branch("downlike_rejects_pt.",&downlike_rejects_pt);
+	_tree->Branch("lepton_rejects_pt.",&lepton_rejects_pt);
+
+	_tree->Branch("uplike_rejects_P.",&uplike_rejects_P);
+	_tree->Branch("downlike_rejects_P.",&downlike_rejects_P);
+	_tree->Branch("lepton_rejects_P.",&lepton_rejects_P);
+
 
 }
 
@@ -1390,6 +1401,63 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 				std::cout<<std::endl;
 	}
 	
+
+	//loop over the jets with overlay removal,
+	//categorize by flavor the rejected particles
+	//indices of mctags/reject jets/ jets w/ overlay removal should match
+	TLorentzVector temp;
+	double* momtemp;
+	double masstemp;
+	for(int i=0; i<rejectjets.size(); i++){
+		//jet associated pdg
+		int pdg = abs(_MCfpdg.at(jetmctags.at(i)) );
+
+		
+		if(	pdg == 2 || pdg == 4 ){
+			//uplike quark
+			for(int j=0; j<rejectjets.at(i).size(); j++){
+				//loop over reject particles of jet i
+				momtemp = rejectjets.at(i).at(j).getMomentum();
+				masstemp = rejectjets.at(i).at(j).getMass();
+				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
+				
+				uplike_rejects_costheta.push_back( temp.CosTheta() );
+				uplike_rejects_pt.push_back( temp.Pt() );
+				uplike_rejects_P.push_back( temp.P() );				
+			}//end loop over particles
+
+		}//end uplike
+		if(pdg == 1 || pdg == 3 || pdg == 5){
+			//downlike quark
+				for(int j=0; j<rejectjets.at(i).size(); j++){
+				//loop over reject particles of jet i
+				momtemp = rejectjets.at(i).at(j).getMomentum();
+				masstemp = rejectjets.at(i).at(j).getMass();
+				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
+				
+				downlike_rejects_costheta.push_back( temp.CosTheta() );
+				downlike_rejects_pt.push_back( temp.Pt() );
+				downlike_rejects_P.push_back( temp.P() );				
+			}//end loop over particles
+
+		}	//end downlike
+		if(pdg == 13 || pdg == 15){
+			//lepton 
+			for(int j=0; j<rejectjets.at(i).size(); j++){
+				//loop over reject particles of jet i
+				momtemp = rejectjets.at(i).at(j).getMomentum();
+				masstemp = rejectjets.at(i).at(j).getMass();
+				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
+				
+				downlike_rejects_costheta.push_back( temp.CosTheta() );
+				downlike_rejects_pt.push_back( temp.Pt() );
+				downlike_rejects_P.push_back( temp.P() );				
+			}//end loop over particles
+			
+			
+		}//end lepton
+
+	}//end loop over rejectjets
 
 	//end debug check
 
