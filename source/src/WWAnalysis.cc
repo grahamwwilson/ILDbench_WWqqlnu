@@ -1507,7 +1507,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	//loop over the jets and fill histograms in custom cutflow
 	//find max costheta
 	double max=-1;
-	for(unsigned int i =0; i<_jetswithoverlay; i++){
+	for(unsigned int i =0; i<_jetswithoverlay.size(); i++){
 		if( fabs(_jetswithoverlay.at(i)->CosTheta())>max){
 			max=fabs(_jetswithoverlay.at(i)->CosTheta());
 		}
