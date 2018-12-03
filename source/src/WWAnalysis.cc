@@ -332,8 +332,8 @@ void WWAnalysis::initOverlayEff(){
 		maxcostheta_cut_ovr.at(i)->Sumw2(true);
 	}
 
-	std::vector<TH1D*> temp1(overlaycuts);
-	std::vector<TH1D*> temp2(overlaycuts);
+	std::vector<TH1D*> temp1(8);
+	std::vector<TH1D*> temp2(8);
 	maxcostheta_cut = temp1;
 	maxcostheta_cut_ovr = temp2;
 	
