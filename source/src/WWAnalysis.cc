@@ -317,10 +317,15 @@ void WWAnalysis::initOverlayEff(){
 	
 
 	for(unsigned int i=0; i< maxcostheta_cut.size(); i++){
-		maxcostheta_cut.at(i) = new TH1D(("maxcostheta_cut"+i).c_str(), ("The polar angle of most forward jet with overlay removal with cut "+maxcosthetacuts.at(i)).c_str(),20,0,3.2);
+
+		char cuts[100];
+         sprintf(cuts, "_%d", i);
+         std::string cutnum(cuts);
+
+		maxcostheta_cut.at(i) = new TH1D(("maxcostheta_cut"+cutnum).c_str(), ("The polar angle of most forward jet with overlay removal with cut "+cutnum).c_str(),20,0,3.2);
 		maxcostheta_cut.at(i)->Sumw2(true);
 
-		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+i).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+maxcosthetacuts.at(i)).c_str(),20,0,3.2);
+		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+cutnum).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+cutnum).c_str(),20,0,3.2);
 		maxcostheta_cut_ovr.at(i)->Sumw2(true);
 	}
 
