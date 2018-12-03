@@ -323,6 +323,11 @@ void WWAnalysis::initOverlayEff(){
 		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+i).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+maxcosthetacuts.at(i)).c_str(),20,0,3.2);
 		maxcostheta_cut_ovr.at(i)->Sumw2(true);
 	}
+
+	std::vector<TH1D*> temp1(overlaycuts);
+	std::vector<TH1D*> temp2(overlaycuts);
+	maxcostheta_cut = temp1;
+	maxcostheta_cut_ovr = temp2;
 	
 
 }
@@ -1515,7 +1520,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	}
 	
 	max=-1;
-	for(unsigned int i=0; i<_jetsremovedoverlay; i++){
+	for(unsigned int i=0; i<_jetsremovedoverlay.size(); i++){
 		if( fabs(_jetsremovedoverlay.at(i)->CosTheta())>max){
 			max=fabs(_jetsremovedoverlay.at(i)->CosTheta());
 		}
