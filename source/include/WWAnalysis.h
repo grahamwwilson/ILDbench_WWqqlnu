@@ -354,4 +354,21 @@ using namespace lcio;
 	TH1D* hyp;
  	/* end histograms */
 
+
+	/* special set of histograms for dealing with overlay and forward acceptance */
+	/* each hist in the array is a cut on costheta */
+	/* the cuts are 0.99, 0.95, 0.91, 0.8, 0.6, 0.4, 0.2 */
+	//total of 7 different cuts
+	int overlaycuts = 8;
+	std::vector<double> maxcosthetacuts{ 0.2, 0.4, 0.6, 0.8, 0.91, 0.95, 0.99,99};
+	std::vector<TH1D*> maxcostheta_cut(8);
+	
+
+	//no overlay removal in this plot
+	std::vector<TH1D*> maxcostheta_cut_ovr(8);
+
+	
+
+	/* end acceptance */
+
 };

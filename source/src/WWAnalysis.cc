@@ -134,6 +134,8 @@ void WWAnalysis::init() {
 
   nEvt = 0;
 
+	
+
 	//initHistograms();
 
 
@@ -310,6 +312,19 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 
 void WWAnalysis::processRunHeader( LCRunHeader* run) {
   streamlog_out(MESSAGE) << " processRunHeader "  << run->getRunNumber() << std::endl ;
+}
+void WWAnalysis::initOverlayEff(){
+	
+
+	for(unsigned int i=0; i< maxcostheta_cut.size(); i++){
+		maxcostheta_cut.at(i) = new TH1D(("maxcostheta_cut"+i).c_str(), ("The polar angle of most forward jet with overlay removal with cut "+maxcosthetacuts.at(i)).c_str(),20,0,3.2);
+		maxcostheta_cut.at(i)->Sumw2(true);
+
+		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+i).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+maxcosthetacuts.at(i)).c_str(),20,0,3.2);
+		maxcostheta_cut_ovr.at(i)->Sumw2(true);
+	}
+	
+
 }
 /*****************
 locate the pfo collection with specified name
@@ -1478,6 +1493,40 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	//end debug check
 
+	
+
+}
+void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswithoverlay, std::vector<TLorentzVector*> _jetsremovedoverlay ){
+	
+
+	//loop over the jets and fill histograms in custom cutflow
+	//find max costheta
+	double max=-1;
+	for(unsigned int i =0; i<_jetswithoverlay; i++){
+		if( fabs(_jetswithoverlay.at(i)->CosTheta())>max){
+			max=fabs(_jetswithoverlay.at(i)->CosTheta());
+		}
+	}
+	//fill the histos
+	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
+		if( max<= maxcosthetacuts.at(i) ){
+			maxcostheta_cut.at(i)->Fill(max);
+		}
+	}
+	
+	max=-1;
+	for(unsigned int i=0; i<_jetsremovedoverlay; i++){
+		if( fabs(_jetsremovedoverlay.at(i)->CosTheta())>max){
+			max=fabs(_jetsremovedoverlay.at(i)->CosTheta());
+		}
+	}
+	
+	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
+		if( max <= maxcosthetacuts.at(i) ){
+			maxcostheta_cut_ovr.at(i)->Fill(max);
+		}
+	}
+
 }
 void WWAnalysis::AnalyzeDijet(){
 	
@@ -1675,7 +1724,9 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
 	//overlay requires mc information so must be called
 	//after event classification, TLVs must also be populated
+	initOverlayEff();
 	AnalyzeOverlay( evt);
+	AnalyzeOverlayAcceptance(jetswithoverlay, jets);
 	
 	//now assess jets
 	//keep the index on _jets of the jet we consider to be the lepton
