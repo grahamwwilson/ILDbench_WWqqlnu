@@ -363,11 +363,11 @@ using namespace lcio;
 	//total of 7 different cuts
 	int overlaycuts = 8;
 	std::vector<double> maxcosthetacuts{ 0.2, 0.4, 0.6, 0.8, 0.91, 0.95, 0.99,99};
-	std::vector<TH1D*> maxcostheta_cut(8);
+	std::vector<TH1D*> maxcostheta_cut{};
 	
 
 	//no overlay removal in this plot
-	std::vector<TH1D*> maxcostheta_cut_ovr(8);
+	std::vector<TH1D*> maxcostheta_cut_ovr{};
 
 	
 
