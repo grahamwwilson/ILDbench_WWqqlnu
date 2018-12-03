@@ -221,6 +221,9 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 	hym = new TH1D("htotalym","y-;log y-;Events Per Bin",100,-15.0,0);
 	hyp = new TH1D("hyp","y+;log y+; Events Per Bin",100,-15,0);
 
+	//overlay stuff//
+	initOverlayEff();
+
 
 // TTree similar to ttbar.cc to start with
 
@@ -1734,7 +1737,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
 	//overlay requires mc information so must be called
 	//after event classification, TLVs must also be populated
-	initOverlayEff();
+	
 	AnalyzeOverlay( evt);
 	AnalyzeOverlayAcceptance(jetswithoverlay, jets);
 	
