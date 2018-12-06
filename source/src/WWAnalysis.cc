@@ -346,7 +346,7 @@ void WWAnalysis::initOverlayEff(){
 
 	
 	
-		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr"+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum)._str(),100,-20,20);
+		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr"+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum).c_str(),100,-20,20);
 		
 		mctag_mc_dM_ovr.at(i)->Sumw2(true);
 	
