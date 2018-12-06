@@ -336,8 +336,19 @@ void WWAnalysis::initOverlayEff(){
 
 		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+cutnum).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+cutnum).c_str(),20,0,1.0);
 		maxcostheta_cut_ovr.at(i)->Sumw2(true);
-	}
 
+		maxcostheta_cut_mc.at(i) = new TH1D(("maxcostheta_cut_mc"+cutnum).c_str(), ("The polar angle of most forward mc particle"+cutnum).c_str(),20,0,1.0);
+		maxcostheta_cut_mc.at(i)->Sumw2(true);
+
+		mctag_mc_dM.at(i) = new TH1D(("mctag_mc_dM")+cutnum).c_str(), ("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}")+cutnum.c_str(),100,-20,20);
+
+		mctag_mc_dM.at(i)->Sumw2(true);
+
+	}
+	
+		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr")+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnumb._str(),100,-20,20);
+		
+		mctag_mc_dM_ovr.at(i)->Sumw2(true);
 	
 
 }
@@ -1542,6 +1553,89 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 		}
 	}
 
+	//we would hope mc data structure is already populated for this section
+	max = -1;
+	for(unsiged int i=0; i<_MCf.size(); i++){
+		if( ( fabs( _MCfpdg.at(i)) != 14) && (fabs( _MCfpdg.at(i)) != 16) ){
+			//no neutrinos
+			if( fabs(_MCf->CosTheta()) > max){
+				max=fabs(_MCf->CosTheta());
+			}
+		}
+	}
+	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
+			if(max <= maxcosthetacuts.at(i){
+				maxcostheta_cut_mc.at(i)->Fill(max);
+		}
+
+	}
+
+	//redo tagging because pls no more globals
+	std::vector<int> jetmctags(_nJets);
+	std::vector<int> jetwithoverlaymctags(_nJets);
+
+	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
+	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
+
+	//if we double tag a jet just return ignore this event
+	// right now these break the code
+	
+	for(unsigned int i=0; i<jetmctags.size(); i++){
+			for(unsigned int j=i+1; j<jetmctags.size(); j++){
+				if(jetmctags.at(i) == jetmctags.at(j)){
+					return;
+				}
+			}
+		}
+		for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
+			for(unsigned int j=i+1; j<jetwithoverlaymctags.size(); j++){
+				if(jetwithoverlaymctags.at(i) == jetwithoverlaymctags.at(j)){
+					return;
+				}
+			}
+		}
+
+	
+	//using tagged jets fill our dM plots based on the cut 
+	//call analyzedijet first it populates mcqqmass
+	//next calculate mctagged qq mass
+	//use old max from mc level
+	double mctagqqmass;
+	TLorentzVector mctagqq;
+	for(unsigned int i=0; i<jetmctags.size(); i++){
+		if( fabs(_MCfpdg.at(jetmctags.at(i)) ) <=5 ){
+			mctagqq+= *(jets.at(i));
+		}
+	}
+	mctagqqmass = mctagqq.M();
+	
+	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
+		//this will be as a function of max cos theta, 
+		if(max <= maxcosthetacuts.at(i)){
+			mctag_mc_dM.at(i)->Fill( mctagqqmass - mcqqmass );
+		}
+	}
+
+	
+
+	//redo mctagqqmass with overlay included mctagged jets
+
+	TLorentzVector mctagqqovr;
+	for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
+		if( fabs(_MCfpdg.at(jetwithoverlaymctags.at(i)) ) <=5 ){
+			mctagqqovr+= *(jetswithoverlay.at(i));
+		}
+	}
+	mctagqqmass = mctagqqovr.M();
+
+	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
+		if(max <= maxcosthetacuts.at(i)){
+			mctag_mc_dM_ovr.at(i)->Fill(mctagqqmass - mcqqmass);
+		}
+	}
+
+	
+
 }
 void WWAnalysis::AnalyzeDijet(){
 	
@@ -1741,6 +1835,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	//after event classification, TLVs must also be populated
 	
 	AnalyzeOverlay( evt);
+	//do some dijet analysis this will populate mcqqmass
+	AnalyzeDijet();
 	AnalyzeOverlayAcceptance(jetswithoverlay, jets);
 	
 	//now assess jets
@@ -1757,8 +1853,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	getMultiplicityOfTrueljet();//TODO make this 
 	true_psi_mcl_ljet = getAngleOfjetandMCLepton(true_ljet_index);
 
-	//do some dijet analysis
-	AnalyzeDijet();
+	
 	
 
 	//get the charge of the lepton jet
