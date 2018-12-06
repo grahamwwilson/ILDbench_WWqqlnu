@@ -1555,16 +1555,16 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 
 	//we would hope mc data structure is already populated for this section
 	max = -1;
-	for(unsiged int i=0; i<_MCf.size(); i++){
+	for(unsigned int i=0; i<_MCf.size(); i++){
 		if( ( fabs( _MCfpdg.at(i)) != 14) && (fabs( _MCfpdg.at(i)) != 16) ){
 			//no neutrinos
-			if( fabs(_MCf->CosTheta()) > max){
-				max=fabs(_MCf->CosTheta());
+			if( fabs(_MCf.at(i)->CosTheta()) > max)){
+				max=fabs(_MCf.at(i)->CosTheta());
 			}
 		}
 	}
 	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-			if(max <= maxcosthetacuts.at(i){
+			if(max <= maxcosthetacuts.at(i)){
 				maxcostheta_cut_mc.at(i)->Fill(max);
 		}
 
