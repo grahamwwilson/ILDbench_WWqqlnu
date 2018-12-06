@@ -340,17 +340,17 @@ void WWAnalysis::initOverlayEff(){
 		maxcostheta_cut_mc.at(i) = new TH1D(("maxcostheta_cut_mc"+cutnum).c_str(), ("The polar angle of most forward mc particle"+cutnum).c_str(),20,0,1.0);
 		maxcostheta_cut_mc.at(i)->Sumw2(true);
 
-		mctag_mc_dM.at(i) = new TH1D(("mctag_mc_dM")+cutnum).c_str(), ("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}")+cutnum.c_str(),100,-20,20);
+		mctag_mc_dM.at(i) = new TH1D(("mctag_mc_dM"+cutnum).c_str(), ("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum).c_str(),100,-20,20);
 
 		mctag_mc_dM.at(i)->Sumw2(true);
 
-	}
 	
-		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr")+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnumb._str(),100,-20,20);
+	
+		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr"+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum)._str(),100,-20,20);
 		
 		mctag_mc_dM_ovr.at(i)->Sumw2(true);
 	
-
+	}
 }
 /*****************
 locate the pfo collection with specified name
@@ -1558,7 +1558,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	for(unsigned int i=0; i<_MCf.size(); i++){
 		if( ( fabs( _MCfpdg.at(i)) != 14) && (fabs( _MCfpdg.at(i)) != 16) ){
 			//no neutrinos
-			if( fabs(_MCf.at(i)->CosTheta()) > max)){
+			if( fabs(_MCf.at(i)->CosTheta()) > max){
 				max=fabs(_MCf.at(i)->CosTheta());
 			}
 		}
