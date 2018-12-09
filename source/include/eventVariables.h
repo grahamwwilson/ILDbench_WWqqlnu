@@ -11,7 +11,7 @@
 #include <math.h>
 #include <iostream>
 
-class eventVariables(){
+class eventVariables{
 
 	//this will have 2 main components to populate
 	//mcparticles and 1 set of jets

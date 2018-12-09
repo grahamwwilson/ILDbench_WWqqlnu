@@ -19,7 +19,7 @@
 #include <fstream>
 #include "EVENT/LCParameters.h"
 
-#include "EventVariables.h"
+#include "eventVariables.h"
 
 
 //#define ncuts 7
