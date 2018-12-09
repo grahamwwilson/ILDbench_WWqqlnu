@@ -10,7 +10,7 @@
 #include "TLorentzVector.h"
 #include <math.h>
 #include <iostream>
-
+using namespace lcio;
 class eventVariables{
 
 	//this will have 2 main components to populate

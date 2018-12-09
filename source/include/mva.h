@@ -6,6 +6,11 @@
 #include "TString.h"
 #include <iostream>
 #include <cassert>
+#include "TTree.h"
+#include "TFile.h"
+#include "TLorentzVector.h"
+#include "TVector3.h"
+
 using namespace lcio;
 class mva {
 
@@ -19,6 +24,9 @@ class mva {
 				
 		void writeTree();
 
+		double getIsoAngle(ReconstructedParticle* j1, ReconstructedParticle* j2);
+		TLorentzVector* mva::boostPart(ReconstructedParticle* jet, ReconstructedParticle* part);
+		double mva::getJetMET(ReconstructedParticle* jet);
 
 		double s_isolation;
 		double bu_isolation;
