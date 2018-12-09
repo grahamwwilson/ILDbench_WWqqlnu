@@ -46,6 +46,14 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 
 		if( qrk == (_nfermions-_nleptons) && lep == _nleptons){
 			std::cout<<"debug3"<<std::endl;
+			for(unsigned int j=0; j<parentpdgs.size(); j++){
+				std::cout<<parentpdgs.at(j)<<" ";
+			}
+			std::cout<< " -> "<<_mcpartvec.at(i)->getPDG()<<" -> ";
+			for(unsigned int j=0; j<daughters.size(); j++){
+				std::cout<<daughters.at(j)->getPDG()<<" ";
+			}
+			std::cout<<std::endl;
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
 				std::cout<<daughters.at(j)->getPDG()<<" " 
