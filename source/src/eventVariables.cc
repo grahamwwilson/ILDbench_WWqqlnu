@@ -46,7 +46,7 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 		for(unsigned int k=0; k<leptons.size(); k++){
 			lep += std::count(daughterpdgs.begin(),daughterpdgs.end(),leptons.at(k));
 		}
-
+		if( qrk == (_nfermions-_nleptons) && lep == _nleptons){
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
 				
