@@ -56,6 +56,7 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 
 				//is this the lepton?
 				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15){
+					mcl = new TLorentzVector();
 					*mcl = mcVec;
 				}
 			}
