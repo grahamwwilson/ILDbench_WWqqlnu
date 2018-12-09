@@ -21,7 +21,7 @@ class eventVariables{
 	public:
 
 	eventVariables(const char* variableSetName, int nfermion, int nlepton);
-	setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
+	void setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
 
 	const char* _variableSetName{};
 	int _nfermions{};
