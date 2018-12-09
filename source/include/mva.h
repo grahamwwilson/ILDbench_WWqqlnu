@@ -25,23 +25,23 @@ class mva {
 		void writeTree();
 
 		double getIsoAngle(ReconstructedParticle* j1, ReconstructedParticle* j2);
-		TLorentzVector* mva::boostPart(ReconstructedParticle* jet, ReconstructedParticle* part);
-		double mva::getJetMET(ReconstructedParticle* jet);
+		TLorentzVector* boostPart(ReconstructedParticle* jet, ReconstructedParticle* part);
+		double getJetMET(ReconstructedParticle* jet);
 
-		double s_isolation;
-		double bu_isolation;
-		double bd_isolation;
+		double s_isolation{};
+		double bu_isolation{};
+		double bd_isolation{};
 		 
-		double s_tmultiplicity;
-		double bu_tmultiplicity;
-		double bd_tmultiplicity;
+		double s_tmultiplicity{};
+		double bu_tmultiplicity{};
+		double bd_tmultiplicity{};
 	
-		double s_met;
-		double bu_met;
-		double bd_met;
+		double s_met{};
+		double bu_met{};
+		double bd_met{};
 
-		TTree* tree;
-		TFile* f; 
+		TTree* tree{};
+		TFile* f{}; 
 		
 
 } ;		

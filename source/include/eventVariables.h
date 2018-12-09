@@ -68,9 +68,9 @@ class eventVariables{
 	  
 		
 	//analysis tagging quantities
-	TLorentzVectur* _anaWl{};
+	TLorentzVector* _anaWl{};
 	TLorentzVector* _analep{};
-	TLorentzVector* _anaWqq{];
+	TLorentzVector* _anaWqq{};
 	TLorentzVector* _anaNu{};
 	int _analepCharge{};
 	//CM TGC
@@ -79,7 +79,7 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void classifyEvent(bool& isTau, bool& isMuon, std::vector<TlorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void classifyEvent(bool& isTau, bool& isMuon, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
 
 	//printing stuff
 	void printEventVariables();
