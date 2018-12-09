@@ -1797,7 +1797,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
-	eventVariables* ev1 = new eventVariables("a", _nfermion, _nlepton, _mcpartvec, _jets, _tree);
+	eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
 	ev1->classifyEvent(ev1->_isTau, ev1->_isMuon, ev1->_MCf, ev1->_MCfpdg);
 	ev1->printEventVariables();
 

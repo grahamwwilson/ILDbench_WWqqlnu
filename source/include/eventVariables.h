@@ -84,7 +84,7 @@ class eventVariables{
 	//printing stuff
 	void printEventVariables();
 	void printTLVVec( std::vector<TLorentzVector*> v);
-	void printPDGVec(std::vector<TLorentzVector*> v);
+	void printPDGVec(std::vector<int> v);
 
 };
 #endif
