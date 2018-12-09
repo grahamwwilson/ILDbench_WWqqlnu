@@ -240,7 +240,7 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
      _tree->Branch("leptonCharge", &trueq,"leptonCharge/I");
 
 	//init vector size
-	std::vector<TLorentzVector*> tempmcf(_nfermions);
+/*	std::vector<TLorentzVector*> tempmcf(_nfermions);
 	_MCf = tempmcf;
 	std::vector<int> tempmcfpdg(_nfermions);
 	_MCfpdg = tempmcfpdg;
@@ -253,6 +253,15 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 	 name << "_PDG";
 	 _tree->Branch(name.str().c_str(), &_MCfpdg.at(i), (name.str()+"/I").c_str());
        }
+*/
+///testing tree refactoring
+	for(int i=0; i< _nfermions; i++){
+		std::stringstream name;
+		name << ev1->variableSetName << MCf << i;
+		_tree->Branch(name.str().c_str(),"TLorentzVector",&ev1->_MCf[i],16000,0);
+		name <<"_PDG";
+		_tree->Branch(name.str().c_str(), &ev1->_MCfpdg.at(i), (name.str()+"/I").c_str());
+	}
 	
 	//add jet TLVS to 
 	std::vector<TLorentzVector*> temp(_nJets);
@@ -1966,9 +1975,9 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	
 	
 	
-
+ */
   _tree->Fill();
-
+/* removed for refactor
 	//clear vectors for next event
 	uplike_rejects_costheta.clear();
 	downlike_rejects_costheta.clear();
