@@ -23,7 +23,7 @@ mva::mva(){
 	tree->Branch("bd_met", &bd_met, "bd_met/D");
 	
 }
-double getIsoAngle(ReconstructedParticle* j1, ReconstructedParticle* j2){
+double mva::getIsoAngle(ReconstructedParticle* j1, ReconstructedParticle* j2){
 
 	const double* j1mom = j1->getMomentum();
 	const double* j2mom = j2->getMomentum();

@@ -9,7 +9,7 @@ eventVariables::eventVariables(const char* variableSetName, int nfermion, int nl
 	_jets = jets;
 	_localTree = tree;
 }
-void eventVariables::classifyEvent(bool& isTau, bool& isMuon, std::vector<TlorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::classifyEvent(bool& isTau, bool& isMuon, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 	
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
