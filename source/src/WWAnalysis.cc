@@ -1800,7 +1800,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	//make event variables with 3 overlay removed jets
 	std::cout<<"Populating Event Variables a"<<std::endl;
 	eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
-	ev1->classifyEvent(ev1->_isTau, ev1->_isMuon, ev1->_MCf, ev1->_MCfpdg);
+	ev1->classifyEvent(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_MCf, ev1->_MCfpdg);
 	ev1->printEventVariables();
 
 

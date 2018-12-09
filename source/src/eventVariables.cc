@@ -15,13 +15,14 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 }
-void eventVariables::classifyEvent(bool& isTau, bool& isMuon, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
-	
+void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+	std::cout<<"debug"<<std::endl;
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
 		std::vector<int> daughterpdgs{};
 		std::vector<MCParticle*> mcparents{};
 		std::vector<MCParticle*> daughters{};
+		std::cout<<"debug2"<<std::endl;
 		daughters = _mcpartvec.at(i)->getDaughters();
 		for(unsigned int j = 0; j<daughters.size(); j++){
 			daughterpdgs.push_back(daughters.at(j)->getPDG());
@@ -43,8 +44,8 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, std::vector<TLoren
 		}
 
 		if( qrk == (_nfermions-_nleptons) && lep == _nleptons){
-	
-
+			std::cout<<"debug3"<<std::endl;
+			
 			for(unsigned int j=0; j<daughters.size(); j++){
 		
                 TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());

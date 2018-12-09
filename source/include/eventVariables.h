@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include "TLorentzVector.h"
+#include "TVector3.h"
 #include <math.h>
 #include <iostream>
 using namespace lcio;
@@ -79,7 +80,7 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void classifyEvent(bool& isTau, bool& isMuon, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void classifyEvent(bool& isTau, bool& isMuon, int& _mclepCharge, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
 
 	//printing stuff
 	void printEventVariables();
