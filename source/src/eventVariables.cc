@@ -1,14 +1,11 @@
 
 #include "eventVariables.h"
 
-eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons ,std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree){
+eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons ){
 	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
-	_mcpartvec = mcpartvec;
-	_jets = jets;
-	_localTree = tree;
-
+	
 	//allocate correct size for fermion vectors
 	std::vector<TLorentzVector*> mcf(nfermions);
 	for(unsigned int i=0; i<mcf.size(); i++){
@@ -18,7 +15,12 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 }
-void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets ){
+	_mcpartvec = mcpartvec;
+	_jets = jets;
+
+}
+void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};

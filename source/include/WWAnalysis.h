@@ -127,6 +127,7 @@ using namespace lcio;
 
   protected:
 
+ eventVariables* ev1;
 //TTree
   TTree* _tree;
   int _nRun;

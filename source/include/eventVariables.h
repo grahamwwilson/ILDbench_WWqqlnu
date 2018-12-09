@@ -20,14 +20,13 @@ class eventVariables{
 
 	public:
 
-	eventVariables(const char* variableSetName, int nfermion, int nlepton, std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree);
+	eventVariables(const char* variableSetName, int nfermion, int nlepton);
+	setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
 
 	const char* _variableSetName{};
 	int _nfermions{};
 	int _nleptons{};
 
-	//this class should also add to a main tree that is set created in main analysis code
-	TTree* _localTree{};
 
 	//monte carlo
 	std::vector<MCParticle*> _mcpartvec{};
@@ -80,7 +79,9 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void classifyEvent(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void initMCTree();
+	
 
 	//printing stuff
 	void printEventVariables();
