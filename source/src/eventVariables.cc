@@ -108,11 +108,11 @@ void eventVariables::printPDGVec(std::vector<int> v){
 void eventVariables::printEventVariables(){
 	std::cout<<"eventVariables: '"<<_variableSetName<<"'"<<std::endl;
 	std::cout<<"nfermions = "<<_nfermions<<"  nleptons = "<<_nleptons<<std::endl;
-	std::cout"MC PDGS: ";	
+	std::cout<<"MC PDGS: ";	
 	printPDGVec(_MCfpdg);
 	std::cout<<"MC TLVS: "<<std::endl;	
 	printTLVVec(_MCf);
-	std::cout<<"Lepton Charge: "<<mclepCharge<<std::endl;
+	std::cout<<"Lepton Charge: "<<_mclepCharge<<std::endl;
 
 	
 }
