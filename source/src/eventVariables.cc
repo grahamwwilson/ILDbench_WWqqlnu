@@ -18,7 +18,7 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 }
-void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector* mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -29,7 +29,6 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 		daughters = _mcpartvec.at(i)->getDaughters();
 		for(unsigned int j = 0; j<daughters.size(); j++){
 			daughterpdgs.push_back(daughters.at(j)->getPDG());
-			std::cout<<daughters.at(j)->getPDG();
 			
 		}
 		//allowed quarks
