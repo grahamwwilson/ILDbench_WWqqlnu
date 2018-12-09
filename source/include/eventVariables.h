@@ -22,12 +22,12 @@ class eventVariables{
 
 	eventVariables(const char* variableSetName, int nfermion, int nlepton, std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree);
 
-	const char* _variableSetName;
-	int _nfermions;
-	int _nleptons;
+	const char* _variableSetName{};
+	int _nfermions{};
+	int _nleptons{};
 
 	//this class should also add to a main tree that is set created in main analysis code
-	TTree* _localTree;
+	TTree* _localTree{};
 
 	//monte carlo
 	std::vector<MCParticle*> _mcpartvec{};
