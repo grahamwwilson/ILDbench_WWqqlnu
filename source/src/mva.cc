@@ -60,7 +60,7 @@ double mva::getJetMET(ReconstructedParticle* jet){
 	std::vector<TLorentzVector*> CMparts(parts.size());
 
 	for(unsigned int i=0; i<parts.size(); i++){
-		CMparts.at(i) = boostPart(jet, parts.at(i);
+		CMparts.at(i) = boostPart(jet, parts.at(i));
 	}
 
 	// MET is sum px,py
@@ -99,7 +99,7 @@ void mva::makeTrainingVariables(ReconstructedParticle* signal, ReconstructedPart
 
 		a1 = getIsoAngle( d_background, signal );
 		a2 = getIsoAngle( d_background, u_background);
-		bd_isolation = (a1 >= a2) : a2 : a1 ;
+		bd_isolation = (a1 >= a2) ? a2 : a1 ;
 		/* end isolation */
 
 		/* multiplicity variables */
@@ -127,8 +127,8 @@ void mva::makeTrainingVariables(ReconstructedParticle* signal, ReconstructedPart
 		/*begin MET variables */
 		//boost into jet CM, add up pT
 		s_met = getJetMET( signal );
-		bu_met = getJetMet( u_background );
-		bd_met = getJetMet( d_background );
+		bu_met = getJetMET( u_background );
+		bd_met = getJetMET( d_background );
 		/*end MET*/
 
 
