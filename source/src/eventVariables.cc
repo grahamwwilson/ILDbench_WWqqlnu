@@ -55,7 +55,7 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
                 MCfpdg[j] = daughters.at(j)->getPDG();
 
 				//is this the lepton?
-				if(abs(MCfpdg[j]) == 13  || abs(MCFpdg[j]) == 15){
+				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15){
 					*mcl = mcVec;
 				}
 			}
