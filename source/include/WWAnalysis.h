@@ -19,6 +19,8 @@
 #include <fstream>
 #include "EVENT/LCParameters.h"
 
+#include "EventVariables.h"
+
 
 //#define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
