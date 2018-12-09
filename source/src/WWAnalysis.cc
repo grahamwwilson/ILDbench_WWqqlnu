@@ -222,7 +222,8 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 	hyp = new TH1D("hyp","y+;log y+; Events Per Bin",100,-15,0);
 
 	//overlay stuff//
-	initOverlayEff();
+	//removed for refactoring
+	//initOverlayEff();
 
 
 // TTree similar to ttbar.cc to start with
