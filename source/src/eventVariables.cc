@@ -11,6 +11,9 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 
 	//allocate correct size for fermion vectors
 	std::vector<TLorentzVector*> mcf(nfermions);
+	for(unsigned int i=0; i<mcf.size(); i++){
+		mcf.at(i) = new TLorentzVector();
+	}
 	_MCf = mcf;
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
@@ -63,11 +66,14 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
                                                                     << daughters.at(j)->getMomentum()[2] << " "
                                                                     << daughters.at(j)->getEnergy() << " " << std::endl;
 		
-				std::cout<<"about to populated vector"<<std::endl;
+				std::cout<<"about to populate vector"<<std::endl;
                 //TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
 				TLorentzVector mcVec;
+				std::cout<<"1"<<std::endl;
 				mcVec.SetXYZM(daughters.at(j)->getMomentum()[0],daughters.at(j)->getMomentum()[1],daughters.at(j)->getMomentum()[2],daughters.at(j)->getMass());
+				std::cout<<"2"<<std::endl;
                 *_MCf[j] = mcVec;
+				std::cout<<"3"<<std::endl;
                 _MCfpdg[j] = daughters.at(j)->getPDG();
 			}
 
