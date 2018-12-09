@@ -257,7 +257,7 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 ///testing tree refactoring
 	for(int i=0; i< _nfermions; i++){
 		std::stringstream name;
-		name << ev1->variableSetName << MCf << i;
+		name << ev1->_variableSetName << "MCf" << i;
 		_tree->Branch(name.str().c_str(),"TLorentzVector",&ev1->_MCf[i],16000,0);
 		name <<"_PDG";
 		_tree->Branch(name.str().c_str(), &ev1->_MCfpdg.at(i), (name.str()+"/I").c_str());
