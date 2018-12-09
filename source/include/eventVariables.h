@@ -80,10 +80,11 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void classifyEvent(bool& isTau, bool& isMuon, int& _mclepCharge, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void classifyEvent(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector* mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
 
 	//printing stuff
 	void printEventVariables();
+	void printTLV(TLorentzVector* v);
 	void printTLVVec( std::vector<TLorentzVector*> v);
 	void printPDGVec(std::vector<int> v);
 

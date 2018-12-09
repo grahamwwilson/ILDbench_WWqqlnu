@@ -18,7 +18,7 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 }
-void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector* mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -51,8 +51,13 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 			for(unsigned int j=0; j<daughters.size(); j++){
 				
                 TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
-                *_MCf[j] = mcVec;
-                _MCfpdg[j] = daughters.at(j)->getPDG();
+                *MCf[j] = mcVec;
+                MCfpdg[j] = daughters.at(j)->getPDG();
+
+				//is this the lepton?
+				if(abs(MCfpdg[j]) == 13  || abs(MCFpdg[j]) == 15){
+					*mcl = mcVec;
+				}
 			}
 
 
@@ -63,10 +68,10 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 				isMuon = true;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
-					_mclepCharge = -1;
+					mclepCharge = -1;
 				}
 				else{
-					_mclepCharge = 1;
+					mclepCharge = 1;
 				}
 			}
 			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 15) != daughterpdgs.end() ||
@@ -76,10 +81,10 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 				isTau = true;
 				//identify the true charge of the lepton
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 15) != daughterpdgs.end() ){
-					_mclepCharge = -1;
+					mclepCharge = -1;
 				}
 				else{
-					_mclepCharge = 1;
+					mclepCharge = 1;
 				}	
 			}
 			//if we have found the true decay set break out of the mcpart vec loop
@@ -89,9 +94,12 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 
 	}//end mcpartvec loop
 
-	//if nothing is found return nulll
+	//if nothing is found return 
 	return;
 
+}
+void eventVariables::printTLV(TLorentzVector* v){
+	std::cout<<v->Px()<<" "<<v->Py()<<" "<<v->Pz()<<" "<<v->E()<<" "<<v->M()<<std::endl;
 }
 void eventVariables::printTLVVec( std::vector<TLorentzVector*> v){
 	for( unsigned int i=0; i< v.size(); i++){
@@ -112,6 +120,8 @@ void eventVariables::printEventVariables(){
 	printPDGVec(_MCfpdg);
 	std::cout<<"MC TLVS: "<<std::endl;	
 	printTLVVec(_MCf);
+	std::cout<<"Lepton TLV: ";
+	printTLV(_mcl);
 	std::cout<<"Lepton Charge: "<<_mclepCharge<<std::endl;
 
 	
