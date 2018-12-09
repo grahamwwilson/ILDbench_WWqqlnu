@@ -8,6 +8,12 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 	_localTree = tree;
+
+	//allocate correct size for fermion vectors
+	std::vector<TLorentzVector*> mcf(nfermions);
+	_MCf = mcf;
+	std::vector<int> mcfpdg(nfermions);
+	_MCfpdg = mcfpdg;
 }
 void eventVariables::classifyEvent(bool& isTau, bool& isMuon, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 	
