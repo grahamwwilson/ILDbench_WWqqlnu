@@ -1,10 +1,10 @@
 
 #include "eventVariables.h"
 
-eventVariables::eventVariables(const char* variableSetName, int nfermion, int nlepton ,std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree){
+eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons ,std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree){
 	_variableSetName = variableSetName;
-	_nfermion = nfermion;
-	_nlepton = nlepton;
+	_nfermionss = nfermions;
+	_nleptonss = nleptons;
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 	_localTree = tree;
@@ -98,7 +98,7 @@ void eventVariables::printPDGVec(std::vector<TLorentzVector*> v){
 
 void eventVariables::printEventVariables(){
 	std::cout<<"eventVariables: '"<<_variableSetName<<"'"<<std::endl;
-	std::cout<<"nfermion = "<<_nfermion<<"  nlepton = "<<_nlepton<<std::endl;
+	std::cout<<"nfermions = "<<_nfermions<<"  nleptons = "<<_nleptons<<std::endl;
 	printPDGVec(_MCfpdg);	
 	printTLVVec(_MCf);
 
