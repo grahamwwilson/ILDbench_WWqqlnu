@@ -18,7 +18,6 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets ){
 	_mcpartvec = mcpartvec;
 	_jets = jets;
-
 }
 void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
