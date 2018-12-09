@@ -48,6 +48,11 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 			std::cout<<"debug3"<<std::endl;
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
+				std::cout<<daughters.at(j)->getPDG()<<" " 
+                                                                    << daughters.at(j)->getMomentum()[0] << " "
+                                                                    << daughters.at(j)->getMomentum()[1] << " "
+                                                                    << daughters.at(j)->getMomentum()[2] << " "
+                                                                    << daughters.at(j)->getEnergy() << " " << std::endl;
 		
                 TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
                 *_MCf[j] = mcVec;
