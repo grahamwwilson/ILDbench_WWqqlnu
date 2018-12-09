@@ -124,11 +124,12 @@ void WWAnalysis::initHistograms(){
 }
 */
 void WWAnalysis::init() {
-
+  
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
   printParameters() ;
 
+  ev1 = new eventVariables("a", _nfermions, _nleptons);
   _nRun = 0;
   _nEvt = 0;
 
@@ -1799,8 +1800,9 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
 	std::cout<<"Populating Event Variables a"<<std::endl;
-	eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
-	ev1->classifyEvent(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_MCf, ev1->_MCfpdg);
+	//eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
+	ev1->setParticles(_mcpartvec, _jets);
+	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_MCf, ev1->_MCfpdg);
 	ev1->printEventVariables();
 
 
