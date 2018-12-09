@@ -1786,6 +1786,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
  FindMCParticles(evt);
  FindJets(evt);
+ FindTracks(evt);
+ FindPFOs(evt);
 //quickfix:::: if there are no jets... !!!!cant do anything TODO explore this phenomenon more
 	//happens if we look for jets with eekt after using kt
 	if(_jets.size() == 0){ 
@@ -1793,10 +1795,19 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		return;
 	}
 
- EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus);
+	/* new class testing area */
+	//make event variables with 3 overlay removed jets
+	eventVariables* ev1 = new eventVariables("a", _nfermion, _nlepton, _mcpartvec, _jets, _tree);
+	ev1->classifyEvent(ev1->isTau, ev1->isMuon, ev1->_MCf, ev1->_MCfpdg);
+	ev1->printEventVariables();
 
- FindTracks(evt);
- FindPFOs(evt);
+
+
+	/* */
+
+/* EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus); 
+
+
 
 
 	EvaluateEventSelectionVariables(totaltracks,total_Pt,total_E,total_M);
@@ -1950,7 +1961,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	} 
 	
 	
-	
+*/	
 
   _tree->Fill();
 
@@ -1974,11 +1985,12 @@ void WWAnalysis::end(){
 	
 
 	/* print out stuff */
+/*
 	std::cout<<" nelec "<<nelec<<" nmuon "<< nmuon <<" ntau "<< ntau << std::endl;
 	std::cout<<" nevents "<< nEvt << " mu q match "<< muonqmatch <<  " tau q match "<< tauqmatch <<std::endl;
 
 	std::cout<<" jet match tau "<<ljetmatchmctau<<" "<<ljetmatchmcmuon<<std::endl;
-
+*/
 	file->Write();
 }
 
