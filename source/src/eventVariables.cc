@@ -26,6 +26,7 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 		daughters = _mcpartvec.at(i)->getDaughters();
 		for(unsigned int j = 0; j<daughters.size(); j++){
 			daughterpdgs.push_back(daughters.at(j)->getPDG());
+			std::cout<<daughters.at(j)->getPDG();
 			
 		}
 		//allowed quarks
