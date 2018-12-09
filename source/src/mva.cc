@@ -38,7 +38,7 @@ TLorentzVector* mva::boostPart(ReconstructedParticle* jet, ReconstructedParticle
 
 	const double* jmom = jet->getMomentum();
 	const double* pmom = part->getMomentum();
-	TLorentzVector* j,pcm;
+	TLorentzVector *j,*pcm;
 	j = new TLorentzVector();
 	pcm = new TLorentzVector();
 	j->SetXYZM(jmom[0],jmom[1],jmom[2],jet->getMass());

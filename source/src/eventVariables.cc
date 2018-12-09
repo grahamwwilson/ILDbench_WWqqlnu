@@ -3,8 +3,8 @@
 
 eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons ,std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets, TTree* tree){
 	_variableSetName = variableSetName;
-	_nfermionss = nfermions;
-	_nleptonss = nleptons;
+	_nfermions = nfermions;
+	_nleptons = nleptons;
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 	_localTree = tree;
@@ -89,7 +89,7 @@ void eventVariables::printTLVVec( std::vector<TLorentzVector*> v){
 		std::cout<<v.at(i)->Px()<<" "<<v.at(i)->Py()<<" "<<v.at(i)->Pz()<<" "<<v.at(i)->E()<<" "<<v.at(i)->M()<<std::endl;
 	}
 }
-void eventVariables::printPDGVec(std::vector<TLorentzVector*> v){
+void eventVariables::printPDGVec(std::vector<int> v){
 	for( unsigned int i=0; i< v.size(); i++){
 		std::cout<<v.at(i)<<" ";
 	}
