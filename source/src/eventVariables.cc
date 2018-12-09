@@ -19,13 +19,13 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	_MCfpdg = mcfpdg;
 }
 void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
-	std::cout<<"debug"<<std::endl;
+
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
 		std::vector<int> daughterpdgs{};
 		std::vector<MCParticle*> mcparents{};
 		std::vector<MCParticle*> daughters{};
-		std::cout<<"debug2"<<std::endl;
+	
 		daughters = _mcpartvec.at(i)->getDaughters();
 		for(unsigned int j = 0; j<daughters.size(); j++){
 			daughterpdgs.push_back(daughters.at(j)->getPDG());
@@ -47,33 +47,11 @@ void eventVariables::classifyEvent(bool& isTau, bool& isMuon, int& mclepCharge, 
 			lep += std::count(daughterpdgs.begin(),daughterpdgs.end(),leptons.at(k));
 		}
 
-		if( qrk == (_nfermions-_nleptons) && lep == _nleptons){
-			std::cout<<"debug3"<<std::endl;
-			for(unsigned int j=0; j<parentpdgs.size(); j++){
-				std::cout<<parentpdgs.at(j)<<" ";
-			}
-			std::cout<< " -> "<<_mcpartvec.at(i)->getPDG()<<" -> ";
-			for(unsigned int j=0; j<daughters.size(); j++){
-				std::cout<<daughters.at(j)->getPDG()<<" ";
-			}
-			std::cout<<std::endl;
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
-				std::cout<<"printing mom"<<std::endl;
-				std::cout<<daughters.at(j)->getPDG()<<" " 
-                                                                    << daughters.at(j)->getMomentum()[0] << " "
-                                                                    << daughters.at(j)->getMomentum()[1] << " "
-                                                                    << daughters.at(j)->getMomentum()[2] << " "
-                                                                    << daughters.at(j)->getEnergy() << " " << std::endl;
-		
-				std::cout<<"about to populate vector"<<std::endl;
-                //TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
-				TLorentzVector mcVec;
-				std::cout<<"1"<<std::endl;
-				mcVec.SetXYZM(daughters.at(j)->getMomentum()[0],daughters.at(j)->getMomentum()[1],daughters.at(j)->getMomentum()[2],daughters.at(j)->getMass());
-				std::cout<<"2"<<std::endl;
+				
+                TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
                 *_MCf[j] = mcVec;
-				std::cout<<"3"<<std::endl;
                 _MCfpdg[j] = daughters.at(j)->getPDG();
 			}
 
@@ -130,8 +108,11 @@ void eventVariables::printPDGVec(std::vector<int> v){
 void eventVariables::printEventVariables(){
 	std::cout<<"eventVariables: '"<<_variableSetName<<"'"<<std::endl;
 	std::cout<<"nfermions = "<<_nfermions<<"  nleptons = "<<_nleptons<<std::endl;
-	printPDGVec(_MCfpdg);	
+	std::cout"MC PDGS: ";	
+	printPDGVec(_MCfpdg);
+	std::cout<<"MC TLVS: "<<std::endl;	
 	printTLVVec(_MCf);
+	std::cout<<"Lepton Charge: "<<mclepCharge<<std::endl;
 
 	
 }
