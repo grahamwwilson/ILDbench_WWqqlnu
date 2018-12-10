@@ -100,6 +100,18 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 	return;
 
 }
+void eventVariables::initJetTLV(std::vector<TLorentzVector>& jetvec){
+	
+		std::vector<TLorentzVector*> temp(_jets.size());
+		jetvec = temp;
+	for(unsigned int i=0; i<_jets.size(); i++){
+		
+		jetvec.at(i) = new TLorentzVector();
+		jetvec.at(i)->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
+		
+	}
+
+}
 void eventVariables::printTLV(TLorentzVector* v){
 	std::cout<<v->Px()<<" "<<v->Py()<<" "<<v->Pz()<<" "<<v->E()<<" "<<v->M()<<std::endl;
 }
@@ -125,7 +137,8 @@ void eventVariables::printEventVariables(){
 	std::cout<<"Lepton TLV: ";
 	printTLV(_mcl);
 	std::cout<<"Lepton Charge: "<<_mclepCharge<<std::endl;
+	std::cout<<"Reco Jet TLV: "<<std::endl;
+	printTLVVec(_tlvjets);
 
-	
 }
 

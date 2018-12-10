@@ -33,6 +33,7 @@ class eventVariables{
 	std::vector<TLorentzVector*> _MCf{};
 	std::vector<int> _MCfpdg{};
 	TLorentzVector* _mcl{};
+	TLorentzVector* _mcqq{};
 	int _mclepCharge{};
 	//event information
 	bool _isTau{};
@@ -80,7 +81,8 @@ class eventVariables{
 
 	//methods used to populate event variables	
 	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
-	void initMCTree();
+	
+	void initJetTLV(std::vector<TLorentzVector> jetvec);
 	
 
 	//printing stuff
