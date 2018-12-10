@@ -22,6 +22,7 @@ class eventVariables{
 
 	eventVariables(const char* variableSetName, int nfermion, int nlepton, int nJets, TTree* tree);
 	void setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
+	void initLocalTree();
 
 	const char* _variableSetName{};
 	int _nfermions{};
