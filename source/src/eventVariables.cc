@@ -100,7 +100,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 	return;
 
 }
-void eventVariables::initJetTLV(std::vector<TLorentzVector>& jetvec){
+void eventVariables::initJetTLV(std::vector<TLorentzVector*>& jetvec){
 	
 		std::vector<TLorentzVector*> temp(_jets.size());
 		jetvec = temp;
