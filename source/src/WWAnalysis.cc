@@ -241,9 +241,10 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
      _tree->Branch("isTau", &isTau, "isTau/O");
      _tree->Branch("leptonCharge", &trueq,"leptonCharge/I");
 */
-	_tree->Branch("isMuon", &ev1->_isMuon,"isMuon/O");
-	_tree->Branch("isTau",&ev1->_isTau,"isTau/O");
-	_tree->Branch("mclepCharge", &ev1->_mclepCharge,"mclepCharge/O");
+/////////////// putting in ev class
+	//_tree->Branch("isMuon", &ev1->_isMuon,"isMuon/O");
+	//_tree->Branch("isTau",&ev1->_isTau,"isTau/O");
+	//_tree->Branch("mclepCharge", &ev1->_mclepCharge,"mclepCharge/O");
 
 	//init vector size
 /*	std::vector<TLorentzVector*> tempmcf(_nfermions);
