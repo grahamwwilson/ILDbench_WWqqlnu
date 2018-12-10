@@ -1,7 +1,7 @@
 
 #include "eventVariables.h"
 
-eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons, int nJets, TTree* tree){
+eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons, int nJets, TTree*& tree){
 	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
