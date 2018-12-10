@@ -68,9 +68,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 
 				//is this the lepton?
 				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15){
-					std::cout<<"entered mcl condition"<<std::endl;
 					mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
-					//*mcl = mcVec;
 				}
 				if(abs(MCfpdg[j]) < 6){
 					qq += *MCf[j];
@@ -168,6 +166,33 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid )
 
 }
 /***** end local mc jet tagging *****/
+/*** calculate variables based on input set of tags ***/
+/*** formatting is function( &{inputtags}, &{output variables} ) ***/
+void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& lep, TLorentzVector*& Wqq, TLorentzVector*& Nu){
+
+	TLorentzVector qq;
+	for(unsigned int i=0; i< tagset.size(); i++){
+		if(abs(tagset.at(i)) < 6){
+			qq += *_tlvjets.at(i)
+		}
+		if(abs(tagset.at(i)) == 13 || abs(tagset.at(i)) == 15){
+			lep = new TLorentzVector( _tlvjets.at(i)->Vect(), _tlvjets.at(i)->E() );
+		}
+	}
+	Wqq = new TLorentzVector(qq.Vect(), qq.E());
+
+	TVector3 MissP( -(lep->Px() + Wqq->Px()), -(lep->Py() + Wqq->Py()), -(lep->Pz() + Wqq->Pz()) );
+
+	Nu = new TLorentzVector();
+	nu->SetXYZM(MissP, 0.0);
+
+	TLorentzVector wl;
+	wl = *nu + *lep;
+
+	Wl = new TLorentzVector(wl.Vect(), wl.E());
+
+}
+/*** end tagged calculations ***/
 void eventVariables::printTLV(TLorentzVector* v){
 	std::cout<<v->Px()<<" "<<v->Py()<<" "<<v->Pz()<<" "<<v->E()<<" "<<v->M()<<std::endl;
 }
@@ -200,6 +225,15 @@ void eventVariables::printEventVariables(){
 	std::cout<<"Jet MC Tags: ";
 	printPDGVec(_jetmctags);
 	std::cout<<"MC Tag Valid = "<<_isMCTagValid<<std::endl;
+	std::cout<<"MC Tag Quantities----"<<std::endl;
+	std::cout<<"mctlep ";
+	printTLV(_mctlep);
+	std::cout<<"mctWqq ";
+	printTLV(_mctWqq);
+	std::cout<<"mctNu ";
+	printTLV(_mctNu);
+	std::cout<<"mctWl ";
+	printTLV(_mctWl);
 	
 
 }
