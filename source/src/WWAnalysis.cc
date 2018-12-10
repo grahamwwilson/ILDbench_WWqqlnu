@@ -1828,6 +1828,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->setParticles(_mcpartvec, _jets);
 	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg);
 	ev1->initJetTLV(ev1->_tlvjets);
+	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid);
 	ev1->printEventVariables();
 	
 

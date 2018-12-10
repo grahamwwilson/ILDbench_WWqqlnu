@@ -26,6 +26,7 @@ class eventVariables{
 	const char* _variableSetName{};
 	int _nfermions{};
 	int _nleptons{};
+	int _nJets{};
 
 
 	//monte carlo
@@ -48,7 +49,7 @@ class eventVariables{
 
 	//mc jet tagging
 	std::vector<int> _jetmctags{};
-	bool isTagValid{};
+	bool _isMCTagValid{};
 	
 
 	//analysis tagging 
@@ -83,6 +84,10 @@ class eventVariables{
 	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
 	
 	void initJetTLV(std::vector<TLorentzVector*>& jetvec);
+
+	void setJetTags(std::vector<int>& localjettags, std::vector<int> tagset );
+
+	void MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid);
 	
 
 	//printing stuff
