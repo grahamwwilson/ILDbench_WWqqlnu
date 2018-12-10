@@ -239,8 +239,8 @@ void eventVariables::printEventVariables(){
 
 }
 void eventVariables::initLocalTree(){
-	_localTree->Branch(variableSetName+"isMuon", &_isMuon,"isMuon/O");
-	_localTree->Branch(variableSetName+"isTau",&_isTau,"isTau/O");
-	_localTree->Branch(variableSetName+"mclepCharge", &_mclepCharge,"mclepCharge/O");
+	_localTree->Branch(_variableSetName+"isMuon", &_isMuon,"isMuon/O");
+	_localTree->Branch(_variableSetName+"isTau",&_isTau,"isTau/O");
+	_localTree->Branch(_variableSetName+"mclepCharge", &_mclepCharge,"mclepCharge/O");
 
 }
