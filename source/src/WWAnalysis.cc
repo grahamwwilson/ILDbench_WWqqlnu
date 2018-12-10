@@ -279,7 +279,7 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 		_tree->Branch(name.str().c_str(),"TLorentzVector", &jets.at(i),16000,0);
 	}
 */
-	for(unsigned int i=0; i< _njets; i++){
+	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
 		name << "jet"<<i;
 		_tree->Branch(name.str().c_str(),"TLorentzVector", &ev1->_tlvjets.at(i),16000,0);
