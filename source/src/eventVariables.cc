@@ -27,7 +27,7 @@ void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vecto
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 }
-void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -54,7 +54,10 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 		for(unsigned int k=0; k<leptons.size(); k++){
 			lep += std::count(daughterpdgs.begin(),daughterpdgs.end(),leptons.at(k));
 		}
+		TLorentzVector qq;
 		if( qrk == (_nfermions-_nleptons) && lep == _nleptons){
+
+			
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
 				
@@ -68,8 +71,11 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 					mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
 					//*mcl = mcVec;
 				}
-			}
-
+				if(abs(MCfpdg[j] < 6)){
+					qq += MCf[j];
+				}
+			}//end daughter loop
+			mcqq = new TLorentzVector(qq.Vect(),qq.E());
 
 
 			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ||
@@ -138,9 +144,11 @@ void eventVariables::printEventVariables(){
 	printPDGVec(_MCfpdg);
 	std::cout<<"MC TLVS: "<<std::endl;	
 	printTLVVec(_MCf);
-	std::cout<<"Lepton TLV: ";
+	std::cout<<"MC Lepton TLV: ";
 	printTLV(_mcl);
-	std::cout<<"Lepton Charge: "<<_mclepCharge<<std::endl;
+	std::cout<<"MC Lepton Charge: "<<_mclepCharge<<std::endl;
+	std::cout<<"MC qq TLV: ";
+	printTLV(_mcqq);
 	std::cout<<"Reco Jet TLV: "<<std::endl;
 	printTLVVec(_tlvjets);
 
