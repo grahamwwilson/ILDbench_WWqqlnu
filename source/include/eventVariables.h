@@ -82,7 +82,7 @@ class eventVariables{
 	//methods used to populate event variables	
 	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
 	
-	void initJetTLV(std::vector<TLorentzVector> jetvec);
+	void initJetTLV(std::vector<TLorentzVector*>& jetvec);
 	
 
 	//printing stuff
