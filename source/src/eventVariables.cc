@@ -239,10 +239,9 @@ void eventVariables::printEventVariables(){
 
 }
 void eventVariables::initLocalTree(){
-	char* vsn;
-	strcpy(vsn,_variableSetName);
-	_localTree->Branch(strcat(vsn,"isMuon"), &_isMuon,strcat(vsn,"isMuon/O"));
-	_localTree->Branch(strcat(vsn,"isTau"),&_isTau,strcat(vsn,"isTau/O"));
-	_localTree->Branch(strcat(vsn,"mclepCharge"), &_mclepCharge,strcat(vsn,"mclepCharge/O"));
+	std::string vsn(_variableSetName);
+	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
+	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
+	_localTree->Branch((vsn+"mclepCharge").c_str(), &_mclepCharge,(vsn+"mclepCharge/O").c_str());
 
 }
