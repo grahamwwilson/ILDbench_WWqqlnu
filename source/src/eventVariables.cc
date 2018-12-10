@@ -184,7 +184,7 @@ void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLoren
 	TVector3 MissP( -(lep->Px() + Wqq->Px()), -(lep->Py() + Wqq->Py()), -(lep->Pz() + Wqq->Pz()) );
 
 	Nu = new TLorentzVector();
-	Nu->SetXYZM(MissP, 0.0);
+	Nu->SetXYZM(MissP.X(), MissP.Y(), MissP.Z(), 0.0);
 
 	TLorentzVector wl;
 	wl = *Nu + *lep;
