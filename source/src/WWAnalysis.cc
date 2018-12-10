@@ -129,7 +129,7 @@ void WWAnalysis::init() {
   // usually a good idea to
   printParameters() ;
 
-  ev1 = new eventVariables("a", _nfermions, _nleptons);
+  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets);
   _nRun = 0;
   _nEvt = 0;
 

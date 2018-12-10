@@ -20,7 +20,7 @@ class eventVariables{
 
 	public:
 
-	eventVariables(const char* variableSetName, int nfermion, int nlepton);
+	eventVariables(const char* variableSetName, int nfermion, int nlepton, int nJets);
 	void setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
 
 	const char* _variableSetName{};
