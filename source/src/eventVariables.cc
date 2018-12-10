@@ -5,6 +5,7 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
+	_nJets = nJets;
 	
 	//allocate correct size for fermion vectors
 	std::vector<TLorentzVector*> mcf(nfermions);
@@ -122,6 +123,51 @@ void eventVariables::initJetTLV(std::vector<TLorentzVector*>& jetvec){
 	}
 
 }
+void eventVariables::setJetTags(std::vector<int>& localjettags, std::vector<int> tagset ){
+	localjettags = tagset;
+}
+/***** local mc jet tagging methods  *****/
+void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid ){
+
+	std::vector<int> pdgtags(_nJets);
+	double maxangle;
+	double angle;
+	int maxindex = -1;
+	for(unsigned int i=0; i<_tlvjets.size(); i++){
+		//match each particle
+		maxangle = -9999;
+		maxindex = -1;
+		//get  mcparticle closest to jet
+		for(unsigned int j=0; j<_MCf.size(); j++){
+			//skip neutrinos
+			if( abs(_MCfpdg.at(j)) == 14 || abs(_MCfpdg.at(j)) == 16 ) continue;
+			
+				angle = _MCf.at(j)->Vect().Dot( _tlvjets.at(i)->Vect() )/ (_MCf.at(j)->Vect().Mag() * _tlvjets.at(i)->Vect().Mag() );
+
+			if(angle > maxangle ){
+				maxangle = angle;
+				maxindex = j;
+			}			
+
+
+		}
+		//take the matched particle and save it
+		pdgtags.at(i) = _MCfpdg.at(maxindex);
+	}//end match
+
+	isMCTagValid = true;
+	//validate the matching (has a particle been doubly matched to a jet?)
+		for(unsigned int i=0; i<pdgtags.size(); i++){
+			for(unsigned int j=i+1; j<pdgtags.size(); j++){
+				if(pdgtags.at(i) == pdgtags.at(j)){
+					isMCTagValid = false;
+				}
+			}
+		}
+	jetmctags = pdgtags;
+
+}
+/***** end local mc jet tagging *****/
 void eventVariables::printTLV(TLorentzVector* v){
 	std::cout<<v->Px()<<" "<<v->Py()<<" "<<v->Pz()<<" "<<v->E()<<" "<<v->M()<<std::endl;
 }
@@ -151,6 +197,10 @@ void eventVariables::printEventVariables(){
 	printTLV(_mcqq);
 	std::cout<<"Reco Jet TLV: "<<std::endl;
 	printTLVVec(_tlvjets);
+	std::cout<<"Jet MC Tags: ";
+	printPDGVec(_jetmctags);
+	std::cout<<"MC Tag Valid = "<<_isMCTagValid<<std::endl;
+	
 
 }
 
