@@ -27,7 +27,7 @@ void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vecto
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 }
-void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
