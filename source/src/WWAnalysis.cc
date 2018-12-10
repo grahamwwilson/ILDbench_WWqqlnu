@@ -128,7 +128,8 @@ void WWAnalysis::init() {
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
   printParameters() ;
-	 
+  file = new TFile("file.root","RECREATE");
+ 
   _tree = new TTree("tree", "tree");
   _tree->Branch("runNumber", &_nRun, "runNumber/I");
   _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
@@ -145,10 +146,9 @@ void WWAnalysis::init() {
 	//initHistograms();
 
 
-	file = new TFile("file.root","RECREATE");
-	double pi = 3.1416;
 
- 
+
+  double pi = 3.1416;
 	for(int i=0; i<= ncuts; i++){
 		 char cuts[100];
          sprintf(cuts, "_%d", i);
