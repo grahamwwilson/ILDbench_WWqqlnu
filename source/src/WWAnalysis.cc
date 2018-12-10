@@ -128,6 +128,10 @@ void WWAnalysis::init() {
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
   printParameters() ;
+	 
+  _tree = new TTree("tree", "tree");
+  _tree->Branch("runNumber", &_nRun, "runNumber/I");
+  _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
 
   ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
@@ -230,9 +234,8 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 
 // TTree similar to ttbar.cc to start with
 
-     _tree = new TTree("tree", "tree");
-     _tree->Branch("runNumber", &_nRun, "runNumber/I");
-     _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
+	//moved instantiation up
+
 //     _tree->Branch("crossSection", &_xsec, "crossSection/F");
 //     _Process = new TString();
 //     _tree->Branch("Process","TString",&_Process,16000,0);
