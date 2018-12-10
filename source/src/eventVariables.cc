@@ -1,11 +1,12 @@
 
 #include "eventVariables.h"
 
-eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons, int nJets){
+eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons, int nJets, TTree* tree){
 	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
 	_nJets = nJets;
+	_localTree = tree;
 	
 	//allocate correct size for fermion vectors
 	std::vector<TLorentzVector*> mcf(nfermions);
@@ -237,4 +238,9 @@ void eventVariables::printEventVariables(){
 	
 
 }
+void eventVariables::initLocalTree(){
+	_localTree->Branch(variableSetName+"isMuon", &_isMuon,"isMuon/O");
+	_localTree->Branch(variableSetName+"isTau",&_isTau,"isTau/O");
+	_localTree->Branch(variableSetName+"mclepCharge", &_mclepCharge,"mclepCharge/O");
 
+}

@@ -20,13 +20,15 @@ class eventVariables{
 
 	public:
 
-	eventVariables(const char* variableSetName, int nfermion, int nlepton, int nJets);
+	eventVariables(const char* variableSetName, int nfermion, int nlepton, int nJets, TTree* tree);
 	void setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets );
 
 	const char* _variableSetName{};
 	int _nfermions{};
 	int _nleptons{};
 	int _nJets{};
+
+	TTree* _localTree;
 
 
 	//monte carlo
