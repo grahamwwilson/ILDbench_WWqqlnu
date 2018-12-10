@@ -1,7 +1,7 @@
 
 #include "eventVariables.h"
 
-eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons ){
+eventVariables::eventVariables(const char* variableSetName, int nfermions, int nleptons, int nJets){
 	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
@@ -14,6 +14,14 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	_MCf = mcf;
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
+
+	std::vector<TLorentzVector*> j(nJets);
+	for(unsigned int i=0; i<j.size(); i++){
+		j.at(i) = new TLorentzVector();
+	}
+	_tlvjets = j;
+	_mctCMjets = j;
+	_anaCMjets = j;
 }
 void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets ){
 	_mcpartvec = mcpartvec;
@@ -102,11 +110,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 }
 void eventVariables::initJetTLV(std::vector<TLorentzVector*>& jetvec){
 	
-		std::vector<TLorentzVector*> temp(_jets.size());
-		jetvec = temp;
-	for(unsigned int i=0; i<_jets.size(); i++){
-		
-		jetvec.at(i) = new TLorentzVector();
+	for(unsigned int i=0; i<_jets.size(); i++){	
 		jetvec.at(i)->SetXYZM(_jets.at(i)->getMomentum()[0], _jets.at(i)->getMomentum()[1], _jets.at(i)->getMomentum()[2], _jets.at(i)->getMass() );
 		
 	}
