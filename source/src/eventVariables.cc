@@ -72,7 +72,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 					//*mcl = mcVec;
 				}
 				if(abs(MCfpdg[j] < 6)){
-					qq += MCf[j];
+					qq += *MCf[j];
 				}
 			}//end daughter loop
 			mcqq = new TLorentzVector(qq.Vect(),qq.E());
