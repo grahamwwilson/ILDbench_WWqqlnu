@@ -129,7 +129,8 @@ void WWAnalysis::init() {
   // usually a good idea to
   printParameters() ;
 
-  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets);
+  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets,_tree);
+	initLocalTree();
   _nRun = 0;
   _nEvt = 0;
 
