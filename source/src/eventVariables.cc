@@ -173,7 +173,7 @@ void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLoren
 	TLorentzVector qq;
 	for(unsigned int i=0; i< tagset.size(); i++){
 		if(abs(tagset.at(i)) < 6){
-			qq += *_tlvjets.at(i)
+			qq += *_tlvjets.at(i);
 		}
 		if(abs(tagset.at(i)) == 13 || abs(tagset.at(i)) == 15){
 			lep = new TLorentzVector( _tlvjets.at(i)->Vect(), _tlvjets.at(i)->E() );
@@ -187,7 +187,7 @@ void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLoren
 	nu->SetXYZM(MissP, 0.0);
 
 	TLorentzVector wl;
-	wl = *nu + *lep;
+	wl = *Nu + *lep;
 
 	Wl = new TLorentzVector(wl.Vect(), wl.E());
 
