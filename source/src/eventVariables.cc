@@ -239,7 +239,7 @@ void eventVariables::printEventVariables(){
 
 }
 void eventVariables::initLocalTree(){
-	char* vsn;
+	char vsn[100];
 	strcpy(vsn,_variableSetName);
 	_localTree->Branch(strcat(vsn,"isMuon"), &_isMuon,strcat(vsn,"isMuon/O"));
 	_localTree->Branch(strcat(vsn,"isTau"),&_isTau,strcat(vsn,"isTau/O"));
