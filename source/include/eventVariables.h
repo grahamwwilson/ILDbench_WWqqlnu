@@ -71,6 +71,8 @@ class eventVariables{
 	 std::vector<TLorentzVector*> _mctCMjets{};
 	 TLorentzVector* _mctCMNu{};
 	
+	 double _mctWmProdAngle{};
+	
 	  
 		
 	//analysis tagging quantities
@@ -83,6 +85,8 @@ class eventVariables{
 	std::vector<TLorentzVector*> _anaCMjets{};
 	TLorentzVector* _anaCMNu{};
 
+	double _anaWmProdAngle{};
+
 
 	//methods used to populate event variables	
 	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
@@ -94,6 +98,10 @@ class eventVariables{
 	void MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge);
 
 	void computeRecoResultsFromTags(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& lep, TLorentzVector*& Wqq, TLorentzVector*& Nu); 
+	
+	void populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& Wqq, TLorentzVector*& Nu, std::vector<TLorentzVector*>& CMjets,  TLorentzVector*& CMNu );
+
+	void eventVariables::getCosThetaW(int& lepCharge, TLorentzVector*& Wl, TLorentzVector*& Wqq, double& WmProdAngle);
 	
 
 	//printing stuff
