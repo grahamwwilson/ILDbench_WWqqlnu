@@ -266,6 +266,7 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
        }
 */
 ///testing tree refactoring
+/*
 	for(int i=0; i< _nfermions; i++){
 		std::stringstream name;
 		name << ev1->_variableSetName << "MCf" << i;
@@ -273,10 +274,10 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 		name <<"_PDG";
 		_tree->Branch(name.str().c_str(), &ev1->_MCfpdg.at(i), (name.str()+"/I").c_str());
 	}
-
+*/
 	//new stuff from ev1
-	_tree->Branch("mcl","TLorentzVector",&ev1->_mcl,16000,0);
-	_tree->Branch("mcqq","TLorentzVector",&ev1->_mcqq,16000,0);
+//	_tree->Branch("mcl","TLorentzVector",&ev1->_mcl,16000,0);
+//	_tree->Branch("mcqq","TLorentzVector",&ev1->_mcqq,16000,0);
 	
 	//add jet TLVS to 
 	/*std::vector<TLorentzVector*> temp(_nJets);
@@ -288,11 +289,12 @@ minjetNpartsMuon.push_back( new TH1D(("minjetNpartsMuon"+cutnum).c_str(), "Visib
 		_tree->Branch(name.str().c_str(),"TLorentzVector", &jets.at(i),16000,0);
 	}
 */
-	for(unsigned int i=0; i< _nJets; i++){
+/*	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
 		name << ev1->_variableSetName << "jet"<<i;
 		_tree->Branch(name.str().c_str(),"TLorentzVector", &ev1->_tlvjets.at(i),16000,0);
 	}
+*/
 
 	_tree->Branch("tauDecayMode",&tauDecayMode,"tauDecayMode/I");
 	_tree->Branch("lepTrackMult",&lnmctracks,"lepTrackMult/I");
@@ -1833,7 +1835,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->setParticles(_mcpartvec, _jets);
 	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg);
 	ev1->initJetTLV(ev1->_tlvjets);
-	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid);
+	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid, ev1->_mctlepCharge);
 	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);
 	ev1->printEventVariables();
 	

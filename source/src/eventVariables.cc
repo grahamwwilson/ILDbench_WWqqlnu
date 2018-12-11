@@ -126,7 +126,7 @@ void eventVariables::setJetTags(std::vector<int>& localjettags, std::vector<int>
 	localjettags = tagset;
 }
 /***** local mc jet tagging methods  *****/
-void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid ){
+void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
 
 	std::vector<int> pdgtags(_nJets);
 	double maxangle;
@@ -164,6 +164,8 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid )
 			}
 		}
 	jetmctags = pdgtags;
+	//also set charge
+	mctlepCharge = mclepCharge;
 
 }
 /***** end local mc jet tagging *****/
@@ -235,13 +237,55 @@ void eventVariables::printEventVariables(){
 	printTLV(_mctNu);
 	std::cout<<"mctWl ";
 	printTLV(_mctWl);
+	std::cout<<"----------------"<<std::endl;
+	std::cout<<std::endl;
+	//after analysis code is done, print ana quantities
 	
 
 }
 void eventVariables::initLocalTree(){
 	std::string vsn(_variableSetName);
+
+	/*** Tree MC info ***/
 	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
 	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
 	_localTree->Branch((vsn+"mclepCharge").c_str(), &_mclepCharge,(vsn+"mclepCharge/O").c_str());
+
+	//add alll the other vars here
+	for(int i=0; i< _nfermions; i++){
+		std::stringstream name;
+		name << _variableSetName << "MCf" << i;
+		_localTree->Branch(name.str().c_str(),"TLorentzVector",&_MCf[i],16000,0);
+		name <<"_PDG";
+		_localTree->Branch(name.str().c_str(), &_MCfpdg.at(i), (name.str()+"/I").c_str());
+	}
+
+	_localTree->Branch("mcl","TLorentzVector",&_mcl,16000,0);
+	_localTree->Branch("mcqq","TLorentzVector",&_mcqq,16000,0);
+	
+	for(unsigned int i=0; i< _nJets; i++){
+		std::stringstream name;
+		name << _variableSetName << "jet"<<i;
+		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_tlvjets.at(i),16000,0);
+	}
+	/*** End Tree MC info ***/
+
+	/*** MC tagging quantities ***/
+	_localTree->Branch((vsn+"mctWl").c_str(),"TLorentzVector",&_mctWl,16000,0);
+	_localTree->Branch((vsn+"mctlep").c_str(),"TLorentzVector",&_mctlep,16000,0);
+	_localTree->Branch((vsn+"mctWqq").c_str(),"TLorentzVector",&_mctWqq,16000,0);
+	_localTree->Branch((vsn+"mctNu").c_str(),"TLorentzVector",&_mctNu,16000,0);
+	_localTree->Branch((vsn+"mctlepCharge").c_str(),&_mctlepCharge, (vsn + "mctlepCharge/I").c_str());  
+
+	/*** end MC tagging info ***/
+
+	/*** Ana tagging quantities ***/
+	_localTree->Branch((vsn+"anaWl").c_str(),"TLorentzVector",&_anaWl,16000,0);
+	_localTree->Branch((vsn+"analep").c_str(),"TLorentzVector",&_analep,16000,0);
+	_localTree->Branch((vsn+"anaWqq").c_str(),"TLorentzVector",&_anaWqq,16000,0);
+	_localTree->Branch((vsn+"anaNu").c_str(),"TLorentzVector",&_anaNu,16000,0);
+	_localTree->Branch((vsn+"analepCharge").c_str(),&_analepCharge, (vsn + "analepCharge/I").c_str());  
+
+	/*** end Ana tagging ***/
 
 }
