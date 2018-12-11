@@ -165,7 +165,7 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 		}
 	jetmctags = pdgtags;
 	//also set charge
-	mctlepCharge = mclepCharge;
+	mctlepCharge = _mclepCharge;
 
 }
 /***** end local mc jet tagging *****/
