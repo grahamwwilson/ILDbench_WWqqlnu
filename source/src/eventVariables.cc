@@ -196,6 +196,58 @@ void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLoren
 
 }
 /*** end tagged calculations ***/
+/*** CM boosting methods ***/
+	// function( {I I I I}, {O O O} )
+void eventVariables::populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& Wqq, TLorentzVector*& Nu, std::vector<TLorentzVector*>& CMjets,  TLorentzVector*& CMNu ){
+
+	TVector3 Wqqboost = Wqq->BoostVector();
+	TVector3 Wlboost = Wl->BoostVector();
+
+	Wqqboost = -Wqqboost;
+	Wlboost = -Wlboost;
+
+//	Wqqboost.Print();
+//	Wlboost.Print();
+
+
+	TLorentzVector cmtemp;
+	for(unsigned int i=0; i<tagset.size(); i++){
+		cmtemp = *(_jets.at(i));
+		if( abs(tagset.at(i)) < 6){
+			cmtemp.Boost(Wqqboost);
+		}
+		else{
+			cmtemp.Boost(Wlboost);
+		}
+		CMjets.at(i)->SetXYZM(cmtemp.Vect(), cmtemp.E());
+	}
+	
+	//boost nu also
+	CMNu = new TLorentzVector();
+	CMNu->SetXYZM(Nu->Px(),Nu->Py(),Nu->Pz(),0.0);
+	CMnu->Boost(Wlboost);
+
+}
+void eventVariables::getCosThetaW(int& lepCharge, TLorentzVector*& Wl, TLorentzVector*& Wqq, double& WmProdAngle){
+	//get the production angle of W-
+	//our unit z vector along the beam axis
+	TVector3 z(0.0,0.0,1.0);
+	if(lepCharge < 0 ){
+		//W- is the lepton
+		TVector3 Wm(Wl->Px(),Wl->Py(),Wl->Pz());
+		Wm = Wm * (1/Wm.Mag());
+		WmProdAngle = Wm.Dot(z);
+		
+	}
+	else{
+		//infer qq charge to be W-
+		TVector3 Wm(Wqq->Px(),Wqq->Py(),Wqq->Pz());
+		Wm = Wm * (1/Wm.Mag());
+		WmProdAngle = Wm.Dot(z);
+	}
+
+}
+/*** end CM boosting ***/
 void eventVariables::printTLV(TLorentzVector* v){
 	std::cout<<v->Px()<<" "<<v->Py()<<" "<<v->Pz()<<" "<<v->E()<<" "<<v->M()<<std::endl;
 }
@@ -276,6 +328,13 @@ void eventVariables::initLocalTree(){
 	_localTree->Branch((vsn+"mctWqq").c_str(),"TLorentzVector",&_mctWqq,16000,0);
 	_localTree->Branch((vsn+"mctNu").c_str(),"TLorentzVector",&_mctNu,16000,0);
 	_localTree->Branch((vsn+"mctlepCharge").c_str(),&_mctlepCharge, (vsn + "mctlepCharge/I").c_str());  
+	//CM stuff
+	for(unsigned int i=0; i< _nJets; i++){
+		std::stringstream name;
+		name << _variableSetName << "mctCMjet"<<i;
+		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_mctCMjets.at(i),16000,0);
+	}
+	_localTree->Branch((vsn+"mctWmProdAngle").c_str(),&_mctWmProdAngle,(vsn+"mctWmProdAngle/D").c_str());
 
 	/*** end MC tagging info ***/
 
@@ -285,7 +344,13 @@ void eventVariables::initLocalTree(){
 	_localTree->Branch((vsn+"anaWqq").c_str(),"TLorentzVector",&_anaWqq,16000,0);
 	_localTree->Branch((vsn+"anaNu").c_str(),"TLorentzVector",&_anaNu,16000,0);
 	_localTree->Branch((vsn+"analepCharge").c_str(),&_analepCharge, (vsn + "analepCharge/I").c_str());  
-
+	//CM stuff
+	for(unsigned int i=0; i< _nJets; i++){
+		std::stringstream name;
+		name << _variableSetName << "anaCMjet"<<i;
+		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_anaCMjets.at(i),16000,0);
+	}
+	_localTree->Branch((vsn+"anaWmProdAngle").c_str(),&_anaWmProdAngle,(vsn+"anaWmProdAngle/D").c_str());
 	/*** end Ana tagging ***/
 
 }
