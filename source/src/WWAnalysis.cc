@@ -1270,7 +1270,7 @@ void WWAnalysis::populateCMTLVs(){
 	//TVector3 Wqqboost(Wqq->Px(),Wqq->Py(),Wqq->Pz());
 	//TVector3 Wlboost(Wl->Px(),Wl->Py(),Wl->Pz());
 
-	TVector3 Wqqboost = Wqq->BoostVector();
+/*	TVector3 Wqqboost = Wqq->BoostVector();
 	TVector3 Wlboost = Wl->BoostVector();
 
 	Wqqboost = -Wqqboost;
@@ -1300,7 +1300,7 @@ void WWAnalysis::populateCMTLVs(){
 	CMJets = cmtempvec;
 	//boost the neutrino into CM
 	CMnu = nu;
-	CMnu->Boost(Wlboost);
+	CMnu->Boost(Wlboost);*/
 	
 }
 void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*> j){
