@@ -212,7 +212,7 @@ void eventVariables::populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& W
 
 	TLorentzVector cmtemp;
 	for(unsigned int i=0; i<tagset.size(); i++){
-		cmtemp = *(_jets.at(i));
+		cmtemp = *(_tlvjets.at(i));
 		if( abs(tagset.at(i)) < 6){
 			cmtemp.Boost(Wqqboost);
 		}
@@ -225,7 +225,7 @@ void eventVariables::populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& W
 	//boost nu also
 	CMNu = new TLorentzVector();
 	CMNu->SetXYZM(Nu->Px(),Nu->Py(),Nu->Pz(),0.0);
-	CMnu->Boost(Wlboost);
+	CMNu->Boost(Wlboost);
 
 }
 void eventVariables::getCosThetaW(int& lepCharge, TLorentzVector*& Wl, TLorentzVector*& Wqq, double& WmProdAngle){
