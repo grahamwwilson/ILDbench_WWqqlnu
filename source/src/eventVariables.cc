@@ -219,7 +219,7 @@ void eventVariables::populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& W
 		else{
 			cmtemp.Boost(Wlboost);
 		}
-		CMjets.at(i)->SetXYZM(cmtemp.Vect(), cmtemp.E());
+		CMjets.at(i)->SetPxPyPzE(cmtemp.Px(),cmtemp.Py(),cmtemp.Pz(), cmtemp.E());
 	}
 	
 	//boost nu also
@@ -335,6 +335,7 @@ void eventVariables::initLocalTree(){
 		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_mctCMjets.at(i),16000,0);
 	}
 	_localTree->Branch((vsn+"mctWmProdAngle").c_str(),&_mctWmProdAngle,(vsn+"mctWmProdAngle/D").c_str());
+	_localTree->Branch((vsn+"mctCMNu").c_str(),"TLorentzVector",&_mctCMNu,16000,0);
 
 	/*** end MC tagging info ***/
 
@@ -351,6 +352,7 @@ void eventVariables::initLocalTree(){
 		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_anaCMjets.at(i),16000,0);
 	}
 	_localTree->Branch((vsn+"anaWmProdAngle").c_str(),&_anaWmProdAngle,(vsn+"anaWmProdAngle/D").c_str());
+	_localTree->Branch((vsn+"anaCMNu").c_str(),"TLorentzVector",&_anaCMNu,16000,0);
 	/*** end Ana tagging ***/
 
 }
