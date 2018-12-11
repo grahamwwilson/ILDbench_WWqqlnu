@@ -289,6 +289,10 @@ void eventVariables::printEventVariables(){
 	printTLV(_mctNu);
 	std::cout<<"mctWl ";
 	printTLV(_mctWl);
+	std::cout<<"W Rest Frame (CM mc tagged)"<<std::endl;
+	printTLVVec(_mctCMjets);
+	std::cout<<"CM neutrino"<<std::endl;
+	printTLV(_mctCMNu);
 	std::cout<<"----------------"<<std::endl;
 	std::cout<<std::endl;
 	//after analysis code is done, print ana quantities
