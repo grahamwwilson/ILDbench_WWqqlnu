@@ -11,6 +11,7 @@
 #include "TVector3.h"
 #include <math.h>
 #include <iostream>
+#include <sstream>
 using namespace lcio;
 class eventVariables{
 
@@ -27,7 +28,7 @@ class eventVariables{
 	const char* _variableSetName{};
 	int _nfermions{};
 	int _nleptons{};
-	int _nJets{};
+	unsigned int _nJets{};
 
 	TTree* _localTree;
 
