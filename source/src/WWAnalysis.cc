@@ -1837,6 +1837,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->initJetTLV(ev1->_tlvjets);
 	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid, ev1->_mctlepCharge);
 	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);
+	ev1->populateCMTLVs(ev1->_jetmctags, ev1->_mctWl, ev1->_mctWqq, ev1->_mctNu, ev1->_mctCMjets,  ev1->_mctCMNu );
+	ev1-> getCosThetaW(ev1->_mctlepCharge, ev1->_mctWl, ev1->_mctWqq, ev1->_mctWmProdAngle);
 	ev1->printEventVariables();
 	
 
