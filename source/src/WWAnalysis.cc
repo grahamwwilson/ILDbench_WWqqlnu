@@ -1282,7 +1282,7 @@ void WWAnalysis::populateCMTLVs(){
 	std::vector<TLorentzVector*> cmtempvec(_jets.size());
 	TLorentzVector cmtemp;
 	for(unsigned int i=0; i<cmtempvec.size(); i++){
-		cmtemp = *(jets.at(i));
+		cmtemp = *(_tlvjets.at(i));
 		std::cout<<cmtemp.Px()<<" "<<cmtemp.Py()<<" "<<cmtemp.Pz()<<" "<<cmtemp.M()<<std::endl;
 		if(i == ljet_index){
 			cmtemp.Boost(Wlboost.X(),Wlboost.Y(),Wlboost.Z());
