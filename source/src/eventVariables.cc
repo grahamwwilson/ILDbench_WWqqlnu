@@ -371,6 +371,9 @@ void eventVariables::initLocalTree(){
 	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
 	_localTree->Branch((vsn+"mclepCharge").c_str(), &_mclepCharge,(vsn+"mclepCharge/O").c_str());
 
+	_localTree->Branch((vsn+"mclepTrkMult").c_str(), &_mclepTrkMult,(vsn+"mclepTrkMult/I").cstr());
+	_localTree->Branch((vsn+"mclepPfoMult").c_str(), &_mclepPfoMult,(vsn+"mclepProMult/I").cstr());
+
 	//add alll the other vars here
 	for(int i=0; i< _nfermions; i++){
 		std::stringstream name;
