@@ -30,7 +30,7 @@ class eventVariables{
 	int _nleptons{};
 	unsigned int _nJets{};
 
-	TTree* _localTree;
+	TTree* _localTree{};
 
 
 	//monte carlo
@@ -40,6 +40,9 @@ class eventVariables{
 	TLorentzVector* _mcl{};
 	TLorentzVector* _mcqq{};
 	int _mclepCharge{};
+	//mc lepton multiplicity info
+	int _mclepTrkMult{};
+	int _mclepPfoMult{};
 	//event information
 	bool _isTau{};
 	bool _isMuon{};
@@ -89,7 +92,16 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void initMCVars(bool& isTau, bool& isMuon, int& _mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg);
+	void initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult);
+	
+	//gets the FSP MCParticles from MC Lepton
+	void exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP);
+
+	// FSP MC Lepton Helper
+	bool allChildrenAreSimulation(MCParticle* p);	
+	
+	// another FSP Lepton Helper
+	void getMCLeptonMult(std::vector<MCParticle*>& FSPs, int& mclepTrkMult, int& mclepPfoMult);
 	
 	void initJetTLV(std::vector<TLorentzVector*>& jetvec);
 

@@ -1833,7 +1833,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	std::cout<<"Populating Event Variables a"<<std::endl;
 	//eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
 	ev1->setParticles(_mcpartvec, _jets);
-	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg);
+	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg, ev1->_mclepTrkMult, ev1->_mclepPfoMult);
 	ev1->initJetTLV(ev1->_tlvjets);
 	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid, ev1->_mctlepCharge);
 	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);

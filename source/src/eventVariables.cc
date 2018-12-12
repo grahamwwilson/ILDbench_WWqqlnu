@@ -29,7 +29,64 @@ void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vecto
 	_mcpartvec = mcpartvec;
 	_jets = jets;
 }
-void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg){
+//recursive helper
+bool eventVariables::allChildrenAreSimulation(MCParticle* p){
+	std::vector<MCParticle*> d = p->getDaughters();
+	bool flag = true;
+	for(unsigned int i=0; i<d.size(); i++){
+		if( ! d.at(i)->isCreatedInSimulation() ){
+			flag= false;
+		}
+	}
+	return flag;
+}
+//recursive function to go through and look at the decay chain of a particle
+//look at specifically charged particles
+void eventVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP){
+	if(p->isCreatedInSimulation()) return;
+
+	//std::cout<<p->id()<<" ";
+	//std::cout<<p->getPDG()<<" -> ";
+	std::vector<MCParticle*> d = p->getDaughters();
+	
+	for(unsigned int i=0; i< d.size(); i++){
+		if( (! d.at(i)->isCreatedInSimulation() ) && ( allChildrenAreSimulation(d.at(i)) || (d.at(i)->getDaughters().size()==0)  ) ){
+		//this is an initial final state particle
+			FSP.push_back(d.at(i));
+		}
+		//if( (! d.at(i)->isCreatedInSimulation()) ){//&& (d.at(i)->getCharge() != 0) ){
+		//	std::cout<< "( "<< d.at(i)->id()<<" "<<d.at(i)->getPDG() <<" "<< d.at(i)->isDecayedInTracker()<<" "<< d.at(i)->isDecayedInCalorimeter()<<" ) ";
+		//}
+	}
+	//std::cout<<std::endl;
+	for(unsigned int i=0; i<d.size(); i++){
+		exploreDaughterParticles(d.at(i), FSP);
+	}
+		
+}
+void eventVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs, int& mclepTrkMult, int& mclepPfoMult){
+  int countparts=0;
+  int counttracks=0;
+  for(unsigned int i=0; i<FSPs.size(); i++){
+		if( (abs(FSPs.at(i)->getPDG()) == 12) || (abs(FSPs.at(i)->getPDG()) == 14) || (abs(FSPs.at(i)->getPDG()) == 16)){
+		//	std::cout<<"neut skipped"<<std::endl;
+			continue;
+		}
+		else{
+			//not a neutrino
+			if(FSPs.at(i)->getCharge() != 0){
+				counttracks++;
+			}
+			//count tracks and neutrals
+			countparts++;
+		//f	std::cout<<"part counted"<<std::endl;
+		}
+  }
+
+  mclepPfoMult = countparts;
+  mclepTrkMult = counttracks;
+}
+void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -70,6 +127,11 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//is this the lepton?
 				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15){
 					mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
+
+					//also get all of the leptons visible FSP
+					std::vector<MCParticle*> mclepFSP{};
+					exploreDaughterParticles(daughters.at(i), mclepFSP );
+					getMCLeptonMult( mclepFSP, mclepTrkMult, mclepPfoMult );
 				}
 				if(abs(MCfpdg[j]) < 6){
 					qq += *MCf[j];
