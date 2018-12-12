@@ -144,6 +144,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				std::find(daughterpdgs.begin(),daughterpdgs.end(), -13) != daughterpdgs.end() ){
 				//identify event containing muon
 				isMuon = true;
+				isTau = false;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
 					mclepCharge = -1;
@@ -157,6 +158,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//ntau++;
 				//identify event containing a tau
 				isTau = true;
+				isMuon = false;
 				//identify the true charge of the lepton
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 15) != daughterpdgs.end() ){
 					mclepCharge = -1;
