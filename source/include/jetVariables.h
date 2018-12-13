@@ -5,6 +5,7 @@
 #include "EVENT/ReconstructedParticle.h"
 #include "lcio.h"
 #include "TLorentzVector.h"
+#include "marlin/Processor.h"
 using namespace lcio;
 class jetVariables{
 	public:

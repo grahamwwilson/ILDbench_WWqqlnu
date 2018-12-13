@@ -78,19 +78,19 @@ void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult
 }
 void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 
-	std::vector<double> cospsi(_nJets);
+	std::vector<double> _cospsi(_nJets);
 
 	TVector3 j1{};
 	TVector3 j2{};	
 	int maxCosPsi= -1;
 	for(unsigned int i=0; i<_tlvjets.size(); i++){
 		j1 = _tlvjets.at(i)->Vect();
-		cospsi.at(i) = -1;
+		_cospsi.at(i) = -1;
 		for(unsigned int j=0; j<_tlvjets.size(); j++){
 		//compute all cos psi w.r.t. ji
 			if( i != j){
 				j2 = _tlvjets.at(j)->Vect();		
-				cospsi.at(j) = j1.Dot(j2)/( j1.Mag() * j2.Mag() );
+				_cospsi.at(j) = j1.Dot(j2)/( j1.Mag() * j2.Mag() );
 			}
 		}
 
