@@ -83,34 +83,24 @@ void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult
 }
 void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 
-	std::vector<double> _cospsi(_nJets);
-
 	TVector3 j1{};
 	TVector3 j2{};	
 	double maxCosPsi= -2.0;
+	double CosPsi;
 	for(unsigned int i=0; i<_tlvjets.size(); i++){
 		j1 = _tlvjets.at(i)->Vect();
-		_cospsi.at(i) = -2.0;
 		for(unsigned int j=0; j<_tlvjets.size(); j++){
 		//compute all cos psi w.r.t. ji
 			if( i != j){
 				j2 = _tlvjets.at(j)->Vect();		
-				_cospsi.at(j) = j1.Dot(j2)/( j1.Mag() * j2.Mag() );
+				CosPsi = j1.Dot(j2)/( j1.Mag() * j2.Mag() );
+				if(CosPsi > maxCosPsi){
+					maxCosPsi = CosPsi;
+				}
 			}
 		}
-
-		//find the max cos psi from vector of cos psis
-		for(unsigned int j=0; j<_cospsi.size(); j++){
-			if( _cospsi.at(j) > maxCosPsi ){
-				maxCosPsi = _cospsi.at(j);
-			}
-			_cospsi.at(i) = -2.0; //reset cospsi
-		}
-		
 		jetMaxCosPsi.at(i) = maxCosPsi;
 		maxCosPsi = -2.0;
-				
-	
 	}
 }
 void jetVariables::setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult){
