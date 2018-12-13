@@ -1,5 +1,8 @@
-
-
+#ifndef _PPFO_
+#define _PPFO_
+#include "EVENT/ReconstructedParticle.h"
+#include "TLorentzVector.h"
+#include <iostream>
 class PandoraPFOVariables{
 
 	PandoraPFOVariables();
@@ -21,3 +24,4 @@ class PandoraPFOVariables{
 
 
 };
+#endif
