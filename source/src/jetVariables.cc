@@ -27,7 +27,7 @@ void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
 	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
     logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 }
-void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult ){
+void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi){
 
 	//mctagged jets must already be populated in evt variables
 
@@ -61,17 +61,21 @@ void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult
 				//its uplike
 				mctUpTrkMult = _trkMult.at(i);
 				mctUpPfoMult = _pfoMult.at(i);
+				mctUpMaxCosPsi = _jetMaxCosPsi.at(i);
+				
 			}
 			else{
 				//its downlike
 				mctDwnTrkMult = _trkMult.at(i);
 				mctDwnPfoMult = _pfoMult.at(i);
+				mctDwnMaxCosPsi = _jetMaxCosPsi.at(i);
 			}
 		}
 		else{
 		//its a lepton
 			mctlepTrkMult = _trkMult.at(i);
 			mctlepPfoMult = _pfoMult.at(i);
+			mctlepMaxCosPsi = _jetMaxCosPsi.at(i);
 		}
 
 	}
@@ -83,7 +87,7 @@ void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 
 	TVector3 j1{};
 	TVector3 j2{};	
-	int maxCosPsi= -1;
+	double maxCosPsi= -1.0;
 	for(unsigned int i=0; i<_tlvjets.size(); i++){
 		j1 = _tlvjets.at(i)->Vect();
 		_cospsi.at(i) = -1;

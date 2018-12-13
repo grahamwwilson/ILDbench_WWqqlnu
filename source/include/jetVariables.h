@@ -36,7 +36,9 @@ class jetVariables{
 	int _mctDwnPfoMult{};
 	int _mctUpTrkMult{};
 	int _mctDwnTrkMult{};
-
+	double _mctlepMaxCosPsi{};
+	double _mctUpMaxCosPsi{};
+	double _mctDwnMaxCosPsi{};
 
 	//analysis jet variables
 	int _analepPfoMult{};
@@ -46,7 +48,7 @@ class jetVariables{
 
 	void setLogYVariables(double& logyMinus, double& logyPlus);
 
-	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult);
+	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi);
 
 	void setMaxCosPsi(std::vector<double>& jetMaxCosPsi); 
 	
