@@ -1850,7 +1850,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	jv1->setMCTJetMultiplicity(jv1->_mctlepPfoMult, jv1->_mctlepTrkMult, jv1->_mctUpPfoMult, jv1->_mctDwnPfoMult, jv1->_mctUpTrkMult, jv1->_mctDwnTrkMult);
 	jv1->setMCTMaxCosPsi(jv1->_jetMaxCosPsi); 
 	//void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
-	jv1->printJetVariables()
+	jv1->printJetVariables();
 
 
 	/* */
