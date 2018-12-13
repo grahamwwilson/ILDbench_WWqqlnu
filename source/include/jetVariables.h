@@ -25,7 +25,7 @@ class jetVariables{
 
 	double _logyMinus{};
 	double _logyPlus{};
-	std::vector<double> _jetMaxCosPsi{}
+	std::vector<double> _jetMaxCosPsi{};
 
 	//MC tag jet variables
 	int _mctlepPfoMult{};
