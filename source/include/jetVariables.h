@@ -46,7 +46,7 @@ class jetVariables{
 
 	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult);
 
-	void setMCTMaxCosPsi(std::vector<double>& jetMaxCosPsi); 
+	void setMaxCosPsi(std::vector<double>& jetMaxCosPsi); 
 	
 	void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
 	
