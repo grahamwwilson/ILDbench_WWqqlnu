@@ -41,7 +41,7 @@ void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult
 	for(unsigned int i=0; i<_jets.size(); i++){
 		std::vector<ReconstructedParticle*> _jetParts = _jets.at(i)->getParticles();
 		for(unsigned int j=0; j< _jetParts.size(); j++){
-			if( _jetParts.at(i)->getCharge() != 0){
+			if( _jetParts.at(j)->getCharge() != 0){
 				trkCount++;
 			}
 			pfoCount++;
@@ -96,9 +96,9 @@ void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 		}
 
 		//find the max cos psi from vector of cos psis
-		for(unsigned int j=0; j<_cospsi.size(); i++){
-			if( _cospsi.at(i) > maxCosPsi ){
-				maxCosPsi = _cospsi.at(i);
+		for(unsigned int j=0; j<_cospsi.size(); j++){
+			if( _cospsi.at(j) > maxCosPsi ){
+				maxCosPsi = _cospsi.at(j);
 			}
 		jetMaxCosPsi.at(i) = maxCosPsi;
 		maxCosPsi = -1;
@@ -114,7 +114,7 @@ void jetVariables::setAnaJetMultiplicity(std::vector<int>& anatags, int& analepP
 		if( abs(anatags.at(i))>6 && abs(anatags.at(i))<16){
 			std::vector<ReconstructedParticle*> _jetParts = _jets.at(i)->getParticles();
 			for(unsigned int j=0; j< _jetParts.size(); j++){
-				if( _jetParts.at(i)->getCharge() != 0){
+				if( _jetParts.at(j)->getCharge() != 0){
 					trkCount++;
 				}
 				pfoCount++;
