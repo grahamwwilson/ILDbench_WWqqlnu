@@ -87,7 +87,7 @@ void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 
 	TVector3 j1{};
 	TVector3 j2{};	
-	double maxCosPsi= -1.0;
+	double maxCosPsi= -2.0;
 	for(unsigned int i=0; i<_tlvjets.size(); i++){
 		j1 = _tlvjets.at(i)->Vect();
 		_cospsi.at(i) = -1;
@@ -104,10 +104,12 @@ void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 			if( _cospsi.at(j) > maxCosPsi ){
 				maxCosPsi = _cospsi.at(j);
 			}
+			_cospsi.at(j) = -2.0; //reset psi
+		}
 		jetMaxCosPsi.at(i) = maxCosPsi;
-		maxCosPsi = -1;
+		maxCosPsi = -2.0;
 				
-		}	
+	
 	}
 }
 void jetVariables::setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult){
