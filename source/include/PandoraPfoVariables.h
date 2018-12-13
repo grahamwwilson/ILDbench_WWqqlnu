@@ -2,7 +2,8 @@
 
 class PandoraPFOVariables{
 
-	PandoraPFOVariables(std::vector<ReconstructedParticle*> pfovec);
+	PandoraPFOVariables();
+	void setParticles(std::vector<ReconstructedParticle*> pfovec);
 	void initLocalTree();
 
 	std::vector<ReconstructedParticle*> _PandoraPFOs{};	
