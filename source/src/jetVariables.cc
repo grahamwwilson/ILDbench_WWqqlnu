@@ -104,8 +104,9 @@ void jetVariables::setMaxCosPsi(std::vector<double>& jetMaxCosPsi){
 			if( _cospsi.at(j) > maxCosPsi ){
 				maxCosPsi = _cospsi.at(j);
 			}
+			_cospsi.at(i) = -2.0; //reset cospsi
 		}
-		_cospsi.clear(); //reset psi
+		
 		jetMaxCosPsi.at(i) = maxCosPsi;
 		maxCosPsi = -2.0;
 				
