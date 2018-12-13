@@ -10,8 +10,7 @@ jetVariables::jetVariables(eventVariables*& evtvar, std::string inputJetCollecti
 	//init rest of local stuff
 	_variableSetName = evtvar->_variableSetName;
 	_nJets = evtvar->_nJets;
-	_jets = evtvar->_jets;
-	_tlvjets = evtvar->_tlvjets;
+	
 
 	//init vector size
 	std::vector<double> temp(_nJets);
@@ -19,8 +18,10 @@ jetVariables::jetVariables(eventVariables*& evtvar, std::string inputJetCollecti
 
 
 }
-void jetVariables::setLCEvent(LCEvent*& evt){
+void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
+	_jets = jets;
+	_tlvjets = tlvjets;
 }
 void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
 	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));

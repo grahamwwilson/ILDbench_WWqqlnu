@@ -139,6 +139,7 @@ void WWAnalysis::init() {
 
   //set up jet variables
   jv1 = new jetVariables(ev1, _inputJetCollectionName);
+  jv1->initLocalTree();
   _nRun = 0;
   _nEvt = 0;
 
@@ -1845,7 +1846,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->printEventVariables();
 	
 
-	jv1->setLCEvent(evt);
+	jv1->setParticles(evt, ev1->_jets, ev1->_tlvjets);
 	jv1->setLogYVariables(jv1->_logyMinus, jv1->_logyPlus);
 	jv1->setMCTJetMultiplicity(jv1->_mctlepPfoMult, jv1->_mctlepTrkMult, jv1->_mctUpPfoMult, jv1->_mctDwnPfoMult, jv1->_mctUpTrkMult, jv1->_mctDwnTrkMult);
 	jv1->setMaxCosPsi(jv1->_jetMaxCosPsi); 
