@@ -9,7 +9,8 @@ using namespace lcio;
 class jetVariables{
 	public:
 
-	jetVariables(eventVariables*& evtvar, LCEvent*& evt, std::string inputJetCollectionName);
+	jetVariables(eventVariables*& evtvar, std::string inputJetCollectionName);
+	void setLCEvent(LCEvent*& evt);
 	void initLocalTree();
 
 	LCEvent* _localEvt{};
@@ -24,7 +25,7 @@ class jetVariables{
 
 	double _logyMinus{};
 	double _logyPlus{};
-	std::vector<double> _jetMinPsi{}
+	std::vector<double> _jetMaxCosPsi{}
 
 	//MC tag jet variables
 	int _mctlepPfoMult{};
@@ -45,9 +46,13 @@ class jetVariables{
 
 	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult);
 
-	void setMCTMinPsi(std::vector<double>& minPsi);
+	void setMCTMaxCosPsi(std::vector<double>& jetMaxCosPsi); 
 	
-	void setAnaJetMultiplicity();
+	void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
+	
+	void printJetVariables();
+	
+	void printVec(std::vector<double> v);
 
 
 };
