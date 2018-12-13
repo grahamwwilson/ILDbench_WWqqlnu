@@ -15,7 +15,7 @@ jetVariables::jetVariables(eventVariables*& evtvar, std::string inputJetCollecti
 
 	//init vector size
 	std::vector<double> temp(_nJets);
- 	_jetMinPsi = temp; 
+ 	_jetMaxCosPsi = temp; 
 
 
 }
@@ -23,8 +23,8 @@ void jetVariables::setLCEvent(LCEvent*& evt){
 	_localEvt = evt;
 }
 void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
-	yMinus =(double) std::log( evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
-    yPlus  =(double) std::log(evt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
+	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
+    logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 }
 void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult ){
 
@@ -39,8 +39,8 @@ void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult
 	//first loop over each jet and get charge and pfo multiplicities
 	for(unsigned int i=0; i<_jets.size(); i++){
 		std::vector<ReconstructedParticle*> _jetParts = _jets.at(i)->getParticles();
-		for(unsigned int j=0; j< _jetparts.size(); j++){
-			if( _jetparts.at(i)->getCharge() != 0){
+		for(unsigned int j=0; j< _jetParts.size(); j++){
+			if( _jetParts.at(i)->getCharge() != 0){
 				trkCount++;
 			}
 			pfoCount++;
@@ -110,16 +110,16 @@ void jetVariables::setAnaJetMultiplicity(std::vector<int>& anatags, int& analepP
 	int trkCount = 0;
 	//first loop over each jet and get charge and pfo multiplicities
 	for(unsigned int i=0; i<anatags.size(); i++){
-		if( abs(anatags.at(i))>6 && abs(anatags)<16){
+		if( abs(anatags.at(i))>6 && abs(anatags.at(i))<16){
 			std::vector<ReconstructedParticle*> _jetParts = _jets.at(i)->getParticles();
-			for(unsigned int j=0; j< _jetparts.size(); j++){
-				if( _jetparts.at(i)->getCharge() != 0){
+			for(unsigned int j=0; j< _jetParts.size(); j++){
+				if( _jetParts.at(i)->getCharge() != 0){
 					trkCount++;
 				}
 				pfoCount++;
 			}
-			analepPfoMult.at(i) = pfoCount;
-			analepTrkMult.at(i) = trkCount;
+			analepPfoMult = pfoCount;
+			analepTrkMult = trkCount;
 			return;
 		}
 	}
