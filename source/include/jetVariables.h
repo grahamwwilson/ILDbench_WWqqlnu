@@ -1,6 +1,6 @@
 #ifndef _JET_
 #define _JET_
-#include "variableSet.h"
+#include "eventVariables.h"
 #include "TTree.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "lcio.h"
