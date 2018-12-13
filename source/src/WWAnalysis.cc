@@ -136,6 +136,9 @@ void WWAnalysis::init() {
 
   ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
+
+  //set up jet variables
+  jv1 = new jetVariables(ev1, _inputJetCollectionName);
   _nRun = 0;
   _nEvt = 0;
 
@@ -1831,7 +1834,6 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
 	std::cout<<"Populating Event Variables a"<<std::endl;
-	//eventVariables* ev1 = new eventVariables("a", _nfermions, _nleptons, _mcpartvec, _jets, _tree);
 	ev1->setParticles(_mcpartvec, _jets);
 	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg, ev1->_mclepTrkMult, ev1->_mclepPfoMult);
 	ev1->initJetTLV(ev1->_tlvjets);
@@ -1839,8 +1841,16 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);
 	ev1->populateCMTLVs(ev1->_jetmctags, ev1->_mctWl, ev1->_mctWqq, ev1->_mctNu, ev1->_mctCMjets,  ev1->_mctCMNu );
 	ev1-> getCosThetaW(ev1->_mctlepCharge, ev1->_mctWl, ev1->_mctWqq, ev1->_mctWmProdAngle);
+	//TODO ana stuff
 	ev1->printEventVariables();
 	
+
+	jv1->setLCEvent(evt);
+	jv1->setLogYVariables(jv1->_logyMinus, jv1->_logyPlus);
+	jv1->setMCTJetMultiplicity(jv1->_mctlepPfoMult, jv1->_mctlepTrkMult, jv1->_mctUpPfoMult, jv1->_mctDwnPfoMult, jv1->_mctUpTrkMult, jv1->_mctDwnTrkMult);
+	jv1->setMCTMaxCosPsi(jv1->_jetMaxCosPsi); 
+	//void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
+	jv1->printJetVariables()
 
 
 	/* */

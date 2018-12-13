@@ -20,6 +20,7 @@
 #include "EVENT/LCParameters.h"
 
 #include "eventVariables.h"
+#include "jetVariables.h"
 
 
 //#define ncuts 7
@@ -128,6 +129,7 @@ using namespace lcio;
   protected:
 
  eventVariables* ev1;
+ jetVariables* jv1;
 //TTree
   TTree* _tree;
   int _nRun;
