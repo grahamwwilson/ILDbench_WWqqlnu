@@ -168,6 +168,10 @@ void jetVariables::initLocalTree(){
 	_localTree->Branch((vsn+"mctDwnPfoMult").c_str(), &_mctDwnPfoMult, (vsn+"mctDwnPfoMult/I").c_str());
 	_localTree->Branch((vsn+"mctDwnTrkMult").c_str(), &_mctDwnTrkMult, (vsn+"mctDwnTrkMult/I").c_str());
 
+	_localTree->Branch((vsn+"mctlepMaxCosPsi").c_str(), &_mctlepMaxCosPsi, (vsn+"mctlepMaxCosPsi/D").c_str());
+	_localTree->Branch((vsn+"mctUpMaxCosPsi").c_str(), &_mctUpMaxCosPsi, (vsn+"mctUpMaxCosPsi/D").c_str());
+	_localTree->Branch((vsn+"mctDwnMaxCosPsi").c_str(), &_mctDwnMaxCosPsi, (vsn+"mctDwnMaxCosPsi/D").c_str());
+
 	_localTree->Branch((vsn+"analepPfoMult").c_str(), &_analepPfoMult, (vsn+"analepPfoMult/I").c_str());
 	_localTree->Branch((vsn+"analepTrkMult").c_str(), &_analepTrkMult, (vsn+"analepTrkMult/I").c_str());
 }
