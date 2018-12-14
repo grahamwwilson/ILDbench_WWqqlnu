@@ -121,6 +121,8 @@ class eventVariables{
 	void printTLV(TLorentzVector* v);
 	void printTLVVec( std::vector<TLorentzVector*> v);
 	void printPDGVec(std::vector<int> v);
+	void printReconstructedParticle(ReconstructedParticle* p);
+	void printReconstructedParticleVec(std::vector<ReconstructedParticle*> v);
 
 };
 #endif

@@ -326,6 +326,14 @@ void eventVariables::printPDGVec(std::vector<int> v){
 	}
 	std::cout<<std::endl;
 }
+void eventVariables::printReconstructedParticle(ReconstructedParticle* p){
+	std::cout<<p->getMomentum()[0]<<" ",p->getMomentum()[1]<<" "<<p->getMomentum()[2]<<" "<<p->getEnergy()<<" "<<p->getMass()<<std::endl;
+}
+void eventVariables::printReconstructedParticleVec(std::vector<ReconstructedParticle*> v){
+	for(unsigned int i=0; i< v.size(); i++){
+		printReconstructedParticle(v.at(i));
+	}
+}
 
 void eventVariables::printEventVariables(){
 	std::cout<<"eventVariables: '"<<_variableSetName<<"'"<<std::endl;
@@ -339,6 +347,8 @@ void eventVariables::printEventVariables(){
 	std::cout<<"MC Lepton Charge: "<<_mclepCharge<<std::endl;
 	std::cout<<"MC qq TLV: ";
 	printTLV(_mcqq);
+	std::cout<<"Reco Parts Jets: "<<std::endl;
+	printReconstructedParticleVec(_jets);
 	std::cout<<"Reco Jet TLV: "<<std::endl;
 	printTLVVec(_tlvjets);
 	std::cout<<"Jet MC Tags: ";
