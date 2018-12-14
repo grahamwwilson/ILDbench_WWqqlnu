@@ -20,7 +20,7 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<TLorentzVector*> j1(nJets);
 	std::vector<TLorentzVector*> j2(nJets);
 	std::vector<TLorentzVector*> j3(nJets);
-	for(unsigned int i=0; i<j.size(); i++){
+	for(unsigned int i=0; i<j1.size(); i++){
 		j1.at(i) = new TLorentzVector();
 		j2.at(i) = new TLorentzVector();
 		j3.at(i) = new TLorentzVector();
