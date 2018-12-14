@@ -132,7 +132,7 @@ using namespace lcio;
 
  eventVariables* ev1;
  jetVariables* jv1;
- PandoraPFOVariables* ppfov1;
+ PandoraPfoVariables* ppfov1;
 //TTree
   TTree* _tree;
   int _nRun;
