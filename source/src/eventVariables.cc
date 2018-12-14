@@ -327,7 +327,7 @@ void eventVariables::printPDGVec(std::vector<int> v){
 	std::cout<<std::endl;
 }
 void eventVariables::printReconstructedParticle(ReconstructedParticle* p){
-	std::cout<<p->getMomentum()[0]<<" ",p->getMomentum()[1]<<" "<<p->getMomentum()[2]<<" "<<p->getEnergy()<<" "<<p->getMass()<<std::endl;
+	std::cout<<p->getMomentum()[0]<<" "<<p->getMomentum()[1]<<" "<<p->getMomentum()[2]<<" "<<p->getEnergy()<<" "<<p->getMass()<<std::endl;
 }
 void eventVariables::printReconstructedParticleVec(std::vector<ReconstructedParticle*> v){
 	for(unsigned int i=0; i< v.size(); i++){
