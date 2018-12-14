@@ -1,10 +1,10 @@
 
 #include "PandoraPFOVariables.h"
 
-PandoraPFOVariables::PandoraPFOVariables(std::vector<ReconstructedParticle*> pfovec){
-	
+PandoraPFOVariables::PandoraPFOVariables(TTree*& tree){
+	_localTree = tree;
 }
-void PandoraPFOVariables::setParticles(std::vector<ReconstructedParticle*> pfovec){
+void PandoraPFOVariables::setParticles(std::vector<ReconstructedParticle*>& pfovec){
 	_PandoraPFOs = pfovec;
 }
 void PandoraPFOVariables::populateVariables(int& nTracks, int& nParticles, double& totalPt, double& totalE, double& totalM){
@@ -34,4 +34,14 @@ void PandoraPFOVariables::printPandoraPFOVariables(){
 	std::cout<<" nTracks = "<<_nTracks<<" nParticles = "<<_nParticles<<std::endl;
 	std::cout<<"totalPt = "<<_totalPt<<" totalE = "<<_totalE<<" totalM = "<<_totalM<<std::endl;	
 	
+}
+void PandoraPFOVariables::initLocalTree(){
+	
+	_localTree->Branch("PPFOnTracks", &_nTracks,"PPFOnTracks/I");
+	_localTree->Branch("PPFOnParticles", &_nParticles,"PPFOnParticles/I");
+	_localTree->Branch("PPFOtotalPt", &_totalPt,"PPFOtotalPt/D");
+	_localTree->Branch("PPFOtotalE", &_totalE,"PPFOtotalE/D");
+	_localTree->Branch("PPFOtotalM", &_totalM,"PPFOtotalM/D");
+
+
 }

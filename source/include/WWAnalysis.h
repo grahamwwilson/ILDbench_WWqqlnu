@@ -21,6 +21,8 @@
 
 #include "eventVariables.h"
 #include "jetVariables.h"
+#include "PandoraPFOVariables.h"
+
 
 
 //#define ncuts 7

@@ -3,10 +3,12 @@
 #include "EVENT/ReconstructedParticle.h"
 #include "TLorentzVector.h"
 #include <iostream>
+#include "TTree.h"
+
 class PandoraPFOVariables{
 
-	PandoraPFOVariables();
-	void setParticles(std::vector<ReconstructedParticle*> pfovec);
+	PandoraPFOVariables(TTree*& tree);
+	void setParticles(std::vector<ReconstructedParticle*>& pfovec);
 	void initLocalTree();
 
 	std::vector<ReconstructedParticle*> _PandoraPFOs{};	

@@ -140,6 +140,10 @@ void WWAnalysis::init() {
   //set up jet variables
   jv1 = new jetVariables(ev1, _inputJetCollectionName);
   jv1->initLocalTree();
+
+  ppfov1 = new PandoraPFOVariables(_tree);
+  ppfov1->initLocalTree();
+
   _nRun = 0;
   _nEvt = 0;
 
@@ -1853,6 +1857,10 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	
 	//void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
 	jv1->printJetVariables();
+
+
+	ppfov1->setParticles(_pfovec);
+	ppfov1->populateVariables(ppfov1->nTracks, ppfov1->nParticles, ppfov1->totalPt, ppfov1->totalE, ppfov1->totalM);	
 
 
 	/* */
