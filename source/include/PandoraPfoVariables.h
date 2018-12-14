@@ -5,13 +5,13 @@
 #include <iostream>
 #include "TTree.h"
 
-class PandoraPFOVariables{
+class PandoraPfoVariables{
 
-	PandoraPFOVariables(TTree*& tree);
+	PandoraPfoVariables(TTree*& tree);
 	void setParticles(std::vector<ReconstructedParticle*>& pfovec);
 	void initLocalTree();
 
-	std::vector<ReconstructedParticle*> _PandoraPFOs{};	
+	std::vector<ReconstructedParticle*> _PandoraPfos{};	
 	TTree* _localTree{};
 
 	int _nTracks{};
@@ -22,7 +22,7 @@ class PandoraPFOVariables{
 
 	void populateVariables(int& nTracks, int& nParticles, double& totalPt, double& totalE, double& totalM);	
 	
-	void printPandoraPFOVariables();
+	void printPandoraPfoVariables();
 
 
 };
