@@ -1860,7 +1860,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
 
 	ppfov1->setParticles(_pfovec);
-	ppfov1->populateVariables(ppfov1->nTracks, ppfov1->nParticles, ppfov1->totalPt, ppfov1->totalE, ppfov1->totalM);	
+	ppfov1->populateVariables(ppfov1->_nTracks, ppfov1->_nParticles, ppfov1->_totalPt, ppfov1->_totalE, ppfov1->_totalM);	
 
 
 	/* */

@@ -4,7 +4,7 @@
 PandoraPfoVariables::PandoraPfoVariables(TTree*& tree){
 	_localTree = tree;
 }
-void PandoraPfoVariables::setParticles(std::vector<ReconstructedParticle*>& pfovec){
+void PandoraPfoVariables::setParticles(std::vector<ReconstructedParticle*> pfovec){
 	_PandoraPfos = pfovec;
 }
 void PandoraPfoVariables::populateVariables(int& nTracks, int& nParticles, double& totalPt, double& totalE, double& totalM){
