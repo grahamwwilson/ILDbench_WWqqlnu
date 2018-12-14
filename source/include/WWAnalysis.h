@@ -21,7 +21,7 @@
 
 #include "eventVariables.h"
 #include "jetVariables.h"
-#include "PandoraPFOVariables.h"
+#include "PandoraPfoVariables.h"
 
 
 
@@ -132,6 +132,7 @@ using namespace lcio;
 
  eventVariables* ev1;
  jetVariables* jv1;
+ PandoraPFOVariables* ppfov1;
 //TTree
   TTree* _tree;
   int _nRun;
