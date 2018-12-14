@@ -4,7 +4,7 @@
 #include "TLorentzVector.h"
 #include <iostream>
 #include "TTree.h"
-
+using namespace lcio;
 class PandoraPfoVariables{
 
 	public:
