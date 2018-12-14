@@ -1,5 +1,6 @@
 #ifndef _PPFO_
 #define _PPFO_
+#include "lcio.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "TLorentzVector.h"
 #include <iostream>
