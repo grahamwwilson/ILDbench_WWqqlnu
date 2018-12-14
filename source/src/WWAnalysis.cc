@@ -141,7 +141,7 @@ void WWAnalysis::init() {
   jv1 = new jetVariables(ev1, _inputJetCollectionName);
   jv1->initLocalTree();
 
-  ppfov1 = new PandoraPFOVariables(_tree);
+  ppfov1 = new PandoraPfoVariables(_tree);
   ppfov1->initLocalTree();
 
   _nRun = 0;
