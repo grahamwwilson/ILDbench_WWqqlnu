@@ -17,13 +17,18 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 
-	std::vector<TLorentzVector*> j(nJets);
+	std::vector<TLorentzVector*> j1(nJets);
+	std::vector<TLorentzVector*> j2(nJets);
+	std::vector<TLorentzVector*> j3(nJets);
 	for(unsigned int i=0; i<j.size(); i++){
-		j.at(i) = new TLorentzVector();
+		j1.at(i) = new TLorentzVector();
+		j2.at(i) = new TLorentzVector();
+		j3.at(i) = new TLorentzVector();
+
 	}
-	_tlvjets = j;
-	_mctCMjets = j;
-	_anaCMjets = j;
+	_tlvjets = j1;
+	_mctCMjets = j2;
+	_anaCMjets = j3;
 }
 void eventVariables::setParticles(std::vector<MCParticle*> mcpartvec, std::vector<ReconstructedParticle*> jets ){
 	_mcpartvec = mcpartvec;
