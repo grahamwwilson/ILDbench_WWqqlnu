@@ -9,7 +9,7 @@ void PandoraPfoVariables::setParticles(std::vector<ReconstructedParticle*>& pfov
 }
 void PandoraPfoVariables::populateVariables(int& nTracks, int& nParticles, double& totalPt, double& totalE, double& totalM){
 	
-	nParticles = _PandoraPfos.size();
+	nParticles =(int) _PandoraPfos.size();
 	TLorentzVector p;
 	TLorentzVector p_Sum;
 	int trackCount = 0;
