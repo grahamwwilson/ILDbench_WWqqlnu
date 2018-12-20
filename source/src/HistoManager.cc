@@ -89,7 +89,7 @@ void HistoManager::initHists2(){
 	hyp = new TH1D("hyp","y+;log y+; Events Per Bin",100,-15,0);
 
 }
-void HistoManager::FillHistos1(int histNumber ){
+void HistoManager::FillHists1(int histNumber ){
 /*	
 	if(isTau){
 		FillTauHistos(histNumber);
