@@ -375,6 +375,22 @@ void eventVariables::printEventVariables(){
 	std::cout<<"----------------"<<std::endl;
 	std::cout<<std::endl;
 	//after analysis code is done, print ana quantities
+	std::cout<<"Jet ANA Tags: ";
+	printPDGVec(_jetanatags);
+	std::cout<<"Ana Tag Quantities----"<<std::endl;
+	std::cout<<"analep ";
+	printTLV(_analep);
+	std::cout<<"anaWqq ";
+	printTLV(_anaWqq);
+	std::cout<<"anaNu ";
+	printTLV(_anaNu);
+	std::cout<<"anaWl ";
+	printTLV(_anaWl);
+	std::cout<<"W Rest Frame (CM ana tagged)"<<std::endl;
+	printTLVVec(_anaCMjets);
+	std::cout<<"CM ana neutrino"<<std::endl;
+	printTLV(_anaCMNu);
+	std::cout<<"----------------"<<std::endl;
 	
 
 }

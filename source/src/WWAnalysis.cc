@@ -144,6 +144,9 @@ void WWAnalysis::init() {
   ppfov1 = new PandoraPfoVariables(_tree);
   ppfov1->initLocalTree();
 
+  ana1 = new anaVariables(_tree, ev1);
+  ana1->initLocalTree();		
+
   _nRun = 0;
   _nEvt = 0;
 
@@ -1846,22 +1849,32 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);
 	ev1->populateCMTLVs(ev1->_jetmctags, ev1->_mctWl, ev1->_mctWqq, ev1->_mctNu, ev1->_mctCMjets,  ev1->_mctCMNu );
 	ev1-> getCosThetaW(ev1->_mctlepCharge, ev1->_mctWl, ev1->_mctWqq, ev1->_mctWmProdAngle);
-	//TODO ana stuff
-	ev1->printEventVariables();
-	
+
 
 	jv1->setParticles(evt, ev1->_jets, ev1->_tlvjets);
 	jv1->setLogYVariables(jv1->_logyMinus, jv1->_logyPlus);
 	jv1->setMaxCosPsi(jv1->_jetMaxCosPsi); 
 	jv1->setMCTJetMultiplicity(jv1->_mctlepPfoMult, jv1->_mctlepTrkMult, jv1->_mctUpPfoMult, jv1->_mctDwnPfoMult, jv1->_mctUpTrkMult, jv1->_mctDwnTrkMult, jv1->_mctlepMaxCosPsi, jv1->_mctUpMaxCosPsi, jv1->_mctDwnMaxCosPsi);
 	
-	//void setAnaJetMultiplicity(std::vector<int>& anatags, int& analepPfoMult, int& analepTrkMult);
-	jv1->printJetVariables();
-
 
 	ppfov1->setParticles(_pfovec);
 	ppfov1->populateVariables(ppfov1->_nTracks, ppfov1->_nParticles, ppfov1->_totalPt, ppfov1->_totalE, ppfov1->_totalM);	
 
+
+	ana1->setParticles(_pfoVec);
+	ana1->identifyLeptonJet_byTrkMult(ana1->_jetanatags);
+	ana1->getLeptonJetCharge_byLeadingTrack(ana1->_analepCharge );
+	ana1->setLeadingTrack(ana1->_analepLeadingTracktlv );
+	ana1->setAnaEventVariables(ev1);
+
+	jv1->setAnaJetMultiplicity( ana1->_jetanatags, jv1->_analepPfoMult, jv1->_analepTrkMult);
+	
+
+	ev1->printEventVariables();	
+	ppfov1->printPandoraPfoVariables();
+	jv1->printJetVariables();
+	ana1->printAnaVariables();
+	//set event vars
 
 	/* */
 
