@@ -142,8 +142,7 @@ void jetVariables::printJetVariables(){
 	std::cout<<" Ana Multiplicities "<< std::endl;
 	std::cout<<"type	pfomult		trkmult"<<std::endl;
 	std::cout<<"lep		"<<_analepPfoMult<<"	"<<_analepTrkMult<<std::endl;
-	std::cout<<" up		"<<_anaUpPfoMult<< "	"<<_anaUpTrkMult<<std::endl;
-	std::cout<<"dwn		"<<_anaDwnPfoMult<<"	"<<_anaDwnTrkMult<<std::endl;
+
 
 
 	//TODO print ana mult	
