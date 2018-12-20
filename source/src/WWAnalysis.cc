@@ -1861,7 +1861,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ppfov1->populateVariables(ppfov1->_nTracks, ppfov1->_nParticles, ppfov1->_totalPt, ppfov1->_totalE, ppfov1->_totalM);	
 
 
-	ana1->setParticles(_pfoVec);
+	ana1->setParticles(_pfovec);
 	ana1->identifyLeptonJet_byTrkMult(ana1->_jetanatags);
 	ana1->getLeptonJetCharge_byLeadingTrack(ana1->_analepCharge );
 	ana1->setLeadingTrack(ana1->_analepLeadingTracktlv );

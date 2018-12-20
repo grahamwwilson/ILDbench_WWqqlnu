@@ -54,7 +54,7 @@ void anaVariables::identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags){
 	}
 	
 }
-void anaVariables::identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCosPsi, std:::vector<int>& jetanatags){
+void anaVariables::identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCosPsi, std::vector<int>& jetanatags){
 	//jetMaxCosPsi comes from jet variables
 	//determine the min of each max
 	double minMaxCosPsi = 999;

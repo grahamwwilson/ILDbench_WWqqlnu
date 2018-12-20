@@ -37,7 +37,7 @@ class anaVariables{
 
 		void getLeptonJetCharge_byLeadingTrack(int& analepCharge );
 	
-		void identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCosPsi, std:::vector<int>& jetanatags);
+		void identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCosPsi, std::vector<int>& jetanatags);
 
 		void identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags);
 
