@@ -39,7 +39,6 @@ void anaVariables::identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags){
 			minTracks = countTracks;
 		}
 		//reset for next jet
-		minTracks = 999999;
 		countTracks = 0;
 	}
 	
