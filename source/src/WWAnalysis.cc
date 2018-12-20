@@ -564,7 +564,7 @@ void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
 
 }
 void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
-
+/*
 
  //LCParameters param = evt->getParameters();
 	//tag events with no overlay
@@ -748,11 +748,11 @@ void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
 
 	//end debug check
 
-	
+	*/
 
 }
 void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswithoverlay, std::vector<TLorentzVector*> _jetsremovedoverlay ){
-	
+	/*
 
 	//loop over the jets and fill histograms in custom cutflow
 	//find max costheta
@@ -863,7 +863,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 		}
 	}
 
-	
+	*/
 
 }
 
