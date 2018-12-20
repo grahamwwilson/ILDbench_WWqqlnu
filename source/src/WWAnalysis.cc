@@ -1870,6 +1870,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	jv1->setAnaJetMultiplicity( ana1->_jetanatags, jv1->_analepPfoMult, jv1->_analepTrkMult);
 	
 
+	std::cout<<"Printing Event Variables a"<<std::endl;
 	ev1->printEventVariables();	
 	ppfov1->printPandoraPfoVariables();
 	jv1->printJetVariables();
