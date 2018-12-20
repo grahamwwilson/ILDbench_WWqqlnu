@@ -6,6 +6,7 @@
 
 class HistoManager{
 
+	public:
 	HistoManager(int nCuts, double weight);
 
 	double _weight{};
