@@ -55,7 +55,7 @@ class HistoManager{
 	void initHists1();
 	void initHists2();
 
-	void FillHists1(int histNumber);
+	void FillHists1(int histNumber );
 	void FillHists2(double weight);
 
 	void FillMuonHistos(int histNumber);
