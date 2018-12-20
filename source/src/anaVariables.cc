@@ -5,14 +5,14 @@ anaVariables::anaVariables(TTree*& tree, eventVariables*& evtVar ){
 
 	_localTree = tree;
 	_variableSetName = evtVar->_variableSetName;
-	_nJets = evtVar->_variableSetName;
+	_nJets = evtVar->_nJets;
 
 	std::vector<int> temp(_nJets);
 	_jetanatags = temp;
 	
 
 }
-anaVariables::setParticles(std::vector<ReconstructedParticle*> jets ){
+void anaVariables::setParticles(std::vector<ReconstructedParticle*> jets ){
 	_jets = jets;
 }
 int anaVariables::tagGenericQuark(){
@@ -44,7 +44,7 @@ void anaVariables::identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags){
 	}
 	
 	//do tagging
-	for(unsigned int i=0; i<jetanatags.size(); i++){
+	for( int i=0; i<jetanatags.size(); i++){
 		if( i == indexofminjet){
 			jetanatags.at(i) = tagGenericLepton();
 		}
@@ -66,8 +66,8 @@ void anaVariables::identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCos
 		}
 	}
 	//tag min as lepton	
-	for(unsigned int i=0; i<jetanatags.size(); i++){
-		if( i = minindex){
+	for( int i=0; i<jetanatags.size(); i++){
+		if( i == minindex){
 			jetanatags.at(i) = tagGenericLepton();
 		}
 		else{
@@ -82,7 +82,7 @@ void anaVariables::getLeptonJetCharge_byLeadingTrack(int& analepCharge ){
 	//use lepton tags to highest momentum charged particle in jet
 	std::vector<ReconstructedParticle*> _parts{};
 	for(unsigned int i=0; i<_jetanatags.size(); i++){
-		if( abs(_jetanatags.at(i)) > 6 && abs(_jetanatgs.at(i)) < 18 ){
+		if( abs(_jetanatags.at(i)) > 6 && abs(_jetanatags.at(i)) < 18 ){
 			_parts = _jets.at(i)->getParticles();
 			//loop over particles
 
@@ -109,7 +109,7 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 	//use mctags to find lepton jet, get the highest momentum track
 	std::vector<ReconstructedParticle*> _parts{};
 	for(unsigned int i=0; i<_jetanatags.size(); i++){
-		if( abs(_jetanatags.at(i)) > 6 && abs(_jetanatgs.at(i)) < 18 ){
+		if( abs(_jetanatags.at(i)) > 6 && abs(_jetanatags.at(i)) < 18 ){
 			_parts = _jets.at(i)->getParticles();
 			//loop over particles
 
@@ -129,13 +129,13 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 			}
 			//if we find a leading track save it
 			if(maxPindex==-1){
-				 std::cout<<"no leading track!"<<std::endl
+				 std::cout<<"no leading track!"<<std::endl;
 				 return;
 			}
 			else{
-				const double* mom = _parts.at(maxPindex);
-				analepLeadingTrack = new TLorentzVector();
-				analepLeadingTrack->SetXYZM(mom[0],mom[1],mom[2],_parts.at(maxPindex)->getMass());
+				const double* mom = _parts.at(maxPindex)->getMomentum();
+				analepLeadingTracktlv = new TLorentzVector();
+				analepLeadingTracktlv->SetXYZM(mom[0],mom[1],mom[2],_parts.at(maxPindex)->getMass());
 
 			}
 			return;
@@ -147,15 +147,15 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 void anaVariables::setAnaEventVariables(eventVariables*& evtVar){
 
 	evtVar->setJetTags( evtVar->_jetanatags, _jetanatags );
-	evtVar->computRecoResultsFromTags(_jetanatags, evtVar->_anaWl,evtVar->_analep, evtVar->_anaWqq, evtVar->_anaNu);
+	evtVar->computeRecoResultsFromTags(_jetanatags, evtVar->_anaWl,evtVar->_analep, evtVar->_anaWqq, evtVar->_anaNu);
 	evtVar->populateCMTLVs(_jetanatags, evtVar->_anaWl, evtVar->_anaWqq, evtVar->_anaNu, evtVar->_anaCMjets, evtVar->_anaCMNu); 
 
 }
 void anaVariables::printAnaVariables(){
 	std::cout<<"anaVariables: '"<<_variableSetName<<"'"<<std::endl;
 	std::cout<<"ana tagged charge "<<_analepCharge<<std::endl;
-	std::cout<<"leading lepton track tlv: "<<:std::endl;
-	std::cout<<_analepLeadingTracktlv.Px()<<" "<<_analepLeadingTracktlv.Py()<<" "<<_analepLeadingTracktlv.Pz()<<" "<<_analepLeadingTracktlv.E()<<" "<<_analepLeadingTracktlv.M()<<std::endl;
+	std::cout<<"leading lepton track tlv: "<<std::endl;
+	std::cout<<_analepLeadingTracktlv->Px()<<" "<<_analepLeadingTracktlv->Py()<<" "<<_analepLeadingTracktlv->Pz()<<" "<<_analepLeadingTracktlv->E()<<" "<<_analepLeadingTracktlv->M()<<std::endl;
 
 }
 void anaVariables::initLocalTree(){
