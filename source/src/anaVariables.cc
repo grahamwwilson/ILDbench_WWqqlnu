@@ -12,7 +12,7 @@ anaVariables::anaVariables(TTree*& tree, eventVariables*& evtVar ){
 	
 
 }
-void anaVariables::setParticles(std::vector<ReconstructedParticle*> jets ){
+void anaVariables::setParticles(std::vector<ReconstructedParticle*>& jets ){
 	_jets = jets;
 }
 int anaVariables::tagGenericQuark(){
