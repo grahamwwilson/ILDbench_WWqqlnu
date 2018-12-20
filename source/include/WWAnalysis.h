@@ -22,6 +22,7 @@
 #include "eventVariables.h"
 #include "jetVariables.h"
 #include "PandoraPfoVariables.h"
+#include "anaVariables.h"
 
 
 
@@ -128,11 +129,13 @@ using namespace lcio;
   void FillTauHistos(int histNumber);
   void fillEventSelectionHistos(double w);
 
+
   protected:
 
  eventVariables* ev1;
  jetVariables* jv1;
  PandoraPfoVariables* ppfov1;
+ anaVariables* ana1;
 //TTree
   TTree* _tree;
   int _nRun;
