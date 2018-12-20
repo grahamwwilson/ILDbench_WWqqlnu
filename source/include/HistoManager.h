@@ -3,7 +3,7 @@
 #include "TH1D.h"
 #include <vector>
 /* WIP */
-#include "
+
 class HistoManager{
 
 	HistoManager(int nCuts, double weight);
@@ -57,9 +57,9 @@ class HistoManager{
 	void FillHists1(int histNumber);
 	void FillHists2(double weight);
 
-	void FillMuonHistos(int histNumber){
-	void FillTauHistos(int histNumber){
-	void fillEventSelectionHistos(double weight){	
+	void FillMuonHistos(int histNumber);
+	void FillTauHistos(int histNumber);
+	void fillEventSelectionHistos(double weight);	
 
 };
 #endif
