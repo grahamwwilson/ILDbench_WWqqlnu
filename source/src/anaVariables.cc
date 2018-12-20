@@ -22,7 +22,7 @@ int anaVariables::tagGenericLepton(){
 	return 13;
 }
 void anaVariables::identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags){
-	int indexofminjet = -1;
+	unsigned int indexofminjet = 999;
 	int minTracks = 999999;
 	int countTracks=0;
 	std::vector<ReconstructedParticle*> _parts{};
@@ -43,7 +43,7 @@ void anaVariables::identifyLeptonJet_byTrkMult(std::vector<int>& jetanatags){
 	}
 	
 	//do tagging
-	for( int i=0; i<jetanatags.size(); i++){
+	for(unsigned int i=0; i<jetanatags.size(); i++){
 		if( i == indexofminjet){
 			jetanatags.at(i) = tagGenericLepton();
 		}
@@ -57,7 +57,7 @@ void anaVariables::identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCos
 	//jetMaxCosPsi comes from jet variables
 	//determine the min of each max
 	double minMaxCosPsi = 999;
-	int minindex = -1;
+	unsigned int minindex = 999;
 	for(unsigned int i=0; i<jetMaxCosPsi.size(); i++){
 		if( jetMaxCosPsi.at(i) < minMaxCosPsi){
 			minMaxCosPsi = jetMaxCosPsi.at(i);
@@ -65,7 +65,7 @@ void anaVariables::identifyLeptonJet_bySeparation(std::vector<double>& jetMaxCos
 		}
 	}
 	//tag min as lepton	
-	for( int i=0; i<jetanatags.size(); i++){
+	for( unsigned int i=0; i<jetanatags.size(); i++){
 		if( i == minindex){
 			jetanatags.at(i) = tagGenericLepton();
 		}
@@ -129,6 +129,8 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 			//if we find a leading track save it
 			if(maxPindex==-1){
 				 std::cout<<"no leading track!"<<std::endl;
+				 analepLeadingTracktlv = new TLorentzVector();
+				 analepLeadingTracktlv->SetXYZM(-1,-1,-1,-1);
 				 return;
 			}
 			else{
@@ -144,12 +146,6 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 
 }
 void anaVariables::setAnaEventVariables(eventVariables*& evtVar){
-
-	std::cout<<"ana tags"<<std::endl;
-	for(unsigned int i=0; i< _jetanatags.size(); i++){
-		std::cout<<_jetanatags.at(i)<<" ";
-	}
-	std::cout<<std::endl;
 
 	evtVar->setJetTags( evtVar->_jetanatags, _jetanatags );
 	evtVar->computeRecoResultsFromTags(_jetanatags, evtVar->_anaWl,evtVar->_analep, evtVar->_anaWqq, evtVar->_anaNu);
