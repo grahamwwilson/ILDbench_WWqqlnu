@@ -11,7 +11,7 @@ class anaVariables{
 	public:
 
 		anaVariables(TTree*& tree, eventVariables*& evtVar);
-		void setParticles(std::vector<ReconstructedParticle*>& pfovec);
+		void setParticles(std::vector<ReconstructedParticle*>& jets);
 		void initLocalTree();
 
 		const char* _variableSetName{};
