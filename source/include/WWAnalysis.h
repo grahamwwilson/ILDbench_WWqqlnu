@@ -23,6 +23,7 @@
 #include "jetVariables.h"
 #include "PandoraPfoVariables.h"
 #include "anaVariables.h"
+#include "HistoManager.h"
 
 
 
@@ -114,7 +115,7 @@ using namespace lcio;
 	//event selection variables
 	void EvaluateEventSelectionVariables(int& _totaltracks,double& _total_Pt,double& _total_E, double& _total_M);
 
-  //populate local datastructures (TLVS)
+  //populate local datastructures (TLVS)h1
   void populateTLVs(int lindex);
   void populateCMTLVs();
 	//for the extra overlay analysis jets
@@ -136,6 +137,8 @@ using namespace lcio;
  jetVariables* jv1;
  PandoraPfoVariables* ppfov1;
  anaVariables* ana1;
+
+ HistoManager* h1;
 //TTree
   TTree* _tree;
   int _nRun;
