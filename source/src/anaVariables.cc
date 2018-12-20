@@ -146,6 +146,12 @@ void anaVariables::setLeadingTrack(TLorentzVector*& analepLeadingTracktlv ){
 }
 void anaVariables::setAnaEventVariables(eventVariables*& evtVar){
 
+	std::cout<<"ana tags"<<std::endl;
+	for(unsigned int i=0; i< _jetanatags.size(); i++){
+		std::cout<<_jetanatags.at(i)<<" ";
+	}
+	std::cout<<std::endl;
+
 	evtVar->setJetTags( evtVar->_jetanatags, _jetanatags );
 	evtVar->computeRecoResultsFromTags(_jetanatags, evtVar->_anaWl,evtVar->_analep, evtVar->_anaWqq, evtVar->_anaNu);
 	evtVar->populateCMTLVs(_jetanatags, evtVar->_anaWl, evtVar->_anaWqq, evtVar->_anaNu, evtVar->_anaCMjets, evtVar->_anaCMNu); 
