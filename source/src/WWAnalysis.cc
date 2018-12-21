@@ -93,7 +93,7 @@ void WWAnalysis::init() {
   _tree->Branch("runNumber", &_nRun, "runNumber/I");
   _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
 
-  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
+/*  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
 
   //set up jet variables
@@ -104,16 +104,45 @@ void WWAnalysis::init() {
   ppfov1->initLocalTree();
 
   ana1 = new anaVariables(_tree, ev1);
-  ana1->initLocalTree();		
+  ana1->initLocalTree();		 */
 
-  h1 = new HistoManager(ncuts,weight);
-  h1->initHists1();
-  h1->initHists2();
+  //temp setup
+	ev_eekt = new eventVariables("eekt",_nfermions, _nleptons, _nJets, _tree);
+    ev_eekt->initLocalTree();
+   jv_eekt= new jetVariables(ev_eekt, _JetCollName_eekt) ;
+	jv_eekt->initLocalTree();
+   ana_eekt = new anaVariables(_tree, ev_eekt);
+	ana_eekt->initLocalTree();
+
+	ev_kt15 = new eventVariables("kt15",_nfermions, _nleptons, _nJets, _tree);
+	ev_kt15->initLocalTree();
+	jv_kt15 = new jetVariables(ev_kt15, _JetCollName_kt15);
+	jv_kt15->initLocalTree();
+	ana_kt15 = new anaVariables(_tree, ev_kt15);
+	ana_kt15->initLocalTree();
+	
+	ev_kt08 = new eventVariables("kt08",_nfermions, _nleptons, _nJets, _tree);
+	ev_kt08->initLocalTree();
+	jv_kt08 = new jetVariables(ev_kt08, _JetCollName_kt08);
+	jv_kt08->initLocalTree();
+	ana_kt08 = new anaVariables(_tree, ev_kt08);
+	ana_kt08->initLocalTree();
+
+
+
+   ppfov = new PandoraPfoVariables(_tree);
+  ppfov->initLocalTree();
+
+
+  h1 = new HistoManager(ncuts,weight); // no need to init until the class is more finalized
+ // h1->initHists1();
+ // h1->initHists2();
 
   _nRun = 0;
   _nEvt = 0;
 
   nEvt = 0;
+
 
 	
 
@@ -286,6 +315,7 @@ bool WWAnalysis::FindMCParticles( LCEvent* evt ){
 /*bool WWAnalysis::FindMCTruthToRecoLink( LCEvent* evt ){
 	
 }*/
+/*
 bool WWAnalysis::FindJets( LCEvent* evt ) {
 
 	bool collectionFound = false;
@@ -319,6 +349,8 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
    
 	return collectionFound;
 }
+*/
+/*
 bool WWAnalysis::FindJetsWithOverlay( LCEvent* evt ) {
 
 	bool collectionFound = false;
@@ -352,7 +384,38 @@ bool WWAnalysis::FindJetsWithOverlay( LCEvent* evt ) {
    
 	return collectionFound;
 }
+*/
+bool WWAnalysis::FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec ) {
 
+	bool collectionFound = false;
+
+  	// clear old global pfovector
+	localVec.clear();
+  	typedef const std::vector<std::string> StringVec ;
+  	StringVec* strVec = evt->getCollectionNames() ;
+	
+	//iterate over collections, find the matching name
+  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){
+     
+		//if found print name and number of elements
+    		if(*itname==JetCollectionName){ 
+			LCCollection* collection = evt->getCollection(*itname);
+			std::cout<< "Located Jet Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
+			collectionFound = true;
+
+ 			//add the collection elements to the global vector
+      			for(unsigned int i=0; i<collection->getNumberOfElements(); i++){
+				ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(collection->getElementAt(i));
+				 localVec.push_back(recoPart);
+      			}
+    		}
+  	}
+	
+	if(!collectionFound){
+		std::cout<<"Jet Collection "<< JetCollectionName << "not found"<<std::endl;
+	}   
+	return collectionFound;
+}
 
 /*
 void WWAnalysis::analyzeLeadingTracks(){
@@ -893,9 +956,15 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
  // _xsec = evt->getParameters().getFloatVal("CrossSection_fb");
 
  FindMCParticles(evt);
- FindJets(evt);
+// FindJets(evt);
+FindJetCollection( evt, _JetCollName_eekt, _eektJets );
+FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
+FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
  FindTracks(evt);
  FindPFOs(evt);
+
+
+ 
 //quickfix:::: if there are no jets... !!!!cant do anything TODO explore this phenomenon more
 	//happens if we look for jets with eekt after using kt
 	if(_jets.size() == 0){ 
@@ -903,8 +972,17 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		return;
 	}
 	
-	processSignalVariableSet(evt, ev1, jv1, ppfov1, ana1);
-	printSignalVariableSet( ev1, jv1, ppfov1, ana1);
+
+
+
+	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt);
+	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt);
+
+	processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15);
+	printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
+
+	processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08);
+	printSignalVariableSet( ev_kt08, jv_kt08, ppfov, ana_kt08);
 
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
