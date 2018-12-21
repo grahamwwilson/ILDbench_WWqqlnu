@@ -441,7 +441,7 @@ void WWAnalysis::analyzeLeadingTracks(){
 }*/
 
 /* deal with 2f backgrounds */
-//MCParticle* WWAnalysis::classifyEvent2fermion( TLorentzVector* (&_MCf)[nferm], int (&_MCfpdg)[nferm]){
+/*
 MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MCf, std::vector<int>& _MCFpdg){
 	for(int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -497,10 +497,10 @@ MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MC
 
 
 }
-
+*/
 
 void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*> j){
-	
+	/*
 	std::vector<TLorentzVector*> temp(_jetswithoverlay.size());
 	jetswithoverlay=temp;
 	for(unsigned int i=0; i<_jetswithoverlay.size(); i++){
@@ -514,29 +514,10 @@ void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*>
 
 		std::cout<<_jetswithoverlay.at(i)->getMomentum()[0]<<" "<< _jetswithoverlay.at(i)->getMomentum()[1]<<" "<<_jetswithoverlay.at(i)->getMomentum()[2]<< " "<< _jetswithoverlay.at(i)->getMass()<<std::endl;
 	}
-
-
-}
-//get the production angle for W-  (W- . z)
-double WWAnalysis::getCosThetaW(){
-	
-	//our unit z vector along the beam axis
-	TVector3 z(0.0,0.0,1.0);
-	if(lq <0 ){
-		//W- is the lepton
-		TVector3 Wm(Wl->Px(),Wl->Py(),Wl->Pz());
-		Wm = Wm * (1/Wm.Mag());
-		return Wm.Dot(z);
-		
-	}
-	else{
-		//infer qq charge to be W-
-		TVector3 Wm(Wqq->Px(),Wqq->Py(),Wqq->Pz());
-		Wm = Wm * (1/Wm.Mag());
-		return Wm.Dot(z);
-	}
+*/
 
 }
+
 void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
 /*	if(p->isCreatedInSimulation()) return;
 	if(! (p->isOverlay())) return;
