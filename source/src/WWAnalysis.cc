@@ -910,10 +910,10 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	*/
 
 }
-void WWAnalysis::processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
+void WWAnalysis::processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar , std::vector<ReconstructedParticle*> jets){
 
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
-	evtVar->setParticles(_mcpartvec, _jets);
+	evtVar->setParticles(_mcpartvec, jets);
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
 	evtVar->initJetTLV(evtVar->_tlvjets);
 	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
@@ -975,13 +975,13 @@ FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
 
 
 
-	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt);
+	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt, _eektJets);
 	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt);
 
-	processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15);
+	processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
 	printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
 
-	processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08);
+	processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08, _kt08Jets);
 	printSignalVariableSet( ev_kt08, jv_kt08, ppfov, ana_kt08);
 
 	/* new class testing area */
