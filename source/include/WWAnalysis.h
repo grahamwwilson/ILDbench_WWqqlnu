@@ -70,13 +70,13 @@ using namespace lcio;
 
  //collection gathering
   bool FindMCParticles( LCEvent* evt );
-  bool FindJets( LCEvent* evt ) ;
+ // bool FindJets( LCEvent* evt ) ;
   bool FindPFOs( LCEvent* evt ) ;
   bool FindTracks( LCEvent* evt );
-  bool FindJetsWithOverlay( LCEvent* evt );
+ // bool FindJetsWithOverlay( LCEvent* evt );
+  bool FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec );
 
 	void processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar );
-
 	void printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar );
 
 
@@ -106,11 +106,20 @@ using namespace lcio;
   protected:
 
  //variable helper classes
- eventVariables* ev1{};
- jetVariables* jv1{};
- PandoraPfoVariables* ppfov1{};
- anaVariables* ana1{};
+ eventVariables* ev_eekt{};
+ jetVariables* jv_eekt{};
+ anaVariables* ana_eekt{};
 
+	eventVariables* ev_kt15{};
+ jetVariables* jv_kt15{};
+ anaVariables* ana_kt15{};
+
+	eventVariables* ev_kt08{};
+ jetVariables* jv_kt08{};
+ anaVariables* ana_kt08{};
+
+
+ PandoraPfoVariables* ppfov{};
  HistoManager* h1{};
 //TTree
   TFile* file{};
@@ -147,16 +156,25 @@ using namespace lcio;
   
   //vector to hold the particles for the event
   std::vector<MCParticle*> _mcpartvec{};
-  std::vector<ReconstructedParticle*> _jets{};
+ // std::vector<ReconstructedParticle*> _jets{};
   std::vector<Track*> _trackvec{};
   std::vector<ReconstructedParticle*> _pfovec{};
-  std::vector<ReconstructedParticle*> _jetswithoverlay{};
+ // std::vector<ReconstructedParticle*> _jetswithoverlay{};
   
  
-
+	//testing
+//  std::vector< std::vector<ReconstructedParticle*> > _jetCollections{};
+ 
+ std::vector<ReconstructedParticle*> _eektJets{};
+  std::vector<ReconstructedParticle*> _kt08Jets{};
+//  std::vector<ReconstructedParticle*> _kt10Jets{};
+//  std::vector<ReconstructedParticle*> _kt12Jets{};
+  std::vector<ReconstructedParticle*> _kt15Jets{};
+ 
  
 	//jet y variabls //log jet variables
   int _nJets{};
+  int _nJetCollections = 5;
 
 
 	//EVENT SELECTION WEIGHT
@@ -176,6 +194,11 @@ using namespace lcio;
   std::string _inputParticleCollectionName{};
   std::string _inputTrackCollectionName{};
 
+ // std::< std::vector<std::string> > jetCollectionNames{};
+
+  std::string _JetCollName_eekt = "eektJets";
+  std::string _JetCollName_kt15 = "kt15Jets";
+  std::string _JetCollName_kt08 = "kt08Jets";
 
 
 
