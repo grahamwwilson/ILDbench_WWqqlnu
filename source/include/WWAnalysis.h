@@ -104,16 +104,17 @@ using namespace lcio;
   protected:
 
  //variable helper classes
- eventVariables* ev1;
- jetVariables* jv1;
- PandoraPfoVariables* ppfov1;
- anaVariables* ana1;
+ eventVariables* ev1{};
+ jetVariables* jv1{};
+ PandoraPfoVariables* ppfov1{};
+ anaVariables* ana1{};
 
- HistoManager* h1;
+ HistoManager* h1{};
 //TTree
-  TTree* _tree;
-  int _nRun;
-  int _nEvt;
+  TFile* file{};
+  TTree* _tree{};
+  int _nRun{};
+  int _nEvt{};
 
 //event number
   int nEvt{};
@@ -153,7 +154,7 @@ using namespace lcio;
 
  
 	//jet y variabls //log jet variables
-  int _nJets;
+  int _nJets{};
 
 
 	//EVENT SELECTION WEIGHT
