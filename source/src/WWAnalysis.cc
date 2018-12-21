@@ -847,9 +847,44 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	*/
 
 }
+void WWAnalysis::processSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
+
+	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
+	evtVar->setParticles(_mcpartvec, _jets);
+	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
+	evtVar->initJetTLV(evtVar->_tlvjets);
+	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
+	evtVar->computeRecoResultsFromTags(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctlep, evtVar->_mctWqq, evtVar->_mctNu);
+	evtVar->populateCMTLVs(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctNu, evtVar->_mctCMjets,  evtVar->_mctCMNu );
+	evtVar-> getCosThetaW(evtVar->_mctlepCharge, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctWmProdAngle);
 
 
+	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
+	jetVar->setLogYVariables(jetVar->_logyMinus, jetVar->_logyPlus);
+	jetVar->setMaxCosPsi(jetVar->_jetMaxCosPsi); 
+	jetVar->setMCTJetMultiplicity(jetVar->_mctlepPfoMult, jetVar->_mctlepTrkMult, jetVar->_mctUpPfoMult, jetVar->_mctDwnPfoMult, jetVar->_mctUpTrkMult, jetVar->_mctDwnTrkMult, jetVar->_mctlepMaxCosPsi, jetVar->_mctUpMaxCosPsi, jetVar->_mctDwnMaxCosPsi);
+	
 
+	ppfoVar->setParticles(_pfovec);
+	ppfoVar->populateVariables(ppfoVar->_nTracks, ppfoVar->_nParticles, ppfoVar->_totalPt, ppfoVar->_totalE, ppfoVar->_totalM);	
+
+
+	anaVar->setParticles(_pfovec);
+	anaVar->identifyLeptonJet_byTrkMult(anaVar->_jetanatags);
+	anaVar->getLeptonJetCharge_byLeadingTrack(anaVar->_analepCharge );
+	anaVar->setLeadingTrack(anaVar->_analepLeadingTracktlv );
+	anaVar->setAnaEventVariables(evtVar);
+
+	jetVar->setAnaJetMultiplicity( anaVar->_jetanatags, jetVar->_analepPfoMult, jetVar->_analepTrkMult);
+}
+void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
+	std::cout<<"Printing Event Variables "<<evtVar->_variableSetName <<std::endl;
+	evtVar->printEventVariables();	
+	ppfoVar->printPandoraPfoVariables();
+	jetVar->printJetVariables();
+	anaVar->printAnaVariables();
+
+}
 void WWAnalysis::processEvent( LCEvent * evt ) {
 
   _nEvt++;
@@ -868,9 +903,12 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		return;
 	}
 
+	processSignalVariablesSet( ev1, jv1, ppfov1, ana1);
+	printSignalVariableSet( ev1, jv1, ppfov1, ana1);
+
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
-	std::cout<<"Populating Event Variables a"<<std::endl;
+/*	std::cout<<"Populating Event Variables a"<<std::endl;
 	ev1->setParticles(_mcpartvec, _jets);
 	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg, ev1->_mclepTrkMult, ev1->_mclepPfoMult);
 	ev1->initJetTLV(ev1->_tlvjets);
@@ -904,101 +942,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 	ppfov1->printPandoraPfoVariables();
 	jv1->printJetVariables();
 	ana1->printAnaVariables();
-	//set event vars
-
-	/* */
-
-/* EvaluateJetVariables(evt, _jets, _nJets, _yMinus, _yPlus); 
-
-
-
-
-	EvaluateEventSelectionVariables(totaltracks,total_Pt,total_E,total_M);
-
-	fillEventSelectionHistos(weight);
-
- std::cout << "======================================== event " << nEvt << std::endl ;
- 
-   
-	//bools to characterize the true lepton decay for this event
-	isTau = false;
-	isMuon = false;
-
-
-
-	//from the MCParticles find what type of semileptonic decay is present
-        //return the parent mcparticle that has the qqlnu decay
-//	parent = classifyEvent(isTau, isMuon, trueq, _MCf[0], _MCfpdg[0]);
-	//separate signal and bg
-	if(_nfermions == 4){
-		parent = classifyEvent(isTau, isMuon, trueq, _MCf, _MCfpdg);
-	}
-	if(_nfermions == 2 ){
-		parent = classifyEvent2fermion( _MCf, _MCfpdg );
-	}
-
-	//classify tau decay
-	if(isTau){
-		classifyTauDecay(getMClepton(parent));
-	}
-
-	//build up all the different tlvs for calculation
-  	populateTLVs(ljet_index);
-
-	//overlay requires mc information so must be called
-	//after event classification, TLVs must also be populated
-	
-	AnalyzeOverlay( evt);
-	//do some dijet analysis this will populate mcqqmass
-	AnalyzeDijet();
-	AnalyzeOverlayAcceptance(jetswithoverlay, jets);
-	
-	//now assess jets
-	//keep the index on _jets of the jet we consider to be the lepton
-//	ljet_index = identifyLeptonJet( _jets );
-	//try using the most separated jet as the lepton jet
-	ljet_index = identifyLeptonJet_bySeparation(_jets);
-
-	
-	psi_mcl_ljet = getAngleOfjetandMCLepton(ljet_index);
-
-	//assess jet that is closest to mclepton
-	true_ljet_index = getJetNearMCLepton();
-	getMultiplicityOfTrueljet();//TODO make this 
-	true_psi_mcl_ljet = getAngleOfjetandMCLepton(true_ljet_index);
-
-	
-	
-
-	//get the charge of the lepton jet
-	lq = getLeptonJetCharge( _jets.at(ljet_index) );
-
-
-	//assess jet multiplicity
-	//fill variables pertaining to leptonic jet numbers of particles
-	getJetMultiplicities(); 
-
-
-	analyzeLeadingTracks();
-
-
-	//check if the assessed charge matches the true charge of the lepton
-	if( trueq == lq){
-		std::cout<<" got correct lepton charge "<<std::endl;
-		//count the number of times we get it right
-		if(isTau) tauqmatch++;
-		if(isMuon) muonqmatch++;
-	}
-	else{ 
-		std::cout<<" charge wrong "<<std::endl;
-	}
-
-
-
-	
-
-    //boost jets to cm for TGC observables
-	populateCMTLVs();
+*/
+/*
 
 	//fill base histograms and produce histos with sequential cuts hist0 is always no cuts
 	FillHistos(0);

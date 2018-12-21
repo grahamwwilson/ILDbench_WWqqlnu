@@ -75,7 +75,9 @@ using namespace lcio;
   bool FindTracks( LCEvent* evt );
   bool FindJetsWithOverlay( LCEvent* evt );
 
+	void processSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar );
 
+	void printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar );
 
 
 
