@@ -967,7 +967,7 @@ FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
  
 //quickfix:::: if there are no jets... !!!!cant do anything TODO explore this phenomenon more
 	//happens if we look for jets with eekt after using kt
-	if(_jets.size() == 0){ 
+	if(_eektJets.size() == 0 || _kt15Jets.size() == 0 || _kt08Jets.size() == 0){ 
 		std::cout<<"NO JETS HERE!!!!!!!!"<<std::endl;
 		return;
 	}
