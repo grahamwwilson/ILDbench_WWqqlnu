@@ -859,7 +859,7 @@ void WWAnalysis::processSignalVariableSet( eventVariables*& evtVar, jetVariables
 	evtVar-> getCosThetaW(evtVar->_mctlepCharge, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctWmProdAngle);
 
 
-	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
+	jetVar->setParticles(evtVar, evtVar->_jets, evtVar->_tlvjets);
 	jetVar->setLogYVariables(jetVar->_logyMinus, jetVar->_logyPlus);
 	jetVar->setMaxCosPsi(jetVar->_jetMaxCosPsi); 
 	jetVar->setMCTJetMultiplicity(jetVar->_mctlepPfoMult, jetVar->_mctlepTrkMult, jetVar->_mctUpPfoMult, jetVar->_mctDwnPfoMult, jetVar->_mctUpTrkMult, jetVar->_mctDwnTrkMult, jetVar->_mctlepMaxCosPsi, jetVar->_mctUpMaxCosPsi, jetVar->_mctDwnMaxCosPsi);
@@ -902,8 +902,8 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		std::cout<<"NO JETS HERE!!!!!!!!"<<std::endl;
 		return;
 	}
-
-	processSignalVariablesSet( ev1, jv1, ppfov1, ana1);
+	
+	processSignalVariableSet( ev1, jv1, ppfov1, ana1);
 	printSignalVariableSet( ev1, jv1, ppfov1, ana1);
 
 	/* new class testing area */
