@@ -847,7 +847,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	*/
 
 }
-void WWAnalysis::processSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
+void WWAnalysis::processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
 
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
 	evtVar->setParticles(_mcpartvec, _jets);
@@ -859,7 +859,7 @@ void WWAnalysis::processSignalVariableSet( eventVariables*& evtVar, jetVariables
 	evtVar-> getCosThetaW(evtVar->_mctlepCharge, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctWmProdAngle);
 
 
-	jetVar->setParticles(evtVar, evtVar->_jets, evtVar->_tlvjets);
+	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
 	jetVar->setLogYVariables(jetVar->_logyMinus, jetVar->_logyPlus);
 	jetVar->setMaxCosPsi(jetVar->_jetMaxCosPsi); 
 	jetVar->setMCTJetMultiplicity(jetVar->_mctlepPfoMult, jetVar->_mctlepTrkMult, jetVar->_mctUpPfoMult, jetVar->_mctDwnPfoMult, jetVar->_mctUpTrkMult, jetVar->_mctDwnTrkMult, jetVar->_mctlepMaxCosPsi, jetVar->_mctUpMaxCosPsi, jetVar->_mctDwnMaxCosPsi);
@@ -903,7 +903,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 		return;
 	}
 	
-	processSignalVariableSet( ev1, jv1, ppfov1, ana1);
+	processSignalVariableSet(evt, ev1, jv1, ppfov1, ana1);
 	printSignalVariableSet( ev1, jv1, ppfov1, ana1);
 
 	/* new class testing area */
