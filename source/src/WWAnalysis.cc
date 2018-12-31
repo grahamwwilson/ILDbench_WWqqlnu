@@ -51,6 +51,14 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 				_inputTrackCollectionName,
 				inputTrackCollectionName);
 
+
+	std::string inputRecoRelationCollectionName = "x";
+  	registerInputCollection( LCIO::LCRELATION,
+			     	"InputRecoRelationCollectionName" , 
+			     	"Input Reco Relation Collection Name "  ,
+			     	_inputRecoRelationCollectionName,
+			      	inputRecoRelationCollectionName);
+
 	//parameters for running in backgrounds: #fermions, # leptons
 	registerProcessorParameter("NFermions",
 								"number of fermions in event",
@@ -308,6 +316,40 @@ bool WWAnalysis::FindMCParticles( LCEvent* evt ){
 
   	if(!collectionFound){
 		std::cout<<"MC Collection "<< _inputMcParticleCollectionName << "not found"<<std::endl;
+	}
+  
+  	return collectionFound;
+}
+bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
+   
+	bool collectionFound = false;
+
+  	// clear old global MCParticle vector
+  	_reco2mcvec.clear();
+  	typedef const std::vector<std::string> StringVec ;
+  	StringVec* strVec = evt->getCollectionNames() ;
+
+	//iterate over collections, find the matching name
+  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){    
+    
+		//if found print name and number of elements 
+		if(*itname==_inputRecoRelationCollectionName){
+      			LCCollection* collection = evt->getCollection(*itname);
+     			std::cout<< "Located MC Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
+      			collectionFound = true;
+      
+			//add the collection elements to the global vector
+			for(unsigned int i=0;i<collection->getNumberOfElements();i++){
+				LCRelation* recoRelation = dynamic_cast<LCRelation*>(collection->getElementAt(i));
+				_reco2mc.push_back(recoRelation);
+
+       
+      			}
+    		}
+  	}
+
+  	if(!collectionFound){
+		std::cout<<"LCRelation Collection "<< _inputRecoRelationCollectionName << "not found"<<std::endl;
 	}
   
   	return collectionFound;

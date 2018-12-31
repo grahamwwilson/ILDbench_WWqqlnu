@@ -1,6 +1,7 @@
 #include "marlin/Processor.h"
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
+#include "EVENT/LCRelation.h"
 #include "IMPL/LCCollectionVec.h"
 #include <marlin/Global.h>
 #include "gear/BField.h"
@@ -73,6 +74,7 @@ using namespace lcio;
  // bool FindJets( LCEvent* evt ) ;
   bool FindPFOs( LCEvent* evt ) ;
   bool FindTracks( LCEvent* evt );
+  bool FindRecoToMCRelation( LCEvent* evt );
  // bool FindJetsWithOverlay( LCEvent* evt );
   bool FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec );
 
@@ -193,6 +195,7 @@ using namespace lcio;
   std::string _inputJetWithOverlayCollectionName{};
   std::string _inputParticleCollectionName{};
   std::string _inputTrackCollectionName{};
+  std::string _inputRecoRelationCollectionName{};
 
  // std::< std::vector<std::string> > jetCollectionNames{};
 
