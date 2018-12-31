@@ -1002,6 +1002,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 FindJetCollection( evt, _JetCollName_eekt, _eektJets );
 FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
 FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
+FindRecoToMCRelation( evt );
  FindTracks(evt);
  FindPFOs(evt);
 
