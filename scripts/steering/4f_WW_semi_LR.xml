@@ -149,6 +149,7 @@
 		<parameter name="McParticleCollectionName" value="MCParticle" />
 		<parameter name="InputParticleCollectionName" type="string" lcioInType="ReconstructedParticle">PandoraPFOs</parameter>
 		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionName" value="FastJets" />
 		<parameter name="InputJetWithOverlayCollectionName" value="FastJetsWithOverlay" />
 
