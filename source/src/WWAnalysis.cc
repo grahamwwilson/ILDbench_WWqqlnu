@@ -1010,8 +1010,8 @@ FindRecoToMCRelation( evt );
 	///little test area for lcrelation
 	for(unsigned int i=0; i< _reco2mcvec.size(); i++){
 			if( i < 1 ){
-				ReconstructedParticle* from =_reco2mcvec.at(i)->getFrom();
-				MCParticle* to =_reco2mcvec.at(i)->getTo();
+				LCObject* from =_reco2mcvec.at(i)->getFrom();
+				LCObject* to =_reco2mcvec.at(i)->getTo();
 				
 				std::cout<<"from "<<from->id()<<" to "<<to->id()<<std::endl;
 				float wgt = _reco2mcvec.at(i)->getWeight();
