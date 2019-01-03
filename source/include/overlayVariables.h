@@ -47,6 +47,7 @@ class overlayVariables{
 		
 		void sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::vector<TLorentzVector*>& jetParticles);
 	
+		void sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlvoverlaySum, std::vector<std::vector<TLorentzVector*> >& tlvjets);
 
 };
 #endif
