@@ -3,13 +3,14 @@
 
 #set analysis dataset variablei
 #just uncomment the one to be run
-DATASET=4f_WW_semi_LR
+#DATASET=4f_WW_semi_LR
+DATASET=4f_WW_semi_RL
 #DATASET=2f_Z_had_LR
 #DATASET=4f_WW_had_LR
 #DATASET=4f_ZZ_semi_LR
 
 #remove the output log otherwise it will not overwrite
-rm /afs/desy.de/group/flc/pool/anguiano/WWFiles/${DATASET}.out.gz
+rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/RunLogs/${DATASET}.out.gz
 
 Marlin ./steering/${DATASET}.xml > ${DATASET}.out
 

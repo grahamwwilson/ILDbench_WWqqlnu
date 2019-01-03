@@ -11,10 +11,13 @@
 
 <marlin>
 	<execute>
-	<processor name="MyOverlayProcessor" />
 
-	<processor name="MyFastJetProcessor" />
-<!--	<processor name="mytruejet"/> -->
+
+	<processor name="Jets0" />
+    <processor name="Jets1" />
+	 <processor name="Jets1recluster" />
+    <processor name="Jets2" />
+	 <processor name="Jets2recluster" />
    	<processor name="MyWWAnalysis"/>
    <processor name="MyLCIOOutputProcessor"/> 
  	</execute>
@@ -28,40 +31,63 @@
    		<parameter name="Verbosity"    options= "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG </parameter>
  	</global>
 
-	 <!-- Overlay Jet clustering here -->
-  <processor name="MyOverlayProcessor" type="FastJetProcessor">
+	 <!-- eekt only -->
+  <processor name="Jets0" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> OverlayJets </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> eektJets </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
-    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromOverlayJets </parameter>
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromeektJets </parameter>
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
-    <parameter name="algorithm" type="StringVec"> kt_algorithm 1.5 </parameter>
+    <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
-    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 2  </parameter>
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
     <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
     <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
 	
-	  <!-- Jet clustering here -->
-  <processor name="MyFastJetProcessor" type="FastJetProcessor">
+	  <!-- Jets1 kt1.5 -> eekt -->
+  <processor name="Jets1" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
-    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PFOsFromOverlayJets </parameter>
+    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> 
+<!--	<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> -->
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> FastJets </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> Jets1 </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
-    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromFastJet </parameter>
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromktJets15 </parameter>
+    <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
+    <parameter name="algorithm" type="StringVec"> kt_algorithm 1.5 </parameter>
+    <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
+    <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
+    <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
+  </processor>
+
+<!-- eekt reclustering of kt1.5-->
+  <processor name="Jets1recluster" type="FastJetProcessor">
+    <!--Using the FastJet library to identify jets-->
+    <!--a list of all reconstructed particles we are searching for jets in.-->
+
+	<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PFOsFromktJets15 </parameter> 
+    <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
+    <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
+    <!--The identified jets-->
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt15Jets </parameter>
+    <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
+    <parameter name="storeParticlesInJets" type="bool"> true </parameter>
+    <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromRecJets15</parameter>
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
     <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
@@ -70,22 +96,51 @@
     <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
 
-  <processor name="mytruejet" type="TrueJet">
- <!-- These are the defaults, probably exactly what you need. -->
-  	<parameter name="MCParticleCollection" type="string" lcioInType="MCParticle">MCParticle</parameter>
-  	<parameter name="RecoParticleCollection" type="string"  lcioInType="ReconstructedParticle">PandoraPFOs</parameter>
-  	<parameter name="RecoMCTruthLinkName" type="string" lcioInType="LCRelation"> RecoMCTruthLink </parameter>
-  	<parameter name="TrueJets" type="string"  lcioOutType="ReconstructedParticle">TrueJets</parameter>
-  	<parameter name="FinalColourNeutrals" type="string"  lcioOutType="ReconstructedParticle">FinalColourNeutrals</parameter>
-  	<parameter name="InitialColourNeutrals" type="string"  lcioOutType="ReconstructedParticle">InitialColourNeutrals</parameter>
-  	<parameter name="TrueJetPFOLink" type="string" lcioOutType="LCRelation"> TrueJetPFOLink </parameter>
-  	<parameter name="TrueJetMCParticleLink" type="string" lcioOutType="LCRelation">TrueJetMCParticleLink </parameter>
-  	<parameter name="InitialElementonLink" type="string" lcioOutType="LCRelation">InitialElementonLink</parameter>
-  	<parameter name="InitialElementonLink" type="string" lcioOutType="LCRelation">InitialElementonLink</parameter>
-  	<parameter name="InitialColourNeutralLink" type="string" lcioOutType="LCRelation">InitialColourNeutralLink</parameter>
- 	<parameter name="InitialColourNeutralLink" type="string" lcioOutType="LCRelation">InitialColourNeutralLink</parameter>
-  
+
+   <!-- Jets1 kt0.8 -> eekt -->
+  <processor name="Jets2" type="FastJetProcessor">
+    <!--Using the FastJet library to identify jets-->
+    <!--a list of all reconstructed particles we are searching for jets in.-->
+    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> 
+<!--	<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> -->
+    <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
+    <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
+    <!--The identified jets-->
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> Jets2 </parameter>
+    <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
+    <parameter name="storeParticlesInJets" type="bool"> true </parameter>
+    <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromktJets08 </parameter>
+    <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
+    <parameter name="algorithm" type="StringVec"> kt_algorithm 0.8 </parameter>
+    <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
+    <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
+    <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
+
+<!-- eekt reclustering of kt1.5-->
+  <processor name="Jets2recluster" type="FastJetProcessor">
+    <!--Using the FastJet library to identify jets-->
+    <!--a list of all reconstructed particles we are searching for jets in.-->
+
+	<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PFOsFromktJets08 </parameter> 
+    <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
+    <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
+    <!--The identified jets-->
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt08Jets </parameter>
+    <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
+    <parameter name="storeParticlesInJets" type="bool"> true </parameter>
+    <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFromRecJets08</parameter>
+    <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
+    <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+    <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
+    <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
+    <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
+  </processor>
+
 
 
 	<processor name="MyWWAnalysis" type="WWAnalysis">   
@@ -94,7 +149,9 @@
 		<parameter name="McParticleCollectionName" value="MCParticle" />
 		<parameter name="InputParticleCollectionName" type="string" lcioInType="ReconstructedParticle">PandoraPFOs</parameter>
 		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionName" value="FastJets" />
+		<parameter name="InputJetWithOverlayCollectionName" value="FastJetsWithOverlay" />
 
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />  
