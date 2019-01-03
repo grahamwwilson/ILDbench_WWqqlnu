@@ -2,7 +2,6 @@
 
 WWAnalysis aWWAnalysis;
 
-
 WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 
