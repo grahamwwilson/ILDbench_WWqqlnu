@@ -65,7 +65,7 @@ void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& 
 		
 void overlayVariables::setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> > tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets ){
 	for(unsigned int i=0; i< _nJets; i++){
-		setOverlayParticles( overlayParticles, tlvoverlayParticles , jets.at(i)->getParticles());
+		setOverlayParticles( overlayParticles.at(i), tlvoverlayParticles.at(i) , jets.at(i)->getParticles());
 	}	
 
 }
