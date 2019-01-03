@@ -50,7 +50,7 @@ TLorentzVector* overlayVariables::createReconstructedParticleTLV(ReconstructedPa
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
-void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, std::vector<ReconstructedParticle*>& jetParticles ){
+void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles ){
 		
 	//loop over thejet particles, if it is overlay keep it
 	for(unsigned int i=0; i< jetParticles.size(); i++){
@@ -73,10 +73,8 @@ void overlayVariables::sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::
 	
 
 	TLorentzVector* tlv = new TLorentzVector();
-	for(unsigned int i =0; i< tlvoverlaySum.size(); i++){
-		for(unsigned int j =0; j<jetParticles.size(); j++){
-			*tlv  += *jetParticles.at(i);
-		}
+	for(unsigned int i =0; i<jetParticles.size(); i++){
+		*tlv  += *jetParticles.at(i);
 	}
 	tlvoverlaySum = tlv;
 }
