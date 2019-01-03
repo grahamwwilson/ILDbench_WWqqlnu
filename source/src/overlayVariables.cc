@@ -36,8 +36,8 @@ bool overlayVariables::particleIsOverlay(int id ){
 				if( _MCOverlayIDs.at(j) == _pfo2mc.at(i)->getTo()->id() ){
 					//this particle has overlay contribution
 					//is the contribution significant?
-					if(((int(_pfo2mc.at(i)->getWeight())%10000)/1000.) > 0.5 ){ return true };
-					if(((int(_pfo2mc.at(i)->getWeight())/10000)/1000.) > 0.5 ){ return true };
+					if(((int(_pfo2mc.at(i)->getWeight())%10000)/1000.) > 0.5 ){ return true; };
+					if(((int(_pfo2mc.at(i)->getWeight())/10000)/1000.) > 0.5 ){ return true; };
 				}
 			}
 			
@@ -56,7 +56,7 @@ void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& 
 	for(unsigned int i=0; i< jetParticles.size(); i++){
 		if(particleIsOverlay( jetParticles.at(i)->id() )){
 			overlayParticles.push_back(jetParticles.at(i));
-			tlvoverlayParticles.push_back( createReconstructedParticleTLV( jetParticles.at(i) );
+			tlvoverlayParticles.push_back( createReconstructedParticleTLV( jetParticles.at(i) ));
 		}
 	}
 
