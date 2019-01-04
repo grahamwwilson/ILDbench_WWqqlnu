@@ -1022,7 +1022,7 @@ FindRecoToMCRelation( evt );
 
 
 	///little test area for lcrelation
-	for(unsigned int i=0; i< _reco2mcvec.size(); i++){
+/*	for(unsigned int i=0; i< _reco2mcvec.size(); i++){
 			if( i < 1 ){
 				LCObject* from =_reco2mcvec.at(i)->getFrom();
 				LCObject* to =_reco2mcvec.at(i)->getTo();
@@ -1033,7 +1033,7 @@ FindRecoToMCRelation( evt );
 				std::cout<<"Decoded weights "<<  "trackwgt = " << (int(wgt)%10000)/1000. <<  " clusterwgt  = " << (int(wgt)/10000)/1000. <<std::endl; 
 
 			}	
-	}
+	} */
 
 
  
@@ -1046,7 +1046,7 @@ FindRecoToMCRelation( evt );
 	
 
 
-
+	std::cout<<"event No. "<< nEvt<<std::endl;
 	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
 	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt);
 
