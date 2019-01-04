@@ -1,7 +1,7 @@
 
 #include "overlayVariables.h"
 
-overlayVariables overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets){
+overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets){
 	
 	_localTree = tree;	
 
