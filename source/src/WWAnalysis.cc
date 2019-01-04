@@ -960,7 +960,7 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*>
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
 
 	oVar->setParticles(jets, pfo2mc);
-	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, _mcpartvecmcpartvec );
+	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, _mcpartvec );
 	oVar->setOverlayparticlesLoop(oVar->_overlayParticles, oVar->_tlvoverlayParticles, jets);
 	oVar->sumOverlayParticlesLoop(oVar->_tlvoverlaySum, oVar->_tlvoverlayParticles);
 
@@ -1043,8 +1043,8 @@ FindRecoToMCRelation( evt );
 
 
 
-	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt, _eektJets);
-	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt);
+	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt _eektJets);
+	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt);
 
 	//processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
 	//printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
