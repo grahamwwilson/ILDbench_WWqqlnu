@@ -18,12 +18,12 @@ overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree, un
 	_tlvoverlaySum = sum;
 	
 }
-void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc){
+void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc){
 
 	_jets = jets;
 	_pfo2mc = pfo2mc;
 }
-void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
+void overlayVariables::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
 	
 	//this skims over mcparts and creates a list of all the overlay particles
 	for( unsigned int i=0; i<mcpartvec.size(); i++){
