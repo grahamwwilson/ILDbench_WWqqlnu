@@ -960,9 +960,13 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*>
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
 
 	oVar->setParticles(jets, pfo2mc);
+	std::cout<<"1"<<std::endl;
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, _mcpartvec );
+		std::cout<<"2"<<std::endl;
 	oVar->setOverlayparticlesLoop(oVar->_overlayParticles, oVar->_tlvoverlayParticles, jets);
+	std::cout<<"3"<<std::endl;
 	oVar->sumOverlayParticlesLoop(oVar->_tlvoverlaySum, oVar->_tlvoverlayParticles);
+	std::cout<<"4"<<std::endl;
 
 	evtVar->setParticles(_mcpartvec, jets);
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
