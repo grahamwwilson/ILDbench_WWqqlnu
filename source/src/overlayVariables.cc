@@ -1,17 +1,29 @@
 
 #include "overlayVariables.h"
 
-overlayVariables overlayVariables(){
-	/*TTree* _localTree{};	
+overlayVariables overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets){
+	
+	_localTree = tree;	
 
-		const char* _variableSetName{};
-		unsigned int _nJets{};
-	*/
-}
-void setParticles(std::vector<ReconstructedParticle*>& jetParticles, std::vector<LCRelation*>& pfo2mc){
+	_variableSetName = variableSetName;
+	_nJets = nJets;
 
+	//allocate vectors
+	std::vector< std::vector<ReconstructedParticle*> > op(nJets);
+	std::vector< std::vector<TLorentzVector*> > tlvop(nJets);
+	std::vector<TLorentzVector*> sum(nJets);
+	
+	_overlayParticles = op;
+	_tlvoverlayParticles = tlvop;
+	_tlvoverlaySum = sum;
+	
 }
-void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int> MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
+void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc){
+
+	_jets = jets;
+	_pfo2mc = pfo2mc;
+}
+void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
 	
 	//this skims over mcparts and creates a list of all the overlay particles
 	for( unsigned int i=0; i<mcpartvec.size(); i++){
@@ -84,6 +96,15 @@ void overlayVariables::sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlv
 		sumOverlayParticles( tlvoverlaySum.at(i), tlvjets.at(i) );
 	}
 	
+}
+void overlayVariables::printOverlayVariables(){
+	//
+	std::cout<<"overlayVariables: '"<<_variableSetName<<"'"<<std::endl;
+	std::cout<<"overlaySum Per jet "<<std::endl;
+	for(unsigned int i=0; i<_tlvoverlaySum.size(); i++){
+		std::cout<<i<<" "<<_tlvoverlaySum.at(i)->Px()<<" "<<_tlvoverlaySum.at(i)->Py()<<" "<<_tlvoverlaySum.at(i)->Pz()<<" "<<_tlvoverlaySum.at(i)->E()<<" "<<_tlvoverlaySum.at(i)->M()<<std::endl;
+	}
+
 }
 void overlayVariables::initLocalTree(){
 	/*

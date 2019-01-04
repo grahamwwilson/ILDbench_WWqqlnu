@@ -17,7 +17,7 @@ class overlayVariables{
 
 	public:
 		overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets );
-		void setParticles(std::vector<ReconstructedParticle*>& jetParticles, std::vector<LCRelation*>& pfo2mc);
+		void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc);
 		void initLocalTree();
 
 		TTree* _localTree{};	
@@ -31,11 +31,14 @@ class overlayVariables{
 		std::vector<MCParticle*> _MCOverlay{};
 		std::vector<int> _MCOverlayIDs{};
 
+		std::vector<ReconstructedParticle*> _jets{};
+		std::vector<ReconstructedParticle*> _purgedJets{};//jets free from overlay
+
 		std::vector< std::vector<ReconstructedParticle*> > _overlayParticles{};//populate from a set of reco jets
 		std::vector< std::vector<TLorentzVector*> > _tlvoverlayParticles{};
 		std::vector< TLorentzVector*> _tlvoverlaySum{};//4vector sum of the particles per jet
 
-		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int> MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );
+		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );
 
 		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles );
 		
@@ -48,6 +51,8 @@ class overlayVariables{
 		void sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::vector<TLorentzVector*>& jetParticles);
 	
 		void sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlvoverlaySum, std::vector<std::vector<TLorentzVector*> >& tlvjets);
+
+		void printOverlayVariables();
 
 };
 #endif
