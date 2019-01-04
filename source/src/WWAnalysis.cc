@@ -121,6 +121,9 @@ void WWAnalysis::init() {
 	jv_eekt->initLocalTree();
    ana_eekt = new anaVariables(_tree, ev_eekt);
 	ana_eekt->initLocalTree();
+	ov_eekt = new overlayVariables("eekt",_tree,_nJets);
+	ov_eekt->initLocalTree();
+	
 
 	ev_kt15 = new eventVariables("kt15",_nfermions, _nleptons, _nJets, _tree);
 	ev_kt15->initLocalTree();
@@ -952,9 +955,15 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	*/
 
 }
-void WWAnalysis::processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar , std::vector<ReconstructedParticle*> jets){
+void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*> pfo2mc, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar , overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets){
 
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
+
+	oVar->setParticles(jets, pfo2mc);
+	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, _mcpartvecmcpartvec );
+	oVar->setOverlayparticlesLoop(oVar->_overlayParticles, oVar->_tlvoverlayParticles, jets);
+	oVar->sumOverlayParticlesLoop(oVar->_tlvoverlaySum, oVar->_tlvoverlayParticles);
+
 	evtVar->setParticles(_mcpartvec, jets);
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
 	evtVar->initJetTLV(evtVar->_tlvjets);
@@ -982,12 +991,13 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar,
 
 	jetVar->setAnaJetMultiplicity( anaVar->_jetanatags, jetVar->_analepPfoMult, jetVar->_analepTrkMult);
 }
-void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar ){
+void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar ){
 	std::cout<<"Printing Event Variables "<<evtVar->_variableSetName <<std::endl;
 	evtVar->printEventVariables();	
 	ppfoVar->printPandoraPfoVariables();
 	jetVar->printJetVariables();
 	anaVar->printAnaVariables();
+	oVar->printOverlayVariables();
 
 }
 void WWAnalysis::processEvent( LCEvent * evt ) {
@@ -1036,11 +1046,11 @@ FindRecoToMCRelation( evt );
 	processSignalVariableSet(evt, ev_eekt, jv_eekt, ppfov, ana_eekt, _eektJets);
 	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt);
 
-	processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
-	printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
+	//processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
+	//printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
 
-	processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08, _kt08Jets);
-	printSignalVariableSet( ev_kt08, jv_kt08, ppfov, ana_kt08);
+	//processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08, _kt08Jets);
+	//printSignalVariableSet( ev_kt08, jv_kt08, ppfov, ana_kt08);
 
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
