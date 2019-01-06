@@ -50,7 +50,7 @@ class overlayVariables{
 
 		TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 
-		ReconstructedParticle* makePurgedJet( std::vector<ReconstructedParticle*> newParticles, std::vector<TLorentzVector*> newTLVs);
+		void makePurgedJet(ReconstructedParticle*& newJet ,TLorentzVector*& newJetTLV, std::vector<ReconstructedParticle*> newParticles, std::vector<TLorentzVector*> newTLVs);
 		
 		void sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::vector<TLorentzVector*>& jetParticles);
 	
