@@ -12,6 +12,11 @@ overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree, un
 	std::vector< std::vector<ReconstructedParticle*> > op(nJets);
 	std::vector< std::vector<TLorentzVector*> > tlvop(nJets);
 	std::vector<TLorentzVector*> sum(nJets);
+
+	std::vector<ReconstructedParticle*> cleanjets(nJets);
+	std::vector<TLorentzVector*> cleantlv(nJets);
+	_tlvpurgedJets = cleantlv;
+	_purgedJets = cleanjets;
 	
 	_overlayParticles = op;
 	_tlvoverlayParticles = tlvop;
@@ -63,22 +68,61 @@ TLorentzVector* overlayVariables::createReconstructedParticleTLV(ReconstructedPa
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
-void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles ){
+void overlayVariables::makePurgedJet(ReconstructedParticle*& newJet ,TLorentzVector*& newJetTLV, std::vector<ReconstructedParticle*> newParticles, std::vector<TLorentzVector*> newTLVs){
+	
+	ReconstructedParticleImpl* jet = new ReconstructedParticleImpl();
+
+	//newJet->setType(oldJet->getType());
+	//newJet->setCovMatrix (oldJet->getCovMatrix())
+	TLorentzVector* t = new TLorentzVector();
+	for(unsigned int i=0; i< newTLVs.size(); i++){
+		*t += *newTLVs.at(i);
+	}
+	jet->setEnergy( t->E());
+	jet->setMass( t->M() );
+	double* mom = new double[3];
+	mom[0] = t->Px();
+	mom[1] = t->Py();
+	mom[2] = t->Pz();
+	jet->setMomentum( mom );
+
+
+
+	float charge =0.;
+	for(unsigned int i=0; i< newParticles.size(); i++){
+		charge  += newParticles.at(i)->getCharge();
+		jet->addParticle( newParticles.at(i) );
+	}
+	jet->setCharge(charge); //sum of new tracks
+	//newJet->setReferencePoint (oldJet->getReferencePoint()) //
+
+	newJet = jet;
+	newJetTLV = t;
+}
+void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, ReconstructedParticle*& purgedJet, TLorentzVector*& purgedTLVJet, const std::vector<ReconstructedParticle*>& jetParticles ){
 		
+	std::vector<ReconstructedParticle*> newParticles{};
+	std::vector<TLorentzVector*> newTLVs{};
 	//loop over thejet particles, if it is overlay keep it
 	for(unsigned int i=0; i< jetParticles.size(); i++){
 		if(particleIsOverlay( jetParticles.at(i)->id() )){
 			overlayParticles.push_back(jetParticles.at(i));
 			tlvoverlayParticles.push_back( createReconstructedParticleTLV( jetParticles.at(i) ));
 		}
+		else{
+			newParticles.push_back(jetParticles.at(i));
+			newTLVs.push_back( createReconstructedParticleTLV( jetParticles.at(i) ));
+		}
 	}
 
+	//make the clean jet
+	purgedJet = makePurgedJet( purgedJet, purgedTLVJet, newParticles, newTLVs);
 
 }
 		
-void overlayVariables::setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets ){
+void overlayVariables::setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& purgedJets, std::vector<TLorentzVector*>& tlvpurgedJets, std::vector<ReconstructedParticle*>& jets ){
 	for(unsigned int i=0; i< _nJets; i++){
-		setOverlayParticles( overlayParticles.at(i), tlvoverlayParticles.at(i) , jets.at(i)->getParticles());
+		setOverlayParticles( overlayParticles.at(i), tlvoverlayParticles.at(i) , purgedJets.at(i), tlvpurgedJets.at(i), jets.at(i)->getParticles());
 	}	
 
 }
@@ -112,16 +156,23 @@ void overlayVariables::printOverlayVariables(){
 	}
 	std::cout<<noparts<<" # of Reconstructed Overlay TLVS: "<< notlvs<<std::endl;
 	std::cout<<"overlay tlvs: "<<std::endl;
-	TLorentzVector* t;
+/*	TLorentzVector* t;
 	for(unsigned int i=0; i< _tlvoverlayParticles.size();i++){
 		for(unsigned int j=0; j< _tlvoverlayParticles.at(i).size();j++){
 			t = _tlvoverlayParticles.at(i).at(j);			
 			std::cout<< t->Px()<< " "<< t->Py() << " " << t->Pz() <<" "<< t->E()<<" "<< t->M()<<std::endl;
 		}
-	}
+	}*/
 	std::cout<<"overlaySum Per jet "<<std::endl;
 	for(unsigned int i=0; i<_tlvoverlaySum.size(); i++){
 		std::cout<<i<<" "<<_tlvoverlaySum.at(i)->Px()<<" "<<_tlvoverlaySum.at(i)->Py()<<" "<<_tlvoverlaySum.at(i)->Pz()<<" "<<_tlvoverlaySum.at(i)->E()<<" "<<_tlvoverlaySum.at(i)->M()<<std::endl;
+	}
+	
+	std::cout<<"purged jets :"<<std::endl;
+	TLorentzVector* p;
+	for(unsigned int i=0; i<_tlvpurgedJets.size(); i++){
+		p = _tlvpurgedJets.at(i);
+		std::cout<<i<<" "<<p->Px()<<" "<<p->Py()<<" "<<p->Pz()<<" "<<p->E()<<" "<<p->M()<<std::endl;
 	}
 	
 

@@ -3,6 +3,7 @@
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "EVENT/LCRelation.h"
+#include "IMPL/ReconstructedParticle.h"
 #include "lcio.h"
 #include "TTree.h"
 #include <vector>
@@ -33,6 +34,7 @@ class overlayVariables{
 
 		std::vector<ReconstructedParticle*> _jets{};
 		std::vector<ReconstructedParticle*> _purgedJets{};//jets free from overlay
+		std::vector<TLorentzVector*> _tlvpurgedJets{};
 
 		std::vector< std::vector<ReconstructedParticle*> > _overlayParticles{};//populate from a set of reco jets
 		std::vector< std::vector<TLorentzVector*> > _tlvoverlayParticles{};
@@ -40,13 +42,15 @@ class overlayVariables{
 
 		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );
 
-		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles );
+		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, ReconstructedParticle*& purgedJet, TLorentzVector*& purgedTLVJet, const std::vector<ReconstructedParticle*>& jetParticles );
 		
-		void setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets );
+		void setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& purgedJets, std::vector<TLorentzVector*>& tlvpurgedJets, std::vector<ReconstructedParticle*>& jets );
 
 		bool particleIsOverlay(int id );
 
 		TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
+
+		ReconstructedParticle* makePurgedJet( std::vector<ReconstructedParticle*> newParticles, std::vector<TLorentzVector*> newTLVs);
 		
 		void sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::vector<TLorentzVector*>& jetParticles);
 	
