@@ -103,10 +103,14 @@ void overlayVariables::printOverlayVariables(){
 	std::cout<<"overlayVariables: '"<<_variableSetName<<"'"<<std::endl;
 	std::cout<<"# MC Overlay Particles: "<<_MCOverlayIDs.size()<<" # of Reconstructed Overlay Particles: ";
 	unsigned int noparts=0;
+	unsigned int notlvs=0;
 	for(unsigned int i=0; i< _overlayParticles.size(); i++){
 		noparts += _overlayParticles.at(i).size();
 	}
-	std::cout<<noparts<<std::endl;
+	for(unsigned int i=0; i< _tlvoverlayParticles.size(); i++){
+		notlvs = _tlvoverlayParticles.at(i).size();
+	}
+	std::cout<<noparts<<" # of Reconstructged Overlay TLVS: "<< notlvs<<std::endl;
 	std::cout<<"overlay tlvs: "<<std::endl;
 	TLorentzVector* t;
 	for(unsigned int i=0; i< _tlvoverlayParticles.size();i++){
