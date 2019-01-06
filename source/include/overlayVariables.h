@@ -42,7 +42,7 @@ class overlayVariables{
 
 		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles );
 		
-		void setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> > tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets );
+		void setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets );
 
 		bool particleIsOverlay(int id );
 
