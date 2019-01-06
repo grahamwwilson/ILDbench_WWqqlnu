@@ -3,7 +3,7 @@
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
 #include "EVENT/LCRelation.h"
-#include "IMPL/ReconstructedParticle.h"
+#include "IMPL/ReconstructedParticleIMPL.h"
 #include "lcio.h"
 #include "TTree.h"
 #include <vector>
