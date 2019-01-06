@@ -46,6 +46,7 @@ bool overlayVariables::particleIsOverlay(int id ){
 			//is this id on the local overlay list?
 			for(unsigned int j=0; j<_MCOverlayIDs.size(); j++){
 				if( _MCOverlayIDs.at(j) == _pfo2mc.at(i)->getTo()->id() ){
+					std::cout<<"found a particle: wgts " (int(_pfo2mc.at(i)->getWeight())%10000)/1000. <<" "<<(int(_pfo2mc.at(i)->getWeight())/10000)/1000. << std::endl;
 					//this particle has overlay contribution
 					//is the contribution significant?
 					if(((int(_pfo2mc.at(i)->getWeight())%10000)/1000.) > 0.5 ){ return true; };
