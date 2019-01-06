@@ -116,7 +116,7 @@ void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& 
 	}
 
 	//make the clean jet
-	purgedJet = makePurgedJet( purgedJet, purgedTLVJet, newParticles, newTLVs);
+	makePurgedJet( purgedJet, purgedTLVJet, newParticles, newTLVs);
 
 }
 		
