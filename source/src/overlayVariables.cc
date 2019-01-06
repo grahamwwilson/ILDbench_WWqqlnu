@@ -107,6 +107,14 @@ void overlayVariables::printOverlayVariables(){
 		noparts += _overlayParticles.at(i).size();
 	}
 	std::cout<<noparts<<std::endl;
+	std::cout<<"overlay tlvs: "<<std::endl;
+	TLorentzVector* t;
+	for(unsigned int i=0; i< _tlvoverlayParticles.size();i++){
+		for(unsigned int j=0; j< _tlvoverlayParticles.at(i).size();j++){
+			t = _tlvoverlayParticles.at(i).at(j);			
+			std::cout<< t->Px()<< " "<< t->Py() << " " << t->Pz() <<" "<< t->E()<<" "<< t->M()<<std::endl;
+		}
+	}
 	std::cout<<"overlaySum Per jet "<<std::endl;
 	for(unsigned int i=0; i<_tlvoverlaySum.size(); i++){
 		std::cout<<i<<" "<<_tlvoverlaySum.at(i)->Px()<<" "<<_tlvoverlaySum.at(i)->Py()<<" "<<_tlvoverlaySum.at(i)->Pz()<<" "<<_tlvoverlaySum.at(i)->E()<<" "<<_tlvoverlaySum.at(i)->M()<<std::endl;
