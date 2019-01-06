@@ -76,7 +76,7 @@ void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& 
 
 }
 		
-void overlayVariables::setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> > tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets ){
+void overlayVariables::setOverlayparticlesLoop(std::vector<std::vector<ReconstructedParticle*> >& overlayParticles, std::vector<std::vector<TLorentzVector*> >& tlvoverlayParticles, std::vector<ReconstructedParticle*>& jets ){
 	for(unsigned int i=0; i< _nJets; i++){
 		setOverlayParticles( overlayParticles.at(i), tlvoverlayParticles.at(i) , jets.at(i)->getParticles());
 	}	
@@ -110,7 +110,7 @@ void overlayVariables::printOverlayVariables(){
 	for(unsigned int i=0; i< _tlvoverlayParticles.size(); i++){
 		notlvs = _tlvoverlayParticles.at(i).size();
 	}
-	std::cout<<noparts<<" # of Reconstructged Overlay TLVS: "<< notlvs<<std::endl;
+	std::cout<<noparts<<" # of Reconstructed Overlay TLVS: "<< notlvs<<std::endl;
 	std::cout<<"overlay tlvs: "<<std::endl;
 	TLorentzVector* t;
 	for(unsigned int i=0; i< _tlvoverlayParticles.size();i++){
