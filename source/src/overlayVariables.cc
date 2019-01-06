@@ -100,10 +100,17 @@ void overlayVariables::sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlv
 void overlayVariables::printOverlayVariables(){
 	//
 	std::cout<<"overlayVariables: '"<<_variableSetName<<"'"<<std::endl;
+	std::cout<<"# MC Overlay Particles: "<<_MCOverlayIDs.size()<<" # of Reconstructed Overlay Particles: ";
+	unsigned int noparts=0;
+	for(unsigned int i=0; i< _overlayParticles.size(); i++){
+		noparts += _overlayParticles.at(i).size();
+	}
+	std::cout<<noparts<<std::endl;
 	std::cout<<"overlaySum Per jet "<<std::endl;
 	for(unsigned int i=0; i<_tlvoverlaySum.size(); i++){
 		std::cout<<i<<" "<<_tlvoverlaySum.at(i)->Px()<<" "<<_tlvoverlaySum.at(i)->Py()<<" "<<_tlvoverlaySum.at(i)->Pz()<<" "<<_tlvoverlaySum.at(i)->E()<<" "<<_tlvoverlaySum.at(i)->M()<<std::endl;
 	}
+	
 
 }
 void overlayVariables::initLocalTree(){
