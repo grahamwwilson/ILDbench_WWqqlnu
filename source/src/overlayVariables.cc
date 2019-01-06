@@ -178,11 +178,17 @@ void overlayVariables::printOverlayVariables(){
 
 }
 void overlayVariables::initLocalTree(){
-	/*
+	
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
-		name << _variableSetName << "mctCMjet"<<i;
-		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_mctCMjets.at(i),16000,0);
+		name << _variableSetName << "jet"<<i<<"_ovrSum";
+		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_tlvoverlaySum.at(i),16000,0);
 	}
-	*/
+
+	for(unsigned int i=0; i< _nJets; i++){
+		std::stringstream name;
+		name << _variableSetName << "jet"<<i<<"_purged";
+		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_tlvpurgedJets.at(i),16000,0);
+	}
+	
 }
