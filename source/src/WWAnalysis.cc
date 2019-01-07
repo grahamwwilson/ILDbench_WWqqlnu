@@ -144,6 +144,8 @@ void WWAnalysis::init() {
    ppfov = new PandoraPfoVariables(_tree);
   ppfov->initLocalTree();
 
+	 ppfo_ovr= new overlayVariables("ppfoOvr",_tree,1,0);
+	 ppfo_over->initLocalTree();
 
   h1 = new HistoManager(ncuts,weight); // no need to init until the class is more finalized
  // h1->initHists1();
@@ -1053,6 +1055,17 @@ FindRecoToMCRelation( evt );
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
+	
+//do ppfo
+	std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
+	ppfo_wrapper.at(0) = _pfovec;
+	ppfo_ovr->setParticles(ppfo_wrapper, pfo2mc);
+	ppfo_ovr->setMCOverlay(ppfo_ovr->_MCOverlay, ppfo_ovr->_MCOverlayIDs, _mcpartvec );
+	ppfo_ovr->setOverlayparticlesLoop(ppfo_ovr->_overlayParticles, ppfo_ovr->_tlvoverlayParticles, ppfo_ovr->_purgedJets, ppfo_ovr->_tlvpurgedJets, ppfo_wrapper);
+	ppfo_ovr->sumOverlayParticlesLoop(ppfo_ovr->_tlvoverlaySum, ppfo_ovr->_tlvoverlayParticles);
+	ppfo_ovr->setTotalVariables();
+//end special ppfo overlay
+
 	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt);
 
 	//processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);

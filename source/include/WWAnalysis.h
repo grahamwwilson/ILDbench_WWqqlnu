@@ -113,6 +113,7 @@ using namespace lcio;
  jetVariables* jv_eekt{};
  anaVariables* ana_eekt{};
  overlayVariables* ov_eekt{};
+ overlayVariables* ppfo_ovr{};
 
 	eventVariables* ev_kt15{};
  jetVariables* jv_kt15{};
