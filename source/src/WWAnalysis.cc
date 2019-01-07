@@ -1061,8 +1061,9 @@ FindRecoToMCRelation( evt );
 	ppfo_wrapper.at(0) = _pfovec;
 	ppfo_ovr->setParticles(ppfo_wrapper,  _reco2mcvec);
 	ppfo_ovr->setMCOverlay(ppfo_ovr->_MCOverlay, ppfo_ovr->_MCOverlayIDs, _mcpartvec );
-	ppfo_ovr->setOverlayparticlesLoop(ppfo_ovr->_overlayParticles, ppfo_ovr->_tlvoverlayParticles, ppfo_ovr->_purgedJets, ppfo_ovr->_tlvpurgedJets, &ppfo_wrapper);
-	ppfo_ovr->sumOverlayParticlesLoop(ppfo_ovr->_tlvoverlaySum, ppfo_ovr->_tlvoverlayParticles);
+	ppfo_ovr->setOverlayparticles(ppfo_ovr->_overlayParticles.at(0), ppfo_ovr->_tlvoverlayParticles.at(0), ppfo_ovr->_purgedJets.at(0), ppfo_ovr->_tlvpurgedJets.at(0), _pfovec);
+
+	ppfo_ovr->sumOverlayParticles(ppfo_ovr->_tlvoverlaySum.at(0), ppfo_ovr->_tlvoverlayParticles.at(0));
 	ppfo_ovr->setTotalVariables();
 //end special ppfo overlay
 
