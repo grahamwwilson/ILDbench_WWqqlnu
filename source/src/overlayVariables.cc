@@ -173,21 +173,21 @@ void overlayVariables::setTagVariables(std::vector<int>& tags){
 					}
 				}
 
-				if( (tags.at(i)<6) && ((tags.at(i)%2) == 0) ){
+				if( (abs(tags.at(i))<6) && ((abs(tags.at(i))%2) == 0) ){
 					//uplike quark
 					_upliketag_overlay = _tlvoverlaySum.at(i);
 					_upliketag_overlay_ntracks = ntrks;
 					_upliketag_overlay_Efrac = _tlvoverlaySum.at(i)->E()/_jets.at(i)->getEnergy();
 					*qq += *_tlvoverlaySum.at(i);
 				}
-				if( (tags.at(i)<6) && ((tags.at(i)%2) != 0) ){
+				if( (abs(tags.at(i))<6) && ((abs(tags.at(i))%2) != 0) ){
 					//dwnlike quark
 					_dwnliketag_overlay = _tlvoverlaySum.at(i);
 					_dwnliketag_overlay_ntracks = ntrks;
 					_dwnliketag_overlay_Efrac = _tlvoverlaySum.at(i)->E()/_jets.at(i)->getEnergy();
 					*qq += *_tlvoverlaySum.at(i);
 				}
-				if( (tags.at(i)>6) && (tags.at(i)<17) ){
+				if( (abs(tags.at(i))>6) && (abs(tags.at(i))<17) ){
 					//lepton
 					_leptontag_overlay = _tlvoverlaySum.at(i);
 					_leptontag_overlay_ntracks = ntrks;
