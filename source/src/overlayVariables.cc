@@ -27,6 +27,16 @@ void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, s
 
 	_jets = jets;
 	_pfo2mc = pfo2mc;
+
+	//clear vectors that are event dependent (using pushback)
+	MCOverlay.clear();
+	MCOverlayIDs.clear();
+
+	for(unsigned int i=0; i<nJets; i++){
+		overlayParticles.at(i).clear();
+		tlvoverlayParticles.at(i).clear();
+	}
+
 }
 void overlayVariables::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
 	
