@@ -1096,7 +1096,7 @@ FindRecoToMCRelation( evt );
 
 	
 
-
+/*
 	jv_eekt_no_overlay->setParticles(evt, ev_eekt_no_overlay->_jets, ev_eekt_no_overlay->_tlvjets);
 	jv_eekt_no_overlay->setLogYVariables(jv_eekt_no_overlay->_logyMinus, jv_eekt_no_overlay->_logyPlus);
 	jv_eekt_no_overlay->setMaxCosPsi(jv_eekt_no_overlay->_jetMaxCosPsi); 
@@ -1110,7 +1110,7 @@ FindRecoToMCRelation( evt );
 	ana_eekt_no_overlay->setAnaEventVariables(ev_eekt_no_overlay);
 
 	jv_eekt_no_overlay->setAnaJetMultiplicity( ana_eekt_no_overlay->_jetanatags, jv_eekt_no_overlay->_analepPfoMult, jv_eekt_no_overlay->_analepTrkMult);
-
+*/
 
 	/* new class testing area */
 	//make event variables with 3 overlay removed jets
