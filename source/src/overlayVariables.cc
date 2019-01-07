@@ -1,8 +1,10 @@
 
 #include "overlayVariables.h"
 
-overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets){
+overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets, bool tagOpt){
 	
+
+	_tagOpt = tagOpt;
 	_localTree = tree;	
 
 	_variableSetName = variableSetName;
@@ -36,6 +38,9 @@ void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, s
 		_overlayParticles.at(i).clear();
 		_tlvoverlayParticles.at(i).clear();
 	}
+
+	_overlay_cosTheta.clear();
+	_overlay_phi.clear();
 
 }
 void overlayVariables::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
@@ -152,6 +157,64 @@ void overlayVariables::sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlv
 	}
 	
 }
+void overlayVariables::setTagVariables(std::vector<int>& tags){
+
+		_jetTags = tags;
+		//look at jets
+		unsigned int ntrks{};
+		TLorentzVector* qq = new TLorentzVector();
+		for(unsigned int i=0; i<_overlayParticles.size(); i++){
+
+				//loop and count tracks of the i-th jet
+				ntrks = 0;
+				for(unsigned int j=0; j<_overlayParticles.at(i).size(); i++){
+					if(_overlayParticles.at(i).at(j)->getCharge() != 0){
+						ntrks++;
+					}
+				}
+
+				if( (tags.at(i)<6) && ((tags.at(i)%2) == 0) ){
+					//uplike quark
+					_upliketag_overlay = _tlvoverlaySum.at(i);
+					_upliketag_overlay_ntracks = ntrks;
+					_upliketag_overlay_Efrac = _tlvoverlaySum.at(i)->E()/_jets.at(i)->getEnergy();
+					*qq += *_tlvoverlaySum.at(i);
+				}
+				if( (tags.at(i)<6) && ((tags.at(i)%2) != 0) ){
+					//dwnlike quark
+					_dwnliketag_overlay = _tlvoverlaySum.at(i);
+					_dwnliketag_overlay_ntracks = ntrks;
+					_dwnliketag_overlay_Efrac = _tlvoverlaySum.at(i)->E()/_jets.at(i)->getEnergy();
+					*qq += *_tlvoverlaySum.at(i);
+				}
+				if( (tags.at(i)>6) && (tags.at(i)<17) ){
+					//lepton
+					_leptontag_overlay = _tlvoverlaySum.at(i);
+					_leptontag_overlay_ntracks = ntrks;
+					_leptontag_overlay_Efrac = _tlvoverlaySum.at(i)->E()/_jets.at(i)->getEnergy();
+				}
+		}
+		_Wqq_overlay = qq;
+
+}
+void overlayVariables::setTotalVariables(){
+	//distribution of all the particles from the overlay
+
+		TLorentzVector t;
+		for(unsigned int i=0; i<tlvoverlaySum.size(); i++){
+			t+= *tlvoverlaySum.at(i);
+		}
+		_overlay_totalMass = t.M();
+		_overlay_totalEnergy = t.E();
+
+		for(unsigned int i=0; i< _tlvoverlayParticles.size(); i++){
+			for(unsigned int j=0; j<_tlvoverlayParticles.at(i).size(); j++){
+				_overlay_cosTheta.push_back( _tlvoverlayParticles.at(i).at(j)->CosTheta() );
+				_overlay_phi.push_back( _tlvoverlayParticles.at(i).at(j)->Phi() );
+			}
+		}
+
+}
 void overlayVariables::printOverlayVariables(){
 	//
 	std::cout<<"overlayVariables: '"<<_variableSetName<<"'"<<std::endl;
@@ -200,5 +263,32 @@ void overlayVariables::initLocalTree(){
 		name << _variableSetName << "jet"<<i<<"_purged";
 		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_tlvpurgedJets.at(i),16000,0);
 	}
+	
+	
+
+	std::string vsn(_variableSetName);
+	
+	_localTree->Branch((vsn+"ovr_totalMass").c_str(), &_overlay_totalMass, (vsn+"ovr_totalMass/D").c_str());		
+	_localTree->Branch((vsn+"ovr_totalEnergy").c_str(), &_overlay_totalEnergy, (vsn+"ovr_totalEnergy/D").c_str());
+	_localTree->Branch((vsn+"ovr_cosTheta.").c_str(), &_overlay_cosTheta);
+	_localTree->Branch((vsn+"ovr_phi.").c_str(), &_overlay_phi);							
+
+	if(tagOpt){
+		_localTree->Branch((vsn+"upliketag_ovr").c_str(),"TLorentzVector",&_upliketag_overlay, 16000,0);
+		_localTree->Branch((vsn+"dwnliketag_ovr").c_str(),"TLorentzVector",&_dwnliketag_overlay, 16000,0);
+		_localTree->Branch((vsn+"leptontag_ovr").c_str(),"TLorentzVector",&_leptontag_overlay, 16000,0);
+		
+		_localTree->Branch((vsn+"upliketag_ovr_ntrks").c_str(), &_upliketag_overlay_ntracks, (vsn+"upliketag_ovr_ntrks/I").c_str());		
+		_localTree->Branch((vsn+"dwnliketag_ovr_ntrks").c_str(), &_dwnliketag_overlay_ntracks, (vsn+"dwnliketag_ovr_ntrks/I").c_str());
+		_localTree->Branch((vsn+"leptontag_ovr_ntrks").c_str(), &_leptontag_overlay_ntracks, (vsn+"leptontag_ovr_ntrks/I").c_str());
+				
+		_localTree->Branch((vsn+"upliketag_ovr_Efrac").c_str(), &_upliketag_overlay_Efrac, (vsn+"upliketag_ovr_Efrac/D").c_str());
+		_localTree->Branch((vsn+"dwnliketag_ovr_Efrac").c_str(), &_dwnliketag_overlay_Efrac, (vsn+"dwnliketag_ovr_Efrac/D").c_str());
+		_localTree->Branch((vsn+"leptontag_ovr_Efrac").c_str(), &_leptontag_overlay_Efrac, (vsn+"leptontag_ovr_Efrac/D").c_str());	
+
+		_localTree->Branch((vsn+"Wqqtag_ovr").c_str(), "TLorentzVector", &_Wqq_overlay, 16000,0);											
+
+	}
+		
 	
 }

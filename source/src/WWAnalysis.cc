@@ -121,7 +121,7 @@ void WWAnalysis::init() {
 	jv_eekt->initLocalTree();
    ana_eekt = new anaVariables(_tree, ev_eekt);
 	ana_eekt->initLocalTree();
-	ov_eekt = new overlayVariables("eekt",_tree,_nJets);
+	ov_eekt = new overlayVariables("eekt",_tree,_nJets, 1);
 	ov_eekt->initLocalTree();
 	
 
@@ -960,13 +960,15 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*>
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
 
 	oVar->setParticles(jets, pfo2mc);
-	std::cout<<"1"<<std::endl;
+
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, _mcpartvec );
 		std::cout<<"2"<<std::endl;
 	oVar->setOverlayparticlesLoop(oVar->_overlayParticles, oVar->_tlvoverlayParticles, oVar->_purgedJets, oVar->_tlvpurgedJets, jets);
 	std::cout<<"3"<<std::endl;
 	oVar->sumOverlayParticlesLoop(oVar->_tlvoverlaySum, oVar->_tlvoverlayParticles);
 	std::cout<<"4"<<std::endl;
+	oVar->setTotalVariables();
+		
 
 	evtVar->setParticles(_mcpartvec, jets);
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
@@ -975,6 +977,9 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*>
 	evtVar->computeRecoResultsFromTags(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctlep, evtVar->_mctWqq, evtVar->_mctNu);
 	evtVar->populateCMTLVs(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctNu, evtVar->_mctCMjets,  evtVar->_mctCMNu );
 	evtVar-> getCosThetaW(evtVar->_mctlepCharge, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctWmProdAngle);
+
+	//use mctag to set overlay for now
+	oVar->setTagVariables(evtVar->_jetmctags);
 
 
 	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
