@@ -201,8 +201,8 @@ void overlayVariables::setTotalVariables(){
 	//distribution of all the particles from the overlay
 
 		TLorentzVector t;
-		for(unsigned int i=0; i<tlvoverlaySum.size(); i++){
-			t+= *tlvoverlaySum.at(i);
+		for(unsigned int i=0; i<_tlvoverlaySum.size(); i++){
+			t+= *_tlvoverlaySum.at(i);
 		}
 		_overlay_totalMass = t.M();
 		_overlay_totalEnergy = t.E();
@@ -273,7 +273,7 @@ void overlayVariables::initLocalTree(){
 	_localTree->Branch((vsn+"ovr_cosTheta.").c_str(), &_overlay_cosTheta);
 	_localTree->Branch((vsn+"ovr_phi.").c_str(), &_overlay_phi);							
 
-	if(tagOpt){
+	if(_tagOpt){
 		_localTree->Branch((vsn+"upliketag_ovr").c_str(),"TLorentzVector",&_upliketag_overlay, 16000,0);
 		_localTree->Branch((vsn+"dwnliketag_ovr").c_str(),"TLorentzVector",&_dwnliketag_overlay, 16000,0);
 		_localTree->Branch((vsn+"leptontag_ovr").c_str(),"TLorentzVector",&_leptontag_overlay, 16000,0);
