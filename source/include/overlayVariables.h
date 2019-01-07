@@ -17,7 +17,7 @@ using namespace lcio;
 class overlayVariables{
 
 	public:
-		overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets );
+		overlayVariables(const char* variableSetName, TTree*& tree, unsigned int nJets, bool tagOpt );
 		void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc);
 		void initLocalTree();
 
@@ -40,6 +40,34 @@ class overlayVariables{
 		std::vector< std::vector<TLorentzVector*> > _tlvoverlayParticles{};
 		std::vector< TLorentzVector*> _tlvoverlaySum{};//4vector sum of the particles per jet
 
+		//variables
+		//total variables
+		double _overlay_totalMass{};
+		double _overlay_totalEnergy{};
+		std::vector<double> _overlay_cosTheta{};
+		std::vector<double> _overlay_phi{};
+
+
+		//tag requirements
+		//tag set that is populated by another class
+		bool _tagOpt{};// option to make these variables in the tree
+		std::vector<int> _jetTags{};
+		TLorentzVector* _upliketag_overlay{};
+		TLorentzVector* _dwnliketag_overlay{};
+		TLorentzVector* _leptontag_overlay{};
+	
+		int _upliketag_overlay_ntracks{};
+		int _dwnliketag_overlay_ntracks{};
+		int _leptontag_overlay_ntracks{};
+
+		double _upliketag_overlay_Efrac{};
+		double _dwnliketag_overlay_Efrac{};
+		double _leptontag_overlay_Efrac{};
+
+		TLorentzVector* _Wqq_overlay{};
+
+
+
 		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );
 
 		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, ReconstructedParticle*& purgedJet, TLorentzVector*& purgedTLVJet, const std::vector<ReconstructedParticle*>& jetParticles );
@@ -55,6 +83,10 @@ class overlayVariables{
 		void sumOverlayParticles(TLorentzVector*& tlvoverlaySum, std::vector<TLorentzVector*>& jetParticles);
 	
 		void sumOverlayParticlesLoop(std::vector<TLorentzVector*>& tlvoverlaySum, std::vector<std::vector<TLorentzVector*> >& tlvjets);
+
+		void setTagVariables(std::vector<int>& tags);
+
+		void setTotalVariables();
 
 		void printOverlayVariables();
 
