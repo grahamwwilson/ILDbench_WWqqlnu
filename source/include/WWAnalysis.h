@@ -123,6 +123,10 @@ using namespace lcio;
  jetVariables* jv_kt08{};
  anaVariables* ana_kt08{};
 
+//overlay removed from eekt variables set
+ eventVariables* ev_eekt_no_overlay{};
+ jetVariables* jv_eekt_no_overlay{};
+ anaVariables* ana_eekt_no_overlay{};
 
  PandoraPfoVariables* ppfov{};
  HistoManager* h1{};
