@@ -32,7 +32,7 @@ void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, s
 	_MCOverlay.clear();
 	_MCOverlayIDs.clear();
 
-	for(unsigned int i=0; i<nJets; i++){
+	for(unsigned int i=0; i<_nJets; i++){
 		_overlayParticles.at(i).clear();
 		_tlvoverlayParticles.at(i).clear();
 	}
