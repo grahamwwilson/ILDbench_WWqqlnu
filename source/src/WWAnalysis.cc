@@ -1097,7 +1097,7 @@ FindRecoToMCRelation( evt );
 	
 
 
-	jv_eekt_no_overlay->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
+	jv_eekt_no_overlay->setParticles(evt, ev_eekt_no_overlay->_jets, ev_eekt_no_overlay->_tlvjets);
 	jv_eekt_no_overlay->setLogYVariables(jv_eekt_no_overlay->_logyMinus, jv_eekt_no_overlay->_logyPlus);
 	jv_eekt_no_overlay->setMaxCosPsi(jv_eekt_no_overlay->_jetMaxCosPsi); 
 	jv_eekt_no_overlay->setMCTJetMultiplicity(jv_eekt_no_overlay->_mctlepPfoMult, jv_eekt_no_overlay->_mctlepTrkMult, jv_eekt_no_overlay->_mctUpPfoMult, jv_eekt_no_overlay->_mctDwnPfoMult, jv_eekt_no_overlay->_mctUpTrkMult, jv_eekt_no_overlay->_mctDwnTrkMult, jv_eekt_no_overlay->_mctlepMaxCosPsi, jv_eekt_no_overlay->_mctUpMaxCosPsi, jv_eekt_no_overlay->_mctDwnMaxCosPsi);
@@ -1107,7 +1107,7 @@ FindRecoToMCRelation( evt );
 	ana_eekt_no_overlay->identifyLeptonJet_byTrkMult(ana_eekt_no_overlay->_jetanatags);
 	ana_eekt_no_overlay->getLeptonJetCharge_byLeadingTrack(ana_eekt_no_overlay->_analepCharge );
 	ana_eekt_no_overlay->setLeadingTrack(ana_eekt_no_overlay->_analepLeadingTracktlv );
-	ana_eekt_no_overlay->setAnaEventVariables(evtVar);
+	ana_eekt_no_overlay->setAnaEventVariables(ev_eekt_no_overlay);
 
 	jv_eekt_no_overlay->setAnaJetMultiplicity( ana_eekt_no_overlay->_jetanatags, jv_eekt_no_overlay->_analepPfoMult, jv_eekt_no_overlay->_analepTrkMult);
 
