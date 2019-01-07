@@ -140,9 +140,9 @@ void WWAnalysis::init() {
 	ana_kt08->initLocalTree();
 
 
-	ev_eekt_no_overlay = new eventVarialbes("eektpure", _nfermions, _nleptons, _nJets, _tree);
+	ev_eekt_no_overlay = new eventVariables("eektpure", _nfermions, _nleptons, _nJets, _tree);
 	ev_eekt_no_overlay->initLocalTree();
-    jv_eekt_no_overlay = new jetvariables(ev_eekt_no_overlay, _JetCollName_eekt);
+    jv_eekt_no_overlay = new jetVariables(ev_eekt_no_overlay, _JetCollName_eekt);
 	jv_eekt_no_overlay->initLocalTree();
     ana_eekt_no_overlay = new anaVariables(_tree, ev_eekt_no_overlay);
     ana_eekt_no_overlay->initLocalTree();
