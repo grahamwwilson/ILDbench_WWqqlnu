@@ -167,7 +167,7 @@ void overlayVariables::setTagVariables(std::vector<int>& tags){
 
 				//loop and count tracks of the i-th jet
 				ntrks = 0;
-				for(unsigned int j=0; j<_overlayParticles.at(i).size(); i++){
+				for(unsigned int j=0; j<_overlayParticles.at(i).size(); j++){
 					if(_overlayParticles.at(i).at(j)->getCharge() != 0){
 						ntrks++;
 					}
