@@ -1057,11 +1057,11 @@ FindRecoToMCRelation( evt );
 	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
 	
 //do ppfo
-	std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
-	ppfo_wrapper.at(0) = _pfovec;
-	ppfo_ovr->setParticles(ppfo_wrapper,  _reco2mcvec);
+	//std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
+//	ppfo_wrapper.at(0) = _pfovec;
+	ppfo_ovr->setParticles(_pfovec,  _reco2mcvec);
 	ppfo_ovr->setMCOverlay(ppfo_ovr->_MCOverlay, ppfo_ovr->_MCOverlayIDs, _mcpartvec );
-	ppfo_ovr->setOverlayparticles(ppfo_ovr->_overlayParticles.at(0), ppfo_ovr->_tlvoverlayParticles.at(0), ppfo_ovr->_purgedJets.at(0), ppfo_ovr->_tlvpurgedJets.at(0), _pfovec);
+	ppfo_ovr->setOverlayParticles(ppfo_ovr->_overlayParticles.at(0), ppfo_ovr->_tlvoverlayParticles.at(0), ppfo_ovr->_purgedJets.at(0), ppfo_ovr->_tlvpurgedJets.at(0), _pfovec);
 
 	ppfo_ovr->sumOverlayParticles(ppfo_ovr->_tlvoverlaySum.at(0), ppfo_ovr->_tlvoverlayParticles.at(0));
 	ppfo_ovr->setTotalVariables();
