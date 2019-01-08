@@ -185,17 +185,17 @@ void ReconstructedOverlayRemoval::printReconstructedParticle(ReconstructedPartic
 }
 bool ReconstructedOverlayRemoval::particleIsOverlay(int id){
 	//find particle in LCRelation list
-	for(unsigned int i=0; i<_pfo2mc.size(); i++){
+	for(unsigned int i=0; i<_reco2mcvec.size(); i++){
 			
-		if( _pfo2mc.at(i)->getFrom()->id() == id ){
+		if( _reco2mcvec.at(i)->getFrom()->id() == id ){
 			//we have located pfo on the list look at  the matching mcparticle
 			//is this id on the local overlay list?
 			for(unsigned int j=0; j<_mcpartvec.size(); j++){
-				if( _mcpartvec.at(j)->id() == _pfo2mc.at(i)->getTo()->id() ){
-					std::cout<<"found a particle: wgts "<< (int(_pfo2mc.at(i)->getWeight())%10000)/1000. <<" "<<(int(_pfo2mc.at(i)->getWeight())/10000)/1000. << std::endl;
+				if( _mcpartvec.at(j)->id() == _reco2mcvec.at(i)->getTo()->id() ){
+					std::cout<<"found a particle: wgts "<< (int(_reco2mcvec.at(i)->getWeight())%10000)/1000. <<" "<<(int(_reco2mcvec.at(i)->getWeight())/10000)/1000. << std::endl;
 					//this particle has overlay contribution
 					//is the contribution significant?
-					if( (((int(_pfo2mc.at(i)->getWeight())%10000)/1000.)+((int(_pfo2mc.at(i)->getWeight())/10000)/1000.)) > 0.5){return true;}
+					if( (((int(_reco2mcvec.at(i)->getWeight())%10000)/1000.)+((int(_reco2mcvec.at(i)->getWeight())/10000)/1000.)) > 0.5){return true;}
 				}//end mc to lcrelation match
 			}///end mc loop
 			
