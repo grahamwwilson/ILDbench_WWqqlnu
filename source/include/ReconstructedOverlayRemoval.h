@@ -1,6 +1,6 @@
 #include "marlin/Processor.h"
 #include "EVENT/MCParticle.h"
-#include "EVENT/Reconstructedparticle.h"
+#include "EVENT/ReconstructedParticle.h"
 #include "EVENT/LCRelation.h"
 #include "lcio.h"
 #include "TFile.h"
