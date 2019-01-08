@@ -12,7 +12,7 @@
 <marlin>
 	<execute>
 
-
+    <processor name="MyOverlayProcessor"/>
 	<processor name="Jets0" />
     <processor name="Jets1" />
 	 <processor name="Jets1recluster" />
@@ -30,6 +30,23 @@
    		<parameter name="GearXMLFile" value="gear_ILD_l5_v02_dd4hep.xml" />
    		<parameter name="Verbosity"    options= "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG </parameter>
  	</global>
+
+  <processor name="MyOverlayRemoval" type="MCParticleSelection">   
+
+		<parameter name="Printing" value="5" />
+		<parameter name="MCOFilter" value="1" />
+
+		
+		<!-- input/output collection names -->
+		<parameter name="InputParticleCollectionName" value="PandoraPFOs" />
+		<parameter name="McParticleCollectionName" value="MCParticle" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
+		
+		<parameter name="OutputParticleCollectionName" type="string" lcioOutType="ReconstructedParticle"> purgedPFOs </parameter>
+		<parameter name="OutputMCCollectionName" type="string" lcioOutType="MCParticle"> MCOverlay </parameter>
+		<parameter name="OutputOverlayCollectionName" type="string" lcioOutType="ReconstructedParticle"> overlayPFOs </parameter>
+   
+ 	</processor>
 
 	 <!-- eekt only -->
   <processor name="Jets0" type="FastJetProcessor">
