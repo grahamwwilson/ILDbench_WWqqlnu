@@ -227,7 +227,8 @@ void ReconstructedOverlayRemoval::extractMCOverlay( std::vector<MCParticle*>& mc
 	//this skims over mcparts and creates a list of all the overlay particles
 	//for( unsigned int i=0; i<mcpartvec.size(); i++){
 	for( std::vector<MCParticle*>::iterator it = mcpartvec.begin(); it != mcpartvec.end(); ++it){
-		if(!mcpartvec.at(i)->isOverlay()){
+		//if(!mcpartvec.at(i)->isOverlay()){
+		if(!(*it->isOverlay())){
 			mcpartvec.erase(it);
 		}
 		else{
