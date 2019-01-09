@@ -225,16 +225,13 @@ void ReconstructedOverlayRemoval::classifyReconstructedParticles( LCCollectionVe
 void ReconstructedOverlayRemoval::extractMCOverlay( std::vector<MCParticle*>& mcpartvec, LCCollectionVec*& mcCollection ){
 	
 	//this skims over mcparts and creates a list of all the overlay particles
-	//for( unsigned int i=0; i<mcpartvec.size(); i++){
+
 	for( std::vector<MCParticle*>::iterator it = mcpartvec.begin(); it != mcpartvec.end(); ++it){
-		//if(!mcpartvec.at(i)->isOverlay()){
-		if(!((*it)->isOverlay())){
-			mcpartvec.erase(it);
-		}
-		else{
-			//add the overlay mcparts to a new sub collection
-			//mcCollection->addElement(mcpartvec.at(i));
+
+		if((*it)->isOverlay()){
 			mcCollection->addElement(*it);
+		else{
+			mcpartvec.erase(it);
 		}
 	}
 
@@ -251,14 +248,15 @@ void ReconstructedOverlayRemoval::processEvent( LCEvent * evt ) {
  mcCollection->setSubset(true);
   //if mco filter is toggled on - create a list of pure overlay mcparticles
  if(_MCOFilter){
-    
 	extractMCOverlay(_mcpartvec, mcCollection); 
-//	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
+	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
  }
   
   
   LCCollectionVec * purgedCollection = new LCCollectionVec(LCIO::RECONSTRUCTEDPARTICLE);
   LCCollectionVec * overlayCollection = new LCCollectionVec(LCIO::RECONSTRUCTEDPARTICLE);
+  purgedCollection->setSubset(true);
+  overlayCollection->setSubset(true);
  
   classifyReconstructedParticles( overlayCollection,  purgedCollection );
 
