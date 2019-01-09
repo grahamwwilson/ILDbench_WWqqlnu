@@ -31,7 +31,7 @@
    		<parameter name="Verbosity"    options= "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG </parameter>
  	</global>
 
-  <processor name="MyOverlayRemoval" type="MCParticleSelection">   
+  <processor name="MyOverlayRemoval" type="ReconstructedOverlayRemoval">   
 
 		<parameter name="Printing" value="5" />
 		<parameter name="MCOFilter" value="1" />
