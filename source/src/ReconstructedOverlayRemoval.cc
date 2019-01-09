@@ -248,12 +248,12 @@ void ReconstructedOverlayRemoval::processEvent( LCEvent * evt ) {
  FindRecoToMCRelation(evt);  
 
  LCCollectionVec * mcCollection = new LCCollectionVec(LCIO::MCPARTICLE);
- //mcCollection->setSubset(true);
+ mcCollection->setSubset(true);
   //if mco filter is toggled on - create a list of pure overlay mcparticles
  if(_MCOFilter){
     
 	extractMCOverlay(_mcpartvec, mcCollection); 
-//	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
+	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
  }
   
   
@@ -264,8 +264,8 @@ void ReconstructedOverlayRemoval::processEvent( LCEvent * evt ) {
 
 	
   
-  evt->addCollection(purgedCollection , _outputParticleCollectionName.c_str() ); 
-  evt->addCollection(overlayCollection , _outputOverlayCollectionName.c_str() ); 
+  //evt->addCollection(purgedCollection , _outputParticleCollectionName.c_str() ); 
+  //evt->addCollection(overlayCollection , _outputOverlayCollectionName.c_str() ); 
 
 
   nEvt++;
