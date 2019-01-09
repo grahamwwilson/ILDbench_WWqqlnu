@@ -131,7 +131,7 @@ bool ReconstructedOverlayRemoval::FindRecoToMCRelation( LCEvent* evt ){
       			collectionFound = true;
       
 			//add the collection elements to the global vector
-			for(unsigned int i=0;i<collection->getNumberOfElements();i++){
+			for( int i=0;i<collection->getNumberOfElements();i++){
 				LCRelation* recoRelation = dynamic_cast<LCRelation*>(collection->getElementAt(i));
 				_reco2mcvec.push_back(recoRelation);
 

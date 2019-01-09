@@ -1066,6 +1066,7 @@ FindRecoToMCRelation( evt );
 //do ppfo
 	//std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
 //	ppfo_wrapper.at(0) = _pfovec;
+/*
 	ppfo_ovr->setParticles(_pfovec,  _reco2mcvec);
 	ppfo_ovr->setMCOverlay(ppfo_ovr->_MCOverlay, ppfo_ovr->_MCOverlayIDs, _mcpartvec );
 	ppfo_ovr->setOverlayParticles(ppfo_ovr->_overlayParticles.at(0), ppfo_ovr->_tlvoverlayParticles.at(0), ppfo_ovr->_purgedJets.at(0), ppfo_ovr->_tlvpurgedJets.at(0), _pfovec);
@@ -1073,7 +1074,7 @@ FindRecoToMCRelation( evt );
 	ppfo_ovr->sumOverlayParticles(ppfo_ovr->_tlvoverlaySum.at(0), ppfo_ovr->_tlvoverlayParticles.at(0));
 	ppfo_ovr->setTotalVariables();
 //end special ppfo overlay
-
+*/
 	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt);
 
 	//processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
@@ -1085,7 +1086,7 @@ FindRecoToMCRelation( evt );
 
 	//processSignalVariableSet(evt, reco //TODO
 
-
+/*
 	ev_eekt_no_overlay->setParticles(_mcpartvec, ov_eekt->_purgedJets);
 	ev_eekt_no_overlay->initMCVars(ev_eekt_no_overlay->_isTau, ev_eekt_no_overlay->_isMuon, ev_eekt_no_overlay->_mclepCharge, ev_eekt_no_overlay->_mcl, ev_eekt_no_overlay->_mcqq, ev_eekt_no_overlay->_MCf, ev_eekt_no_overlay->_MCfpdg, ev_eekt_no_overlay->_mclepTrkMult, ev_eekt_no_overlay->_mclepPfoMult);
 	ev_eekt_no_overlay->initJetTLV(ev_eekt_no_overlay->_tlvjets);
@@ -1093,7 +1094,7 @@ FindRecoToMCRelation( evt );
 	ev_eekt_no_overlay->computeRecoResultsFromTags(ev_eekt_no_overlay->_jetmctags, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctlep, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctNu);
 	ev_eekt_no_overlay->populateCMTLVs(ev_eekt_no_overlay->_jetmctags, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctNu, ev_eekt_no_overlay->_mctCMjets,  ev_eekt_no_overlay->_mctCMNu );
 	ev_eekt_no_overlay-> getCosThetaW(ev_eekt_no_overlay->_mctlepCharge, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctWmProdAngle);
-
+*/
 	
 
 /*
