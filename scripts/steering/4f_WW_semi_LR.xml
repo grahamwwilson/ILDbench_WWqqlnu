@@ -12,7 +12,7 @@
 <marlin>
 	<execute>
 
-    <processor name="MyOverlayRemoval"/>
+ <!--   <processor name="MyOverlayRemoval"/> -->
 	<processor name="Jets0" />
     <processor name="Jets1" />
 	 <processor name="Jets1recluster" />
