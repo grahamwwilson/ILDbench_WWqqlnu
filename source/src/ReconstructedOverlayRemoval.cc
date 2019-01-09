@@ -253,7 +253,7 @@ void ReconstructedOverlayRemoval::processEvent( LCEvent * evt ) {
  if(_MCOFilter){
     
 	extractMCOverlay(_mcpartvec, mcCollection); 
-	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
+//	evt->addCollection(mcCollection , _outputMCCollectionName.c_str() );
  }
   
   
