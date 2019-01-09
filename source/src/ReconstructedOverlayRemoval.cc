@@ -230,6 +230,7 @@ void ReconstructedOverlayRemoval::extractMCOverlay( std::vector<MCParticle*>& mc
 
 		if((*it)->isOverlay()){
 			mcCollection->addElement(*it);
+		}
 		else{
 			mcpartvec.erase(it);
 		}
