@@ -263,8 +263,8 @@ void ReconstructedOverlayRemoval::processEvent( LCEvent * evt ) {
 
 	
   
-  //evt->addCollection(purgedCollection , _outputParticleCollectionName.c_str() ); 
-  //evt->addCollection(overlayCollection , _outputOverlayCollectionName.c_str() ); 
+  evt->addCollection(purgedCollection , _outputParticleCollectionName.c_str() ); 
+  evt->addCollection(overlayCollection , _outputOverlayCollectionName.c_str() ); 
 
 
   nEvt++;
