@@ -82,6 +82,9 @@ using namespace lcio;
 	void processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*> pfo2mc, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets);
 	void printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar );
 
+   void processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstrcutedParticle*> jets, std::vector<MCParticles*> mcpartvec , std::vector<LCRelation*> pfo2mc);
+
+   void processVariables(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets );
 
 
 	//overlay analysis
@@ -113,22 +116,28 @@ using namespace lcio;
  jetVariables* jv_eekt{};
  anaVariables* ana_eekt{};
  overlayVariables* ov_eekt{};
- overlayVariables* ppfo_ovr{};
+ 
+	eventVariables* ev_pure{};
+	jetVariables*	jv_pure{};
+	anaVariables*  ana_pure{};
 
 	eventVariables* ev_kt15{};
  jetVariables* jv_kt15{};
  anaVariables* ana_kt15{};
+ overlayVariables* ov_kt15{};
 
 	eventVariables* ev_kt08{};
  jetVariables* jv_kt08{};
  anaVariables* ana_kt08{};
+ overlayVariables* ov_kt15{};
 
 //overlay removed from eekt variables set
- eventVariables* ev_eekt_no_overlay{};
- jetVariables* jv_eekt_no_overlay{};
- anaVariables* ana_eekt_no_overlay{};
+// eventVariables* ev_eekt_no_overlay{};
+// jetVariables* jv_eekt_no_overlay{};
+// anaVariables* ana_eekt_no_overlay{};
 
  PandoraPfoVariables* ppfov{};
+ //overlayVariables* ppfo_ovr{};
  HistoManager* h1{};
 //TTree
   TFile* file{};
@@ -180,6 +189,7 @@ using namespace lcio;
 //  std::vector<ReconstructedParticle*> _kt10Jets{};
 //  std::vector<ReconstructedParticle*> _kt12Jets{};
   std::vector<ReconstructedParticle*> _kt15Jets{};
+  std::vector<ReconstructedParticle*> _pureJets{};
  
  
 	//jet y variabls //log jet variables
@@ -210,6 +220,7 @@ using namespace lcio;
   std::string _JetCollName_eekt = "eektJets";
   std::string _JetCollName_kt15 = "kt15Jets";
   std::string _JetCollName_kt08 = "kt08Jets";
+  std::string _JetCollName_pure = "pureJets";
 
 
 
