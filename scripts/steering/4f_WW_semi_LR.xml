@@ -13,6 +13,7 @@
 	<execute>
 
    <processor name="MyOverlayRemoval"/> 
+    <processor name="pureJets" />
 	<processor name="Jets0" />
     <processor name="Jets1" />
 	 <processor name="Jets1recluster" />
@@ -47,6 +48,27 @@
 		<parameter name="OutputOverlayCollectionName" type="string" lcioOutType="ReconstructedParticle"> overlayPFOs </parameter>
    
  	</processor>
+
+  <!-- eekt only on jets with overlay removed -->
+  <processor name="pureJets" type="FastJetProcessor">
+    <!--Using the FastJet library to identify jets-->
+    <!--a list of all reconstructed particles we are searching for jets in.-->
+    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> purgedPFOs </parameter>
+    <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
+    <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
+    <!--The identified jets-->
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> pureJets </parameter>
+    <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
+    <parameter name="storeParticlesInJets" type="bool"> true </parameter>
+    <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
+    <parameter name="recParticleOut" type="string" lcioOutType="ReconstructedParticle"> PFOsFrompureJets </parameter>
+    <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
+    <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+    <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveNJets 3  </parameter>
+    <!--The recombination scheme used when merging 2 particles. Usually there is no need to use anything else than 4-Vector addition: E_scheme-->
+    <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
+  </processor>
 
 	 <!-- eekt only -->
   <processor name="Jets0" type="FastJetProcessor">
