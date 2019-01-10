@@ -1113,19 +1113,24 @@ FindRecoToMCRelation( evt );
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
-   processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
+  // processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
    
-   processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );
+ //  processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );
    processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
-
-   processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
+	
+ //  processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
    processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
 
-   processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
+  // processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
    processVariables( evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets );
  
 
-	
+	/*evtVar->printEventVariables();	
+	ppfoVar->printPandoraPfoVariables();
+	jetVar->printJetVariables();
+	anaVar->printAnaVariables();
+	oVar->printOverlayVariables();
+	*/
 //do ppfo
 	//std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
 //	ppfo_wrapper.at(0) = _pfovec;
