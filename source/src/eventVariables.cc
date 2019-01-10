@@ -243,6 +243,9 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& lep, TLorentzVector*& Wqq, TLorentzVector*& Nu){
 
 	std::cout<<"tags "<<tagset.size()<<std::endl;
+	for(unsigned int i=0; i< tagset.size(); i++){
+		std::cout<<tagset.at(i)<<std::endl;
+	}
 	
 	TLorentzVector qq;
 	for(unsigned int i=0; i< tagset.size(); i++){
