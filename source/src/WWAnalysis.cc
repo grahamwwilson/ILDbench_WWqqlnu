@@ -1113,7 +1113,7 @@ FindRecoToMCRelation( evt );
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
-  // processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
+   processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
    
  //  processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );
    processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
