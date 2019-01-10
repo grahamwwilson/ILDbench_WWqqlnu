@@ -129,7 +129,7 @@ using namespace lcio;
 	eventVariables* ev_kt08{};
  jetVariables* jv_kt08{};
  anaVariables* ana_kt08{};
- overlayVariables* ov_kt15{};
+ overlayVariables* ov_kt08{};
 
 //overlay removed from eekt variables set
 // eventVariables* ev_eekt_no_overlay{};
