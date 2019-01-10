@@ -977,7 +977,7 @@ void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswith
 	*/
 
 }
-void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstrcutedParticle*> jets, std::vector<MCParticles*> mcpartvec , std::vector<LCRelation*> pfo2mc){
+void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticles*> mcpartvec , std::vector<LCRelation*> pfo2mc){
 	oVar->setParticles(jets, pfo2mc);
 
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, mcpartvec );
