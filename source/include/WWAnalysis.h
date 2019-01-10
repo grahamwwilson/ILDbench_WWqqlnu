@@ -225,7 +225,7 @@ using namespace lcio;
   std::string _JetCollName_kt15 = "kt15Jets";
   std::string _JetCollName_kt08 = "kt08Jets";
   std::string _JetCollName_pure = "pureJets";
-  std::string _PfoCollName_pure = "purePFOs";
+  std::string _PfoCollName_pure = "purgedPFOs";
 
 
 	/* special set of histograms for dealing with overlay and forward acceptance */
