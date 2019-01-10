@@ -274,6 +274,38 @@ bool WWAnalysis::FindPFOs( LCEvent* evt ) {
    
 	return collectionFound;
 }
+bool WWAnalysis::FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec ){
+	bool collectionFound = false;
+
+  	// clear old global pfovector
+	localVec.clear();
+  	typedef const std::vector<std::string> StringVec ;
+  	StringVec* strVec = evt->getCollectionNames() ;
+	
+	//iterate over collections, find the matching name
+  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){
+     
+		//if found print name and number of elements
+    		if(*itname==PfoCollectionName){ 
+			LCCollection* collection = evt->getCollection(*itname);
+			std::cout<< "Located Pfo Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
+			collectionFound = true;
+
+ 			//add the collection elements to the global vector
+      			for(int i=0; i<collection->getNumberOfElements(); i++){
+				ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(collection->getElementAt(i));
+				localVec.push_back(recoPart);
+      			}
+    		}
+  	}
+	
+	if(!collectionFound){
+		std::cout<<"Pfo Collection "<< PfoCollectionName << "not found"<<std::endl;
+	}
+
+   
+	return collectionFound;
+}
 /*****************
 locate the track collection with specified name
 populate the global track vectors with tracks from the collection for this event
@@ -1084,6 +1116,7 @@ FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
 FindRecoToMCRelation( evt );
  FindTracks(evt);
  FindPFOs(evt);
+FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 
 	///little test area for lcrelation

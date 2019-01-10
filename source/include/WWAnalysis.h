@@ -74,6 +74,7 @@ using namespace lcio;
   bool FindMCParticles( LCEvent* evt );
  // bool FindJets( LCEvent* evt ) ;
   bool FindPFOs( LCEvent* evt ) ;
+  bool FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec );
   bool FindTracks( LCEvent* evt );
   bool FindRecoToMCRelation( LCEvent* evt );
  // bool FindJetsWithOverlay( LCEvent* evt );
@@ -177,6 +178,7 @@ using namespace lcio;
  // std::vector<ReconstructedParticle*> _jets{};
   std::vector<Track*> _trackvec{};
   std::vector<ReconstructedParticle*> _pfovec{};
+  std::vector<ReconstructedParticle*> _purePFOs{};
   std::vector<LCRelation*> _reco2mcvec{};
  // std::vector<ReconstructedParticle*> _jetswithoverlay{};
   
@@ -190,6 +192,8 @@ using namespace lcio;
 //  std::vector<ReconstructedParticle*> _kt12Jets{};
   std::vector<ReconstructedParticle*> _kt15Jets{};
   std::vector<ReconstructedParticle*> _pureJets{};
+
+ 
  
  
 	//jet y variabls //log jet variables
@@ -221,7 +225,7 @@ using namespace lcio;
   std::string _JetCollName_kt15 = "kt15Jets";
   std::string _JetCollName_kt08 = "kt08Jets";
   std::string _JetCollName_pure = "pureJets";
-
+  std::string _PfoCollName_pure = "purePFOs";
 
 
 	/* special set of histograms for dealing with overlay and forward acceptance */
