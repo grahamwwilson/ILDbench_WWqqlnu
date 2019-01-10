@@ -19,7 +19,7 @@
 	 <processor name="Jets1recluster" />
     <processor name="Jets2" />
 	 <processor name="Jets2recluster" />
-   	<processor name="MyWWAnalysis"/>
+   <!--	<processor name="MyWWAnalysis"/> -->
    <processor name="MyLCIOOutputProcessor"/> 
  	</execute>
 
