@@ -251,7 +251,7 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 	for(unsigned int i=0; i<angles.size(); i++){
 		for(unsigned int j=0; j<angles.at(i).size(); j++){
 				if( angles.at(i).at(j) > maxangle &&  !fused.at(i) && !jused.at(j) ){
-					maxangle = angle.at(i).at(j);
+					maxangle = angles.at(i).at(j);
 					I=i;
 					J=j;
 				}
@@ -289,7 +289,7 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 	std::vector<std::vector<double> > angles{};
 	for(unsigned int i=0; i<ferm.size(); i++){
 		std::vector<double> a(_nJets);
-		angles.at(i).push_back(a);
+		angles.push_back(a);
 	}
 
 	double angle{};
