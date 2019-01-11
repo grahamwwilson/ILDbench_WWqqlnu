@@ -265,7 +265,7 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 }
 void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
 	
-
+	isMCTagValid = true;
 	//make a fermlist with no neutrino
 	std::vector<int> ferm{};
 	std::vector<TLorentzVector*> mc{};
