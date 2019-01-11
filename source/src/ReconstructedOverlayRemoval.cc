@@ -191,6 +191,7 @@ bool ReconstructedOverlayRemoval::particleIsOverlay(int id){
 			//we have located pfo on the list look at  the matching mcparticle
 			//is this id on the local overlay list?
 			for(unsigned int j=0; j<_mcpartvec.size(); j++){
+				if(_mcpartvec.at(j)->isOverlay()){
 				if( _mcpartvec.at(j)->id() == _reco2mcvec.at(i)->getTo()->id() ){
 					std::cout<<"found a particle: wgts "<< (int(_reco2mcvec.at(i)->getWeight())%10000)/1000. <<" "<<(int(_reco2mcvec.at(i)->getWeight())/10000)/1000. << std::endl;
 					//this particle has overlay contribution
@@ -200,6 +201,7 @@ bool ReconstructedOverlayRemoval::particleIsOverlay(int id){
 					if( ((int(_reco2mcvec.at(i)->getWeight())/10000)/1000.)> 0.5){return true;}
 
 				}//end mc to lcrelation match
+				}//end overlaycheck
 			}///end mc loop
 			
 		}//end id to lcrelation match	
