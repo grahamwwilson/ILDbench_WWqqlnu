@@ -1,8 +1,9 @@
 
 #include "PandoraPfoVariables.h"
 
-PandoraPfoVariables::PandoraPfoVariables(TTree*& tree){
+PandoraPfoVariables::PandoraPfoVariables(TTree*& tree, const char* variableSetName){
 	_localTree = tree;
+	_variableSetName = variableSetName;
 }
 void PandoraPfoVariables::setParticles(std::vector<ReconstructedParticle*>& pfovec){
 	_PandoraPfos = pfovec;
@@ -36,12 +37,14 @@ void PandoraPfoVariables::printPandoraPfoVariables(){
 	
 }
 void PandoraPfoVariables::initLocalTree(){
+
+std::string vsn(_variableSetName);
 	
-	_localTree->Branch("PPfonTracks", &_nTracks,"PPfonTracks/I");
-	_localTree->Branch("PPfonParticles", &_nParticles,"PPfonParticles/I");
-	_localTree->Branch("PPfototalPt", &_totalPt,"PPfototalPt/D");
-	_localTree->Branch("PPfototalE", &_totalE,"PPfototalE/D");
-	_localTree->Branch("PPfototalM", &_totalM,"PPfototalM/D");
+	_localTree->Branch((vsn+"PfonTracks").c_str(), &_nTracks,(vsn+"PfonTracks/I").c_str());
+	_localTree->Branch((vsn+"PfonParticles").c_str(), &_nParticles,(vsn+"PfonParticles/I").c_str());
+	_localTree->Branch((vsn+"PfototalPt").c_str(), &_totalPt,(vsn+"PfototalPt/D").c_str());
+	_localTree->Branch((vsn+"PfototalE").c_str(), &_totalE,(vsn+"PfototalE/D").c_str());
+	_localTree->Branch((vsn+"PfototalM").c_str(), &_totalM,(vsn+"PfototalM/D").c_str());
 
 
 }
