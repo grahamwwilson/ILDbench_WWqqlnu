@@ -161,10 +161,10 @@ void WWAnalysis::init() {
 	*/
 
 
- //  ppfov = new PandoraPfoVariables(_tree);
- // ppfov->initLocalTree();
+   ppfov = new PandoraPfoVariables(_tree, "pandora");
+  ppfov->initLocalTree();
 
-   ppfoPure = new PandoraPfoVariables(_tree);
+   ppfoPure = new PandoraPfoVariables(_tree, "pure");
 	ppfoPure->initLocalTree();
 
 	// ppfo_ovr= new overlayVariables("ppfoOvr",_tree,1,0);
@@ -1142,34 +1142,71 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
  
 //quickfix:::: if there are no jets... !!!!cant do anything TODO explore this phenomenon more
 	//happens if we look for jets with eekt after using kt
-	if(_eektJets.size() == 0 || _kt15Jets.size() == 0 || _kt08Jets.size() == 0 || _pureJets.size() == 0){ 
+/*	if(_eektJets.size() == 0 || _kt15Jets.size() == 0 || _kt08Jets.size() == 0 || _pureJets.size() == 0){ 
 		std::cout<<"NO JETS HERE!!!!!!!!"<<std::endl;
 		return;
-	}
+	}*/
 	
 
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
+	if(_pureJets.size() ==0 ){ 
+		std::cout<<"NO JETS IN pureJets!!!"<<std::endl;
+	}
+	else{
    processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
+		ev_pure->printEventVariables();	
+		jv_pure->printJetVariables();
+		ana_pure->printAnaVariables();
+  	 }
    
 
+	if(_eektJets.size() == 0){
+		std::cout<<"NO JETS IN eektJets!!!"<<std::endl;
+	}
+	else{
    processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
    processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );	
    ov_eekt->setTagVariables(ev_eekt->_jetmctags);	
+   	std::cout<<"Printing Event Variables "<<ev_eekt->_variableSetName <<std::endl;
+	ev_eekt->printEventVariables();	
+	jv_eekt->printJetVariables();
+	ana_eekt->printAnaVariables();
+	ov_eekt->printOverlayVariables();
+	}
 
 
+	if(_kt15Jets.size() == 0){
+		std::cout<<"NO JETS IN kt15Jets!!!"<<std::endl;
+	}
+	else{
    processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
    processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
    ov_kt15->setTagVariables(ev_kt15->_jetmctags);	
+    	std::cout<<"Printing Event Variables "<<ev_k15->_variableSetName <<std::endl;
+	ev_kt15->printEventVariables();	
+	jv_kt15->printJetVariables();
+	ana_kt15->printAnaVariables();
+	ov_kt15->printOverlayVariables();
+	}
 
-
+	if(_kt08Jets.size() == 0){
+		std::cout<<"NO Jets IN kt08Jets!!!"<<std::endl;
+	}
+	else{
    processVariables( evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets );
     processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
    ov_kt08->setTagVariables(ev_kt08->_jetmctags);	
+		std::cout<<"Printing Event Variables "<<ev_kt08->_variableSetName <<std::endl;
+	ev_kt08->printEventVariables();	
+	jv_kt08->printJetVariables();
+	ana_kt08->printAnaVariables();
+	ov_kt08->printOverlayVariables();
+	}
 
-    //ppfov->setParticles(_pfovec);
-	//ppfov->populateVariables(ppfov->_nTracks, ppfov->_nParticles, ppfov->_totalPt, ppfov->_totalE, ppfov->_totalM);	
+    ppfov->setParticles(_pfovec);
+	ppfov->populateVariables(ppfov->_nTracks, ppfov->_nParticles, ppfov->_totalPt, ppfov->_totalE, ppfov->_totalM);	
 
 	ppfoPure->setParticles(_purePFOs);
     ppfoPure->populateVariables(ppfoPure->_nTracks, ppfoPure->_nParticles, ppfoPure->_totalPt, ppfoPure->_totalE, ppfoPure->_totalM);	

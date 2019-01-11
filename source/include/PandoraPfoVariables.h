@@ -9,7 +9,8 @@ using namespace lcio;
 class PandoraPfoVariables{
 
 	public:
-	PandoraPfoVariables(TTree*& tree);
+	const char* _variableSetName{};
+	PandoraPfoVariables(TTree*& tree, const char* variableSetName);
 	void setParticles(std::vector<ReconstructedParticle*>& pfovec);
 	void initLocalTree();
 
