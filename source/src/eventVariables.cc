@@ -265,7 +265,7 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 }
 void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
 	
-
+	isMCTagValid = true;
 	//make a fermlist with no neutrino
 	std::vector<int> ferm{};
 	std::vector<TLorentzVector*> mc{};
@@ -294,7 +294,7 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 	}
 
 	double angle{};
-
+	
 	for(unsigned int i=0; i<ferm.size(); i++){
 		int pdg = ferm.at(i);
 		for(unsigned int j=0; j<_tlvjets.size(); j++){
@@ -304,6 +304,14 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 			angles.at(i).at(j) = angle;
 			
 		}
+	}
+
+	std::cout<<"angle matrix: "<<std::endl;
+	for(unsigned int i=0; i<angles.size(); i++){
+		for(unsigned int j=0; j<angles.at(i).size(); j++){
+			std::cout<< angles.at(i).at(j) << " ";
+		}
+		std::cout<<std::endl;
 	}
 	while( !allTagged(fused) ){
 		findBestMatch(angles, jetmctags, ferm, fused, jused);
