@@ -161,8 +161,11 @@ void WWAnalysis::init() {
 	*/
 
 
-   ppfov = new PandoraPfoVariables(_tree);
-  ppfov->initLocalTree();
+ //  ppfov = new PandoraPfoVariables(_tree);
+ // ppfov->initLocalTree();
+
+   ppfoPure = new PandoraPfoVariables(_tree);
+	ppfoPure->initLocalTree();
 
 	// ppfo_ovr= new overlayVariables("ppfoOvr",_tree,1,0);
 	// ppfo_ovr->initLocalTree();
@@ -1165,6 +1168,12 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
     processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
    ov_kt08->setTagVariables(ev_kt08->_jetmctags);	
 
+    //ppfov->setParticles(_pfovec);
+	//ppfov->populateVariables(ppfov->_nTracks, ppfov->_nParticles, ppfov->_totalPt, ppfov->_totalE, ppfov->_totalM);	
+
+	ppfoPure->setParticles(_purePFOs);
+    ppfoPure->populateVariables(ppfoPure->_nTracks, ppfoPure->_nParticles, ppfoPure->_totalPt, ppfoPure->_totalE, ppfoPure->_totalM);	
+	
 	/*evtVar->printEventVariables();	
 	ppfoVar->printPandoraPfoVariables();
 	jetVar->printJetVariables();

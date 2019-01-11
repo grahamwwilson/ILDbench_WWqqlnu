@@ -138,6 +138,7 @@ using namespace lcio;
 // anaVariables* ana_eekt_no_overlay{};
 
  PandoraPfoVariables* ppfov{};
+ PandoraPfoVariables* ppfoPure{};
  //overlayVariables* ppfo_ovr{};
  HistoManager* h1{};
 //TTree
