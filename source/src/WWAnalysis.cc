@@ -1150,15 +1150,20 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
    processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
    
-   processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );
-   processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
-	
-   processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
-   processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
 
-   processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
+   processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
+   processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );	
+   ov_eekt->setTagVariables(ev_eekt->_jetmctags);	
+
+
+   processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
+   processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
+   ov_kt15->setTagVariables(ev_kt15->_jetmctags);	
+
+
    processVariables( evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets );
- 
+    processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
+   ov_kt08->setTagVariables(ev_kt08->_jetmctags);	
 
 	/*evtVar->printEventVariables();	
 	ppfoVar->printPandoraPfoVariables();
