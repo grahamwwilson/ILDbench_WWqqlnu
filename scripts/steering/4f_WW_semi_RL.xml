@@ -37,7 +37,7 @@
 	<processor name="MyOverlayRemoval" type="ReconstructedOverlayRemoval">   
 
 		<parameter name="Printing" value="5" />
-		<parameter name="MCOFilter" value="1" />
+		<parameter name="MCOFilter" value="0" />
 
 		
 		<!-- input/output collection names -->
