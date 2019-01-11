@@ -17,6 +17,9 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 
+	std::vector<int> jtag(nJets);
+	 _jetmctags = jtag;
+
 	std::vector<TLorentzVector*> j1(nJets);
 	std::vector<TLorentzVector*> j2(nJets);
 	std::vector<TLorentzVector*> j3(nJets);
