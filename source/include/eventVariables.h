@@ -114,6 +114,10 @@ class eventVariables{
 	void populateCMTLVs(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& Wqq, TLorentzVector*& Nu, std::vector<TLorentzVector*>& CMjets,  TLorentzVector*& CMNu );
 
 	void getCosThetaW(int& lepCharge, TLorentzVector*& Wl, TLorentzVector*& Wqq, double& WmProdAngle);
+
+	void findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused);
+
+	bool allTagged(std::vector<bool> flags);
 	
 
 	//printing stuff
