@@ -195,6 +195,7 @@ void eventVariables::setJetTags(std::vector<int>& localjettags, std::vector<int>
 	localjettags = tagset;
 }
 /***** local mc jet tagging methods  *****/
+/*
 void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
 
 	std::vector<int> pdgtags(_nJets);
@@ -236,6 +237,78 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 	//also set charge
 	mctlepCharge = _mclepCharge;
 
+}*/
+bool eventVariables::allTagged(std::vector<bool> flags){
+	for(unsigned int i=0; i<flags.size(); i++){
+		if(flags.at(i) == false) return false;
+	}
+	return true;
+}
+void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused){
+		
+	int I{},J{}; // the max indices
+	double maxangle = -9999;
+	for(unsigned int i=0; i<angles.size(); i++){
+		for(unsigned int j=0; j<angles.at(i).size(); j++){
+				if( angle > maxangle &&  !fused.at(i) && !jused.at(j) ){
+					maxangle = angle;
+					I=i;
+					J=j;
+				}
+		}
+	}
+	//using the max mark used and make a tag
+	tags.at(J) = ferm.at(I);
+	jused.at(J) = true;
+	fused.at(I) = true;
+	std::cout<<"tagged jet "<<J<<" with "<< ferm.at(I) << " and angle "<<maxangle<<std::endl; 
+}
+void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
+	
+
+	//make a fermlist with no neutrino
+	std::vector<int> ferm{};
+	std::vector<MCParticle*> mc{};
+	for(unsigned int i=0; i< _MCfpdg.size(); i++){
+		int pdg = _MCfpdg.at(i);
+		if( (abs(pdg)!=14) && (abs(pdg)!=16) ){
+			ferm.push_back(_MCfpdg.at(i) );
+			mc.push_back(_MCf.at(i));
+		}
+	}
+	std::vector<bool> fused(ferm.size());
+	for(unsigned int i=0; i<fused.size(), i++){
+		fused.at(i) = false;
+	}
+
+	std::vector<bool> jused(_nJets);
+	for(unsigned int i=0; i<jused.size(), i++){
+		jused.at(i) = false;
+	}
+
+	std::vector<std::vector<double> > angles{};
+	for(unsigned int i=0; i<ferm.size(); i++){
+		std::vector a(_nJets);
+		angles.at(i).push_back(a);
+	}
+
+	double angle{};
+
+	for(unsigned int i=0; i<ferm.size(); i++){
+		int pdg = ferm.at(i);
+		for(unsigned int j=0; j<_tlvjets.size(); j++){
+			
+			angle = mc.at(i)->Vect().Dot( _tlvjets.at(j)->Vect() )/ (mc.at(i)->Vect().Mag() * _tlvjets.at(j)->Vect().Mag() );
+			
+			angles.at(i).at(j) = angle;
+			
+		}
+	}
+	while( !allTagged(fused) ){
+		findBestMatch(angles, jetmctags, ferm, fused, jused);
+	}
+
+	mctlepCharge = _mclepCharge;
 }
 /***** end local mc jet tagging *****/
 /*** calculate variables based on input set of tags ***/
