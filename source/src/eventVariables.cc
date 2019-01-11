@@ -286,10 +286,11 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 		jused.at(i) = false;
 	}
 
-	std::vector<std::vector<double> > angles{};
-	for(unsigned int i=0; i<ferm.size(); i++){
-		std::vector<double> a(_nJets);
-		angles.push_back(a);
+	std::vector<std::vector<double> > angles(ferm.size());
+	std::vector<double> a(_nJets);
+	for(unsigned int i=0; i<angles.size(); i++){
+		//std::vector<double> a(_nJets);
+		angles.at(i) = a;
 	}
 
 	double angle{};
