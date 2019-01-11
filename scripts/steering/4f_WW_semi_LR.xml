@@ -14,11 +14,11 @@
 
    <processor name="MyOverlayRemoval"/> 
     <processor name="pureJets" />
-	<processor name="Jets0" />
-    <processor name="Jets1" />
-	 <processor name="Jets1recluster" />
-    <processor name="Jets2" />
-	 <processor name="Jets2recluster" />
+	<processor name="eektJets" />
+    <processor name="kt15Jets" />
+	 <processor name="kt15eektrecluster" />
+    <processor name="kt08Jets" />
+	 <processor name="kt08eektrecluster" />
    	<processor name="MyWWAnalysis"/> 
    <processor name="MyLCIOOutputProcessor"/> 
  	</execute>
@@ -71,7 +71,7 @@
   </processor>
 
 	 <!-- eekt only -->
-  <processor name="Jets0" type="FastJetProcessor">
+  <processor name="eektJets" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
@@ -92,7 +92,7 @@
   </processor>
 	
 	  <!-- Jets1 kt1.5 -> eekt -->
-  <processor name="Jets1" type="FastJetProcessor">
+  <processor name="kt15Jets" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> 
@@ -100,7 +100,7 @@
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> Jets1 </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt15Jets </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
@@ -114,7 +114,7 @@
   </processor>
 
 <!-- eekt reclustering of kt1.5-->
-  <processor name="Jets1recluster" type="FastJetProcessor">
+  <processor name="kt15eektrecluster" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
 
@@ -122,7 +122,7 @@
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt15Jets </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt15eektJets </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
@@ -137,7 +137,7 @@
 
 
    <!-- Jets1 kt0.8 -> eekt -->
-  <processor name="Jets2" type="FastJetProcessor">
+  <processor name="kt08Jets" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter> 
@@ -145,7 +145,7 @@
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> Jets2 </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt08Jets </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
@@ -159,7 +159,7 @@
   </processor>
 
 <!-- eekt reclustering of kt1.5-->
-  <processor name="Jets2recluster" type="FastJetProcessor">
+  <processor name="kt08eektrecluster" type="FastJetProcessor">
     <!--Using the FastJet library to identify jets-->
     <!--a list of all reconstructed particles we are searching for jets in.-->
 
@@ -167,7 +167,7 @@
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <!-- <parameter name="Verbosity" type="string">DEBUG5 </parameter> -->
     <!--The identified jets-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt08Jets </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> kt08eektJets </parameter>
     <!--Store the list of particles that were clustered into jets in the recParticleOut collection-->
     <parameter name="storeParticlesInJets" type="bool"> true </parameter>
     <!--a list of all reconstructed particles used to make jets. If no value specified collection is not created-->
