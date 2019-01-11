@@ -1184,7 +1184,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
    processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
    processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
    ov_kt15->setTagVariables(ev_kt15->_jetmctags);	
-    	std::cout<<"Printing Event Variables "<<ev_k15->_variableSetName <<std::endl;
+    	std::cout<<"Printing Event Variables "<<ev_kt15->_variableSetName <<std::endl;
 	ev_kt15->printEventVariables();	
 	jv_kt15->printJetVariables();
 	ana_kt15->printAnaVariables();
