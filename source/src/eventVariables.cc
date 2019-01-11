@@ -250,8 +250,8 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 	double maxangle = -9999;
 	for(unsigned int i=0; i<angles.size(); i++){
 		for(unsigned int j=0; j<angles.at(i).size(); j++){
-				if( angle > maxangle &&  !fused.at(i) && !jused.at(j) ){
-					maxangle = angle;
+				if( angles.at(i).at(j) > maxangle &&  !fused.at(i) && !jused.at(j) ){
+					maxangle = angle.at(i).at(j);
 					I=i;
 					J=j;
 				}
@@ -268,7 +268,7 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 
 	//make a fermlist with no neutrino
 	std::vector<int> ferm{};
-	std::vector<MCParticle*> mc{};
+	std::vector<TLorentzVector*> mc{};
 	for(unsigned int i=0; i< _MCfpdg.size(); i++){
 		int pdg = _MCfpdg.at(i);
 		if( (abs(pdg)!=14) && (abs(pdg)!=16) ){
@@ -277,18 +277,18 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 		}
 	}
 	std::vector<bool> fused(ferm.size());
-	for(unsigned int i=0; i<fused.size(), i++){
+	for(unsigned int i=0; i<fused.size(); i++){
 		fused.at(i) = false;
 	}
 
 	std::vector<bool> jused(_nJets);
-	for(unsigned int i=0; i<jused.size(), i++){
+	for(unsigned int i=0; i<jused.size(); i++){
 		jused.at(i) = false;
 	}
 
 	std::vector<std::vector<double> > angles{};
 	for(unsigned int i=0; i<ferm.size(); i++){
-		std::vector a(_nJets);
+		std::vector<double> a(_nJets);
 		angles.at(i).push_back(a);
 	}
 
