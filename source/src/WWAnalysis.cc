@@ -116,7 +116,7 @@ void WWAnalysis::init() {
 
   //temp setup
 
-	ev_pure= new eventVariables("eekt",_nfermions, _nleptons, _nJets, _tree);
+	ev_pure= new eventVariables("pure",_nfermions, _nleptons, _nJets, _tree);
 	ev_pure->initLocalTree();
 	jv_pure= new jetVariables(ev_pure,_JetCollName_pure);
 	jv_pure->initLocalTree();
