@@ -196,8 +196,8 @@ bool ReconstructedOverlayRemoval::particleIsOverlay(int id){
 					//this particle has overlay contribution
 					//is the contribution significant?
 					//if( (((int(_reco2mcvec.at(i)->getWeight())%10000)/1000.)+((int(_reco2mcvec.at(i)->getWeight())/10000)/1000.)) > 0.5){return true;}
-					if( ((int(_reco2mcvec.at(i)->getWeight())%10000)/1000.)> 0.5){return true;}
-				//	if( ((int(_reco2mcvec.at(i)->getWeight())/10000)/1000.)> 0.5){return true;}
+				//	if( ((int(_reco2mcvec.at(i)->getWeight())%10000)/1000.)> 0.5){return true;}
+					if( ((int(_reco2mcvec.at(i)->getWeight())/10000)/1000.)> 0.5){return true;}
 
 				}//end mc to lcrelation match
 			}///end mc loop
