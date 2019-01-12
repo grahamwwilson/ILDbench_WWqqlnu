@@ -45,6 +45,7 @@ class eventVariables{
 	int _mclepPfoMult{};
 	//event information
 	bool _isTau{};
+	int _tauType{}; //0=not a tau event 1=muon 2=electron 3=other
 	bool _isMuon{};
 	bool _isSignal{};//is this a signal event or background?
 

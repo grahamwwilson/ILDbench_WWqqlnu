@@ -95,7 +95,7 @@ void WWAnalysis::init() {
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
   printParameters() ;
-  file = new TFile("file.root","RECREATE");
+
  
   _tree = new TTree("tree", "tree");
   _tree->Branch("runNumber", &_nRun, "runNumber/I");
@@ -106,6 +106,7 @@ void WWAnalysis::init() {
  _kt15tree = new TTree("kt15tree", "tree made from pandora pfos, overlay removal with kt R=1.5, reclustered with eekt n=3");
  _kt08tree = new TTree("kt08tree", "tree made from pandora pfos, overlay removal with kt R=0.8, reclustered with eekt n=3") ;
 
+  file = new TFile("file.root","RECREATE");
 /*  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
 
