@@ -113,7 +113,7 @@ class eventVariables{
 
 	void setJetTags(std::vector<int>& localjettags, std::vector<int> tagset );
 
-	void MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge);
+	void MCTagJets(std::vector<int>& jetmctags,std::vector<double>& tagCosPsi, bool& isMCTagValid, int& mctlepCharge);
 
 	void computeRecoResultsFromTags(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& lep, TLorentzVector*& Wqq, TLorentzVector*& Nu); 
 	
@@ -121,7 +121,7 @@ class eventVariables{
 
 	void getCosThetaW(int& lepCharge, TLorentzVector*& Wl, TLorentzVector*& Wqq, double& WmProdAngle);
 
-	void findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused);
+	void findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<double>& tagCosPsi, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused);
 
 	bool allTagged(std::vector<bool> flags);
 
