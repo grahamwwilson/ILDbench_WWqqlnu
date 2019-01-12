@@ -93,7 +93,7 @@ class eventVariables{
 
 
 	//methods used to populate event variables	
-	void initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult);
+	void initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult, int& tauType);
 	
 	//gets the FSP MCParticles from MC Lepton
 	void exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP);
@@ -119,7 +119,8 @@ class eventVariables{
 	void findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused);
 
 	bool allTagged(std::vector<bool> flags);
-	
+
+	int getTauDecayMode(MCParticle* mcp);	
 
 	//printing stuff
 	void printEventVariables();

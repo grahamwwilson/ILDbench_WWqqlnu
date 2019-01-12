@@ -99,9 +99,6 @@ void WWAnalysis::init() {
  
   file = new TFile("file.root","RECREATE");
   _tree = new TTree("tree", "tree");
-  _tree->Branch("runNumber", &_nRun, "runNumber/I");
-  _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
-
  _puretree = new TTree("puretree", "tree made for pfos with overlay removed and clustered with eekt n=3");
  _eekttree = new TTree("eekttree", "tree made from pandora pfos and clustered with eekt n=3");
  _kt15tree = new TTree("kt15tree", "tree made from pandora pfos, overlay removal with kt R=1.5, reclustered with eekt n=3");
@@ -165,7 +162,8 @@ void WWAnalysis::init() {
     ana_eekt_no_overlay = new anaVariables(_tree, ev_eekt_no_overlay);
     ana_eekt_no_overlay->initLocalTree();
 	*/
-
+  _tree->Branch("runNumber", &_nRun, "runNumber/I");
+  _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
 
    ppfov = new PandoraPfoVariables(_tree, "pandora");
   ppfov->initLocalTree();
@@ -651,7 +649,7 @@ void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<Re
 void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets ){
 	
 	evtVar->setParticles(_mcpartvec, jets);
-	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult);
+	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult, evtVar->_tauType);
 	evtVar->initJetTLV(evtVar->_tlvjets);
 	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
 	if( evtVar->_isMCTagValid ){
@@ -675,7 +673,7 @@ void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVari
 	}
 }
 void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*> pfo2mc, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar , overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets){
-
+/*
 	std::cout<<"Populating Event Variables "<<evtVar->_variableSetName<<std::endl;
 
 	oVar->setParticles(jets, pfo2mc);
@@ -718,6 +716,7 @@ void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*>
 	anaVar->setAnaEventVariables(evtVar);
 
 	jetVar->setAnaJetMultiplicity( anaVar->_jetanatags, jetVar->_analepPfoMult, jetVar->_analepTrkMult);
+*/
 }
 void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar ){
 	std::cout<<"Printing Event Variables "<<evtVar->_variableSetName <<std::endl;
