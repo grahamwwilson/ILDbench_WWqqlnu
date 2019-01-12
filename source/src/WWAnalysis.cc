@@ -769,10 +769,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		return;
 	}*/
 	
-TTree* _puretree{};
-  TTree* _eekttree{};
-  TTree* _kt15tree{};
-  TTree* _kt08tree{};
+
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
