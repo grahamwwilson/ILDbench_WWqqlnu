@@ -98,7 +98,7 @@ int eventVariables::getTauDecayMode(MCParticle* mctau){
 		//1= muon 2=elec 3= other
 		//with the tau mcp get its immediate decay products
 		//from daniels code decayChPi=0, decayRho, decayA1_1p, decayA1_3p , decayEl, decayMu , decayW , decayK , decayMultiprong , decayOthersingleprong, decayUnrecognised
-		int mode = getMCdecayMode(mctau);
+		int mode = classifyTau::getMCdecayMode(mctau);
 		if(mode == 5) return 1;
 		if(mode == 4) return 2;
 		return 3;
