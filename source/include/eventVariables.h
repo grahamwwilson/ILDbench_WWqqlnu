@@ -12,6 +12,7 @@
 #include <math.h>
 #include <iostream>
 #include <sstream>
+#include "classifyTau.h"
 using namespace lcio;
 class eventVariables{
 
@@ -120,7 +121,7 @@ class eventVariables{
 
 	bool allTagged(std::vector<bool> flags);
 
-	int getTauDecayMode(MCParticle* mcp);	
+	int getTauDecayMode(MCParticle* mctau);	
 
 	//printing stuff
 	void printEventVariables();
