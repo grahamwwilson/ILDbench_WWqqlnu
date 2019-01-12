@@ -651,7 +651,7 @@ void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVari
 	evtVar->setParticles(_mcpartvec, jets);
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult, evtVar->_tauType);
 	evtVar->initJetTLV(evtVar->_tlvjets);
-	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_tagCosPsi, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
+	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_tagCosPsi, evtVar->_tagCosPsiSum, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
 	if( evtVar->_isMCTagValid ){
 	evtVar->computeRecoResultsFromTags(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctlep, evtVar->_mctWqq, evtVar->_mctNu);
 	evtVar->populateCMTLVs(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctNu, evtVar->_mctCMjets,  evtVar->_mctCMNu );
