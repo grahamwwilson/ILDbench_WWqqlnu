@@ -287,7 +287,7 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 	fused.at(I) = true;
 	std::cout<<"tagged jet "<<J<<" with "<< ferm.at(I) << " and angle "<<maxangle<<std::endl; 
 }
-void eventVariables::MCTagJets(std::vector<int>& jetmctags, std::vector<double>& tagCosPsi, bool& isMCTagValid, int& mctlepCharge ){
+void eventVariables::MCTagJets(std::vector<int>& jetmctags, std::vector<double>& tagCosPsi, double& tagCosPsiSum,  bool& isMCTagValid, int& mctlepCharge ){
 	
 	isMCTagValid = true;
 	//make a fermlist with no neutrino

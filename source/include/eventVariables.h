@@ -113,7 +113,7 @@ class eventVariables{
 
 	void setJetTags(std::vector<int>& localjettags, std::vector<int> tagset );
 
-	void MCTagJets(std::vector<int>& jetmctags,std::vector<double>& tagCosPsi, bool& isMCTagValid, int& mctlepCharge);
+	void MCTagJets(std::vector<int>& jetmctags,std::vector<double>& tagCosPsi, double& tagCosPsiSum, bool& isMCTagValid, int& mctlepCharge);
 
 	void computeRecoResultsFromTags(std::vector<int>& tagset, TLorentzVector*& Wl, TLorentzVector*& lep, TLorentzVector*& Wqq, TLorentzVector*& Nu); 
 	
