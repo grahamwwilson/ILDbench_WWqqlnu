@@ -59,6 +59,10 @@ class eventVariables{
 	//mc jet tagging
 	std::vector<int> _jetmctags{};
 	bool _isMCTagValid{};
+
+	//mc tagging quality variables
+	std::vector<double> _tagCosPsi{};
+	double _tagCosPsiSum{};
 	
 
 	//analysis tagging 

@@ -20,6 +20,9 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> jtag(nJets);
 	 _jetmctags = jtag;
 
+	std::vector<double> tagquality(nJets);
+	_tagCosPsi = tagquality;
+
 	std::vector<TLorentzVector*> j1(nJets);
 	std::vector<TLorentzVector*> j2(nJets);
 	std::vector<TLorentzVector*> j3(nJets);
@@ -264,7 +267,7 @@ bool eventVariables::allTagged(std::vector<bool> flags){
 	}
 	return true;
 }
-void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused){
+void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, std::vector<int>& tags, std::vector<double>& tagCosPsi, std::vector<int>& ferm, std::vector<bool>& fused, std::vector<bool>& jused){
 		
 	int I{},J{}; // the max indices
 	double maxangle = -9999;
@@ -279,11 +282,12 @@ void eventVariables::findBestMatch(std::vector<std::vector<double> >& angles, st
 	}
 	//using the max mark used and make a tag
 	tags.at(J) = ferm.at(I);
+	tagCosPsi.at(J) = maxangle;
 	jused.at(J) = true;
 	fused.at(I) = true;
 	std::cout<<"tagged jet "<<J<<" with "<< ferm.at(I) << " and angle "<<maxangle<<std::endl; 
 }
-void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, int& mctlepCharge ){
+void eventVariables::MCTagJets(std::vector<int>& jetmctags, std::vector<double>& tagCosPsi, bool& isMCTagValid, int& mctlepCharge ){
 	
 	isMCTagValid = true;
 	//make a fermlist with no neutrino
@@ -334,7 +338,12 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, bool& isMCTagValid, 
 		std::cout<<std::endl;
 	}
 	while( !allTagged(fused) ){
-		findBestMatch(angles, jetmctags, ferm, fused, jused);
+		findBestMatch(angles, jetmctags,tagCosPsi, ferm, fused, jused);
+	}
+
+    tagCosPsiSum=0.;
+	for(unsigned int i=0; i< tagCosPsi.size(); i++){
+		tagCosPsiSum+= tagCosPsi.at(i);
 	}
 
 	mctlepCharge = _mclepCharge;
