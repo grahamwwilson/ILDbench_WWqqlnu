@@ -782,7 +782,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		ev_pure->printEventVariables();	
 		jv_pure->printJetVariables();
 		ana_pure->printAnaVariables();
-		this._puretree->Fill();
+		this->_puretree->Fill();
   	 }
    
 
@@ -798,7 +798,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_eekt->printJetVariables();
 	ana_eekt->printAnaVariables();
 	ov_eekt->printOverlayVariables();
-		this._eekttree->Fill();
+		this->_eekttree->Fill();
 	}
 
 
@@ -814,7 +814,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_kt15->printJetVariables();
 	ana_kt15->printAnaVariables();
 	ov_kt15->printOverlayVariables();
-		this._kt15tree->Fill();
+		this->_kt15tree->Fill();
 	}
 
 	if(_kt08Jets.size() == 0){
@@ -829,7 +829,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_kt08->printJetVariables();
 	ana_kt08->printAnaVariables();
 	ov_kt08->printOverlayVariables();
-		this._kt08tree->Fill();
+		this->_kt08tree->Fill();
 	}
 
     ppfov->setParticles(_pfovec);
@@ -999,7 +999,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	
 	
  */
-  this._tree->Fill();
+  this->_tree->Fill();
 /* removed for refactor
 	//clear vectors for next event
 	uplike_rejects_costheta.clear();
