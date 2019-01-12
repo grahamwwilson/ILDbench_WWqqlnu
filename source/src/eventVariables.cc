@@ -508,6 +508,7 @@ void eventVariables::initLocalTree(){
 	/*** Tree MC info ***/
 	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
 	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
+	_localTree->Bracnh((vsn+"tauType").cstr(),&_tauType,(vsn+"tauType/I").c_str());
 	_localTree->Branch((vsn+"mclepCharge").c_str(), &_mclepCharge,(vsn+"mclepCharge/I").c_str());
 
 	_localTree->Branch((vsn+"mclepTrkMult").c_str(), &_mclepTrkMult,(vsn+"mclepTrkMult/I").c_str());
