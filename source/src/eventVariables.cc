@@ -94,7 +94,19 @@ void eventVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs, int& mclepT
   mclepPfoMult = countparts;
   mclepTrkMult = counttracks;
 }
-void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult){
+int eventVariables::getTauDecayMode(MCParticle* mcp){
+		//1= muon 2=elec 3= other
+		//with the tau mcp get its immediate decay products
+		std::vector<MCParticle*> daughters{};
+		daughters = mcp->getDaughters();
+		for(unsigned int i=0; i<daughters.size(); i++){
+			if(abs(daughters.at(i)->getPDG()) == 13) return 1;
+			if(abs(daughters.at(i)->getPDG()) == 11) return 2;
+		}
+		return 3;
+		
+}
+void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult, int& tauType){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -153,6 +165,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing muon
 				isMuon = true;
 				isTau = false;
+				tauType = 0;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
 					mclepCharge = -1;
@@ -167,6 +180,11 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing a tau
 				isTau = true;
 				isMuon = false;
+				for(unsigned int I=0; I<daughters.size(); I++){
+					if( abs(daughters.at(I)->getPDG())==15){
+						tauType = getTauDecayMode(daughters.at(I));
+					}
+				}
 				//identify the true charge of the lepton
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 15) != daughterpdgs.end() ){
 					mclepCharge = -1;
