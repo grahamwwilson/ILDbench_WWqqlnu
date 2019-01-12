@@ -101,6 +101,11 @@ void WWAnalysis::init() {
   _tree->Branch("runNumber", &_nRun, "runNumber/I");
   _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
 
+ _puretree = new TTree("puretree", "tree made for pfos with overlay removed and clustered with eekt n=3");
+ _eekttree = new TTree("eekttree", "tree made from pandora pfos and clustered with eekt n=3");
+ _kt15tree = new TTree("kt15tree", "tree made from pandora pfos, overlay removal with kt R=1.5, reclustered with eekt n=3");
+ _kt08tree = new TTree("kt08tree", "tree made from pandora pfos, overlay removal with kt R=0.8, reclustered with eekt n=3") ;
+
 /*  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
 
@@ -116,39 +121,39 @@ void WWAnalysis::init() {
 
   //temp setup
 
-	ev_pure= new eventVariables("pure",_nfermions, _nleptons, _nJets, _tree);
+	ev_pure= new eventVariables("pure",_nfermions, _nleptons, _nJets, _puretree);
 	ev_pure->initLocalTree();
 	jv_pure= new jetVariables(ev_pure,_JetCollName_pure);
 	jv_pure->initLocalTree();
-	ana_pure= new anaVariables(_tree, ev_pure);
+	ana_pure= new anaVariables(_puretree, ev_pure);
 	ana_pure->initLocalTree();
 
-	ev_eekt = new eventVariables("eekt",_nfermions, _nleptons, _nJets, _tree);
+	ev_eekt = new eventVariables("eekt",_nfermions, _nleptons, _nJets, _eekttree);
     ev_eekt->initLocalTree();
    jv_eekt= new jetVariables(ev_eekt, _JetCollName_eekt) ;
 	jv_eekt->initLocalTree();
-   ana_eekt = new anaVariables(_tree, ev_eekt);
+   ana_eekt = new anaVariables(_eekttree, ev_eekt);
 	ana_eekt->initLocalTree();
-	ov_eekt = new overlayVariables("eekt",_tree,_nJets, 1);
+	ov_eekt = new overlayVariables("eekt",_eekttree,_nJets, 1);
 	ov_eekt->initLocalTree();
 	
 
-	ev_kt15 = new eventVariables("kt15",_nfermions, _nleptons, _nJets, _tree);
+	ev_kt15 = new eventVariables("kt15",_nfermions, _nleptons, _nJets, _kt15tree);
 	ev_kt15->initLocalTree();
 	jv_kt15 = new jetVariables(ev_kt15, _JetCollName_kt15);
 	jv_kt15->initLocalTree();
-	ana_kt15 = new anaVariables(_tree, ev_kt15);
+	ana_kt15 = new anaVariables(_kt15tree, ev_kt15);
 	ana_kt15->initLocalTree();
-	ov_kt15 = new overlayVariables("kt15",_tree,_nJets, 1);
+	ov_kt15 = new overlayVariables("kt15",_kt15tree,_nJets, 1);
     ov_kt15->initLocalTree();
 	
-	ev_kt08 = new eventVariables("kt08",_nfermions, _nleptons, _nJets, _tree);
+	ev_kt08 = new eventVariables("kt08",_nfermions, _nleptons, _nJets, _kt08tree);
 	ev_kt08->initLocalTree();
 	jv_kt08 = new jetVariables(ev_kt08, _JetCollName_kt08);
 	jv_kt08->initLocalTree();
-	ana_kt08 = new anaVariables(_tree, ev_kt08);
+	ana_kt08 = new anaVariables(_kt08tree, ev_kt08);
 	ana_kt08->initLocalTree();
-    ov_kt08 = new overlayVariables("kt08", _tree, _nJets, 1);
+    ov_kt08 = new overlayVariables("kt08", _kt08tree, _nJets, 1);
 	ov_kt08->initLocalTree();
 
 
@@ -170,7 +175,7 @@ void WWAnalysis::init() {
 	// ppfo_ovr= new overlayVariables("ppfoOvr",_tree,1,0);
 	// ppfo_ovr->initLocalTree();
 
-  h1 = new HistoManager(ncuts,weight); // no need to init until the class is more finalized
+ // h1 = new HistoManager(ncuts,weight); // no need to init until the class is more finalized
  // h1->initHists1();
  // h1->initHists2();
 
@@ -185,7 +190,7 @@ void WWAnalysis::init() {
 	
 
 	//overlay!
-	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
+/*	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
 	_tree->Branch("OverlayPairBgOverlaynEvents",&OverlayPairBgOverlaynEvents,"OverlayPairBgOverlaynEvents/I");
 	_tree->Branch("uplike_rejects_costheta.",&uplike_rejects_costheta);
 	_tree->Branch("downlike_rejects_costheta.",&downlike_rejects_costheta);
@@ -198,7 +203,7 @@ void WWAnalysis::init() {
 	_tree->Branch("downlike_rejects_P.",&downlike_rejects_P);
 	_tree->Branch("lepton_rejects_P.",&lepton_rejects_P);
 
-
+*/
 }
 
 void WWAnalysis::processRunHeader( LCRunHeader* run) {
@@ -414,9 +419,6 @@ bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
   
   	return collectionFound;
 }
-/*bool WWAnalysis::FindMCTruthToRecoLink( LCEvent* evt ){
-	
-}*/
 /*
 bool WWAnalysis::FindJets( LCEvent* evt ) {
 
@@ -452,41 +454,7 @@ bool WWAnalysis::FindJets( LCEvent* evt ) {
 	return collectionFound;
 }
 */
-/*
-bool WWAnalysis::FindJetsWithOverlay( LCEvent* evt ) {
 
-	bool collectionFound = false;
-
-  	// clear old global pfovector
-	_jetswithoverlay.clear();
-  	typedef const std::vector<std::string> StringVec ;
-  	StringVec* strVec = evt->getCollectionNames() ;
-	
-	//iterate over collections, find the matching name
-  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){
-     
-		//if found print name and number of elements
-    		if(*itname==_inputJetWithOverlayCollectionName){ 
-			LCCollection* collection = evt->getCollection(*itname);
-			std::cout<< "Located Jets With Overlay Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
-			collectionFound = true;
-
- 			//add the collection elements to the global vector
-      			for(unsigned int i=0; i<collection->getNumberOfElements(); i++){
-				ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(collection->getElementAt(i));
-				_jetswithoverlay.push_back(recoPart);
-      			}
-    		}
-  	}
-	
-	if(!collectionFound){
-		std::cout<<"Jet Collection "<< _inputJetWithOverlayCollectionName << "not found"<<std::endl;
-	}
-
-   
-	return collectionFound;
-}
-*/
 bool WWAnalysis::FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec ) {
 
 	bool collectionFound = false;
@@ -664,354 +632,8 @@ MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MC
 }
 */
 
-void WWAnalysis::populateJetsWithOverlayTLVs(std::vector<ReconstructedParticle*> j){
-	/*
-	std::vector<TLorentzVector*> temp(_jetswithoverlay.size());
-	jetswithoverlay=temp;
-	for(unsigned int i=0; i<_jetswithoverlay.size(); i++){
-	
-	//	TLorentzVector* j = new TLorentzVector();
-
-		jetswithoverlay.at(i) = new TLorentzVector();
-
-		jetswithoverlay.at(i)->SetXYZM(_jetswithoverlay.at(i)->getMomentum()[0], _jetswithoverlay.at(i)->getMomentum()[1], _jetswithoverlay.at(i)->getMomentum()[2], _jetswithoverlay.at(i)->getMass() );
-		//tempjets.at(i) = j;
-
-		std::cout<<_jetswithoverlay.at(i)->getMomentum()[0]<<" "<< _jetswithoverlay.at(i)->getMomentum()[1]<<" "<<_jetswithoverlay.at(i)->getMomentum()[2]<< " "<< _jetswithoverlay.at(i)->getMass()<<std::endl;
-	}
-*/
-
-}
-
-void WWAnalysis::FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP){
-/*	if(p->isCreatedInSimulation()) return;
-	if(! (p->isOverlay())) return;
-
-	//std::cout<<p->id()<<" ";
-	//std::cout<<p->getPDG()<<" -> ";
-	std::vector<MCParticle*> d = p->getDaughters();
-	
-	for(unsigned int i=0; i< d.size(); i++){
-		if( (! d.at(i)->isCreatedInSimulation() ) && ( allChildrenAreSimulation(d.at(i)) || (d.at(i)->getDaughters().size()==0)  ) && (d.at(i)->isOverlay() ) ){
-		
-		//this is an initial final state particle
-			FSP.push_back(d.at(i));
-		}
-		if( (! d.at(i)->isCreatedInSimulation()) &&  d.at(i)->isOverlay() ){//&& (d.at(i)->getCharge() != 0) ){
-			std::cout<< "( "<< d.at(i)->id()<<" "<<d.at(i)->getPDG() <<" "<< d.at(i)->isDecayedInTracker()<<" "<< d.at(i)->isDecayedInCalorimeter()<<" ) ";
-		}
-	}
-	//std::cout<<std::endl;
-	for(unsigned int i=0; i<d.size(); i++){
-		FindMCOverlay(d.at(i), FSP);
-	}
-*/
 
 
-}
-void WWAnalysis::AnalyzeOverlay( LCEvent* evt ){
-/*
-
- //LCParameters param = evt->getParameters();
-	//tag events with no overlay
-	std::string key = "Overlay.nTotalEvents";
-	//the global: 
-	OverlaynTotalEvents = (evt->getParameters()).getIntVal(key);
-
-	key = "Overlay.PairBgOverlay.nEvents";
-
-	OverlayPairBgOverlaynEvents = (evt->getParameters()).getIntVal(key);
-
-	std::cout<<"noverlay "<< OverlaynTotalEvents<< std::endl;
-	std::cout<<"npairbg "<< OverlayPairBgOverlaynEvents <<std::endl;
-
-	std::cout<<"finding jets with overlay "<<std::endl;
-	 FindJetsWithOverlay( evt );
-	populateJetsWithOverlayTLVs(_jetswithoverlay);
-
-	//relevant quantities to find...
-	//-- cos theta of particles that are thrown out by kt
-	std::vector<ReconstructedParticle*> rejectedbeamparticles{};
-	std::vector<std::vector<ReconstructedParticle*> >  rejectjets{};
-
-	//go through mcf, from this particle go through and tag a jet that corresponds for the mc particle, for both sets of jets
-
-	//tag jets
-	std::vector<int> jetmctags(_nJets);
-	std::vector<int> jetwithoverlaymctags(_nJets);
-
-	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
-	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
-
-	//if we double tag a jet just return ignore this event
-	// right now these break the code
-	
-	for(unsigned int i=0; i<jetmctags.size(); i++){
-			for(unsigned int j=i+1; j<jetmctags.size(); j++){
-				if(jetmctags.at(i) == jetmctags.at(j)){
-					return;
-				}
-			}
-		}
-		for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
-			for(unsigned int j=i+1; j<jetwithoverlaymctags.size(); j++){
-				if(jetwithoverlaymctags.at(i) == jetwithoverlaymctags.at(j)){
-					return;
-				}
-			}
-		}
-
-	//print out the mctags to see what is matched to what
-	std::cout<<"jet tags ";
-	for(int i=0; i<jetmctags.size();i++){
-		std::cout<< _MCfpdg.at( jetmctags.at(i) )<<" ";
-	}
-	std::cout<<std::endl;
-
-	std::cout<<"jetwith overlay tags ";
-	for(int i=0; i<jetwithoverlaymctags.size();i++){
-		std::cout<< _MCfpdg.at( jetwithoverlaymctags.at(i) )<<" ";
-	}
-	std::cout<<std::endl;
-	
-
-	for(int i=0; i< jetmctags.size(); i++){
-		//find the corresponding jet with overlay
-		for(int j=0; j< jetwithoverlaymctags.size(); j++){
-			if(jetmctags.at(i) == jetwithoverlaymctags.at(j)){
-				//both jets refer to same mc particle
-
-				//figure out what particles got rejected and save them
-				std::vector<ReconstructedParticle*> p = _jets.at(i)->getParticles();
-				std::vector<ReconstructedParticle*> pwo = _jetswithoverlay.at(j)->getParticles();
-				
-				 //loop over the sets of particles and find whats missing
-				for(int k = 0; k < pwo.size(); k++){
-					bool containsParticle = false;
-					for(int l = 0; l < p.size(); l++){
-						if( p.at(l)->id() == pwo.at(k)->id() ){
-							containsParticle = true;
-						}
-					}
-					if(!containsParticle){
-						//particle k is a reject
-						rejectedbeamparticles.push_back(pwo.at(k));
-					}
-				}//end loops over 2 sets of particles
-				rejectjets.push_back(rejectedbeamparticles);
-				rejectedbeamparticles.clear();
-			}//end if we matched the two jets
-			//add the rejects to reject jet vector
-			
-		}
-	}
-
-
-	//debug check
-	for(int i=0; i<_jets.size(); i++){
-		std::cout<<"jets "<<i<<std::endl;
-		std::vector<ReconstructedParticle*> p{};
-		p = _jets.at(i)->getParticles();
-		for(int j=0; j<p.size(); j++){
-			std::cout<<p.at(j)->id()<<" ";
-		}
-				std::cout<<std::endl;
-	}
-	for(int i=0; i<_jetswithoverlay.size(); i++){
-		std::cout<<"jets with o "<<i<<std::endl;
-		std::vector<ReconstructedParticle*> p{};
-		p = _jetswithoverlay.at(i)->getParticles();
-		for(int j=0; j<p.size(); j++){
-			std::cout<<p.at(j)->id()<<" ";
-		}
-		std::cout<<std::endl;
-	}
-	for(int i=0; i<rejectjets.size(); i++){
-		std::cout<<"reject "<<i<<std::endl;
-		for(int j=0; j<rejectjets.at(i).size(); j++){
-			std::cout<<rejectjets.at(i).at(j)->id()<<" ";
-		}
-				std::cout<<std::endl;
-	}
-	
-
-	//loop over the jets with overlay removal,
-	//categorize by flavor the rejected particles
-	//indices of mctags/reject jets/ jets w/ overlay removal should match
-	TLorentzVector temp;
-	const double* momtemp;
-	double masstemp;
-	for(int i=0; i<rejectjets.size(); i++){
-		//jet associated pdg
-		int pdg = abs(_MCfpdg.at(jetmctags.at(i)) );
-
-		
-		if(	pdg == 2 || pdg == 4 ){
-			//uplike quark
-			for(int j=0; j<rejectjets.at(i).size(); j++){
-				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j)->getMomentum();
-				masstemp = rejectjets.at(i).at(j)->getMass();
-				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
-				
-				uplike_rejects_costheta.push_back( temp.CosTheta() );
-				uplike_rejects_pt.push_back( temp.Pt() );
-				uplike_rejects_P.push_back( temp.P() );				
-			}//end loop over particles
-
-		}//end uplike
-		if(pdg == 1 || pdg == 3 || pdg == 5){
-			//downlike quark
-				for(int j=0; j<rejectjets.at(i).size(); j++){
-				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j)->getMomentum();
-				masstemp = rejectjets.at(i).at(j)->getMass();
-				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
-				
-				downlike_rejects_costheta.push_back( temp.CosTheta() );
-				downlike_rejects_pt.push_back( temp.Pt() );
-				downlike_rejects_P.push_back( temp.P() );				
-			}//end loop over particles
-
-		}	//end downlike
-		if(pdg == 13 || pdg == 15){
-			//lepton 
-			for(int j=0; j<rejectjets.at(i).size(); j++){
-				//loop over reject particles of jet i
-				momtemp = rejectjets.at(i).at(j)->getMomentum();
-				masstemp = rejectjets.at(i).at(j)->getMass();
-				temp.SetXYZM(momtemp[0],momtemp[1],momtemp[2],masstemp);
-				
-				downlike_rejects_costheta.push_back( temp.CosTheta() );
-				downlike_rejects_pt.push_back( temp.Pt() );
-				downlike_rejects_P.push_back( temp.P() );				
-			}//end loop over particles
-			
-			
-		}//end lepton
-
-	}//end loop over rejectjets
-
-	//end debug check
-
-	*/
-
-}
-void WWAnalysis::AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswithoverlay, std::vector<TLorentzVector*> _jetsremovedoverlay ){
-	/*
-
-	//loop over the jets and fill histograms in custom cutflow
-	//find max costheta
-	double max=-1;
-	for(unsigned int i =0; i<_jetswithoverlay.size(); i++){
-		if( fabs(_jetswithoverlay.at(i)->CosTheta())>max){
-			max=fabs(_jetswithoverlay.at(i)->CosTheta());
-		}
-	}
-	//fill the histos
-	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-		if( max<= maxcosthetacuts.at(i) ){
-			maxcostheta_cut.at(i)->Fill(max);
-		}
-	}
-	
-	max=-1;
-	for(unsigned int i=0; i<_jetsremovedoverlay.size(); i++){
-		if( fabs(_jetsremovedoverlay.at(i)->CosTheta())>max){
-			max=fabs(_jetsremovedoverlay.at(i)->CosTheta());
-		}
-	}
-	
-	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-		if( max <= maxcosthetacuts.at(i) ){
-			maxcostheta_cut_ovr.at(i)->Fill(max);
-		}
-	}
-
-	//we would hope mc data structure is already populated for this section
-	max = -1;
-	for(unsigned int i=0; i<_MCf.size(); i++){
-		if( ( fabs( _MCfpdg.at(i)) != 14) && (fabs( _MCfpdg.at(i)) != 16) ){
-			//no neutrinos
-			if( fabs(_MCf.at(i)->CosTheta()) > max){
-				max=fabs(_MCf.at(i)->CosTheta());
-			}
-		}
-	}
-	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-			if(max <= maxcosthetacuts.at(i)){
-				maxcostheta_cut_mc.at(i)->Fill(max);
-		}
-
-	}
-
-	//redo tagging because pls no more globals
-	std::vector<int> jetmctags(_nJets);
-	std::vector<int> jetwithoverlaymctags(_nJets);
-
-	MCTagjets(_MCf, _MCfpdg, jets, jetmctags);
-	MCTagjets(_MCf, _MCfpdg, jetswithoverlay, jetwithoverlaymctags);
-
-	//if we double tag a jet just return ignore this event
-	// right now these break the code
-	
-	for(unsigned int i=0; i<jetmctags.size(); i++){
-			for(unsigned int j=i+1; j<jetmctags.size(); j++){
-				if(jetmctags.at(i) == jetmctags.at(j)){
-					return;
-				}
-			}
-		}
-		for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
-			for(unsigned int j=i+1; j<jetwithoverlaymctags.size(); j++){
-				if(jetwithoverlaymctags.at(i) == jetwithoverlaymctags.at(j)){
-					return;
-				}
-			}
-		}
-
-	
-	//using tagged jets fill our dM plots based on the cut 
-	//call analyzedijet first it populates mcqqmass
-	//next calculate mctagged qq mass
-	//use old max from mc level
-	double mctagqqmass;
-	TLorentzVector mctagqq;
-	for(unsigned int i=0; i<jetmctags.size(); i++){
-		if( fabs(_MCfpdg.at(jetmctags.at(i)) ) <=5 ){
-			mctagqq+= *(jets.at(i));
-		}
-	}
-	mctagqqmass = mctagqq.M();
-	
-	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-		//this will be as a function of max cos theta, 
-		if(max <= maxcosthetacuts.at(i)){
-			mctag_mc_dM.at(i)->Fill( mctagqqmass - mcqqmass );
-		}
-	}
-
-	
-
-	//redo mctagqqmass with overlay included mctagged jets
-
-	TLorentzVector mctagqqovr;
-	for(unsigned int i=0; i<jetwithoverlaymctags.size(); i++){
-		if( fabs(_MCfpdg.at(jetwithoverlaymctags.at(i)) ) <=5 ){
-			mctagqqovr+= *(jetswithoverlay.at(i));
-		}
-	}
-	mctagqqmass = mctagqqovr.M();
-
-	for(unsigned int i=0; i<maxcosthetacuts.size(); i++){
-		if(max <= maxcosthetacuts.at(i)){
-			mctag_mc_dM_ovr.at(i)->Fill(mctagqqmass - mcqqmass);
-		}
-	}
-
-	*/
-
-}
 
 void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
 	oVar->setParticles(jets, pfo2mc);
@@ -1159,6 +781,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		ev_pure->printEventVariables();	
 		jv_pure->printJetVariables();
 		ana_pure->printAnaVariables();
+		_puretree->Fill();
   	 }
    
 
@@ -1174,6 +797,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_eekt->printJetVariables();
 	ana_eekt->printAnaVariables();
 	ov_eekt->printOverlayVariables();
+		_eekttree->Fill();
 	}
 
 
@@ -1189,6 +813,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_kt15->printJetVariables();
 	ana_kt15->printAnaVariables();
 	ov_kt15->printOverlayVariables();
+		_kt15tree->Fill();
 	}
 
 	if(_kt08Jets.size() == 0){
@@ -1203,6 +828,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	jv_kt08->printJetVariables();
 	ana_kt08->printAnaVariables();
 	ov_kt08->printOverlayVariables();
+		_kt08tree->Fill();
 	}
 
     ppfov->setParticles(_pfovec);

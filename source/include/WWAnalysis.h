@@ -143,7 +143,14 @@ using namespace lcio;
  HistoManager* h1{};
 //TTree
   TFile* file{};
-  TTree* _tree{};
+  TTree* _tree{};//general tree
+
+  TTree* _puretree{};
+  TTree* _eekttree{};
+  TTree* _kt15tree{};
+  TTree* _kt08tree{};
+
+
   int _nRun{};
   int _nEvt{};
 
