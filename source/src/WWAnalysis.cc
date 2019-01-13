@@ -881,7 +881,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		}
 	}
 
-}
+
 
 
     ppfov->setParticles(_pfovec);
