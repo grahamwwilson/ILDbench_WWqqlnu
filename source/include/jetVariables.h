@@ -28,6 +28,7 @@ class jetVariables{
 	double _logyMinus{};
 	double _logyPlus{};
 	std::vector<double> _jetMaxCosPsi{};
+	int _jetLeastNTrks{}; //least tracks not including 0 tracks
 
 	//MC tag jet variables
 	int _mctlepPfoMult{};
@@ -47,6 +48,8 @@ class jetVariables{
 
 
 	void setLogYVariables(double& logyMinus, double& logyPlus);
+
+	void setjetLeastTrks(int& jetLeastNTrks);
 
 	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi);
 

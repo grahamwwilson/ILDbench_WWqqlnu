@@ -87,6 +87,8 @@ using namespace lcio;
 
    void processVariables(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets );
 
+   void processBackground(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets);
+
 
 	//overlay analysis
 	//TODO redo in separate class
@@ -214,6 +216,9 @@ using namespace lcio;
 
 
 	int   _printing{};
+
+	//running mode
+	int _runSignalMode{};
 
 //input background//number of fermions or leptons
 	int _nfermions{};
