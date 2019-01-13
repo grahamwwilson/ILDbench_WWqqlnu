@@ -27,6 +27,23 @@ void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
 	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
     logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 }
+void jetVariables::setjetLeastTrks(int& jetLeastNTrks){
+	int mintrks = 999;
+	int trkcount=0;
+	for(unsigned int i=0; i<_jets.size(); i++){
+		std::vector<ReconstructedParticle*> parts = _jets.at(k)->getParticles();
+		trkcount=0;
+		for(unsigned int j=0; j<parts.size(); j++){
+			if( parts.at(i)->getCharge() != 0 ){
+				trkcount++;
+			}
+		}
+		if(trkcount>0 && trkcount<mintrks){
+			mintrks = trkcount;
+		}
+	}	
+	_jetLeastNTrks = mintrks;
+}
 void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi){
 
 	//mctagged jets must already be populated in evt variables

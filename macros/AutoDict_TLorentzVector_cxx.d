@@ -1,0 +1,57 @@
+
+# DO NOT DELETE
+
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TLorentzVector.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMath.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/Rtypes.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RtypesCore.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RConfig.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RVersion.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/DllImport.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/Rtypeinfo.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/typeinfo
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/snprintf.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/strlcpy.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/atomic
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TGenericClassInfo.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/vector
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TSchemaHelper.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/string
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMathBase.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/cstdlib
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/cmath
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TError.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/algorithm
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/limits
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TVector3.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TVector2.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TObject.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RConfigure.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/Riosfwd.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/iosfwd
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TStorage.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TVersionCheck.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrix.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixF.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixT.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixTBase.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TNamed.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TString.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RStringView.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RWrap_libcpp_string_view.h
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/iterator
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/ostream
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/iomanip
+AutoDict_TLorentzVector_cxx.so: /usr/include/c++/5/stdexcept
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/libcpp_string_view.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixFBasefwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixDBasefwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TVectorFfwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TVectorDfwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixTUtils.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixFfwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixFUtils.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TMatrixFUtilsfwd.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/TRotation.h
+AutoDict_TLorentzVector_cxx.so: /home/bears/root/build-6.08/include/RVersion.h /home/bears/root/build-6.08/include/RConfig.h /home/bears/root/build-6.08/include/TClass.h /home/bears/root/build-6.08/include/TDictAttributeMap.h /home/bears/root/build-6.08/include/TInterpreter.h /home/bears/root/build-6.08/include/TROOT.h /home/bears/root/build-6.08/include/TBuffer.h /home/bears/root/build-6.08/include/TMemberInspector.h /home/bears/root/build-6.08/include/TError.h /home/bears/root/build-6.08/include/RtypesImp.h /home/bears/root/build-6.08/include/TIsAProxy.h /home/bears/root/build-6.08/include/TFileMergeInfo.h /home/bears/root/build-6.08/include/TCollectionProxyInfo.h /home/bears/root/build-6.08/bin/rootcling
+AutoDict_TLorentzVector_cxx__ROOTBUILDVERSION= 6.08/00

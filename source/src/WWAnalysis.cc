@@ -13,6 +13,11 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 	                             _printing,
 	                             (int)5 ) ;
 
+	registerProcessorParameter( "RunSignalMode",
+								"toggle to run over signal or bg events",
+								_runSignalMode,
+								(int) 1 );
+
 	std::string inputMcParticleCollectionName = "x";
 	registerInputCollection( LCIO::MCPARTICLE,
 				"McParticleCollectionName" ,
@@ -631,18 +636,33 @@ MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MC
 }
 */
 
+void WWAnalysis::processBackground(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets){
+	evtVar->setParticles(_mcpartvec,jets);
+	evtVar->initJetTLV(evtVar->_tlvjets);
+	
+	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
+	jetVar->setLogYVariables(jetVar->_logyMinus, jetVar->_logyPlus);
+	jetVar->setjetLeastTrks(jetVar->_jetLeastNTrks);
+	jetVar->setMaxCosPsi(jetVar->_jetMaxCosPsi);
 
+	anaVar->setParticles(_pfovec);
+	anaVar->identifyLeptonJet_byTrkMult(anaVar->_jetanatags);
+	anaVar->getLeptonJetCharge_byLeadingTrack(anaVar->_analepCharge );
+	anaVar->setLeadingTrack(anaVar->_analepLeadingTracktlv );
+	anaVar->setAnaEventVariables(evtVar);
 
+	jetVar->setAnaJetMultiplicity( anaVar->_jetanatags, jetVar->_analepPfoMult, jetVar->_analepTrkMult);	
 
+}
 void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
 	oVar->setParticles(jets, pfo2mc);
 
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, mcpartvec );
-		std::cout<<"2"<<std::endl;
+	//	std::cout<<"2"<<std::endl;
 	oVar->setOverlayparticlesLoop(oVar->_overlayParticles, oVar->_tlvoverlayParticles, oVar->_purgedJets, oVar->_tlvpurgedJets, jets);
-	std::cout<<"3"<<std::endl;
+//	std::cout<<"3"<<std::endl;
 	oVar->sumOverlayParticlesLoop(oVar->_tlvoverlaySum, oVar->_tlvoverlayParticles);
-	std::cout<<"4"<<std::endl;
+//	std::cout<<"4"<<std::endl;
 	oVar->setTotalVariables();
 
 }
@@ -659,6 +679,7 @@ void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVari
 
 	jetVar->setParticles(evt, evtVar->_jets, evtVar->_tlvjets);
 	jetVar->setLogYVariables(jetVar->_logyMinus, jetVar->_logyPlus);
+	jetVar->setjetLeastTrks(jetVar->_jetLeastNTrks);
 	jetVar->setMaxCosPsi(jetVar->_jetMaxCosPsi); 
 	jetVar->setMCTJetMultiplicity(jetVar->_mctlepPfoMult, jetVar->_mctlepTrkMult, jetVar->_mctUpPfoMult, jetVar->_mctDwnPfoMult, jetVar->_mctUpTrkMult, jetVar->_mctDwnTrkMult, jetVar->_mctlepMaxCosPsi, jetVar->_mctUpMaxCosPsi, jetVar->_mctDwnMaxCosPsi);
 	
@@ -773,15 +794,23 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 	std::cout<<"event No. "<< nEvt<<std::endl;
 ////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
+	
+
 	if(_pureJets.size() ==0 ){ 
 		std::cout<<"NO JETS IN pureJets!!!"<<std::endl;
 	}
 	else{
-   processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
-		ev_pure->printEventVariables();	
-		jv_pure->printJetVariables();
-		ana_pure->printAnaVariables();
-		this->_puretree->Fill();
+		if(_runSignalMode){
+	   		processVariables( evt, ev_pure, jv_pure, ana_pure, _pureJets );
+			ev_pure->printEventVariables();	
+			jv_pure->printJetVariables();
+			ana_pure->printAnaVariables();
+			this->_puretree->Fill();
+		}
+		else{
+			processBackground(evt, ev_pure, jv_pure, ana_pure, _pureJets);
+			this->_puretree->Fill();
+		}
   	 }
    
 
@@ -789,15 +818,22 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		std::cout<<"NO JETS IN eektJets!!!"<<std::endl;
 	}
 	else{
-   processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
-   processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );	
-   ov_eekt->setTagVariables(ev_eekt->_jetmctags);	
-   	std::cout<<"Printing Event Variables "<<ev_eekt->_variableSetName <<std::endl;
-	ev_eekt->printEventVariables();	
-	jv_eekt->printJetVariables();
-	ana_eekt->printAnaVariables();
-	ov_eekt->printOverlayVariables();
-		this->_eekttree->Fill();
+		if(_runSignalMode){
+   			processVariables( evt, ev_eekt, jv_eekt, ana_eekt, _eektJets );
+  		 	processOverlayVariables( ov_eekt,  _eektJets, _mcpartvec , _reco2mcvec );	
+   			ov_eekt->setTagVariables(ev_eekt->_jetmctags);	
+   			std::cout<<"Printing Event Variables "<<ev_eekt->_variableSetName <<std::endl;
+			ev_eekt->printEventVariables();	
+			jv_eekt->printJetVariables();
+			ana_eekt->printAnaVariables();
+			ov_eekt->printOverlayVariables();
+			this->_eekttree->Fill();
+		}
+		else{
+			processBackground(evt, ev_eekt, jv_eekt, ana_eekt, _eektJets);
+			processOverlayVariables(ov_eekt, _eektJets, _mcpartvec, _reco2mcvec);
+			this->_eekttree->Fill();
+		}
 	}
 
 
@@ -805,131 +841,59 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		std::cout<<"NO JETS IN kt15Jets!!!"<<std::endl;
 	}
 	else{
-   processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
-   processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
-   ov_kt15->setTagVariables(ev_kt15->_jetmctags);	
-    	std::cout<<"Printing Event Variables "<<ev_kt15->_variableSetName <<std::endl;
-	ev_kt15->printEventVariables();	
-	jv_kt15->printJetVariables();
-	ana_kt15->printAnaVariables();
-	ov_kt15->printOverlayVariables();
+		if(_runSignalMode){
+   			processVariables( evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets );
+   			processOverlayVariables( ov_kt15, _kt15Jets, _mcpartvec , _reco2mcvec );
+  			ov_kt15->setTagVariables(ev_kt15->_jetmctags);	
+    		std::cout<<"Printing Event Variables "<<ev_kt15->_variableSetName <<std::endl;
+			ev_kt15->printEventVariables();	
+			jv_kt15->printJetVariables();
+			ana_kt15->printAnaVariables();
+			ov_kt15->printOverlayVariables();
 		this->_kt15tree->Fill();
+		}
+		else{
+			processBackground(evt, ev_kt15, jv_kt15, ana_kt15, _kt15Jets);
+			processOverlayVariables(ov_kt15, _kt15Jets, _mcpartvec, _reco2mcvec);
+			this->_kt15tree->Fill();
+		}
 	}
 
 	if(_kt08Jets.size() == 0){
 		std::cout<<"NO Jets IN kt08Jets!!!"<<std::endl;
 	}
 	else{
-   processVariables( evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets );
-    processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
-   ov_kt08->setTagVariables(ev_kt08->_jetmctags);	
-		std::cout<<"Printing Event Variables "<<ev_kt08->_variableSetName <<std::endl;
-	ev_kt08->printEventVariables();	
-	jv_kt08->printJetVariables();
-	ana_kt08->printAnaVariables();
-	ov_kt08->printOverlayVariables();
+		if(_runSignalMode){
+   			processVariables( evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets );
+    		processOverlayVariables( ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec );
+   			ov_kt08->setTagVariables(ev_kt08->_jetmctags);	
+			std::cout<<"Printing Event Variables "<<ev_kt08->_variableSetName <<std::endl;
+			ev_kt08->printEventVariables();	
+			jv_kt08->printJetVariables();
+			ana_kt08->printAnaVariables();
+			ov_kt08->printOverlayVariables();
 		this->_kt08tree->Fill();
+		}
+		else{
+			processBackground(evt, ev_kt08, jv_kt08, ana_kt08, _kt08Jets);
+			processOverlayVariables(ov_kt08, _kt08Jets, _mcpartvec, _reco2mcvec);
+			this->_kt08tree->Fill();
+		}
 	}
+
+}
+
 
     ppfov->setParticles(_pfovec);
 	ppfov->populateVariables(ppfov->_nTracks, ppfov->_nParticles, ppfov->_totalPt, ppfov->_totalE, ppfov->_totalM);	
 
 	ppfoPure->setParticles(_purePFOs);
     ppfoPure->populateVariables(ppfoPure->_nTracks, ppfoPure->_nParticles, ppfoPure->_totalPt, ppfoPure->_totalE, ppfoPure->_totalM);	
-	
-	/*evtVar->printEventVariables();	
-	ppfoVar->printPandoraPfoVariables();
-	jetVar->printJetVariables();
-	anaVar->printAnaVariables();
-	oVar->printOverlayVariables();
-	*/
-//do ppfo
-	//std::vector<std::vector<ReconstructedParticle*> > ppfo_wrapper(1);
-//	ppfo_wrapper.at(0) = _pfovec;
-/*
-	ppfo_ovr->setParticles(_pfovec,  _reco2mcvec);
-	ppfo_ovr->setMCOverlay(ppfo_ovr->_MCOverlay, ppfo_ovr->_MCOverlayIDs, _mcpartvec );
-	ppfo_ovr->setOverlayParticles(ppfo_ovr->_overlayParticles.at(0), ppfo_ovr->_tlvoverlayParticles.at(0), ppfo_ovr->_purgedJets.at(0), ppfo_ovr->_tlvpurgedJets.at(0), _pfovec);
-
-	ppfo_ovr->sumOverlayParticles(ppfo_ovr->_tlvoverlaySum.at(0), ppfo_ovr->_tlvoverlayParticles.at(0));
-	ppfo_ovr->setTotalVariables();
-//end special ppfo overlay
-*/
-///////////	printSignalVariableSet( ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt);
-
-	//processSignalVariableSet(evt, ev_kt15, jv_kt15, ppfov, ana_kt15, _kt15Jets);
-	//printSignalVariableSet( ev_kt15, jv_kt15, ppfov, ana_kt15);
-
-	//processSignalVariableSet(evt, ev_kt08, jv_kt08, ppfov, ana_kt08, _kt08Jets);
-	//printSignalVariableSet( ev_kt08, jv_kt08, ppfov, ana_kt08);
 
 
-	//processSignalVariableSet(evt, reco //TODO
-
-/*
-	ev_eekt_no_overlay->setParticles(_mcpartvec, ov_eekt->_purgedJets);
-	ev_eekt_no_overlay->initMCVars(ev_eekt_no_overlay->_isTau, ev_eekt_no_overlay->_isMuon, ev_eekt_no_overlay->_mclepCharge, ev_eekt_no_overlay->_mcl, ev_eekt_no_overlay->_mcqq, ev_eekt_no_overlay->_MCf, ev_eekt_no_overlay->_MCfpdg, ev_eekt_no_overlay->_mclepTrkMult, ev_eekt_no_overlay->_mclepPfoMult);
-	ev_eekt_no_overlay->initJetTLV(ev_eekt_no_overlay->_tlvjets);
-	ev_eekt_no_overlay->MCTagJets( ev_eekt_no_overlay->_jetmctags, ev_eekt_no_overlay->_isMCTagValid, ev_eekt_no_overlay->_mctlepCharge);
-	ev_eekt_no_overlay->computeRecoResultsFromTags(ev_eekt_no_overlay->_jetmctags, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctlep, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctNu);
-	ev_eekt_no_overlay->populateCMTLVs(ev_eekt_no_overlay->_jetmctags, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctNu, ev_eekt_no_overlay->_mctCMjets,  ev_eekt_no_overlay->_mctCMNu );
-	ev_eekt_no_overlay-> getCosThetaW(ev_eekt_no_overlay->_mctlepCharge, ev_eekt_no_overlay->_mctWl, ev_eekt_no_overlay->_mctWqq, ev_eekt_no_overlay->_mctWmProdAngle);
-*/
+	 this->_tree->Fill();
 	
 
-/*
-	jv_eekt_no_overlay->setParticles(evt, ev_eekt_no_overlay->_jets, ev_eekt_no_overlay->_tlvjets);
-	jv_eekt_no_overlay->setLogYVariables(jv_eekt_no_overlay->_logyMinus, jv_eekt_no_overlay->_logyPlus);
-	jv_eekt_no_overlay->setMaxCosPsi(jv_eekt_no_overlay->_jetMaxCosPsi); 
-	jv_eekt_no_overlay->setMCTJetMultiplicity(jv_eekt_no_overlay->_mctlepPfoMult, jv_eekt_no_overlay->_mctlepTrkMult, jv_eekt_no_overlay->_mctUpPfoMult, jv_eekt_no_overlay->_mctDwnPfoMult, jv_eekt_no_overlay->_mctUpTrkMult, jv_eekt_no_overlay->_mctDwnTrkMult, jv_eekt_no_overlay->_mctlepMaxCosPsi, jv_eekt_no_overlay->_mctUpMaxCosPsi, jv_eekt_no_overlay->_mctDwnMaxCosPsi);
-	
-
-	ana_eekt_no_overlay->setParticles(_pfovec);
-	ana_eekt_no_overlay->identifyLeptonJet_byTrkMult(ana_eekt_no_overlay->_jetanatags);
-	ana_eekt_no_overlay->getLeptonJetCharge_byLeadingTrack(ana_eekt_no_overlay->_analepCharge );
-	ana_eekt_no_overlay->setLeadingTrack(ana_eekt_no_overlay->_analepLeadingTracktlv );
-	ana_eekt_no_overlay->setAnaEventVariables(ev_eekt_no_overlay);
-
-	jv_eekt_no_overlay->setAnaJetMultiplicity( ana_eekt_no_overlay->_jetanatags, jv_eekt_no_overlay->_analepPfoMult, jv_eekt_no_overlay->_analepTrkMult);
-*/
-
-	/* new class testing area */
-	//make event variables with 3 overlay removed jets
-/*	std::cout<<"Populating Event Variables a"<<std::endl;
-	ev1->setParticles(_mcpartvec, _jets);
-	ev1->initMCVars(ev1->_isTau, ev1->_isMuon, ev1->_mclepCharge, ev1->_mcl, ev1->_mcqq, ev1->_MCf, ev1->_MCfpdg, ev1->_mclepTrkMult, ev1->_mclepPfoMult);
-	ev1->initJetTLV(ev1->_tlvjets);
-	ev1->MCTagJets( ev1->_jetmctags, ev1->_isMCTagValid, ev1->_mctlepCharge);
-	ev1->computeRecoResultsFromTags(ev1->_jetmctags, ev1->_mctWl, ev1->_mctlep, ev1->_mctWqq, ev1->_mctNu);
-	ev1->populateCMTLVs(ev1->_jetmctags, ev1->_mctWl, ev1->_mctWqq, ev1->_mctNu, ev1->_mctCMjets,  ev1->_mctCMNu );
-	ev1-> getCosThetaW(ev1->_mctlepCharge, ev1->_mctWl, ev1->_mctWqq, ev1->_mctWmProdAngle);
-
-
-	jv1->setParticles(evt, ev1->_jets, ev1->_tlvjets);
-	jv1->setLogYVariables(jv1->_logyMinus, jv1->_logyPlus);
-	jv1->setMaxCosPsi(jv1->_jetMaxCosPsi); 
-	jv1->setMCTJetMultiplicity(jv1->_mctlepPfoMult, jv1->_mctlepTrkMult, jv1->_mctUpPfoMult, jv1->_mctDwnPfoMult, jv1->_mctUpTrkMult, jv1->_mctDwnTrkMult, jv1->_mctlepMaxCosPsi, jv1->_mctUpMaxCosPsi, jv1->_mctDwnMaxCosPsi);
-	
-
-	ppfov1->setParticles(_pfovec);
-	ppfov1->populateVariables(ppfov1->_nTracks, ppfov1->_nParticles, ppfov1->_totalPt, ppfov1->_totalE, ppfov1->_totalM);	
-
-
-	ana1->setParticles(_pfovec);
-	ana1->identifyLeptonJet_byTrkMult(ana1->_jetanatags);
-	ana1->getLeptonJetCharge_byLeadingTrack(ana1->_analepCharge );
-	ana1->setLeadingTrack(ana1->_analepLeadingTracktlv );
-	ana1->setAnaEventVariables(ev1);
-
-	jv1->setAnaJetMultiplicity( ana1->_jetanatags, jv1->_analepPfoMult, jv1->_analepTrkMult);
-	
-
-	std::cout<<"Printing Event Variables a"<<std::endl;
-	ev1->printEventVariables();	
-	ppfov1->printPandoraPfoVariables();
-	jv1->printJetVariables();
-	ana1->printAnaVariables();
-*/
 /*
 
 	//fill base histograms and produce histos with sequential cuts hist0 is always no cuts
@@ -998,7 +962,7 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 	
 	
  */
-  this->_tree->Fill();
+ 
 /* removed for refactor
 	//clear vectors for next event
 	uplike_rejects_costheta.clear();
