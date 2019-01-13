@@ -557,6 +557,7 @@ void eventVariables::initLocalTree(){
 	_localTree->Branch((vsn+"mctCMNu").c_str(),"TLorentzVector",&_mctCMNu,16000,0);
 
 	_localTree->Branch((vsn+"isMCTagValid").c_str(), &_isMCTagValid,(vsn+"isMCTagValid/O").c_str());
+	_localTree->Branch((vsn+"tagCosPsiSum").c_str(), &_tagCosPsiSum,(vsn+"tagCosPsiSum/D").c_str());
 	/*** end MC tagging info ***/
 
 	/*** Ana tagging quantities ***/
