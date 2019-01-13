@@ -169,7 +169,7 @@ void jetVariables::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"logyMinus").c_str(), &_logyMinus,(vsn+"logyMinus/D").c_str());
 	_localTree->Branch((vsn+"logyPlus").c_str(), &_logyPlus,(vsn+"logyPlus/D").c_str());
-	
+	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
 	
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
