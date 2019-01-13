@@ -11,8 +11,8 @@
 
 <marlin>
 	<execute>
-	<processor name="MyFastJetProcessor" />
 
+   <processor name="MyOverlayRemoval"/> 
 	 <processor name="pureJets" />
 	<processor name="eektJets" />
     <processor name="kt15Jets" />
