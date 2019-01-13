@@ -31,7 +31,7 @@ void jetVariables::setjetLeastTrks(int& jetLeastNTrks){
 	int mintrks = 999;
 	int trkcount=0;
 	for(unsigned int i=0; i<_jets.size(); i++){
-		std::vector<ReconstructedParticle*> parts = _jets.at(k)->getParticles();
+		std::vector<ReconstructedParticle*> parts = _jets.at(j)->getParticles();
 		trkcount=0;
 		for(unsigned int j=0; j<parts.size(); j++){
 			if( parts.at(i)->getCharge() != 0 ){
