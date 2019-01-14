@@ -672,7 +672,7 @@ void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVari
 	evtVar->initMCVars(evtVar->_isTau, evtVar->_isMuon, evtVar->_mclepCharge, evtVar->_mcl, evtVar->_mcqq, evtVar->_MCf, evtVar->_MCfpdg, evtVar->_mclepTrkMult, evtVar->_mclepPfoMult, evtVar->_tauType);
 	evtVar->initJetTLV(evtVar->_tlvjets);
 	evtVar->MCTagJets( evtVar->_jetmctags, evtVar->_tagCosPsi, evtVar->_tagCosPsiSum, evtVar->_isMCTagValid, evtVar->_mctlepCharge);
-	if( evtVar->_isMCTagValid ){
+	
 	evtVar->computeRecoResultsFromTags(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctlep, evtVar->_mctWqq, evtVar->_mctNu);
 	evtVar->populateCMTLVs(evtVar->_jetmctags, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctNu, evtVar->_mctCMjets,  evtVar->_mctCMNu );
 	evtVar-> getCosThetaW(evtVar->_mctlepCharge, evtVar->_mctWl, evtVar->_mctWqq, evtVar->_mctWmProdAngle);
@@ -691,7 +691,7 @@ void WWAnalysis::processVariables(LCEvent* evt, eventVariables*& evtVar, jetVari
 	anaVar->setAnaEventVariables(evtVar);
 
 	jetVar->setAnaJetMultiplicity( anaVar->_jetanatags, jetVar->_analepPfoMult, jetVar->_analepTrkMult);
-	}
+	
 }
 void WWAnalysis::processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*> pfo2mc, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar , overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets){
 /*
