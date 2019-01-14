@@ -20,7 +20,7 @@
     <processor name="kt08Jets" />
 	 <processor name="kt08eektrecluster" />
    	<processor name="MyWWAnalysis"/>
-   <processor name="MyLCIOOutputProcessor"/> 
+<!--   <processor name="MyLCIOOutputProcessor"/> -->
  	</execute>
 
 	<global>
