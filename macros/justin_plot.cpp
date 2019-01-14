@@ -40,11 +40,11 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 	TTreeReaderValue<int> eektleptontag_ovr_ntrksLR(eektLRread,"eektleptontag_ovr_ntrks");
 	TTreeReaderValue<int> eektupliketag_ovr_ntrksLR(eektLRread,"eektupliketag_ovr_ntrks");
 	TTreeReaderValue<int> eektdwnliketag_ovr_ntrksLR(eektLRread,"eektdwnliketag_ovr_ntrks");
-	TTreeReaderValue<TLorentzVector*> eektmctWqqLR(eektLRread,"eektmctWqq");
+	TTreeReaderValue<TLorentzVector> eektmctWqqLR(eektLRread,"eektmctWqq");
 
-	TTreeReaderValue<TLorentzVector*> puremctWqqLR(pureLRread,"puremctWqq");
-	TTreeReaderValue<TLorentzVector*> puremcqqLR(pureLRread,"mcqq");
-	TTreeReaderValue<double> puretagCosPsiSumLR(pureLRread,"puretagCosPsiSum");
+	//TTreeReaderValue<double> puremctWqqLR(pureLRread,"puremctWqq.M");
+	//TTreeReaderValue<double> puremcqqLR(pureLRread,"mcqq.M");
+	//TTreeReaderValue<double> puretagCosPsiSumLR(pureLRread,"puretagCosPsiSum");
 
 	//pfo energy
 	TH1D *h1 = new TH1D("htotalEPure","purePfototalELR;TotalEnergy;Entries",100,0.,600.);
@@ -79,6 +79,7 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 	int numevents=0; // number of events that fall within the criteria  0<ntracks<=3
 	int nvts=0;
 	int nevtoverlaytrks=0;
+	TLorentzVector t;
 	while( eektLRread.Next()){
 		
 		if( *eekttagCosPsiSumLR < mctagcut ) continue;
@@ -95,7 +96,9 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 		huntrks->Fill(*eektupliketag_ovr_ntrksLR);
 		hdntrks->Fill(*eektdwnliketag_ovr_ntrksLR);
 
-		heektWqq->Fill((eektmctWqqLR).M());
+		t=*eektmctWqqLR;
+		//heektWqq->Fill((*eektmctWqqLR));
+		//std::cout<<(*eektmctWqqLR).M()<<" ";
 
 		if( *eektmctlepTrkMultLR <= 3 && *eektmctlepTrkMultLR > 0) numevents++;
 		if( *eektleptontag_ovr_ntrksLR > 0 ) nevtoverlaytrks++;
@@ -104,19 +107,19 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 	std::cout<<" number outside cut = "<< nvts - numevents <<" "<< (double(nvts-numevents)/double(nvts) )*100.<<"%" <<std::endl;
 	std::cout<<"the number of events with lepton is contaminated with at least 1 track "<< nevtoverlaytrks <<" "<< (double(nevtoverlaytrks)/double(nvts))*100.<<"%"<<std::endl;
 
-
+/*
 	//loop over pure tree
 	while( pureLRread.Next()){
 		
-		hmcWqq->Fill((puremcqqLR).M());
+		hmcWqq->Fill((*puremcqqLR));
 
 		if( *puretagCosPsiSumLR < mctagcut ) continue;
 		
-			hpureWqq->Fill((puremctWqqLR).M());
+			hpureWqq->Fill((*puremctWqqLR));
 
 	}
 
-
+*/
 const float dx=0.36;
 	const float dy=0.26;
 
