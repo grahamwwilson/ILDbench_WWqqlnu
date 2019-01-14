@@ -532,7 +532,8 @@ void eventVariables::initLocalTree(){
 	}
 
 	_localTree->Branch("mcl","TLorentzVector",&_mcl,16000,0);
-	_localTree->Branch("mcqq","TLorentzVector",&_mcqq,16000,0);
+	//_localTree->Branch("mcqq","TLorentzVector",&_mcqq,16000,0);
+	_localTree->Branch("mcqq.",&_mcl);
 	
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
