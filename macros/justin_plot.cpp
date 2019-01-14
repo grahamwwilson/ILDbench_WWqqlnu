@@ -40,10 +40,10 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 	TTreeReaderValue<int> eektleptontag_ovr_ntrksLR(eektLRread,"eektleptontag_ovr_ntrks");
 	TTreeReaderValue<int> eektupliketag_ovr_ntrksLR(eektLRread,"eektupliketag_ovr_ntrks");
 	TTreeReaderValue<int> eektdwnliketag_ovr_ntrksLR(eektLRread,"eektdwnliketag_ovr_ntrks");
-	TTreeReaderValue<TLorentzVector> eektmctWqqLR(eektLRread,"eektmctWqq");
+	//TTreeReaderValue<TLorentzVector> eektmctWqqLR(eektLRread,"eektmctWqq");
 
 	//TTreeReaderValue<double> puremctWqqLR(pureLRread,"puremctWqq.M");
-	//TTreeReaderValue<double> puremcqqLR(pureLRread,"mcqq.M");
+//	TTreeReaderValue<double> puremcqqLR(pureLRread,"mcqq.fM()");
 	//TTreeReaderValue<double> puretagCosPsiSumLR(pureLRread,"puretagCosPsiSum");
 
 	//pfo energy
@@ -96,7 +96,7 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 		huntrks->Fill(*eektupliketag_ovr_ntrksLR);
 		hdntrks->Fill(*eektdwnliketag_ovr_ntrksLR);
 
-		t=*eektmctWqqLR;
+	//	t=*eektmctWqqLR;
 		//heektWqq->Fill((*eektmctWqqLR));
 		//std::cout<<(*eektmctWqqLR).M()<<" ";
 
@@ -107,19 +107,20 @@ void justin_plot(string htype="hx",float ymax=800.0, float xlmin=0.35, float ylm
 	std::cout<<" number outside cut = "<< nvts - numevents <<" "<< (double(nvts-numevents)/double(nvts) )*100.<<"%" <<std::endl;
 	std::cout<<"the number of events with lepton is contaminated with at least 1 track "<< nevtoverlaytrks <<" "<< (double(nevtoverlaytrks)/double(nvts))*100.<<"%"<<std::endl;
 
-/*
+
 	//loop over pure tree
 	while( pureLRread.Next()){
 		
-		hmcWqq->Fill((*puremcqqLR));
+		//std::cout<<*puremcqqLR<<" ";
+		//hmcWqq->Fill((*puremcqqLR));
 
-		if( *puretagCosPsiSumLR < mctagcut ) continue;
+	//	if( *puretagCosPsiSumLR < mctagcut ) continue;
 		
-			hpureWqq->Fill((*puremctWqqLR));
+		//	hpureWqq->Fill((*puremctWqqLR));
 
 	}
 
-*/
+
 const float dx=0.36;
 	const float dy=0.26;
 
