@@ -30,6 +30,23 @@
    		<parameter name="GearXMLFile" value="gear_ILD_l5_v02_dd4hep.xml" />
    		<parameter name="Verbosity"    options= "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT"> DEBUG </parameter>
  	</global>
+
+<processor name="MyOverlayRemoval" type="ReconstructedOverlayRemoval">   
+
+		<parameter name="Printing" value="5" />
+		<parameter name="MCOFilter" value="0" />
+
+		
+		<!-- input/output collection names -->
+		<parameter name="InputParticleCollectionName" value="PandoraPFOs" />
+		<parameter name="McParticleCollectionName" value="MCParticle" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
+		
+		<parameter name="OutputParticleCollectionName" type="string" lcioOutType="ReconstructedParticle"> purgedPFOs </parameter>
+		<parameter name="OutputMCCollectionName" type="string" lcioOutType="MCParticle"> MCOverlay </parameter>
+		<parameter name="OutputOverlayCollectionName" type="string" lcioOutType="ReconstructedParticle"> overlayPFOs </parameter>
+   
+ 	</processor>
 	
 	 <!-- eekt only on jets with overlay removed -->
   <processor name="pureJets" type="FastJetProcessor">
