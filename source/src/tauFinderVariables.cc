@@ -62,10 +62,10 @@ void tauFinderVariables::setTauVariables(){
 		c=0;
 	}
 }
-void tauFinderVariables::setTauOLVariables(){
+void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 	//just use OL class
 	overlayVariables* OLTau = new overlayVariables( _variableSetName, _localTree, _taus.size(), false);
-	OLTau->setParticles(jets, pfo2mc);
+	OLTau->setParticles(_taus, _pfo2mc);
 	OLTau->setMCOverlay(OLTau->_MCOverlay, OLTau->_MCOverlayIDs, mcpartvec );
 	OLTau->setOverlayparticlesLoop(OLTau->_overlayParticles, OLTau->_tlvoverlayParticles, OLTau->_purgedJets, OLTau->_tlvpurgedJets, jets);
 	OLTau->sumOverlayParticlesLoop(OLTau->_tlvoverlaySum, OLTau->_tlvoverlayParticles);
@@ -88,7 +88,7 @@ void tauFinderVariables::setTauOLVariables(){
 	}
 	//look at overlay jet energy fraction
 	for(unsigned int i=0; i< OLTau->_tlvoverlaySum.size(); i++){
-		_tauOLEFrac.at(i) = _tlvoverlaySum.at(i)->E()/jets.at(i)->getEnergy();
+		_tauOLEFrac.at(i) = OLTau->_tlvoverlaySum.at(i)->E()/jets.at(i)->getEnergy();
 	}
 
 	//figure out visible MC energy
@@ -98,9 +98,9 @@ void tauFinderVariables::setTauOLVariables(){
 	//loop over daughters, sum into 4vec visible particles
 	for(unsigned int i=0; i< taudaughters.size(); i++){
 		//sum visible components
-		if( abs(taudaughters.at(i)->getPDG()) !=12 && abs(taudaughters.at(i)->getPDG()) != 14 && abs(tabudaughters.at(i)->getPDG()) != 16 ){
+		if( abs(taudaughters.at(i)->getPDG()) !=12 && abs(taudaughters.at(i)->getPDG()) != 14 && abs(taudaughters.at(i)->getPDG()) != 16 ){
 			TLorentzVector visibledaughter;
-			visibledaughter.SetXYZM(  taudaughters.at(i)->getMomentum()[0], taudaughters.at(i)->getMomentum()[1], taudaughters.at(i)->getMomentum()[2], taudaughters.at(i)->getMass())
+			visibledaughter.SetXYZM(  taudaughters.at(i)->getMomentum()[0], taudaughters.at(i)->getMomentum()[1], taudaughters.at(i)->getMomentum()[2], taudaughters.at(i)->getMass());
 			MCtauVis += visibledaughter;
 		}
 	}
@@ -112,26 +112,21 @@ void tauFinderVariables::setTauOLVariables(){
 void tauFinderVariables::setMCTTauVariables(){
 	//find opening angle between tau& mcTau  acos(psi)
 	TLorentzVector mc;
-	mc.SetXYZM(  _mcTau->getMomentum()[0], _mcTau->getMomentum()[1], _mcTau->getMomentum()[2], _mcTau->GetMass() );
+	mc.SetXYZM(  _mcTau->getMomentum()[0], _mcTau->getMomentum()[1], _mcTau->getMomentum()[2], _mcTau->getMass() );
 
 	double cospsi{};
 	double psi{};
 	_minTauPsi = 999;
 	for(unsigned int i=0; i< _tlvtaus.size(); i++){
 
-		cospsi = mc->Vect().Dot( _tlvtaus.at(i)->Vect() )/ (mc->Vect().Mag() * _tlvtaus.at(j)->Vect().Mag() );
+		cospsi = mc.Vect().Dot( _tlvtaus.at(i)->Vect() )/ (mc.Vect().Mag() * _tlvtaus.at(i)->Vect().Mag() );
 		psi = acos(cospsi);
 		_tauPsi.at(i) = psi;	
 		if(psi < _minTauPsi ){
 			_minTauPsi = psi;
-			_indexofmintauPsi = i;
+			_indexofminTauPsi = i;
 		}
 
 	}	
 	
-
-	
-
-
-
 }
