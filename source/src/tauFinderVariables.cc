@@ -44,6 +44,8 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 }
 void tauFinderVariables:: setMCTau( MCParticle*& mcTau ){
 	_mcTau = mcTau;
+	_mcTauTlv = new TLorentzVector();
+	_mcTauTlv->SetXYZM(mcTau->getMomentum()[0], mcTau->getMomentum()[1], mcTau->getMomentum()[2], mcTau->getMass() );
 }
 void tauFinderVariables::setTauVariables(){
 	
@@ -131,4 +133,36 @@ void tauFinderVariables::setMCTTauVariables(){
 
 	}	
 	
+}
+void tauFinderVariables::initLocalTree(){
+
+	std::string vsn(_variableSetName);
+
+	_localTree->Branch((vsn+"mcTau").c_str(),"TLorentzVector",&_mcTauTlv,16000,0);
+
+	for(int i=0; i< _nTaus; i++){
+		std::stringstream name;
+		name << _variableSetName << "tauJet" << i;
+		_localTree->Branch(name.str().c_str(),"TLorentzVector",&_tlvtaus.at(i),16000,0);
+	}
+
+	_localTree->Branch((vsn+"nTaus").c_str(),&_nTaus,(vsn+"nTaus/I").c_str());
+
+	_localTree->Branch((vsn+"tauTrkMult").c_str(), &_tauTrkMult);
+	_localTree->Branch((vsn+"tauPfoMult").c_str(), &_tauPfoMult);
+
+	_localTree->Branch((vsn+"tauNOLTrks").c_str(), &_tauNOLTrks);
+	_localTree->Branch((vsn+"tauNOLPfos").c_str(), &_tauNOLPfos);
+
+	_localTree->Branch((vsn+"tauOLEFrac").c_str(), &_tauOLEFrac);
+	_localTree->Branch((vsn+"tauOLMFrac").c_str(), &_tauOLMFrac);
+	
+	_localTree->Branch((vsn+"tauTrueFrac").c_str(), &_tauTrueFrac);
+
+	_localTree->Branch((vsn+"tauPsi").c_str(), &_tauPsi);
+	_localTree->Branch((vsn+"minTauPsi").c_str(), &_minTauPsi, (vsn+"minTauPsi/D").c_str());
+	_localTree->Branch((vsn+"indexOfMinTauPsi").c_str(), &_indexOfMintauPsi, (vsn+"indexOfMinTauPsi/I").c_str());
+	
+	
+
 }
