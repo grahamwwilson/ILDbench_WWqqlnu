@@ -90,7 +90,7 @@ void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 	}
 	//look at overlay jet energy fraction
 	for(unsigned int i=0; i< OLTau->_tlvoverlaySum.size(); i++){
-		_tauOLEFrac.at(i) = OLTau->_tlvoverlaySum.at(i)->E()/jets.at(i)->getEnergy();
+		_tauOLEFrac.at(i) = OLTau->_tlvoverlaySum.at(i)->E()/_taus.at(i)->getEnergy();
 	}
 
 	//figure out visible MC energy
