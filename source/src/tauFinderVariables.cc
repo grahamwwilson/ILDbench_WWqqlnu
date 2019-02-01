@@ -161,7 +161,7 @@ void tauFinderVariables::initLocalTree(){
 
 	_localTree->Branch((vsn+"tauPsi").c_str(), &_tauPsi);
 	_localTree->Branch((vsn+"minTauPsi").c_str(), &_minTauPsi, (vsn+"minTauPsi/D").c_str());
-	_localTree->Branch((vsn+"indexOfMinTauPsi").c_str(), &_indexOfMintauPsi, (vsn+"indexOfMinTauPsi/I").c_str());
+	_localTree->Branch((vsn+"indexOfMinTauPsi").c_str(), &_indexOfMinTauPsi, (vsn+"indexOfMinTauPsi/I").c_str());
 	
 	
 
