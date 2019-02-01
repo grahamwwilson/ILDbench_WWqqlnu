@@ -17,6 +17,9 @@ eventVariables::eventVariables(const char* variableSetName, int nfermions, int n
 	std::vector<int> mcfpdg(nfermions);
 	_MCfpdg = mcfpdg;
 
+	std::vector<MCParticle*> mcpf(nfermions);
+	_MCPf = mcpf;
+
 	std::vector<int> jtag(nJets);
 	 _jetmctags = jtag;
 
@@ -142,6 +145,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 			for(unsigned int j=0; j<daughters.size(); j++){
 				
                 TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
+				_MCPf[j] = daughters.at(j);
                 *MCf[j] = mcVec;
                 MCfpdg[j] = daughters.at(j)->getPDG();
 
