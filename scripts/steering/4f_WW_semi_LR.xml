@@ -185,9 +185,9 @@
 		<!--Input PFO collection-->
   		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle">PandoraPFOs </parameter>
   		<!--Tau output collection-->
- 		<parameter name="OutputTauCollection" type="string" lcioOutType="ReconstructedParticle">tauJets </parameter>
+ 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle">tauJets </parameter>
   		<!--Remained PFO collection not clustered-->
-  		<parameter name="RemainPFOCollection" type="string" lcioOutType="ReconstructedParticle">RemainPFOs </parameter>
+  		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle">RemainPFOs </parameter>
 		<!--Tau mass for tau clustering [GeV]-->
   		<parameter name="TauMass" type="double">2 </parameter>
   		<!--Allowed cosine angle to be clustered-->
