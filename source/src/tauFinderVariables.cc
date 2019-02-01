@@ -4,7 +4,7 @@ tauFinderVariables::tauFinderVariables(const char* variableSetName, TTree*& tree
 	_localTree = tree;
 	_variableSetName = variableSetName;
 }
-TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p){
+TLorentzVector* tauFinderVariables::createReconstructedParticleTLV(ReconstructedParticle* p){
 	TLorentzVector* t = new TLorentzVector();
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
