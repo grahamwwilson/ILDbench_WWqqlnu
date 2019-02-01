@@ -896,13 +896,17 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 	//tau stuff
 	
-	tfv->setParticles(_tauJets, _reco2mcvec);
-	tfv->setMCTau(ev_kt08->_MCPf.at(2));
-	tfv->setTauVariables();
-	tfv->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
-	tfv->setMCTTauVariables();	
-	this->_tautree->Fill();
-
+	if(_tauJets.size() == 0){
+		std::cout<<"tau not found"<<std::endl;
+	}
+	else{
+		tfv->setParticles(_tauJets, _reco2mcvec);
+		tfv->setMCTau(ev_kt08->_MCPf.at(2));
+		tfv->setTauVariables();
+		tfv->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
+		tfv->setMCTTauVariables();	
+		this->_tautree->Fill();
+	}
 
 	 this->_tree->Fill();
 	

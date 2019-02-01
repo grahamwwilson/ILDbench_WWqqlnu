@@ -27,6 +27,7 @@ class tauFinderVariables{
 	std::vector<TLorentzVector*> _tlvtaus{};
 
 	MCParticle* _mcTau{};
+	TLorentzVector* _mcTauTlv{};
 
 	//tau variables
 	int _nTaus{};
