@@ -26,7 +26,7 @@
 #include "anaVariables.h"
 #include "overlayVariables.h"
 #include "HistoManager.h"
-
+#include "tauFinderVariables.h"
 
 
 //#define ncuts 7
@@ -155,6 +155,9 @@ using namespace lcio;
   TTree* _kt15tree{};
   TTree* _kt08tree{};
 
+  //taufinder tree
+  TTree* _tautree{};
+
 
   int _nRun{};
   int _nEvt{};
@@ -205,6 +208,9 @@ using namespace lcio;
 //  std::vector<ReconstructedParticle*> _kt12Jets{};
   std::vector<ReconstructedParticle*> _kt15Jets{};
   std::vector<ReconstructedParticle*> _pureJets{};
+
+
+  std::vector<ReconstructedParticle*> _tauJets{};
 
  
  
