@@ -27,7 +27,7 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	_tauNOLPfos = olp;
 	
 	std::vector<double> ef(_nTaus);
-	_tauOLEfrac = ef;
+	_tauOLEFrac = ef;
 
 	std::vector<double> mctau(_nTaus);
 	_tauPsi = mctau;
@@ -36,8 +36,10 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	_tauTrueFrac = truefr;
 
 	for(unsigned int i=0; i<_nTaus; i++){
-	 	_tlvtaus.at(i) = createReconstructedParticle( _taus.at(i) );
+	 	_tlvtaus.at(i) = createReconstructedParticleTLV( _taus.at(i) );
 	}
+
+	_pfo2mc = pfo2mc;
 
 }
 void tauFinderVariables:: setMCTau( MCParticle*& mcTau ){
@@ -48,7 +50,7 @@ void tauFinderVariables::setTauVariables(){
 	int n=0;
 	int c=0;
 	for(unsigned int i=0; i<_taus.size(); i++){
-		std::vector<ReconstructedParticle*> tauparts = _taus.at(i)->etParticles();
+		std::vector<ReconstructedParticle*> tauparts = _taus.at(i)->getParticles();
 		for(unsigned int j=0; j<tauparts.size(); j++){
 			if(tauparts.at(j)->getCharge() != 0  ){
 				c++;
@@ -67,7 +69,7 @@ void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 	overlayVariables* OLTau = new overlayVariables( _variableSetName, _localTree, _taus.size(), false);
 	OLTau->setParticles(_taus, _pfo2mc);
 	OLTau->setMCOverlay(OLTau->_MCOverlay, OLTau->_MCOverlayIDs, mcpartvec );
-	OLTau->setOverlayparticlesLoop(OLTau->_overlayParticles, OLTau->_tlvoverlayParticles, OLTau->_purgedJets, OLTau->_tlvpurgedJets, jets);
+	OLTau->setOverlayparticlesLoop(OLTau->_overlayParticles, OLTau->_tlvoverlayParticles, OLTau->_purgedJets, OLTau->_tlvpurgedJets, _taus);
 	OLTau->sumOverlayParticlesLoop(OLTau->_tlvoverlaySum, OLTau->_tlvoverlayParticles);
 	OLTau->setTotalVariables();	
 	
@@ -106,7 +108,7 @@ void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 	}
 	
 	for(unsigned int i=0; i<OLTau->_tlvpurgedJets.size(); i++){
-		_tauTrueFrac.at(i) = _tlvpurgedJets.at(i)->E() / MCtauVis.E();
+		_tauTrueFrac.at(i) = OLTau->_tlvpurgedJets.at(i)->E() / MCtauVis.E();
 	}
 }
 void tauFinderVariables::setMCTTauVariables(){
@@ -124,7 +126,7 @@ void tauFinderVariables::setMCTTauVariables(){
 		_tauPsi.at(i) = psi;	
 		if(psi < _minTauPsi ){
 			_minTauPsi = psi;
-			_indexofminTauPsi = i;
+			_indexOfMinTauPsi = i;
 		}
 
 	}	

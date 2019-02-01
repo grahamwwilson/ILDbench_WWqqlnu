@@ -15,7 +15,7 @@ using namespace lcio;
 class tauFinderVariables{
 	public:
 	
-	tauFinderVariables(const char* variableSetName, TTree* tree);
+	tauFinderVariables(const char* variableSetName, TTree*& tree);
 
 	void setParticles(std::vector<ReconstructedParticle*>& taus, std::vector<LCRelation*>& pfo2mc);
 	void initLocalTree();
@@ -29,7 +29,7 @@ class tauFinderVariables{
 	MCParticle* _mcTau{};
 
 	//tau variables
-	int nTaus{};
+	int _nTaus{};
 	std::vector<int> _tauTrkMult{};
 	std::vector<int> _tauPfoMult{};//total pfos trk+neutrals
 	
@@ -42,7 +42,7 @@ class tauFinderVariables{
 	
 	//mct tau
 	std::vector<double> _tauPsi{};
-	int _indexOfminTauPsi{};
+	int _indexOfMinTauPsi{};
 	double _minTauPsi{};
 
 	void setMCTau(MCParticle*& mctau);
