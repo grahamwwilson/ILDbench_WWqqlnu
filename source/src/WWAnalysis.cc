@@ -108,6 +108,7 @@ void WWAnalysis::init() {
  _eekttree = new TTree("eekttree", "tree made from pandora pfos and clustered with eekt n=3");
  _kt15tree = new TTree("kt15tree", "tree made from pandora pfos, overlay removal with kt R=1.5, reclustered with eekt n=3");
  _kt08tree = new TTree("kt08tree", "tree made from pandora pfos, overlay removal with kt R=0.8, reclustered with eekt n=3") ;
+ _tautree = new  TTree("tautree","tree for exploring taufinder");
 
 /*  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
