@@ -159,6 +159,9 @@ void WWAnalysis::init() {
     ov_kt08 = new overlayVariables("kt08", _kt08tree, _nJets, 1);
 	ov_kt08->initLocalTree();
 
+	tfv = new tauFinderVariables("tau", _tautree);
+	tf->initLocalTree();
+
 
 	/*ev_eekt_no_overlay = new eventVariables("eektpure", _nfermions, _nleptons, _nJets, _tree);
 	ev_eekt_no_overlay->initLocalTree();
@@ -417,7 +420,7 @@ bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
     		}
   	}
 
-  	if(!collectionFound){
+  	if(!collectionFound){tauFinderVariables
 		std::cout<<"LCRelation Collection "<< _inputRecoRelationCollectionName << "not found"<<std::endl;
 	}
   
@@ -761,6 +764,7 @@ FindJetCollection( evt, _JetCollName_pure, _pureJets );
 FindJetCollection( evt, _JetCollName_eekt, _eektJets );
 FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
 FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
+FindJetCollection( evt, _JetCollName_tau , _tauJets );
 FindRecoToMCRelation( evt );
  FindTracks(evt);
  FindPFOs(evt);
@@ -889,6 +893,15 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 	ppfoPure->setParticles(_purePFOs);
     ppfoPure->populateVariables(ppfoPure->_nTracks, ppfoPure->_nParticles, ppfoPure->_totalPt, ppfoPure->_totalE, ppfoPure->_totalM);	
+
+	//tau stuff
+	
+	tfv->setParticles(_tauJets, _reco2mcvec);
+	tfv->setMCTau(ev_kt08->_MCPf.at(2));
+	tfv->setTauVariables();
+	tfv->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
+	tfv->setMCTTauVariables();	
+	this->_tautree->Fill();
 
 
 	 this->_tree->Fill();

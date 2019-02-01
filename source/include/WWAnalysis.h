@@ -134,6 +134,9 @@ using namespace lcio;
  anaVariables* ana_kt08{};
  overlayVariables* ov_kt08{};
 
+	//testing classes for tau finder
+	tauFinderVariables* tfv{};
+
 //overlay removed from eekt variables set
 // eventVariables* ev_eekt_no_overlay{};
 // jetVariables* jv_eekt_no_overlay{};
@@ -239,7 +242,8 @@ using namespace lcio;
   std::string _JetCollName_kt08 = "kt08Jets";
   std::string _JetCollName_pure = "pureJets";
   std::string _PfoCollName_pure = "purgedPFOs";
-
+  //taufinding
+	std::string _JetCollName_tau = "tauJets";
 
 	/* special set of histograms for dealing with overlay and forward acceptance */
 	/* each hist in the array is a cut on costheta */
