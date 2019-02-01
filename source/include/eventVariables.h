@@ -36,7 +36,7 @@ class eventVariables{
 
 	//monte carlo
 	std::vector<MCParticle*> _mcpartvec{};
-	std::Vector<MCParticle*> _MCPf{};
+	std::vector<MCParticle*> _MCPf{};
 	std::vector<TLorentzVector*> _MCf{};
 	std::vector<int> _MCfpdg{};
 	TLorentzVector* _mcl{};
