@@ -10,14 +10,14 @@
 #include <math.h>
 #include <iostream>
 #include "overlayVariables.h"
-#include
+
 using namespace lcio;
 class tauFinderVariables{
 	public:
 	
 	tauFinderVariables(const char* variableSetName, TTree* tree);
 
-	void setParticles(std::vector<ReconstructedParticle*>& taus std::vector<LCRelation*>& pfo2mc);
+	void setParticles(std::vector<ReconstructedParticle*>& taus, std::vector<LCRelation*>& pfo2mc);
 	void initLocalTree();
 
 	TTree* _localTree{};
@@ -47,11 +47,11 @@ class tauFinderVariables{
 
 	void setMCTau(MCParticle*& mctau);
 	void setTauVariables();
-	void setTauOLVariables();
+	void setTauOLVariables(std::vector<MCParticle*> mcpartvec); //quick fix throw in mcpartvec
 	void setMCTTauVariables();
 	TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 	
 	
 	
-}
+};
 #endif
