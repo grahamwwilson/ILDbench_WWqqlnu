@@ -160,7 +160,7 @@ void WWAnalysis::init() {
 	ov_kt08->initLocalTree();
 
 	tfv = new tauFinderVariables("tau", _tautree);
-	tf->initLocalTree();
+	tfv->initLocalTree();
 
 
 	/*ev_eekt_no_overlay = new eventVariables("eektpure", _nfermions, _nleptons, _nJets, _tree);
@@ -420,7 +420,7 @@ bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
     		}
   	}
 
-  	if(!collectionFound){tauFinderVariables
+  	if(!collectionFound){
 		std::cout<<"LCRelation Collection "<< _inputRecoRelationCollectionName << "not found"<<std::endl;
 	}
   
