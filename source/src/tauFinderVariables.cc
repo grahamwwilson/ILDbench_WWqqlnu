@@ -140,11 +140,13 @@ void tauFinderVariables::initLocalTree(){
 
 	_localTree->Branch((vsn+"mcTau").c_str(),"TLorentzVector",&_mcTauTlv,16000,0);
 
-	for(int i=0; i< _nTaus; i++){
+/*	for(int i=0; i< _nTaus; i++){
 		std::stringstream name;
 		name << _variableSetName << "tauJet" << i;
 		_localTree->Branch(name.str().c_str(),"TLorentzVector",&_tlvtaus.at(i),16000,0);
 	}
+*/
+	_localTree->branch((vsn+"tauTLV.").c_str(), &_tlvtaus);
 
 	_localTree->Branch((vsn+"nTaus").c_str(),&_nTaus,(vsn+"nTaus/I").c_str());
 

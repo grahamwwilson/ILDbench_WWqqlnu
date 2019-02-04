@@ -162,7 +162,8 @@ void WWAnalysis::init() {
 
 	tfv = new tauFinderVariables("tau", _tautree);
 	tfv->initLocalTree();
-
+	ev_tfv = new eventVariables("evtau",_nfermions,_nleptons, _nJets, _tautree);
+	ev_tfv->initLocalTree();
 
 	/*ev_eekt_no_overlay = new eventVariables("eektpure", _nfermions, _nleptons, _nJets, _tree);
 	ev_eekt_no_overlay->initLocalTree();
@@ -906,6 +907,12 @@ FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 		tfv->setTauVariables();
 		tfv->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
 		tfv->setMCTTauVariables();	
+
+		ev_tfv->setParticles(_mcpartvec, _kt08Jets);//throw in any jets
+		ev_tfv->initMCVars(ev_tfv->_isTau, ev_tfv->_isMuon, ev_tfv->_mclepCharge, ev_tfv->_mcl, ev_tfv->_mcqq, ev_tfv->_MCf, ev_tfv->_MCfpdg, ev_tfv->_mclepTrkMult, 			ev_tfv->_mclepPfoMult, ev_tfv->_tauType);
+
+
+
 		this->_tautree->Fill();
 	}
 
