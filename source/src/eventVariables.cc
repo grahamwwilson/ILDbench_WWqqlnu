@@ -112,12 +112,15 @@ int eventVariables::getTauDecayMode(MCParticle* mctau){
 		std::vector<MCParticle*> dec = mctau->getDaughters();
 		std::cout<<"TAU DETAILS"<<std::endl;
 		std::cout<<"N tau daughters = "<<dec.size()<<std::endl;
+		std::cout<<"tau daughter pdg = ";
 		int tcount = 0;
 		for(unsigned int i=0; i< dec.size(); i++){
+				std::cout<< dec.at(i)->getPDG();
 				if(dec.at(i)->getCharge() != 0){
 					tcount++;
 				}
 		}
+		std::cout<<std::endl;
 		std::cout<<"N tau tracks = "<<tcount<<std::endl;
 		if(tcount == 1) return 3;
 		if(tcount == 3) return 4;
