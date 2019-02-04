@@ -101,13 +101,24 @@ void eventVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs, int& mclepT
   mclepTrkMult = counttracks;
 }
 int eventVariables::getTauDecayMode(MCParticle* mctau){
-		//1= muon 2=elec 3= other
+		//1= muon 2=elec 3=had1p 4=had3p 5=other (5p)
 		//with the tau mcp get its immediate decay products
 		//from daniels code decayChPi=0, decayRho, decayA1_1p, decayA1_3p , decayEl, decayMu , decayW , decayK , decayMultiprong , decayOthersingleprong, decayUnrecognised
 		int mode = classifyTau::getMCdecayMode(mctau);
 		if(mode == 5) return 1;
 		if(mode == 4) return 2;
-		return 3;
+
+		//if its something else just count tracks
+		std::vector<MCParticle*> dec = mctau->getDaughters();
+		int tcount = 0;
+		for(unsigned int i=0; i< dec.size(); i++){
+				if(dec.at(i)->getCharge() != 0){
+					tcount++;
+				}
+		}
+		if(tcount == 1) return 3;
+		if(tcount == 3) return 4;
+		return 5;
 		
 }
 void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLorentzVector*& mcl, TLorentzVector*& mcqq, std::vector<TLorentzVector*>& MCf, std::vector<int>& MCfpdg, int& mclepTrkMult, int& mclepPfoMult, int& tauType){
