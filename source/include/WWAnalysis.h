@@ -136,6 +136,7 @@ using namespace lcio;
 
 	//testing classes for tau finder
 	tauFinderVariables* tfv{};
+	eventVariables* ev_tfv{};
 
 //overlay removed from eekt variables set
 // eventVariables* ev_eekt_no_overlay{};
