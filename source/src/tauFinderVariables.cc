@@ -103,7 +103,7 @@ void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 
 	//figure out visible MC energy
 	std::vector<MCParticle*> taudaughters{};
-	taudaughters = classifyTau::getstablemctauDaughters(_mctau);
+	taudaughters =  classifyTau::getstablemctauDaughters(_mcTau);
 	TLorentzVector MCtauVis;
 	//loop over daughters, sum into 4vec visible particles
 	for(unsigned int i=0; i< taudaughters.size(); i++){
