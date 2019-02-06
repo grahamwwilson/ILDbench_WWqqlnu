@@ -10,6 +10,7 @@
 #include <math.h>
 #include <iostream>
 #include "overlayVariables.h"
+#include "classifyTau.h"
 
 using namespace lcio;
 class tauFinderVariables{
