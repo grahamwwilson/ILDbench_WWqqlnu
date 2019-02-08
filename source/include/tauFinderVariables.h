@@ -12,9 +12,9 @@
 #include "overlayVariables.h"
 #include "classifyTau.h"
 
-#ifdef __CINT__
-#pragma link C++ class std::vector<TLorentzVector>+;
-#endif
+//#ifdef __CINT__
+//#pragma link C++ class std::vector<TLorentzVector>+;
+//#endif
 
 using namespace lcio;
 class tauFinderVariables{
@@ -31,7 +31,8 @@ class tauFinderVariables{
 	std::vector<ReconstructedParticle*> _taus{};
 	std::vector<TLorentzVector*> _tlvtaus{};
 	//std::vector<std::vector<double> > _taus2d{}; //px py pz M
-	std::vector<TLorentzVector> _taustest{};
+	//std::vector<TLorentzVector> _taustest{};
+	TLorentzVector _taustest{};
 
 	MCParticle* _mcTau{};
 	TLorentzVector* _mcTauTlv{};
