@@ -19,7 +19,7 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	//_taus2d = tld;
 	//std::vector<TLorentzVector> tlvt(_nTaus);
 	//_taustest = tlvt;
-	_tuastest = new TLorentzVector[_nTaus];
+	_taustest = new TLorentzVector[_nTaus];
 
 	std::vector<int> tmult(_nTaus);
 	_tauTrkMult = tmult;
