@@ -59,6 +59,7 @@ class tauFinderVariables{
 	void setTauOLVariables(std::vector<MCParticle*> mcpartvec); //quick fix throw in mcpartvec
 	void setMCTTauVariables();
 	TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
+    TLorentzVector* getTauTLVFromRecoPart(ReconstructedParticle* tau);
 	
 	
 	

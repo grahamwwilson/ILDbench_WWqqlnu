@@ -9,6 +9,15 @@ TLorentzVector* tauFinderVariables::createReconstructedParticleTLV(Reconstructed
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
+TLorentzVector* tauFinderVariables::getTauTLVFromRecoPart(ReconstructedParticle* tau){
+	std::vector<TLorentzVector*> daughters = tau->getParticles();
+	TLorentzVector* t = new TLorentzVector();
+	for( unsigned int i=0; i<daughters.size(); i++){
+		*t = *t + *daughters.at(i);
+	}
+	return t;
+
+}
 void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus, std::vector<LCRelation*>& pfo2mc){
 	_taus = taus;//based on the number of taus allocate space for all the arrays
 	_nTaus = (int) _taus.size();
@@ -43,7 +52,9 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	//TLorentzVector* t;
 	for(unsigned int i=0; i<_nTaus; i++){
 		
-	 	_tlvtaus.at(i) = createReconstructedParticleTLV( _taus.at(i) );
+		
+	 	//_tlvtaus.at(i) = createReconstructedParticleTLV( _taus.at(i) );
+		_tlvtaus.at(i) = getTauTLVFromRecoPart(_taus.at(i));
 		//t = createReconstructedParticleTLV( _taus.at(i) );
 	//	_taus2d.at(i) = std::vector<double>{ t->Px(), t->Py(), t->Pz(), t->M() };
 		_taustest[i] = *_tlvtaus.at(i);
