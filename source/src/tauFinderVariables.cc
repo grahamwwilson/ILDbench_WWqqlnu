@@ -17,7 +17,7 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	//std::vector< std::vector<double> > tld(_nTaus);
 	_tlvtaus = tlv;
 	//_taus2d = tld;
-	std::vector<TLorentzVector*> tlvt(_nTaus);
+	std::vector<TLorentzVector> tlvt(_nTaus);
 	_taustest = tlvt;
 
 	std::vector<int> tmult(_nTaus);
@@ -43,9 +43,9 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	for(unsigned int i=0; i<_nTaus; i++){
 		
 	 	_tlvtaus.at(i) = createReconstructedParticleTLV( _taus.at(i) );
-		t = createReconstructedParticleTLV( _taus.at(i) );
+		//t = createReconstructedParticleTLV( _taus.at(i) );
 	//	_taus2d.at(i) = std::vector<double>{ t->Px(), t->Py(), t->Pz(), t->M() };
-		_taustest.at(i) = *t;
+		_taustest.at(i) = *_tlvtaus.at(i);
 	}
 
 	_pfo2mc = pfo2mc;
@@ -160,7 +160,7 @@ void tauFinderVariables::initLocalTree(){
 		_localTree->Branch(name.str().c_str(),"TLorentzVector",&_tlvtaus.at(i),16000,0);
 	}
 */
-	_localTree->Branch((vsn+"tauTLV.").c_str(), &_taus2d);
+	_localTree->Branch((vsn+"tauTLV.").c_str(), &_taustest);
 
 	_localTree->Branch((vsn+"nTaus").c_str(),&_nTaus,(vsn+"nTaus/I").c_str());
 
