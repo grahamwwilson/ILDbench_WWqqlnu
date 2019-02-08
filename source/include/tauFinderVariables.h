@@ -32,7 +32,7 @@ class tauFinderVariables{
 	std::vector<TLorentzVector*> _tlvtaus{};
 	//std::vector<std::vector<double> > _taus2d{}; //px py pz M
 	//std::vector<TLorentzVector> _taustest{};
-	TLorentzVector _taustest{};
+	TLorentzVector* _taustest{};
 
 	MCParticle* _mcTau{};
 	TLorentzVector* _mcTauTlv{};
