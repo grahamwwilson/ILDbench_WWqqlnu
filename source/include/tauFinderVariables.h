@@ -26,7 +26,8 @@ class tauFinderVariables{
 	const char* _variableSetName{};
 	std::vector<ReconstructedParticle*> _taus{};
 	std::vector<TLorentzVector*> _tlvtaus{};
-	std::vector<std::vector<double> > _taus2d{}; //px py pz M
+	//std::vector<std::vector<double> > _taus2d{}; //px py pz M
+	std::vector<TLorentzvector*> _taustest{};
 
 	MCParticle* _mcTau{};
 	TLorentzVector* _mcTauTlv{};

@@ -14,9 +14,11 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	_nTaus = (int) _taus.size();
 
 	std::vector<TLorentzVector*> tlv(_nTaus);
-	std::vector< std::vector<double> > tld(_nTaus);
+	//std::vector< std::vector<double> > tld(_nTaus);
 	_tlvtaus = tlv;
-	_taus2d = tld;
+	//_taus2d = tld;
+	std::vector<TLorentzVector*> tlvt(_nTaus);
+	_taustest = tlvt;
 
 	std::vector<int> tmult(_nTaus);
 	_tauTrkMult = tmult;
@@ -37,12 +39,13 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	std::vector<double> truefr(_nTaus);
 	_tauTrueFrac = truefr;
 
-	TLorentzVector* t;
+	//TLorentzVector* t;
 	for(unsigned int i=0; i<_nTaus; i++){
 		
 	 	_tlvtaus.at(i) = createReconstructedParticleTLV( _taus.at(i) );
 		t = createReconstructedParticleTLV( _taus.at(i) );
-		_taus2d.at(i) = std::vector<double>{ t->Px(), t->Py(), t->Pz(), t->M() };
+	//	_taus2d.at(i) = std::vector<double>{ t->Px(), t->Py(), t->Pz(), t->M() };
+		_taustest.at(i) = *t;
 	}
 
 	_pfo2mc = pfo2mc;
