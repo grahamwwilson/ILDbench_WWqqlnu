@@ -10,10 +10,16 @@ TLorentzVector* tauFinderVariables::createReconstructedParticleTLV(Reconstructed
 	return t;
 }
 TLorentzVector* tauFinderVariables::getTauTLVFromRecoPart(ReconstructedParticle* tau){
-	std::vector<TLorentzVector*> daughters = tau->getParticles();
-	TLorentzVector* t = new TLorentzVector();
+	std::vector<ReconstructedParticle*> daughters = tau->getParticles();
+	std::vector<TLorentzVector*> daughterstlv(daughters.size());
+	
 	for( unsigned int i=0; i<daughters.size(); i++){
-		*t = *t + *daughters.at(i);
+		daughterstlv.at(i) = createReconstructedParticleTLV( daughters.at(i) );
+	}
+
+	TLorentzVector* t = new TLorentzVector();
+	for( unsigned int i=0; i<daughterstlv.size(); i++){
+		*t = *t + *daughterstlv.at(i);
 	}
 	return t;
 
