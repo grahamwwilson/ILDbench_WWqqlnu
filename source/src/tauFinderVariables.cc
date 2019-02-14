@@ -71,7 +71,7 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	//	_taus2d.at(i) = std::vector<double>{ t->Px(), t->Py(), t->Pz(), t->M() };
 		_taustest[i] = *_tlvtaus.at(i);
 
-		std::cout<<"recopart "<<_taus.at(i)->getMomentum()[0]<<" "<<_taus.at(i)->getMomentum()[1]<<" "<<_taus.at(i)->getMomentum()[2]<<" "<<_taus.at(i)->getEnergy()<<" "_taus.at(i)->getMass()<<std::endl;
+		std::cout<<"recopart "<<_taus.at(i)->getMomentum()[0]<<" "<<_taus.at(i)->getMomentum()[1]<<" "<<_taus.at(i)->getMomentum()[2]<<" "<<_taus.at(i)->getEnergy()<<" "<<_taus.at(i)->getMass()<<std::endl;
 		std::cout<<"tlv "<<_taustest[i].Px()<<" "<<_taustest[i].Py()<<" "<<_taustest[i].Pz()<<" "<<_taustest[i].E()<<" "<<_taustest[i].M()<<std::endl;
 	}
 
