@@ -187,7 +187,8 @@ void tauFinderVariables::initLocalTree(){
 		_localTree->Branch(name.str().c_str(),"TLorentzVector",&_tlvtaus.at(i),16000,0);
 	}
 */
-	_localTree->Branch((vsn+"tauTLV").c_str(),"TLorentzVector" , &_taustest);
+//	_localTree->Branch((vsn+"tauTLV").c_str(),"TLorentzVector" , &_taustest);
+	_localTree->Branch((vsn+"tauTLV").c_str(),"vector<TLorentzVector>", &_tlvtaus);
 
 	_localTree->Branch((vsn+"nTaus").c_str(),&_nTaus,(vsn+"nTaus/I").c_str());
 
