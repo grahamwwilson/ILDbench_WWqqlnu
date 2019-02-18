@@ -163,7 +163,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				
                // TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
 				TLorentzVector mcVec;
-				mcVec.SetXYZM(daughters.at(j)->getMomentum()[0], daughters.at(j)->getMomentum()[1], daughters.at(j)->getMomentum()[2], daughters.at(j)->getMass());
+				mcVec.SetXYZM(daughters.at(j)->getMomentum()[0], daughters.at(j)->getMomentum()[1], daughters.at(j)->getMomentum()[2], daughters.at(j)->getMass() );
 				_MCPf[j] = daughters.at(j);
                 *MCf[j] = mcVec;
                 MCfpdg[j] = daughters.at(j)->getPDG();
