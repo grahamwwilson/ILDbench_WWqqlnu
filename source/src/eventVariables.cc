@@ -167,7 +167,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
                 MCfpdg[j] = daughters.at(j)->getPDG();
 
 				//is this the lepton?
-				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15){
+				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15 || abs(MCfpdg[j]) == 11){
 					mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
 
 					//also get all of the leptons visible FSP
