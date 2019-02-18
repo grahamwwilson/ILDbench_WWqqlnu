@@ -187,6 +187,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing muon
 				isMuon = true;
 				isTau = false;
+				isElectron = false;
 				tauType = 0;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
@@ -202,6 +203,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing a tau
 				isTau = true;
 				isMuon = false;
+				isElectron=false;
 				
 				for(unsigned int I=0; I<daughters.size(); I++){
 					if( abs(daughters.at(I)->getPDG())==15){
@@ -214,7 +216,23 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				}
 				else{
 					mclepCharge = 1;
-				}	
+				}
+			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ||
+				std::find(daughterpdgs.begin(),daughterpdgs.end(), -11) != daughterpdgs.end() ){
+				//identify event containing muon
+				isMuon = false;
+				isTau = false;
+				isElectron = true;
+				tauType = 0;
+				//get true charge of the muon
+				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ){
+					mclepCharge = -1;
+				}
+				else{
+					mclepCharge = 1;
+				}
+			}
+	
 			}
 			//if we have found the true decay set break out of the mcpart vec loop
 			return;
@@ -316,7 +334,7 @@ void eventVariables::MCTagJets(std::vector<int>& jetmctags, std::vector<double>&
 	std::vector<TLorentzVector*> mc{};
 	for(unsigned int i=0; i< _MCfpdg.size(); i++){
 		int pdg = _MCfpdg.at(i);
-		if( (abs(pdg)!=14) && (abs(pdg)!=16) ){
+		if( (abs(pdg)!=14) && (abs(pdg)!=16) && (abs(pdg)!=12)){
 			ferm.push_back(_MCfpdg.at(i) );
 			mc.push_back(_MCf.at(i));
 		}
@@ -384,7 +402,7 @@ void eventVariables::computeRecoResultsFromTags(std::vector<int>& tagset, TLoren
 		if(abs(tagset.at(i)) < 6){
 			qq += *_tlvjets.at(i);
 		}
-		if(abs(tagset.at(i)) == 13 || abs(tagset.at(i)) == 15){
+		if(abs(tagset.at(i)) == 13 || abs(tagset.at(i)) == 15 || abs(tagset.at(i)) == 11){
 			lep = new TLorentzVector( _tlvjets.at(i)->Vect(), _tlvjets.at(i)->E() );
 		}
 	}
@@ -537,6 +555,7 @@ void eventVariables::initLocalTree(){
 	/*** Tree MC info ***/
 	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
 	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
+	_localTree->Branch((vsn+"isElectron").c_str(),&_isElectron,(vsn+"isElectron/O").c_str());
 	_localTree->Branch((vsn+"tauType").c_str(),&_tauType,(vsn+"tauType/I").c_str());
 	_localTree->Branch((vsn+"mclepCharge").c_str(), &_mclepCharge,(vsn+"mclepCharge/I").c_str());
 
