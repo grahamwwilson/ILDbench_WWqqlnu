@@ -7,7 +7,8 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 
 	//load vector<TLorentzVector>
-	gROOT->ProcessLine(".L ./loader.C+");
+	gROOT->ProcessLine("cd()");
+	gROOT->ProcessLine(".L loader.C+");
 
   // register steering parameters: name, description, class-variable, default value
 
