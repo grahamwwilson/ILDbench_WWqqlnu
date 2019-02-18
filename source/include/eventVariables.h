@@ -49,6 +49,7 @@ class eventVariables{
 	bool _isTau{};
 	int _tauType{}; //0=not a tau event 1=muon 2=electron 3=had1p 4=had3p 5=other
 	bool _isMuon{};
+	bool _isElectron{};
 	bool _isSignal{};//is this a signal event or background?
 
 
