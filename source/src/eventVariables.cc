@@ -161,14 +161,18 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 			
 			for(unsigned int j=0; j<daughters.size(); j++){
 				
-                TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
+               // TLorentzVector mcVec(TVector3(daughters.at(j)->getMomentum()),daughters.at(j)->getEnergy());
+				TLorentzVector mcVec;
+				mcVec.SetXYZM(daughters.at(j)->getMomentum()[0], daughters.at(j)->getMomentum()[1], daughters.at(j)->getMomentum()[2], daughters.at(j)->getMass());
 				_MCPf[j] = daughters.at(j);
                 *MCf[j] = mcVec;
                 MCfpdg[j] = daughters.at(j)->getPDG();
 
 				//is this the lepton?
 				if(abs(MCfpdg[j]) == 13  || abs(MCfpdg[j]) == 15 || abs(MCfpdg[j]) == 11){
-					mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
+					//mcl = new TLorentzVector(mcVec.Vect(),mcVec.E());
+					mcl = new TLorentzVector();
+					mcl->SetXYZM( mcVec.Px(), mcVec.Py(), mcVec.Pz(), mcVec.M() );
 
 					//also get all of the leptons visible FSP
 					std::vector<MCParticle*> mclepFSP{};
@@ -219,12 +223,12 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				}
 			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ||
 				std::find(daughterpdgs.begin(),daughterpdgs.end(), -11) != daughterpdgs.end() ){
-				//identify event containing muon
+				//identify event containing electron
 				isMuon = false;
 				isTau = false;
 				_isElectron = true;
 				tauType = 0;
-				//get true charge of the muon
+				//get true charge of the electron
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ){
 					mclepCharge = -1;
 				}
