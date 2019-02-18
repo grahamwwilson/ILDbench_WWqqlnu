@@ -19,6 +19,7 @@
 #include <iostream>
 #include <fstream>
 #include "EVENT/LCParameters.h"
+#include "TROOT.h"
 
 #include "eventVariables.h"
 #include "jetVariables.h"
