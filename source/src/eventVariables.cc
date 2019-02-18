@@ -238,7 +238,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				}
 			}
 	
-			}
+			
 			//if we have found the true decay set break out of the mcpart vec loop
 			return;
 			//break;
