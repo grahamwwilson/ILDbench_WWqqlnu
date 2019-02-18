@@ -187,7 +187,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing muon
 				isMuon = true;
 				isTau = false;
-				isElectron = false;
+				_isElectron = false;
 				tauType = 0;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
@@ -203,7 +203,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing a tau
 				isTau = true;
 				isMuon = false;
-				isElectron=false;
+				_isElectron=false;
 				
 				for(unsigned int I=0; I<daughters.size(); I++){
 					if( abs(daughters.at(I)->getPDG())==15){
@@ -222,7 +222,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				//identify event containing muon
 				isMuon = false;
 				isTau = false;
-				isElectron = true;
+				_isElectron = true;
 				tauType = 0;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ){
