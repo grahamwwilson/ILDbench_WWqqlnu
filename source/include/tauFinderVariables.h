@@ -42,6 +42,7 @@ class tauFinderVariables{
 	int _nTaus{};
 	std::vector<int> _tauTrkMult{};
 	std::vector<int> _tauPfoMult{};//total pfos trk+neutrals
+	std::vector<double> _tauCharge{};
 	
 	std::vector<int> _tauNOLTrks{};
 	std::vector<int> _tauNOLPfos{};

@@ -47,6 +47,9 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	std::vector<int> pmult(_nTaus);
 	_tauPfoMult = pmult;
 
+	std::vector<double> tq(_nTaus);
+	_tauCharge= tq;
+
 	std::vector<int> olt(_nTaus);
 	_tauNOLTrks = olt;
 	std::vector<int> olp(_nTaus);
@@ -74,6 +77,13 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 
 		std::cout<<"recopart "<<_taus.at(i)->getMomentum()[0]<<" "<<_taus.at(i)->getMomentum()[1]<<" "<<_taus.at(i)->getMomentum()[2]<<" "<<_taus.at(i)->getEnergy()<<" "<<_taus.at(i)->getMass()<<std::endl;
 		std::cout<<"tlv "<<_taustest[i].Px()<<" "<<_taustest[i].Py()<<" "<<_taustest[i].Pz()<<" "<<_taustest[i].E()<<" "<<_taustest[i].M()<<std::endl;
+
+		std::vector<ReconstructedParticle*> daughters{};
+		daughters = _taus.at(i)->getParticles();
+		_tauCharge.at(i) = 0.;
+		for(unsigned int j=0; j<daughters.size(); j++){
+			_tauCharge.at(i) += daughters.at(j)->getCharge();
+		}
 	}
 
 	_pfo2mc = pfo2mc;
@@ -195,6 +205,8 @@ void tauFinderVariables::initLocalTree(){
 
 	_localTree->Branch((vsn+"tauTrkMult").c_str(), &_tauTrkMult);
 	_localTree->Branch((vsn+"tauPfoMult").c_str(), &_tauPfoMult);
+
+	_localTree->Branch((vsn+"tauCharge").c_str(), &_tauCharge);
 
 	_localTree->Branch((vsn+"tauNOLTrks").c_str(), &_tauNOLTrks);
 	_localTree->Branch((vsn+"tauNOLPfos").c_str(), &_tauNOLPfos);
