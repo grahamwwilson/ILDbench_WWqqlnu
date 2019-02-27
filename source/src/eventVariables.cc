@@ -214,7 +214,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				for(unsigned int I=0; I<daughters.size(); I++){
 					if( abs(daughters.at(I)->getPDG())==15){
 						tauType = getTauDecayMode(daughters.at(I));
-					}
+					
 					//save stable daughters
 				    std::vector<MCParticle*> dec =  classifyTau::getstablemctauDaughters(daughters.at(I));
 					std::vector<TLorentzVector> mctaudaughters( dec.size() );
@@ -227,6 +227,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 						}
 					}
 					_MCTauVisibleDaughters = mctaudaughters;
+					}//end get mctau
 			
 				}
 
