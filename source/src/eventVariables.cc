@@ -218,11 +218,11 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 					//save stable daughters
 				    std::vector<MCParticle*> dec =  classifyTau::getstablemctauDaughters(daughters.at(I));
 					std::vector<TLorentzVector> mctaudaughters( dec.size() );
-					for(unsigned int K =0; K<dec.size() K++){
+					for(unsigned int K =0; K<dec.size(); K++){
 						int taupdg = abs(dec.at(K)->getPDG());
 						if( taupdg == 12 || taupdg == 14 || taupdg == 16 ){
 							TLorentzVector t;
-							T.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
+							t.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
 							mctaudaughters.at(K) = t;
 						}
 					}
