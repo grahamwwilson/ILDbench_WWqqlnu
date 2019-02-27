@@ -209,11 +209,30 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 				isMuon = false;
 				_isElectron=false;
 				
+
+				
 				for(unsigned int I=0; I<daughters.size(); I++){
 					if( abs(daughters.at(I)->getPDG())==15){
 						tauType = getTauDecayMode(daughters.at(I));
 					}
+					//save stable daughters
+				    std::vector<MCParticle*> dec =  classifyTau::getstablemctauDaughters(daughters.at(I));
+					std::vector<TLorentzVector> mctaudaughters( dec.size() );
+					for(unsigned int K =0; K<dec.size() K++){
+						int taupdg = abs(dec.at(K)->getPDG());
+						if( taupdg == 12 || taupdg == 14 || taupdg == 16 ){
+							TLorentzVector t;
+							T.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
+							mctaudaughters.at(K) = t;
+						}
+					}
+					_MCTauVisibleDaughters = mctaudaughters;
+			
 				}
+
+				//save the stable daughters
+				
+
 				//identify the true charge of the lepton
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 15) != daughterpdgs.end() ){
 					mclepCharge = -1;
@@ -575,6 +594,8 @@ void eventVariables::initLocalTree(){
 		name <<"_PDG";
 		_localTree->Branch(name.str().c_str(), &_MCfpdg.at(i), (name.str()+"/I").c_str());
 	}
+
+	_localTree->Branch((vsn+"MCTauVisibleDaughters").c_str(),"vector<TLorentzVector>", &_MCTauVisibleDaughters);//TODO fill this
 
 	_localTree->Branch("mcl","TLorentzVector",&_mcl,16000,0);
 	_localTree->Branch("mcqq","TLorentzVector",&_mcqq,16000,0);
