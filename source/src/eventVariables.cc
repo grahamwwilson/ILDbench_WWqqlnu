@@ -220,7 +220,7 @@ void eventVariables::initMCVars(bool& isTau, bool& isMuon, int& mclepCharge, TLo
 					std::vector<TLorentzVector> mctaudaughters( dec.size() );
 					for(unsigned int K =0; K<dec.size(); K++){
 						int taupdg = abs(dec.at(K)->getPDG());
-						if( taupdg == 12 || taupdg == 14 || taupdg == 16 ){
+						if( taupdg != 12 || taupdg != 14 || taupdg != 16 ){
 							TLorentzVector t;
 							t.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
 							mctaudaughters.at(K) = t;
