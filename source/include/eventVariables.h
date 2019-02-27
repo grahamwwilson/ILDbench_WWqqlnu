@@ -40,6 +40,8 @@ class eventVariables{
 	std::vector<TLorentzVector*> _MCf{};
 	std::vector<int> _MCfpdg{};
 	std::vector<TLorentzVector> _MCTauVisibleDaughters{};
+	std::vector<int> _MCTauVisibleDaughters_pdg{};
+	std::vector<int> _MCTauVisibleDaughters_charge{};
 
 	TLorentzVector* _mcl{};
 	TLorentzVector* _mcqq{};
