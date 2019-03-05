@@ -20,6 +20,7 @@
 #include <fstream>
 #include "EVENT/LCParameters.h"
 #include "TROOT.h"
+#include <string> 
 
 #include "eventVariables.h"
 #include "jetVariables.h"
@@ -243,7 +244,7 @@ using namespace lcio;
   std::string _inputTrackCollectionName{};
   std::string _inputRecoRelationCollectionName{};
 
-  std::vector<std::string> _inputJetCollectionsName{};
+  std::vector<std::string> _inputJetCollectionsNames{};
   std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
 
  // std::< std::vector<std::string> > jetCollectionNames{};
