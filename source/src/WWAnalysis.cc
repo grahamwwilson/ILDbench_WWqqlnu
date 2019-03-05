@@ -61,7 +61,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 				inputTrackCollectionName);
 
 	std::vector<std::string> inputCollectionNames{ "x" };
-	registInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
+	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
 							"InputJetCollectionsNames",
 							"Name of the Input particle collections",
 							_inputJetCollectionsNames,
