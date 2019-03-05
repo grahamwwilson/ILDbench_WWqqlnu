@@ -243,6 +243,9 @@ using namespace lcio;
   std::string _inputTrackCollectionName{};
   std::string _inputRecoRelationCollectionName{};
 
+  std::vector<std::string> _inputJetCollectionsName{};
+  std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
+
  // std::< std::vector<std::string> > jetCollectionNames{};
 
   std::string _JetCollName_eekt = "eektJets";

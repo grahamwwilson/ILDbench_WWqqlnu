@@ -60,6 +60,13 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 				_inputTrackCollectionName,
 				inputTrackCollectionName);
 
+	std::vector<std::string> inputCollectionNames{ "x" };
+	registInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
+							"InputJetCollectionsNames",
+							"Name of the Input particle collections",
+							_inputJetCollectionsNames,
+							inputCollectionNames);
+
 
 	std::string inputRecoRelationCollectionName = "x";
   	registerInputCollection( LCIO::LCRELATION,
@@ -104,6 +111,14 @@ void WWAnalysis::init() {
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
   printParameters() ;
+
+//init particle collection vectors
+	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
+	for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
+		std::vector<ReconstructedParticle*> collection{};
+		initParticleCollections.at(i) = collection;
+	}
+	_particleCollections = initParticleCollections;
 
  
   file = new TFile("file.root","RECREATE");
@@ -766,15 +781,26 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 
  FindMCParticles(evt);
 // FindJets(evt);
-FindJetCollection( evt, _JetCollName_pure, _pureJets );
-FindJetCollection( evt, _JetCollName_eekt, _eektJets );
-FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
-FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
-FindJetCollection( evt, _JetCollName_tau , _tauJets );
+for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
+	FindJetCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
+}
+
+//testting
+_eektJets = _particleCollections.at(0);
+_kt15Jets = _particleCollections.at(1);
+_kt08Jets = _particleCollections.at(2);
+_pureJets = _particleCollections.at(3);
+_tauJets = _particleCollections.at(4);
+
+//FindJetCollection( evt, _JetCollName_pure, _pureJets );
+//FindJetCollection( evt, _JetCollName_eekt, _eektJets );
+//FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
+//FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
+//FindJetCollection( evt, _JetCollName_tau , _tauJets );
 FindRecoToMCRelation( evt );
  FindTracks(evt);
  FindPFOs(evt);
-FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
+//FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 
 	///little test area for lcrelation

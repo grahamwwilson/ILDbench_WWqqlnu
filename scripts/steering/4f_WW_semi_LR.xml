@@ -225,6 +225,9 @@
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionName" value="FastJets" />
 		<parameter name="InputJetWithOverlayCollectionName" value="FastJetsWithOverlay" />
+		
+		<!-- testing vector inputs -->
+		<parameter name="InputJetCollectionsNames"> eektJets kt15Jets kt08jets pureJets tauJets</parameter>
 
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />  
