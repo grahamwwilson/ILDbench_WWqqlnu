@@ -1,12 +1,12 @@
 
 
-DATASET=TauFinder22.xml
+DATASET=TauFinder22
 
 
 #remove the output log otherwise it will not overwrite
 rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out.gz
 
-Marlin ./steeringMacros/${DATASET}.xml > ${DATASET}.out
+Marlin ./steeringMacros/TauFinderSteeringS1LR/${DATASET}.xml > ${DATASET}.out
 
 gzip ${DATASET}.out
 
