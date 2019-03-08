@@ -104,8 +104,15 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 
 }
+void WWAnalysis::initTauFinderOptimization(){
+			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 
-
+				_trees.at(i) = new TTree(_inputJetCollectionNames.at(i).c_str(), _inputJetCollectionNames.at(i).c_str());
+				_tf.at(i) = new tauFinderVariables(_inputJetCollectionNames.at(i).c_str(), _trees.at(i));
+				_mcv.at(i) = new mcVariables(_inputJetCollectionNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
+			}
+			
+}
 void WWAnalysis::init() {
   
   streamlog_out(DEBUG) << "   init called  " << std::endl;
@@ -122,13 +129,16 @@ void WWAnalysis::init() {
 
  
   file = new TFile("file.root","RECREATE");
-  _tree = new TTree("tree", "tree");
+
+
+	initTauFinderOptimization();
+/*  _tree = new TTree("tree", "tree");
  _puretree = new TTree("puretree", "tree made for pfos with overlay removed and clustered with eekt n=3");
  _eekttree = new TTree("eekttree", "tree made from pandora pfos and clustered with eekt n=3");
  _kt15tree = new TTree("kt15tree", "tree made from pandora pfos, overlay removal with kt R=1.5, reclustered with eekt n=3");
  _kt08tree = new TTree("kt08tree", "tree made from pandora pfos, overlay removal with kt R=0.8, reclustered with eekt n=3") ;
  _tautree = new  TTree("tautree","tree for exploring taufinder");
-
+*/
 /*  ev1 = new eventVariables("a", _nfermions, _nleptons, _nJets, _tree);
   ev1->initLocalTree();
 
@@ -144,6 +154,7 @@ void WWAnalysis::init() {
 
   //temp setup
 
+/*
 	ev_pure= new eventVariables("pure",_nfermions, _nleptons, _nJets, _puretree);
 	ev_pure->initLocalTree();
 	jv_pure= new jetVariables(ev_pure,_JetCollName_pure);
@@ -183,7 +194,7 @@ void WWAnalysis::init() {
 	tfv->initLocalTree();
 	ev_tfv = new eventVariables("evtau",_nfermions,_nleptons, _nJets, _tautree);
 	ev_tfv->initLocalTree();
-
+*/
 	/*ev_eekt_no_overlay = new eventVariables("eektpure", _nfermions, _nleptons, _nJets, _tree);
 	ev_eekt_no_overlay->initLocalTree();
     jv_eekt_no_overlay = new jetVariables(ev_eekt_no_overlay, _JetCollName_eekt);
@@ -191,15 +202,18 @@ void WWAnalysis::init() {
     ana_eekt_no_overlay = new anaVariables(_tree, ev_eekt_no_overlay);
     ana_eekt_no_overlay->initLocalTree();
 	*/
+
+/*
   _tree->Branch("runNumber", &_nRun, "runNumber/I");
   _tree->Branch("eventNumber", &_nEvt, "eventNumber/I");
-
+*/
+/*
    ppfov = new PandoraPfoVariables(_tree, "pandora");
   ppfov->initLocalTree();
 
    ppfoPure = new PandoraPfoVariables(_tree, "pure");
 	ppfoPure->initLocalTree();
-
+*/
 	// ppfo_ovr= new overlayVariables("ppfoOvr",_tree,1,0);
 	// ppfo_ovr->initLocalTree();
 
@@ -210,69 +224,14 @@ void WWAnalysis::init() {
   _nRun = 0;
   _nEvt = 0;
 
-  nEvt = 0;
 
 
 	
-
-	
-
-	//overlay!
-/*	_tree->Branch("OverlaynTotalEvents",&OverlaynTotalEvents,"OverlaynTotalEvents/I");
-	_tree->Branch("OverlayPairBgOverlaynEvents",&OverlayPairBgOverlaynEvents,"OverlayPairBgOverlaynEvents/I");
-	_tree->Branch("uplike_rejects_costheta.",&uplike_rejects_costheta);
-	_tree->Branch("downlike_rejects_costheta.",&downlike_rejects_costheta);
-	_tree->Branch("lepton_rejects_costheta.",&lepton_rejects_costheta);
-	_tree->Branch("uplike_rejects_pt.",&uplike_rejects_pt);
-	_tree->Branch("downlike_rejects_pt.",&downlike_rejects_pt);
-	_tree->Branch("lepton_rejects_pt.",&lepton_rejects_pt);
-
-	_tree->Branch("uplike_rejects_P.",&uplike_rejects_P);
-	_tree->Branch("downlike_rejects_P.",&downlike_rejects_P);
-	_tree->Branch("lepton_rejects_P.",&lepton_rejects_P);
-
-*/
 }
-
 void WWAnalysis::processRunHeader( LCRunHeader* run) {
   streamlog_out(MESSAGE) << " processRunHeader "  << run->getRunNumber() << std::endl ;
 }
-void WWAnalysis::initOverlayEff(){
-	
 
-	std::vector<TH1D*> temp1(8);
-	std::vector<TH1D*> temp2(8);
-	maxcostheta_cut = temp1;
-	maxcostheta_cut_ovr = temp2;
-	
-	
-	for(unsigned int i=0; i< maxcostheta_cut.size(); i++){
-
-		char cuts[100];
-         sprintf(cuts, "_%d", i);
-         std::string cutnum(cuts);
-
-		maxcostheta_cut.at(i) = new TH1D(("maxcostheta_cut"+cutnum).c_str(), ("The polar angle of most forward jet with overlay removal with cut "+cutnum).c_str(),20,0,1.0);
-		maxcostheta_cut.at(i)->Sumw2(true);
-
-		maxcostheta_cut_ovr.at(i) = new TH1D(("maxcostheta_cut_ovr"+cutnum).c_str(), ("The polar angle of most forward jet without overlay removal and cut"+cutnum).c_str(),20,0,1.0);
-		maxcostheta_cut_ovr.at(i)->Sumw2(true);
-
-		maxcostheta_cut_mc.at(i) = new TH1D(("maxcostheta_cut_mc"+cutnum).c_str(), ("The polar angle of most forward mc particle"+cutnum).c_str(),20,0,1.0);
-		maxcostheta_cut_mc.at(i)->Sumw2(true);
-
-		mctag_mc_dM.at(i) = new TH1D(("mctag_mc_dM"+cutnum).c_str(), ("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum).c_str(),100,-20,20);
-
-		mctag_mc_dM.at(i)->Sumw2(true);
-
-	
-	
-		mctag_mc_dM_ovr.at(i) = new TH1D(("mctag_mc_dM_ovr"+cutnum).c_str(),("#Delta M = M_{qq}^{mctag} - M_{qq}^{mc}"+cutnum).c_str(),100,-20,20);
-		
-		mctag_mc_dM_ovr.at(i)->Sumw2(true);
-	
-	}
-}
 /*****************
 locate the pfo collection with specified name
 populated the global pfo vectors with particles from that collection for this event
@@ -447,41 +406,7 @@ bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
   
   	return collectionFound;
 }
-/*
-bool WWAnalysis::FindJets( LCEvent* evt ) {
 
-	bool collectionFound = false;
-
-  	// clear old global pfovector
-	_jets.clear();
-  	typedef const std::vector<std::string> StringVec ;
-  	StringVec* strVec = evt->getCollectionNames() ;
-	
-	//iterate over collections, find the matching name
-  	for(StringVec::const_iterator itname=strVec->begin(); itname!=strVec->end(); itname++){
-     
-		//if found print name and number of elements
-    		if(*itname==_inputJetCollectionName){ 
-			LCCollection* collection = evt->getCollection(*itname);
-			std::cout<< "Located Jets Collection "<< *itname<< " with "<< collection->getNumberOfElements() << " elements " <<std::endl;
-			collectionFound = true;
-
- 			//add the collection elements to the global vector
-      			for(unsigned int i=0; i<collection->getNumberOfElements(); i++){
-				ReconstructedParticle* recoPart = dynamic_cast<ReconstructedParticle*>(collection->getElementAt(i));
-				_jets.push_back(recoPart);
-      			}
-    		}
-  	}
-	
-	if(!collectionFound){
-		std::cout<<"Jet Collection "<< _inputJetCollectionName << "not found"<<std::endl;
-	}
-
-   
-	return collectionFound;
-}
-*/
 
 bool WWAnalysis::FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec ) {
 
@@ -515,91 +440,7 @@ bool WWAnalysis::FindJetCollection( LCEvent* evt, std::string JetCollectionName,
 	return collectionFound;
 }
 
-/*
-void WWAnalysis::analyzeLeadingTracks(){
-	ReconstructedParticle* leader;
-	std::vector<ReconstructedParticle*> d;
-	std::vector<Track*> dt;
-	double maxP = -9999;
-    double maxtP = -9999;
-	int maxindex= -1;
-	int maxtindex = -1;
-	double tp;
-	const double* mom;
-	double p;
 
-	const double c = 2.99792458e8; // m*s^-1        
-  	const double mm2m = 1e-3;
-  	const double eV2GeV = 1e-9;
-    const double BField = marlin::Global::GEAR->getBField().at(gear::Vector3D(0.,0.,0.)).z();
-
-  	const double eB = BField*c*mm2m*eV2GeV;
-
-	for(int i=0; i< _jets.size(); i++){
-
-		d = _jets.at(i)->getParticles();
-		for(unsigned int j=0; j< d.size(); j++){
-			if(d.at(j)->getCharge() !=0){
-				mom = d.at(j)->getMomentum();
-				p = std::sqrt( mom[0]*mom[0] + mom[1]*mom[1] + mom[2]*mom[2]);
-			//	std::cout<<"om "<<om<<" "<<fabs(om)<<" "<<minOm<<std::endl;
-			//	std::cout<<" p "<<p<<std::endl;
-				if( p > maxP){
-					maxP = p;
-					maxindex=j;
-				}//end max reset
-			}//end charge condition
-		}//end jet particles
-
-		if(maxindex == -1) { std::cout<< "continuing" <<std::endl; continue;} //no tracks in this jet
-
-		//the maxpt track may have more than 1 associated tracks so pick out the one with highest pt
-		dt = d.at(maxindex)->getTracks();
-
-		for(int j=0; j< dt.size();j++){
-			double p_t = abs(dt.at(j)->getOmega())*eB;
-			double p_z = p_t*dt.at(j)->getTanLambda();
-
-			tp = std::sqrt(p_t*p_t + p_z*p_z);
-			if(tp > maxtP){
-				maxtP = tp;
-				maxtindex=j;
-			}
-
-		}		
-		//look at track of this particle
-	    Track* t = dt.at(maxtindex);
-		std::cout<<"jet "<<i<< std::endl;
-		
-			std::cout<<t->getD0()<<" ";
-			std::cout<<t->getPhi()<<" ";
-			std::cout<<t->getOmega()<<" ";
-			std::cout<<t->getZ0()<<" ";
-			std::cout<<t->getTanLambda()<<" ";
-		 
-		std::cout<<std::endl;
-    
-		if(i == ljet_index){
-			leadingptljet = maxtP ;
-			leadingd0ljet = t->getD0();
-		//	leadingd0relerrljet = sqrt(t->getCovMatrix()[0])/fabs(t->getD0());
-			leadingd0relerrljet = fabs(t->getD0())/sqrt(t->getCovMatrix()[0]);
-		}
-		else{
-			//we lazily just examing 1 q jet for now
-			leadingptqjet = maxtP;
-			leadingd0qjet = t->getD0();
-		//	leadingd0relerrqjet = sqrt(t->getCovMatrix()[0])/fabs(t->getD0());
-			leadingd0relerrqjet = fabs(t->getD0())/sqrt(t->getCovMatrix()[0]);
-		}
-		//reset maxindex and max p new jet
-		maxtP = -9999;
-		maxindex= -1;
-		maxtindex = -1;
-		maxP = -9999;
-	}//end jet loop
- 
-}*/
 
 /* deal with 2f backgrounds */
 /*
@@ -772,34 +613,65 @@ void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*&
 	oVar->printOverlayVariables();
 
 }
+void WWAnalysis::SetTauOptimizationVariables(){
+	//do tau optimization stuff
+	for(unsigned int i=0; i<_tf.size(); i++){
+		//make sure we have jets in this particular collection
+		if( _particleCollections.at(i)->size == 0){
+			std::cout<<"No Taus in: "<<_inputJetCollectionsNames.at(i)<<std::endl;
+		}
+		else{
+
+			mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
+			mcv.at(i)->initMCVars();
+
+			tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
+			tf.at(i)->setMCTau(mcv.at(i)->mcl); //the mctau is any lepton
+			tf.at(i)->setTauVariables();
+			tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
+			tf.at(i)->setMCTTauVariables();	
+		}
+	}
+
+
+}
 void WWAnalysis::processEvent( LCEvent * evt ) {
 
-  _nEvt++;
+ 
+ std::cout<<"event No. "<< _nEvt<<std::endl;
  // Get Process name and cross section
  //  *_Process = evt->getParameters().getStringVal("Process");
  // _xsec = evt->getParameters().getFloatVal("CrossSection_fb");
 
+ FindRecoToMCRelation( evt );
  FindMCParticles(evt);
 // FindJets(evt);
 for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindJetCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
 }
 
+//doing tau optimization
+SetTauOptimizationVariables();
+
 //testting
+/*
 _eektJets = _particleCollections.at(0);
 _kt15Jets = _particleCollections.at(1);
 _kt08Jets = _particleCollections.at(2);
 _pureJets = _particleCollections.at(3);
 _tauJets = _particleCollections.at(4);
+*/
 
 //FindJetCollection( evt, _JetCollName_pure, _pureJets );
 //FindJetCollection( evt, _JetCollName_eekt, _eektJets );
 //FindJetCollection( evt, _JetCollName_kt15, _kt15Jets );
 //FindJetCollection( evt, _JetCollName_kt08, _kt08Jets );
 //FindJetCollection( evt, _JetCollName_tau , _tauJets );
-FindRecoToMCRelation( evt );
- FindTracks(evt);
- FindPFOs(evt);
+
+
+ //FindTracks(evt);
+ //FindPFOs(evt);
+
 //FindPFOCollection( evt, _PfoCollName_pure, _purePFOs );
 
 
@@ -828,9 +700,9 @@ FindRecoToMCRelation( evt );
 	
 
 
-	std::cout<<"event No. "<< nEvt<<std::endl;
-////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
 	
+////////////	processSignalVariableSet(evt, _reco2mcvec, ev_eekt, jv_eekt, ppfov, ana_eekt, ov_eekt, _eektJets);
+/*	
 
 	if(_pureJets.size() ==0 ){ 
 		std::cout<<"NO JETS IN pureJets!!!"<<std::endl;
@@ -919,7 +791,8 @@ FindRecoToMCRelation( evt );
 
 
 
-
+*/
+/*
     ppfov->setParticles(_pfovec);
 	ppfov->populateVariables(ppfov->_nTracks, ppfov->_nParticles, ppfov->_totalPt, ppfov->_totalE, ppfov->_totalM);	
 
@@ -947,7 +820,7 @@ FindRecoToMCRelation( evt );
 	}
 
 	 this->_tree->Fill();
-	
+	*/
 
 /*
 
@@ -1034,7 +907,7 @@ FindRecoToMCRelation( evt );
 
 */
 
- nEvt++;
+ _nEvt++;
 }
 void WWAnalysis::end(){
 
