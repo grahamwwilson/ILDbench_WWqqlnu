@@ -64,7 +64,7 @@
 		<parameter name="Verbosity"  options = "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT" > DEBUG </parameter>
 	</global>
 
-	<processor name= "MyTauFinder801" />
+	<processor name= "MyTauFinder801" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets801 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs801 </parameter>
@@ -78,7 +78,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder802" />
+	<processor name= "MyTauFinder802" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets802 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs802 </parameter>
@@ -92,7 +92,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder803" />
+	<processor name= "MyTauFinder803" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets803 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs803 </parameter>
@@ -106,7 +106,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder804" />
+	<processor name= "MyTauFinder804" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets804 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs804 </parameter>
@@ -120,7 +120,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder805" />
+	<processor name= "MyTauFinder805" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets805 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs805 </parameter>
@@ -134,7 +134,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder806" />
+	<processor name= "MyTauFinder806" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets806 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs806 </parameter>
@@ -148,7 +148,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder807" />
+	<processor name= "MyTauFinder807" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets807 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs807 </parameter>
@@ -162,7 +162,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder808" />
+	<processor name= "MyTauFinder808" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets808 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs808 </parameter>
@@ -176,7 +176,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder809" />
+	<processor name= "MyTauFinder809" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets809 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs809 </parameter>
@@ -190,7 +190,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder810" />
+	<processor name= "MyTauFinder810" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets810 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs810 </parameter>
@@ -204,7 +204,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder811" />
+	<processor name= "MyTauFinder811" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets811 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs811 </parameter>
@@ -218,7 +218,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder812" />
+	<processor name= "MyTauFinder812" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets812 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs812 </parameter>
@@ -232,7 +232,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder813" />
+	<processor name= "MyTauFinder813" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets813 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs813 </parameter>
@@ -246,7 +246,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder814" />
+	<processor name= "MyTauFinder814" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets814 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs814 </parameter>
@@ -260,7 +260,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder815" />
+	<processor name= "MyTauFinder815" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets815 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs815 </parameter>
@@ -274,7 +274,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder816" />
+	<processor name= "MyTauFinder816" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets816 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs816 </parameter>
@@ -288,7 +288,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder817" />
+	<processor name= "MyTauFinder817" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets817 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs817 </parameter>
@@ -302,7 +302,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder818" />
+	<processor name= "MyTauFinder818" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets818 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs818 </parameter>
@@ -316,7 +316,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder819" />
+	<processor name= "MyTauFinder819" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets819 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs819 </parameter>
@@ -330,7 +330,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder820" />
+	<processor name= "MyTauFinder820" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets820 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs820 </parameter>
@@ -344,7 +344,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder821" />
+	<processor name= "MyTauFinder821" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets821 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs821 </parameter>
@@ -358,7 +358,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder822" />
+	<processor name= "MyTauFinder822" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets822 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs822 </parameter>
@@ -372,7 +372,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder823" />
+	<processor name= "MyTauFinder823" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets823 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs823 </parameter>
@@ -386,7 +386,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder824" />
+	<processor name= "MyTauFinder824" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets824 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs824 </parameter>
@@ -400,7 +400,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder825" />
+	<processor name= "MyTauFinder825" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets825 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs825 </parameter>
@@ -414,7 +414,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder826" />
+	<processor name= "MyTauFinder826" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets826 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs826 </parameter>
@@ -428,7 +428,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder827" />
+	<processor name= "MyTauFinder827" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets827 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs827 </parameter>
@@ -442,7 +442,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder828" />
+	<processor name= "MyTauFinder828" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets828 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs828 </parameter>
@@ -456,7 +456,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder829" />
+	<processor name= "MyTauFinder829" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets829 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs829 </parameter>
@@ -470,7 +470,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder830" />
+	<processor name= "MyTauFinder830" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets830 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs830 </parameter>
@@ -484,7 +484,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder831" />
+	<processor name= "MyTauFinder831" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets831 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs831 </parameter>
@@ -498,7 +498,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder832" />
+	<processor name= "MyTauFinder832" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets832 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs832 </parameter>
@@ -512,7 +512,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder833" />
+	<processor name= "MyTauFinder833" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets833 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs833 </parameter>
@@ -526,7 +526,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder834" />
+	<processor name= "MyTauFinder834" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets834 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs834 </parameter>
@@ -540,7 +540,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder835" />
+	<processor name= "MyTauFinder835" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets835 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs835 </parameter>
@@ -554,7 +554,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder836" />
+	<processor name= "MyTauFinder836" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets836 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs836 </parameter>
@@ -568,7 +568,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder837" />
+	<processor name= "MyTauFinder837" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets837 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs837 </parameter>
@@ -582,7 +582,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder838" />
+	<processor name= "MyTauFinder838" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets838 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs838 </parameter>
@@ -596,7 +596,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder839" />
+	<processor name= "MyTauFinder839" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets839 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs839 </parameter>
@@ -610,7 +610,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder840" />
+	<processor name= "MyTauFinder840" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets840 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs840 </parameter>
@@ -624,7 +624,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder841" />
+	<processor name= "MyTauFinder841" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets841 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs841 </parameter>
@@ -638,7 +638,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder842" />
+	<processor name= "MyTauFinder842" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets842 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs842 </parameter>
@@ -652,7 +652,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder843" />
+	<processor name= "MyTauFinder843" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets843 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs843 </parameter>
@@ -666,7 +666,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder844" />
+	<processor name= "MyTauFinder844" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets844 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs844 </parameter>
@@ -680,7 +680,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder845" />
+	<processor name= "MyTauFinder845" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets845 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs845 </parameter>
@@ -694,7 +694,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder846" />
+	<processor name= "MyTauFinder846" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets846 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs846 </parameter>
@@ -708,7 +708,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder847" />
+	<processor name= "MyTauFinder847" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets847 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs847 </parameter>
@@ -722,7 +722,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder848" />
+	<processor name= "MyTauFinder848" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets848 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs848 </parameter>
@@ -736,7 +736,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder849" />
+	<processor name= "MyTauFinder849" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets849 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs849 </parameter>
@@ -750,7 +750,7 @@
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
 
-	<processor name= "MyTauFinder850" />
+	<processor name= "MyTauFinder850" type="TauFinder" />
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets850 </parameter>
 		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs850 </parameter>
