@@ -29,6 +29,7 @@
 #include "overlayVariables.h"
 #include "HistoManager.h"
 #include "tauFinderVariables.h"
+#include "mcVariables.h"
 
 
 //#define ncuts 7
@@ -92,12 +93,8 @@ using namespace lcio;
    void processBackground(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets);
 
 
-	//overlay analysis
-	//TODO redo in separate class
-	void AnalyzeOverlay(LCEvent* evt );
-	void FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP);
-	void AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswithoverlay, std::vector<TLorentzVector*> _jetsremovedoverlay );
-	void initOverlayEff();
+	
+
 
   //jet analysis helpers
  
@@ -162,30 +159,24 @@ using namespace lcio;
   TTree* _tautree{};
 
 
+
+ std::vector<TTree*> _trees{};
+
+//Tau optimization////
+ void initTauFinderOptimization();
+ void SetTauOptimizationVariables();
+ std::vector<tauFinderVariables*> _tf{};
+ std::vector<mcVariables*> _mcv{};
+
+
   int _nRun{};
   int _nEvt{};
 
-//event number
-  int nEvt{};
 
 
 
- //the number of overlay events present in the event
-	int OverlaynTotalEvents=-1;
-	int OverlayPairBgOverlaynEvents=-1;
-	//overlay rejected particle variables separated by flavour
-	//these vectors need to be cleared for each event
-	std::vector<double> uplike_rejects_costheta{};
-	std::vector<double> downlike_rejects_costheta{};
-	std::vector<double> lepton_rejects_costheta{};
 
-	std::vector<double> uplike_rejects_pt{}; 
-	std::vector<double> downlike_rejects_pt{};
-	std::vector<double> lepton_rejects_pt{};
-	
-	std::vector<double> uplike_rejects_P{};
-	std::vector<double> downlike_rejects_P{};
-	std::vector<double> lepton_rejects_P{};
+
 
 //the total number of unique cuts applied (for histogram indexing)
 
@@ -194,21 +185,15 @@ using namespace lcio;
   
   //vector to hold the particles for the event
   std::vector<MCParticle*> _mcpartvec{};
- // std::vector<ReconstructedParticle*> _jets{};
+
   std::vector<Track*> _trackvec{};
   std::vector<ReconstructedParticle*> _pfovec{};
   std::vector<ReconstructedParticle*> _purePFOs{};
   std::vector<LCRelation*> _reco2mcvec{};
- // std::vector<ReconstructedParticle*> _jetswithoverlay{};
-  
- 
-	//testing
-//  std::vector< std::vector<ReconstructedParticle*> > _jetCollections{};
  
  std::vector<ReconstructedParticle*> _eektJets{};
   std::vector<ReconstructedParticle*> _kt08Jets{};
-//  std::vector<ReconstructedParticle*> _kt10Jets{};
-//  std::vector<ReconstructedParticle*> _kt12Jets{};
+
   std::vector<ReconstructedParticle*> _kt15Jets{};
   std::vector<ReconstructedParticle*> _pureJets{};
 
@@ -257,23 +242,6 @@ using namespace lcio;
   //taufinding
 	std::string _JetCollName_tau = "tauJets";
 
-	/* special set of histograms for dealing with overlay and forward acceptance */
-	/* each hist in the array is a cut on costheta */
-	/* the cuts are 0.99, 0.95, 0.91, 0.8, 0.6, 0.4, 0.2 */
-	//total of 7 different cuts
-	int overlaycuts = 8;
-	std::vector<double> maxcosthetacuts{ 0.2, 0.4, 0.6, 0.8, 0.91, 0.95, 0.99,99};
-	std::vector<TH1D*> maxcostheta_cut{};
-	//no overlay removal in this plot
-	std::vector<TH1D*> maxcostheta_cut_ovr{};
 
-	//generator level
-	std::vector<TH1D*> maxcostheta_cut_mc{};
-	//mctag mqq - mc mqq
-	std::vector<TH1D*> mctag_mc_dM_ovr{};
-	std::vector<TH1D*> mctag_mc_dM{};
-	
-
-	/* end acceptance */
 
 };
