@@ -99,7 +99,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 	registerProcessorParameter("Ncuts",
 								"nmber of event selection cuts",
 								ncuts,
-								(int) 0);_MCPf.at(2)
+								(int) 0);
 
 
 
