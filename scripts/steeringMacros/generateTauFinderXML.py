@@ -102,7 +102,7 @@ while treenum <= totalTrees:
 			cone_itr = cone_itr+1
 			angle_itr = 0
 		if t > totalTrees : break
-		file.write("	<processor name= \"MyTauFinder"+str(t)+"\" type=\"TauFinder\" />\n" )
+		file.write("	<processor name= \"MyTauFinder"+str(t)+"\" type=\"TauFinder\" >\n" )
 		file.write("		<parameter name=\"PFOCollection\" type=\"string\" lcioInType=\"ReconstructedParticle\"> PandoraPFOs </parameter>\n")
 		file.write("		<parameter name=\"TauRecCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> TauJets"+str(t)+" </parameter>\n")
 		file.write("		<parameter name=\"TauRecRestCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> RemainPFOs"+str(t)+" </parameter>\n")
