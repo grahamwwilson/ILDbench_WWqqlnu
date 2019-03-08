@@ -28,7 +28,7 @@ void mcVariables::setParticles(std::vector<MCParticle*>& mcpartvec ){
 	_mcpartvec = mcpartvec;
 }
 //recursive helper
-bool eventVariables::allChildrenAreSimulation(MCParticle* p){
+bool mcVariables::allChildrenAreSimulation(MCParticle* p){
 	std::vector<MCParticle*> d = p->getDaughters();
 	bool flag = true;
 	for(unsigned int i=0; i<d.size(); i++){
@@ -40,7 +40,7 @@ bool eventVariables::allChildrenAreSimulation(MCParticle* p){
 }
 //recursive function to go through and look at the decay chain of a particle
 //look at specifically charged particles
-void eventVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP){
+void mcVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP){
 	if(p->isCreatedInSimulation()) return;
 
 	//std::cout<<p->id()<<" ";
@@ -62,7 +62,7 @@ void eventVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCPart
 	}
 		
 }
-void eventVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
+void mcVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
   int countparts=0;
   int counttracks=0;
   for(unsigned int i=0; i<FSPs.size(); i++){
@@ -84,7 +84,7 @@ void eventVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
   _mclepPfoMult = countparts;
   _mclepTrkMult = counttracks;
 }
-int eventVariables::getTauDecayMode(MCParticle* mctau){
+int mcVariables::getTauDecayMode(MCParticle* mctau){
 		//1= muon 2=elec 3=had1p 4=had3p 5=other (5p)
 		//with the tau mcp get its immediate decay products
 		//from daniels code decayChPi=0, decayRho, decayA1_1p, decayA1_3p , decayEl, decayMu , decayW , decayK , decayMultiprong , decayOthersingleprong, decayUnrecognised
@@ -111,7 +111,7 @@ int eventVariables::getTauDecayMode(MCParticle* mctau){
 		return 5;
 		
 }
-void eventVariables::initMCVars(){
+void mcVariables::initMCVars(){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -261,7 +261,7 @@ void eventVariables::initMCVars(){
 	//if nothing is found return 
 	return;
 }
-void eventVariables::initLocalTree(){
+void mcVariables::initLocalTree(){
 	std::string vsn(_variableSetName);
 
 	/*** Tree MC info ***/
