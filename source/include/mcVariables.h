@@ -1,7 +1,17 @@
 
 #ifndef _MCPART_
 #define _MCPART_
-
+#include "EVENT/MCParticle.h"
+#include "EVENT/ReconstructedParticle.h"
+#include "lcio.h"
+#include "TTree.h"
+#include <vector>
+#include "TLorentzVector.h"
+#include "TVector3.h"
+#include <math.h>
+#include <iostream>
+#include <sstream>
+#include "classifyTau.h"
 
 using namespace lcio;
 
