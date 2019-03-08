@@ -99,7 +99,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 	registerProcessorParameter("Ncuts",
 								"nmber of event selection cuts",
 								ncuts,
-								(int) 0);
+								(int) 0);_MCPf.at(2)
 
 
 
@@ -626,7 +626,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_mcv.at(i)->initMCVars();
 
 			_tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
-			_tf.at(i)->setMCTau(_mcv.at(i)->_mcl); //the mctau is any lepton
+			_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
 			_tf.at(i)->setTauVariables();
 			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
 			_tf.at(i)->setMCTTauVariables();	
