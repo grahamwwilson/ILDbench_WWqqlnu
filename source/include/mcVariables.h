@@ -18,12 +18,13 @@ using namespace lcio;
 class mcVariables{
 	public:
 	mcVariables( const char* variableSetName, int nfermion, int nlepton, TTree*& tree);
-	void setParticles(std::vector<MCParticle*> mcpartvec);
+	void setParticles(std::vector<MCParticle*>& mcpartvec);
 	void initLocalTree();
 
 	const char* _variableSetName{};
 	int _nfermions{};
 	int _nleptons{};
+	TTree* _localTree{};
 
 	std::vector<MCParticle*> _mcpartvec{};
 	std::vector<MCParticle*> _MCPf{};

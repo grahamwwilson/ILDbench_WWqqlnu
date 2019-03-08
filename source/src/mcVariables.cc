@@ -27,7 +27,7 @@ mcVariables::mcVariables(const char* variableSetName, int nfermions, int nlepton
 void mcVariables::setParticles(std::vector<MCParticle*>& mcpartvec ){
 	_mcpartvec = mcpartvec;
 }
-/recursive helper
+//recursive helper
 bool eventVariables::allChildrenAreSimulation(MCParticle* p){
 	std::vector<MCParticle*> d = p->getDaughters();
 	bool flag = true;

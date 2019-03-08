@@ -108,8 +108,8 @@ void WWAnalysis::initTauFinderOptimization(){
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 
 				_trees.at(i) = new TTree(_inputJetCollectionsNames.at(i).c_str(), _inputJetCollectionNames.at(i).c_str());
-				_tf.at(i) = new tauFinderVariables(_inputJetCollectionNames.at(i).c_str(), _trees.at(i));
-				_mcv.at(i) = new mcVariables(_inputJetCollectionNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
+				_tf.at(i) = new tauFinderVariables(_inputJetCollectionsNames.at(i).c_str(), _trees.at(i));
+				_mcv.at(i) = new mcVariables(_inputJetCollectionsNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
 			}
 			
 }
@@ -617,7 +617,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 	//do tau optimization stuff
 	for(unsigned int i=0; i<_tf.size(); i++){
 		//make sure we have jets in this particular collection
-		if( _particleCollections.at(i)->size == 0){
+		if( _particleCollections.at(i)->size() == 0){
 			std::cout<<"No Taus in: "<<_inputJetCollectionsNames.at(i)<<std::endl;
 		}
 		else{
@@ -626,7 +626,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_mcv.at(i)->initMCVars();
 
 			_tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
-			_tf.at(i)->setMCTau(mcv.at(i)->mcl); //the mctau is any lepton
+			_tf.at(i)->setMCTau(_mcv.at(i)->mcl); //the mctau is any lepton
 			_tf.at(i)->setTauVariables();
 			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
 			_tf.at(i)->setMCTTauVariables();	
