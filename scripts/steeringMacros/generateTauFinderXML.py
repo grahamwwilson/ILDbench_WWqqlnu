@@ -4,8 +4,11 @@ import numpy as np
 
 
 #3 parameter optimzation, searchcone, iso angle, iso E
-inputFileName = 'f.slcio'
+inputFileName = '/pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_singleW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250042.P4f_sw_sl.eL.pR.n001.d_dstm_10417_0.slcio'
+
 gearfile = "gear_ILD_l5_v02_dd4hep.xml"
+
+outputPath = './TauFinderSteeringS1LR/'
 
 searchConeAngleMin = 0.
 searchConeAngleMax = 0.16
@@ -28,9 +31,9 @@ coneValues = np.arange(searchConeAngleMin, searchConeAngleMax, searchConeAngleSt
 isoAngleValues = np.arange(isoAngleMin, isoAngleMax, isoAngleStep)
 isoEnergyValues = np.arange(isoEnergyMin, isoEnergyMax, isoEnergyStep)
 
-print coneValues
-print isoAngleValues
-print isoEnergyValues
+#print coneValues
+#print isoAngleValues
+#print isoEnergyValues
 
 nbinsCone = len(coneValues)
 nbinsIsoCone = len(isoAngleValues)
@@ -47,17 +50,17 @@ print totalTrees
 
 
 #test
-nTreesPerFile = 2
+#nTreesPerFile = 2
 TreePerFileTracker = nTreesPerFile
 treenum = 1
 filenum = 1
-totalTrees = 7
+#totalTrees = 7
 
 cone_itr = 0
 angle_itr = 0
 ener_itr = 0
 
-file = open('TauFinder'+str(filenum)+'.xml','w')
+file = open(outputPath+'TauFinder'+str(filenum)+'.xml','w')
 
 #write all headers 
 while treenum <= totalTrees:
@@ -65,7 +68,7 @@ while treenum <= totalTrees:
 	if 	treenum > TreePerFileTracker:
 		file.close()
 		filenum = filenum+1
-		file = open('TauFinder'+str(filenum)+'.xml','w')
+		file = open(outputPath+'TauFinder'+str(filenum)+'.xml','w')
 		TreePerFileTracker = TreePerFileTracker + nTreesPerFile
 		
 
@@ -84,18 +87,18 @@ while treenum <= totalTrees:
 
 	file.write("	<global>\n")
 	file.write("		<parameter name=\"LCIOInputFiles\"> " +inputFileName+" </parameter>\n")
-	file.write("		<parameter name=\"SkipNEvents \"> value = \"0\" />\n")
-	file.write("		<parameter name=\"MaxRecordNumber\"> value = \"0\" />\n")
-	file.write("		<parameter name=\"SupressCheck\"> value = \"false\" />\n")
-	file.write("		<parameter name=\"GearXMLFile\"> value = \""+gearfile+"\" />\n")
-	file.write("		<parameter name=\"Verbosity\" > options = \"DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT\" /> DEBUG </parameter>\n")
+	file.write("		<parameter name=\"SkipNEvents \" value = \"0\" />\n")
+	file.write("		<parameter name=\"MaxRecordNumber\" value = \"0\" />\n")
+	file.write("		<parameter name=\"SupressCheck\" value = \"false\" />\n")
+	file.write("		<parameter name=\"GearXMLFile\" value = \""+gearfile+"\" />\n")
+	file.write("		<parameter name=\"Verbosity\"  options = \"DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT\" > DEBUG </parameter>\n")
 	file.write("	</global>\n")
 	file.write("\n")
 	for t in range( treenum, TreePerFileTracker+1):
-		if ener_itr == nbinsIsoE-1:
+		if ener_itr == nbinsIsoE:
 			angle_itr = angle_itr+1
 			ener_itr = 0
-		if angle_itr == nbinsIsoCone-1:
+		if angle_itr == nbinsIsoCone:
 			cone_itr = cone_itr+1
 			angle_itr = 0
 		if t > totalTrees : break
@@ -114,6 +117,7 @@ while treenum <= totalTrees:
 		file.write("	</processor>\n")	
 		file.write("\n")	
 		ener_itr = ener_itr+1
+		
 
 	file.write("	<processor name= \"MyWWAnalysis\" type=\"WWAnalysis\">\n")
 	file.write("		<parameter name=\"McParticleCollectionName\" value=\"MCParticle\" />\n")
@@ -130,7 +134,7 @@ while treenum <= totalTrees:
 	file.write("	</processor>\n")
 	file.write("\n")
 
-
+	file.write("</marlin>\n")
 	#ready next tree
 	treenum = treenum+nTreesPerFile
 
