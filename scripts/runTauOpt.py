@@ -1,14 +1,30 @@
 
 
-import os
+import subprocess 
 
 
 DATASET = '4f_WW_semi_LR'
 
 
-command = os.popen('ls ./steeringMacros/TauFinderSteeringS1LR/' ).read()
+def bash( bashCommand ):
+	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+	output, error = process.communicate()
+	return output ,error
 
-print command
+bashCommand ='ls ./steeringMacros/TauFinderSteeringS1LR/' 
+OUTPUT = bash( bashCommand ) #get name of all xml Files
+DATASETLIST = OUTPUT[0].split('\n')
+print DATASETLIST
+#loop over each file and run in marlin, print which file we are running too
+for DATASET in DATASETLIST:
+	if DATASET == '': continue
+	print "Starting Run "+ DATASET
+	DATASETNAME = DATASET[:-4]
+	print DATASETNAME	
+	print bash('rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out.gz')
+	print bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET+' > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
+	print bash('gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
+	print bash('mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+DATASETNAME+'.root')
+	 
 
 
-command = os.popen('echo YES')
