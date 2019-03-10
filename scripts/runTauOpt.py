@@ -3,7 +3,8 @@
 import subprocess 
 
 
-DATASET = '4f_WW_semi_LR'
+SUBSET = 'S1'
+#SUBSET = 'S2'
 
 
 def bash( bashCommand ):
@@ -21,9 +22,13 @@ for DATASET in DATASETLIST:
 	if DATASET == '': continue
 	print "Starting Run "+ DATASET
 	DATASETNAME = DATASET[:-4]
-	#print DATASETNAME
+	DATASETNAME = DATASETNAME+SUBSET
+	print DATASETNAME
 	bash('rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out.gz')
-	bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET+' > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
+	#bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET+' > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
+	log = bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET)
+	file = open(DATASETNAME+'.out','w')
+	file.write(log)
 	bash('gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
 	bash('mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+DATASETNAME+'.root')
 	break
