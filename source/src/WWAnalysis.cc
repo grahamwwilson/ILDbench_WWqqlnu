@@ -648,6 +648,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_tf.at(i)->setTauVariables();
 			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
 			_tf.at(i)->setMCTTauVariables();	
+			_trees.at(i)->Fill();
 		}
 	}
 
