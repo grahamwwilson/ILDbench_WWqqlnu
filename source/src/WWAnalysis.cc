@@ -123,7 +123,9 @@ void WWAnalysis::initTauFinderOptimization(){
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 				_trees.at(i) = new TTree(_inputJetCollectionsNames.at(i).c_str(), _inputJetCollectionsNames.at(i).c_str());
 				_tf.at(i) = new tauFinderVariables(_inputJetCollectionsNames.at(i).c_str(), _trees.at(i));
+				_tf.at(i)->initLocalTree();
 				_mcv.at(i) = new mcVariables(_inputJetCollectionsNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
+				_mcv.at(i)->initLocalTree();
 			}
 			
 }
