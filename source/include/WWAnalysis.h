@@ -172,6 +172,8 @@ using namespace lcio;
   int _nRun{};
   int _nEvt{};
 
+std::string _outpath;
+
 
 
 
