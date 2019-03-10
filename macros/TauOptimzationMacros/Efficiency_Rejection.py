@@ -109,16 +109,22 @@ for filename in FILESUBSET:
 						N_s = N_s + 1.
 					
 			if PARTICLETYPE == 'ELECTRON':
+				True
 
 			if PARTICLETYPE == 'TAU0':
+				True
 
 			if PARTICLETYPE == 'TAU1':
+				True
 
 			if PARTICLETYPE == 'TAU2':
+				True
 
 			if PARTICLETYPE == 'TAU3':
+				True
 	
 			if PARTICLETYPE == 'TAU4':
+				True
 
 		#populate variables according to the current tree and fill our output tree
 		eff_sL.append(N_s/Total_s)
