@@ -118,7 +118,7 @@ void WWAnalysis::initTauFinderOptimization(){
 			std::vector<mcVariables*> m(_inputJetCollectionsNames.size());
 			_trees = t;
 			_tf = f;
-			_mvc = m;
+			_mcv = m;
 
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 				_trees.at(i) = new TTree(_inputJetCollectionsNames.at(i).c_str(), _inputJetCollectionsNames.at(i).c_str());
