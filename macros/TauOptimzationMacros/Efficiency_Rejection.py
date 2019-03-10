@@ -22,6 +22,8 @@ PARTICLETYPE = ['MUON', 'ELECTRON', 'TAU0', 'TAU1', 'TAU2', 'TAU3', 'TAU4', 'BG1
 #CHOOSE SUBSET/PTYPE INDICES
 SUBSET = SUBSET[0]
 PARTICLETYPE = PARTICLETYPE[0]
+BGSUBSET = SUBSET[2]
+BGPARTICLETYPE = PARTICLETYPE[7]
 
 
 #Since i didnt store it, figure out the parameters for each tree and store them with the eff
@@ -57,13 +59,38 @@ for c in coneValues:
 
 print treedetails
 
-LS = bash('ls /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/')
+LS = bash('ls /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/')
 LS = LS[0].split('\n')
 
 #collect the files of chosen subset
 FILESUBSET = [f for f in LS if SUBSET in f]
+BGFILESUBSET = [f for f in LS if BGSUBSET in f]
 
 print FILESUBSET
+print BGFILESUBSET
+
+#we need to write all this stuff to a tree in a rootfile
+outputFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/'+SUBSET+PARTICLETYPE+'.root','RECREATE')
+outputTree = TTree(SUBSET+PARTICLETYPE, SUBSET+PARTICLETYPE)
+eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = 0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.
+eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = []
+#set branches
+outputTree.Branch("eff_s",eff_s)
+outputTree.Branch("eff_b",eff_b)
+outputTree.Branch("RR",RR)
+outputTree.Branch("treeN",treeN)
+outputTree.Branch("searchCone",searchCone)
+outputTree.Branch("isoCone",isoCone)
+outputTree.Branch("isoE",isoE)
+outputTree.Branch("p",p)
+outputTree.Branch("effp",effp)
+outputTree.Branch("N_s",N_s)
+outputTree.Branch("N_b",N_b)
+outputTree.Branch("Total_s", Total_s)
+outputTree.Branch("Total_b", Total_b)
+
+#iterator for tree details
+treedetails_itr = 0;
 
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
@@ -71,12 +98,15 @@ for filename in FILESUBSET:
 	treeNames = currentFile.GetKeyNames('./')
 	#extract each tree
 	for tn in treeNames:
-		tree = t.currentFile.Get(tn)
+		tree = currentFile.Get(tn)
 		#loop over the tree
 		for nevents in tree:
 
 			if PARTICLETYPE == 'MUON':
-				if nevent.isMuon:
+				if nevent.(tn+'isMuon'):
+					Total_s = Total_s+ 1.
+					if nevent.(tn+'nTaus') == 1:
+						N_s = N_s + 1.
 					
 			if PARTICLETYPE == 'ELECTRON':
 
@@ -89,3 +119,43 @@ for filename in FILESUBSET:
 			if PARTICLETYPE == 'TAU3':
 	
 			if PARTICLETYPE == 'TAU4':
+
+		#populate variables according to the current tree and fill our output tree
+		eff_sL.append(N_s/Total_s)
+		treeNL.append(treedetails[treedetails_itr][0])
+		searchConeL.append(treedetails[treedetails_itr][1])
+		isoConeL.append(treedetails[treedetails_itr][2])
+		isoEL.append(treedetails[treedetails_itr][3])
+		#tree.Fill()
+
+#we have to loop over the bg file separate
+for filename in BGFILESUBSET:
+	currentFile = TFile.Open(filename)
+	treeNames = currentFile.GetKeyNames('./')
+	#extract each tree
+	for tn in treeNames:
+		tree = currentFile.Get(tn)
+		#loop over the tree
+		for nevents in tree:
+			Total_b = Total_b + 1.
+			if nevent.(tn+'nTaus') :
+				N_b = N_b + 1.
+
+		eff_bL.append(N_b/Total_b)
+		RRL.append(1. - eff_b)
+		pL.append(N_s / (N_s + N_b))
+		effPL.append(1.)
+		
+#loop over everything
+for A,B,C,D,E,F,G,H,I,J,K,L,M in zip(eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL):
+	eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = A,B,C,D,E,F,G,H,I,J,K,L,M
+	effp = eff_s * p
+	outputTree.Fill()
+	
+
+outputFile.Write()
+		
+
+
+
+
