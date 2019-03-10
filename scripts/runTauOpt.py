@@ -5,7 +5,7 @@ import subprocess
 
 SUBSET = 'S1'
 #SUBSET = 'S2'
-
+#SUBSET = 'B1'
 
 def bash( bashCommand ):
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
@@ -31,6 +31,6 @@ for DATASET in DATASETLIST:
 	file.write(log[0])
 	bash('gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
 	bash('mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+DATASETNAME+'.root')
-	break
+	
 
 
