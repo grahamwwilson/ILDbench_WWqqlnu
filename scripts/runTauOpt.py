@@ -14,6 +14,9 @@ def bash( bashCommand ):
 	return output ,error
 
 bashCommand ='ls ./steeringMacros/TauFinderSteeringS1LR/' 
+#bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
+#bashCommand = 'ls ./steeringMacros/TauFinderSteeringB1LR/'
+
 OUTPUT = bash( bashCommand ) #get name of all xml Files
 DATASETLIST = OUTPUT[0].split('\n')
 print DATASETLIST

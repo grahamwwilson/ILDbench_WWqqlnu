@@ -5,12 +5,15 @@ import numpy as np
 
 #3 parameter optimzation, searchcone, iso angle, iso E
 #inputFileName = '/pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_0.slcio'
-inputFileName = '/pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_singleW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250042.P4f_sw_sl.eL.pR.n001.d_dstm_10417_0.slcio'
+#inputFileName = '/pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_singleW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250042.P4f_sw_sl.eL.pR.n001.d_dstm_10417_0.slcio'
+
+inputFileName = '/pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250006.P4f_ww_h.eL.pR.n001.d_dstm_10398_0.slcio'
 
 gearfile = "gear_ILD_l5_v02_dd4hep.xml"
 
 #outputPath = './TauFinderSteeringS1LR/'
-outputPath = './TauFinderSteeringS2LR/'
+#outputPath = './TauFinderSteeringS2LR/'
+outputPath = './TauFinderSteeringB1LR/'
 
 searchConeAngleMin = 0.
 searchConeAngleMax = 0.16
