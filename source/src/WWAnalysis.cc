@@ -103,9 +103,9 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 	std::string defaultpath= "./"
 	registerProcessorParameter("OutPath",
-							   "path of output rootfile"
+							   "path of output rootfile",
 								_outpath,
-								defaultpath);
+								defaultpath );
 
 
 
