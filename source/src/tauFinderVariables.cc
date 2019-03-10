@@ -92,6 +92,7 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 void tauFinderVariables:: setMCTau( MCParticle*& mcTau ){
 	if( mcTau == NULL){
 		 _nolep = true;
+	}
 	else{
 		_nolep = false;	
 	_mcTau = mcTau;

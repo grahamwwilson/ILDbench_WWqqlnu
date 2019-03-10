@@ -52,6 +52,7 @@ class tauFinderVariables{
 	std::vector<double> _tauTrueFrac{};
 	
 	//mct tau
+	bool _nolep{};
 	std::vector<double> _tauPsi{};
 	int _indexOfMinTauPsi{};
 	double _minTauPsi{};
