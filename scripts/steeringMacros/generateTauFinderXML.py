@@ -136,6 +136,7 @@ while treenum <= totalTrees:
 	file.write("		<parameter name=\"Normalization\" value=\"0.784017\" />\n")
 	file.write("		<parameter name=\"Njets\" value=\"3\" />\n")
 	file.write("		<parameter name=\"Ncuts\" value=\"7\" />\n")
+	file.write("		<parameter name=\"OutPath\" value=\"/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/\" />\n")
 	file.write("	</processor>\n")
 	file.write("\n")
 
