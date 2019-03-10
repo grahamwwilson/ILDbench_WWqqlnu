@@ -89,16 +89,18 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 	_pfo2mc = pfo2mc;
 
 }
-void tauFinderVariables:: setMCTau( MCParticle*& mcTau ){
-	if( mcTau == NULL){
-		 _nolep = true;
+void tauFinderVariables::setNoLep( bool lep ){
+	_nolep = lep;
+}
+void tauFinderVariables::setMCTau( MCParticle*& mcTau ){
+	if( _nolep){
+		 return;
 	}
-	else{
-		_nolep = false;	
+
 	_mcTau = mcTau;
 	_mcTauTlv = new TLorentzVector();
 	_mcTauTlv->SetXYZM(mcTau->getMomentum()[0], mcTau->getMomentum()[1], mcTau->getMomentum()[2], mcTau->getMass() );
-	}
+	
 }
 void tauFinderVariables::setTauVariables(){
 	

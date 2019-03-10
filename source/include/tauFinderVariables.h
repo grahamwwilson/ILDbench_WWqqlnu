@@ -53,6 +53,7 @@ class tauFinderVariables{
 	
 	//mct tau
 	bool _nolep{};
+	void setNoLep(bool lep);
 	std::vector<double> _tauPsi{};
 	int _indexOfMinTauPsi{};
 	double _minTauPsi{};
