@@ -639,7 +639,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			std::cout<<"No Taus in: "<<_inputJetCollectionsNames.at(i)<<std::endl;
 		}
 		else{
-
+			std::cout<<"setting parts and filling trees"<<std::endl;
 			_mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
 			_mcv.at(i)->initMCVars();
 
