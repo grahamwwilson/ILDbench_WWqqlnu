@@ -6,9 +6,9 @@ DATASET=TauFinder22
 #remove the output log otherwise it will not overwrite
 rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out.gz
 
-Marlin ./steeringMacros/TauFinderSteeringS1LR/${DATASET}.xml > ${DATASET}.out
+Marlin ./steeringMacros/TauFinderSteeringS1LR/${DATASET}.xml > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out
 
-gzip ${DATASET}.out
+gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out
 
 mv ${DATASET}.out.gz /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs
 mv file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/${DATASET}.root

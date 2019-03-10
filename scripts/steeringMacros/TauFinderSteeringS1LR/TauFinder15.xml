@@ -769,8 +769,7 @@
 		<parameter name="InputParticleColletionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
 		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
-		<parameter name="InputJetCollectionName" value="FastJets" />
-		<parameter name="InputJetWithOverlayCollectionName" value="FastJetsWithOverlay" />
+		<parameter name="InputJetCollectionsNames">  TauJets701 TauJets702 TauJets703 TauJets704 TauJets705 TauJets706 TauJets707 TauJets708 TauJets709 TauJets710 TauJets711 TauJets712 TauJets713 TauJets714 TauJets715 TauJets716 TauJets717 TauJets718 TauJets719 TauJets720 TauJets721 TauJets722 TauJets723 TauJets724 TauJets725 TauJets726 TauJets727 TauJets728 TauJets729 TauJets730 TauJets731 TauJets732 TauJets733 TauJets734 TauJets735 TauJets736 TauJets737 TauJets738 TauJets739 TauJets740 TauJets741 TauJets742 TauJets743 TauJets744 TauJets745 TauJets746 TauJets747 TauJets748 TauJets749 TauJets750 </parameter>
 		<parameter name="NFermions" value="4" />
 		<parameter name="NLeptons" value="2" />
 		<parameter name="Normalization" value="0.784017" />

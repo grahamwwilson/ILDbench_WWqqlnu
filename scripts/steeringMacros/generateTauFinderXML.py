@@ -124,8 +124,13 @@ while treenum <= totalTrees:
 	file.write("		<parameter name=\"InputParticleColletionName\" type=\"string\" lcioInType=\"ReconstructedParticle\"> PandoraPFOs </parameter>\n")
 	file.write("		<parameter name=\"InputTrackCollectionName\" value=\"MarlinTrkTracks\" />\n")
 	file.write("		<parameter name=\"InputRecoRelationCollectionName\" value=\"RecoMCTruthLink\" />\n")
-	file.write("		<parameter name=\"InputJetCollectionName\" value=\"FastJets\" />\n")
-	file.write("		<parameter name=\"InputJetWithOverlayCollectionName\" value=\"FastJetsWithOverlay\" />\n")
+#	file.write("		<parameter name=\"InputJetCollectionName\" value=\"FastJets\" />\n")
+#	file.write("		<parameter name=\"InputJetWithOverlayCollectionName\" value=\"FastJetsWithOverlay\" />\n")
+	file.write("		<parameter name=\"InputJetCollectionsNames\"> ")
+	for i in range( treenum , TreePerFileTracker+1 ):
+		if i> totalTrees : break
+		file.write(" TauJets"+str(i))
+	file.write(" </parameter>\n")
 	file.write("		<parameter name=\"NFermions\" value=\"4\" />\n")
 	file.write("		<parameter name=\"NLeptons\" value=\"2\" />\n")
 	file.write("		<parameter name=\"Normalization\" value=\"0.784017\" />\n")
