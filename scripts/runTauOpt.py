@@ -3,8 +3,8 @@
 import subprocess 
 
 #SUBSET = 'S1'
-SUBSET = 'S2'
-#SUBSET = 'B1'
+#SUBSET = 'S2'
+SUBSET = 'B1'
 
 def bash( bashCommand ):
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
@@ -13,8 +13,8 @@ def bash( bashCommand ):
 	return output ,error
 
 #bashCommand ='ls ./steeringMacros/TauFinderSteeringS1LR/' 
-bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
-#bashCommand = 'ls ./steeringMacros/TauFinderSteeringB1LR/'
+#bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
+bashCommand = 'ls ./steeringMacros/TauFinderSteeringB1LR/'
 
 OUTPUT = bash( bashCommand ) #get name of all xml Files
 DATASETLIST = OUTPUT[0].split('\n')
