@@ -646,7 +646,13 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_mcv.at(i)->initMCVars();
 
 			_tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
-			_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
+			//make sure this isnt bg
+			if( _mcv.at(i)->isMuon || _mcv.at(i)->isTau || _mcv.at(i)->isElectron){
+				_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
+			}
+			else{
+				_tf.at(i)->setMCTau(NULL);
+			}
 			_tf.at(i)->setTauVariables();
 			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
 			_tf.at(i)->setMCTTauVariables();	

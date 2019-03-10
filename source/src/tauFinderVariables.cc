@@ -90,9 +90,14 @@ void tauFinderVariables::setParticles(std::vector<ReconstructedParticle*>& taus,
 
 }
 void tauFinderVariables:: setMCTau( MCParticle*& mcTau ){
+	if( mcTau == NULL){
+		 _nolep = true;
+	else{
+		_nolep = false;	
 	_mcTau = mcTau;
 	_mcTauTlv = new TLorentzVector();
 	_mcTauTlv->SetXYZM(mcTau->getMomentum()[0], mcTau->getMomentum()[1], mcTau->getMomentum()[2], mcTau->getMass() );
+	}
 }
 void tauFinderVariables::setTauVariables(){
 	
@@ -167,6 +172,7 @@ void tauFinderVariables::setTauOLVariables(std::vector<MCParticle*> mcpartvec){
 }
 void tauFinderVariables::setMCTTauVariables(){
 	//find opening angle between tau& mcTau  acos(psi)
+	if(_nolep) return;
 	TLorentzVector mc;
 	mc.SetXYZM(  _mcTau->getMomentum()[0], _mcTau->getMomentum()[1], _mcTau->getMomentum()[2], _mcTau->getMass() );
 
@@ -189,9 +195,10 @@ void tauFinderVariables::setMCTTauVariables(){
 void tauFinderVariables::initLocalTree(){
 
 	std::string vsn(_variableSetName);
-
+	
+	if(_nolep == false){
 	_localTree->Branch((vsn+"mcTau").c_str(),"TLorentzVector",&_mcTauTlv,16000,0);
-
+	}
 /*	for(int i=0; i< _nTaus; i++){
 		std::stringstream name;
 		name << _variableSetName << "tauJet" << i;
@@ -216,10 +223,11 @@ void tauFinderVariables::initLocalTree(){
 	
 	_localTree->Branch((vsn+"tauTrueFrac").c_str(), &_tauTrueFrac);
 
+	if(_nolep == false){
 	_localTree->Branch((vsn+"tauPsi").c_str(), &_tauPsi);
 	_localTree->Branch((vsn+"minTauPsi").c_str(), &_minTauPsi, (vsn+"minTauPsi/D").c_str());
 	_localTree->Branch((vsn+"indexOfMinTauPsi").c_str(), &_indexOfMinTauPsi, (vsn+"indexOfMinTauPsi/I").c_str());
-	
+	}
 	
 
 }

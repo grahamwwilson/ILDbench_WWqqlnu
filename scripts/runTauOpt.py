@@ -2,9 +2,8 @@
 
 import subprocess 
 
-
-SUBSET = 'S1'
-#SUBSET = 'S2'
+#SUBSET = 'S1'
+SUBSET = 'S2'
 #SUBSET = 'B1'
 
 def bash( bashCommand ):
@@ -13,8 +12,8 @@ def bash( bashCommand ):
 	output, error = process.communicate()
 	return output ,error
 
-bashCommand ='ls ./steeringMacros/TauFinderSteeringS1LR/' 
-#bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
+#bashCommand ='ls ./steeringMacros/TauFinderSteeringS1LR/' 
+bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
 #bashCommand = 'ls ./steeringMacros/TauFinderSteeringB1LR/'
 
 OUTPUT = bash( bashCommand ) #get name of all xml Files

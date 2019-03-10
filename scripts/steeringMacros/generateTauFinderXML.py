@@ -14,6 +14,9 @@ gearfile = "gear_ILD_l5_v02_dd4hep.xml"
 #outputPath = './TauFinderSteeringS1LR/'
 #outputPath = './TauFinderSteeringS2LR/'
 outputPath = './TauFinderSteeringB1LR/'
+#nlep = 2
+nferm = 4
+nlep = 0
 
 searchConeAngleMin = 0.
 searchConeAngleMax = 0.16
@@ -136,8 +139,8 @@ while treenum <= totalTrees:
 		if i> totalTrees : break
 		file.write(" TauJets"+str(i))
 	file.write(" </parameter>\n")
-	file.write("		<parameter name=\"NFermions\" value=\"4\" />\n")
-	file.write("		<parameter name=\"NLeptons\" value=\"2\" />\n")
+	file.write("		<parameter name=\"NFermions\" value=\""+str(nferm)+"\" />\n")
+	file.write("		<parameter name=\"NLeptons\" value=\""+str(nlep)+"\" />\n")
 	file.write("		<parameter name=\"Normalization\" value=\"0.784017\" />\n")
 	file.write("		<parameter name=\"Njets\" value=\"3\" />\n")
 	file.write("		<parameter name=\"Ncuts\" value=\"7\" />\n")
