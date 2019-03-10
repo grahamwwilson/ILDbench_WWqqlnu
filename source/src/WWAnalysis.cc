@@ -111,8 +111,16 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 }
 void WWAnalysis::initTauFinderOptimization(){
-			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 
+
+			std::vector<TTree*> t(_inputJetCollectionsNames.size());
+			std::vector<tauFinderVariables*> f(_inputJetCollectionsNames.size());
+			std::vector<mcVariables*> m(_inputJetCollectionsNames.size());
+			_trees = t;
+			_tf = f;
+			_mvc = m;
+
+			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 				_trees.at(i) = new TTree(_inputJetCollectionsNames.at(i).c_str(), _inputJetCollectionsNames.at(i).c_str());
 				_tf.at(i) = new tauFinderVariables(_inputJetCollectionsNames.at(i).c_str(), _trees.at(i));
 				_mcv.at(i) = new mcVariables(_inputJetCollectionsNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
@@ -126,15 +134,16 @@ void WWAnalysis::init() {
   printParameters() ;
 
 //init particle collection vectors
-	//std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
+	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
+	//std::cout<<"init particle collections"<<std::endl;
 	for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 		std::vector<ReconstructedParticle*> collection{};
-		//initParticleCollections.push_back( collection );
-		_particleCollections.push_back(collection);
+		initParticleCollections.at(i)=collection ;
+		//_particleCollections.push_back(collection);
 	}
-	//_particleCollections = initParticleCollections;
+	_particleCollections = initParticleCollections;
 
- 
+// std::cout<<"set filepath "<<std::endl;
   _outpath = _outpath+"file.root";
   file = new TFile(_outpath.c_str(),"RECREATE");
 
