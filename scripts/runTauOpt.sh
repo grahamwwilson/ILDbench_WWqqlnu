@@ -10,9 +10,9 @@ Marlin ./steeringMacros/TauFinderSteeringS1LR/${DATASET}.xml > /nfs/dust/ilc/use
 
 gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out
 
-mv ${DATASET}.out.gz /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs
-mv file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/${DATASET}.root
+#mv ${DATASET}.out.gz /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs
+mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/${DATASET}.root
 
 #slcio tends to be really big so normally just overwrite it
 #mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/slcioFiles/${DATASET}_jets.slcio
-mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/slcioFiles/
+#mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/slcioFiles/

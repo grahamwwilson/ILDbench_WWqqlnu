@@ -101,6 +101,11 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								ncuts,
 								(int) 0);
 
+	registerProcessorParameter("OutPath",
+							   "path of output rootfile"
+								_outpath,
+								"./");
+
 
 
 }
@@ -120,15 +125,17 @@ void WWAnalysis::init() {
   printParameters() ;
 
 //init particle collection vectors
-	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
+	//std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
 	for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 		std::vector<ReconstructedParticle*> collection{};
-		initParticleCollections.at(i) = collection;
+		//initParticleCollections.push_back( collection );
+		_particleCollections.push_back(collection);
 	}
-	_particleCollections = initParticleCollections;
+	//_particleCollections = initParticleCollections;
 
  
-  file = new TFile("file.root","RECREATE");
+  _outpath = _outpath+"file.root";
+  file = new TFile(_outpath.c_str(),"RECREATE");
 
 
 	initTauFinderOptimization();
@@ -614,6 +621,7 @@ void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*&
 
 }
 void WWAnalysis::SetTauOptimizationVariables(){
+	std::cout<<"Jet collections size "<< _particleCollections.size()<<std::endl;
 	//do tau optimization stuff
 	for(unsigned int i=0; i<_tf.size(); i++){
 		//make sure we have jets in this particular collection
