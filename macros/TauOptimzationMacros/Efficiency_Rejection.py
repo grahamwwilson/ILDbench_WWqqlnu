@@ -209,14 +209,14 @@ for filename in FILESUBSET:
 					N_b[0] = N_b[0] + 1.
 					round(N_b[0])
 		
-		eff_s[0] = (N_s/Total_s)
+		eff_s[0] = (N_s[0]/Total_s[0])
 		treeN[0] =(treedetails[treedetails_itr][0])
 		searchCone[0] = (treedetails[treedetails_itr][1])
 		isoCone[0] = (treedetails[treedetails_itr][2])
 		isoE[0] =(treedetails[treedetails_itr][3])			
-		eff_b[0] =(N_b/Total_b)
-		RR[0] = (1. - eff_b)
-		p[0] = (N_s / (N_s + N_b))
+		eff_b[0] =(N_b[0]/Total_b[0])
+		RR[0] = (1. - eff_b[0])
+		p[0] = (N_s[0] / (N_s[0] + N_b[0]))
 		effP[0] = eff_s[0] * p[0]
 		outputTree.Fill()
 		
