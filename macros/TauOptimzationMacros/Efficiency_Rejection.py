@@ -28,10 +28,11 @@ SUBSET = ['S1', 'S2', 'B1']
 PARTICLETYPE = ['MUON', 'ELECTRON', 'TAU0', 'TAU1', 'TAU2', 'TAU3', 'TAU4', 'BG1']
 
 #CHOOSE SUBSET/PTYPE INDICES
-SUBSET = SUBSET[0]
-PARTICLETYPE = PARTICLETYPE[0]
 BGSUBSET = SUBSET[2]
 BGPARTICLETYPE = PARTICLETYPE[7]
+SUBSET = SUBSET[0]
+PARTICLETYPE = PARTICLETYPE[0]
+
 
 
 #Since i didnt store it, figure out the parameters for each tree and store them with the eff
