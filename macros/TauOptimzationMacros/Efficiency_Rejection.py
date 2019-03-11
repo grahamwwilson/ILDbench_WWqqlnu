@@ -110,7 +110,7 @@ for filename in FILESUBSET:
 		#loop over the tree
 		for nevents in tree:
 
-			GetTreeObject(tree, nevents, 'isMuon' ):
+			GetTreeObject(tree, nevents, 'isMuon' )
 			break
 			if PARTICLETYPE == 'MUON':
 				#if nevent.(tn+'isMuon'):
