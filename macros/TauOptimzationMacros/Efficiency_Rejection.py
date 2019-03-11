@@ -2,6 +2,8 @@
 
 from ROOT import TCanvas, TFile, TH1D, TH2D, TProfile, TLegend, TGraph, TTree, gDirectory
 import subprocess
+import numpy as np
+
 
 def bash( bashCommand ):
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
