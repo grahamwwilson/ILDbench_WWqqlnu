@@ -27,7 +27,7 @@ def GetTreeObject(tree, branchName ,value):
 	print "got branch"
 	print branch
 	print "done"
-	tree.SetBranchAddress(branch,value)
+	tree.SetBranchAddress(branch[0],value)
 	#return branch.GetEntries()
 	#ranch.GetLeafEntry
 	#leafs = tree.GetListOfLeaves()
