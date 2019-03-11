@@ -146,11 +146,11 @@ for filename in FILESUBSET:
 		GetTreeObject(tree, 'nTaus', nTaus )
 		for entry in tree:
 			if isMuon[0]:
-				Total_s = Total_s+1.
-				round(Total_s)
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
 				if nTaus == 1:
-					N_s = N_s + 1.
-					round(N_s)
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
 
 
 		tree.Fill()
