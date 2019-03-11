@@ -120,9 +120,17 @@ outputTree.Branch("Total_b", Total_b,"Total_b/F")
 
 #iterator for tree details
 treedetails_itr = 0;
+#combine FILESUBSETS
+FILESUPERSET = []
+for f1 in FILESUBSET:
+	FILESUPERSET.append(f1)
+for b1 in BGFILESUBSET:
+	FILESUPERSET.append(b1)
 
+FILESUBSET = FILESUPERSET
 #tree loop vars
 isMuon = array('i',[0])
+nTaus = array('i',[0])
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
 	currentFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filename)
@@ -135,9 +143,17 @@ for filename in FILESUBSET:
 		tree = currentFile.Get(tn)
 
 		GetTreeObject(tree, 'isMuon', isMuon )
+		GetTreeObject(tree, 'nTaus', nTaus )
 		for entry in tree:
-			print isMuon
+			if isMuon[0]:
+				Total_s = Total_s+1.
+				round(Total_s)
+				if nTaus == 1:
+					N_s = N_s + 1.
+					round(N_s)
 
+
+		tree.Fill()
 		break
 		#loop over the tree
 		#for nevents in tree:
@@ -203,7 +219,7 @@ for filename in FILESUBSET:
 #	outputTree.Fill()
 	
 
-#outputFile.Write()
+outputFile.Write()
 		
 
 
