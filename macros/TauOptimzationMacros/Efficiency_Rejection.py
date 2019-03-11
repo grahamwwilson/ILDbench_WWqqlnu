@@ -92,7 +92,7 @@ BGFILESUBSET = [f for f in LS if BGSUBSET in f]
 outputFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/'+SUBSET+PARTICLETYPE+'.root','RECREATE')
 outputTree = TTree(SUBSET+PARTICLETYPE, SUBSET+PARTICLETYPE)
 eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = 0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.
-eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], []
+eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], [], []
 #set branches
 outputTree.Branch("eff_s",eff_s)
 outputTree.Branch("eff_b",eff_b)
