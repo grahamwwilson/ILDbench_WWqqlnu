@@ -16,7 +16,11 @@ def GetKeyNames( self, dir = "" ):
 TFile.GetKeyNames = GetKeyNames
 
 def GetTreeObject(tree, branchName ):
-	branches = tree.GetListOfBranches()
+	branchesObj = tree.GetListOfBranches()
+	branches = []
+	for b in branchesObj:
+		branches.append( b.GetName() )
+		
 	print "got branches"
 	print branches
 	branch = [b for b in branches if branchName in b]
