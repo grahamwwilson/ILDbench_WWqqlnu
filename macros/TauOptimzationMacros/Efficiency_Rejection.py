@@ -152,8 +152,8 @@ for filename in FILESUBSET:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
-		print N_s[0], Total_s[0]
-		tree.Fill()
+		#print N_s[0], Total_s[0]
+		outputTree.Fill()
 		break
 	break
 		#loop over the tree
