@@ -76,7 +76,7 @@ for c in coneValues:
 			treedetails.append( [ treenum, c, iA, iE ])
 			treenum = treenum + 1
 
-print treedetails
+#print treedetails
 
 LS = bash('ls /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/')
 LS = LS[0].split('\n')
@@ -85,14 +85,14 @@ LS = LS[0].split('\n')
 FILESUBSET = [f for f in LS if SUBSET in f]
 BGFILESUBSET = [f for f in LS if BGSUBSET in f]
 
-print FILESUBSET
-print BGFILESUBSET
+#print FILESUBSET
+#print BGFILESUBSET
 
 #we need to write all this stuff to a tree in a rootfile
 outputFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/'+SUBSET+PARTICLETYPE+'.root','RECREATE')
 outputTree = TTree(SUBSET+PARTICLETYPE, SUBSET+PARTICLETYPE)
 eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = 0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.
-eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = []
+eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], []
 #set branches
 outputTree.Branch("eff_s",eff_s)
 outputTree.Branch("eff_b",eff_b)
