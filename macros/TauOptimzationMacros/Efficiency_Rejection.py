@@ -145,14 +145,14 @@ for filename in FILESUBSET:
 		GetTreeObject(tree, 'isMuon', isMuon )
 		GetTreeObject(tree, 'nTaus', nTaus )
 		for entry in tree:
-			if isMuon[0]:
+			if isMuon[0] && PARTICLETYPE == 'MUON'::
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
 				if nTaus == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
-
+		print N_s[0], Total_s[0]
 		tree.Fill()
 		break
 	break
