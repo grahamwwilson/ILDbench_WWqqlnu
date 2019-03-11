@@ -134,6 +134,7 @@ isTau = array('i',[0])
 isElectron = array('i',[0])
 tauType = array('i',[0])
 nTaus = array('i',[0])
+nTausBG = array('i',[0])
 print FILESUBSET
 print BGFILESUBSET
 #loop over the list of files and collect all the trees
@@ -144,16 +145,19 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 	keyList = currentFile.GetKeyNames('./')
 	print "\nKeys in file:", keyList
 	treeNames = currentFile.GetKeyNames('./')
+	treeNamesBG = currentBGFile.GetKeyNames('./')
 	#extract each tree
-	for tn in treeNames:
+	for tn,tnbg in zip(treeNames, treeNamesBG):
 		tree = currentFile.Get(tn)
+		treebg = currentBGFile.Get(tnbg)
 
 		GetTreeObject(tree, 'isMuon', isMuon )
 		GetTreeObject(tree, 'nTaus', nTaus )
 		GetTreeObject(tree, 'isTau', isTau)
 		GetTreeObject(tree, 'isElectron', isElectron)
 		GetTreeObject(tree, 'tauType', tauType)
-		for entry in tree:
+		GetTreeObject(treebg, 'nTaus', nTausBG)
+		for entry, entryBG in zip(tree, treebg):
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
@@ -205,10 +209,10 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
-			if isElectron[0] == False and isMuon[0] == False and isTau[0] == False: #this is background
+			if True: #this is background
 				Total_b[0] = Total_b[0]+1.
 				round(Total_b[0])
-				if nTaus >= 1:
+				if nTausBG >= 1:
 					N_b[0] = N_b[0] + 1.
 					round(N_b[0])
 		
