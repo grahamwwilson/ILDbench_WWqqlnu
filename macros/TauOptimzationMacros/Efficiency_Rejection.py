@@ -224,7 +224,7 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		eff_b[0] =(N_b[0]/Total_b[0])
 		RR[0] = (1. - eff_b[0])
 		p[0] = (N_s[0] / (N_s[0] + N_b[0]))
-		effP[0] = eff_s[0] * p[0]
+		effp[0] = eff_s[0] * p[0]
 		outputTree.Fill()
 		
 	
