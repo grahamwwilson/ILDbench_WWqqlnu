@@ -162,7 +162,7 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				print nTaus
+				#print nTaus
 				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
