@@ -15,11 +15,11 @@ def GetKeyNames( self, dir = "" ):
         return [key.GetName() for key in gDirectory.GetListOfKeys()]
 TFile.GetKeyNames = GetKeyNames
 
-def GetTreeObject(tree, nevent, branchName ):
+def GetTreeObject(tree, branchName ):
 	branches = tree.GetListOfBranches()
 	branch = [b for b in branches if branchName in b]
 	print branch
-	return branch.GetEntries()
+	return branch[0].GetEntries()
 	#ranch.GetLeafEntry
 	#leafs = tree.GetListOfLeaves()
 	#print leafs
