@@ -122,7 +122,7 @@ outputTree.Branch("Total_b", Total_b,"Total_b/F")
 treedetails_itr = 0;
 
 #tree loop vars
-isMuon = -1
+isMuon = array('i',[0])
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
 	currentFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filename)
