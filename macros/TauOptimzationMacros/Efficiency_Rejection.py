@@ -95,18 +95,18 @@ eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, 
 eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], [], []
 #set branches
 outputTree.Branch("eff_s",eff_s,"eff_s/F")
-outputTree.Branch("eff_b",eff_b)
-outputTree.Branch("RR",RR)
-outputTree.Branch("treeN",treeN)
-outputTree.Branch("searchCone",searchCone)
-outputTree.Branch("isoCone",isoCone)
-outputTree.Branch("isoE",isoE)
-outputTree.Branch("p",p)
-outputTree.Branch("effp",effp)
-outputTree.Branch("N_s",N_s)
-outputTree.Branch("N_b",N_b)
-outputTree.Branch("Total_s", Total_s)
-outputTree.Branch("Total_b", Total_b)
+outputTree.Branch("eff_b",eff_b,"eff_b/F")
+outputTree.Branch("RR",RR,"RR/F")
+outputTree.Branch("treeN",treeN,"treeN/F")
+outputTree.Branch("searchCone",searchCone,"searchCone/F")
+outputTree.Branch("isoCone",isoCone,"isoCone/F")
+outputTree.Branch("isoE",isoE,"isoE/F")
+outputTree.Branch("p",p,"p/F")
+outputTree.Branch("effp",effp,"effp/F")
+outputTree.Branch("N_s",N_s,"N_s/F")
+outputTree.Branch("N_b",N_b,"N_b/F")
+outputTree.Branch("Total_s", Total_s,"Total_s/F")
+outputTree.Branch("Total_b", Total_b,"Total_b/F")
 
 #iterator for tree details
 treedetails_itr = 0;
