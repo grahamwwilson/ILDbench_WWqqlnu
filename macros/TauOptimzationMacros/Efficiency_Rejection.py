@@ -19,9 +19,10 @@ def GetTreeObject(tree, nevent, branchName ):
 	branches = tree.GetListOfBranches()
 	branch = [b for b in branches if branchName in b]
 	print branch
+	return branch.GetEntries()
 	#ranch.GetLeafEntry
-	leafs = tree.GetListOfLeaves()
-	print leafs
+	#leafs = tree.GetListOfLeaves()
+	#print leafs
 
 def makearray(mini,Maxi,step):
 	#start = mini
@@ -118,36 +119,41 @@ for filename in FILESUBSET:
 	#extract each tree
 	for tn in treeNames:
 		tree = currentFile.Get(tn)
+
+		isMuon = GetTreeObject(tree, 'isMuon')
+		for entry in isMuon
+			print entry
+
+		break
 		#loop over the tree
-		for nevents in tree:
+		#for nevents in tree:
 
-			GetTreeObject(tree, nevents, 'isMuon' )
-			break
-			if PARTICLETYPE == 'MUON':
-				#if nevent.(tn+'isMuon'):
-				if 0:
-					Total_s = Total_s+ 1.
-				#	if nevent.(tn+'nTaus') == 1:
-				if 0:
-						N_s = N_s + 1.
-					
-			if PARTICLETYPE == 'ELECTRON':
-				True
-
-			if PARTICLETYPE == 'TAU0':
-				True
-
-			if PARTICLETYPE == 'TAU1':
-				True
-
-			if PARTICLETYPE == 'TAU2':
-				True
-
-			if PARTICLETYPE == 'TAU3':
-				True
-	
-			if PARTICLETYPE == 'TAU4':
-				True
+		#	GetTreeObject(tree, 'isMuon' )
+		#	break
+	#		if PARTICLETYPE == 'MUON':
+	#			#if nevent.(tn+'isMuon'):
+	#			if 0:
+	#				Total_s = Total_s+ 1.
+	#			#	if nevent.(tn+'nTaus') == 1:
+	#			if 0:
+	#					N_s = N_s + 1.
+	#				
+	#		if PARTICLETYPE == 'ELECTRON':
+	#			True
+#
+#			if PARTICLETYPE == 'TAU0':
+#				True
+#
+#			if PARTICLETYPE == 'TAU1':
+#				True
+##			if PARTICLETYPE == 'TAU2':
+#				True
+#
+#			if PARTICLETYPE == 'TAU3':
+#				True
+#	
+#			if PARTICLETYPE == 'TAU4':
+#				True
 
 		#populate variables according to the current tree and fill our output tree
 #		eff_sL.append(N_s/Total_s)
@@ -158,19 +164,19 @@ for filename in FILESUBSET:
 		#tree.Fill()
 
 #we have to loop over the bg file separate
-for filename in BGFILESUBSET:
-	currentFile = TFile.Open(filename)
-	treeNames = currentFile.GetKeyNames('./')
+#for filename in BGFILESUBSET:
+#	currentFile = TFile.Open(filename)
+#	treeNames = currentFile.GetKeyNames('./')
 	#extract each tree
-	for tn in treeNames:
-		tree = currentFile.Get(tn)
+#	for tn in treeNames:
+#		tree = currentFile.Get(tn)
 		#loop over the tree
-		for nevents in tree:
-			Total_b = Total_b + 1.
+#		for nevents in tree:
+#			Total_b = Total_b + 1.
 		#if nevent.(tn+'nTaus') :
-		if 0:
-				N_b = N_b + 1.
-
+#		if 0:
+#				N_b = N_b + 1.
+#
 #		eff_bL.append(N_b/Total_b)
 #		RRL.append(1. - eff_b)
 #		pL.append(N_s / (N_s + N_b))
