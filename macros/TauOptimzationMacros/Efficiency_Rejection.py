@@ -19,7 +19,7 @@ def GetTreeObject(tree, branchName ):
 	branches = tree.GetListOfBranches()
 	branch = [b for b in branches if branchName in b]
 	print branch
-	return branch[0].GetEntries()
+	return branch.GetEntries()
 	#ranch.GetLeafEntry
 	#leafs = tree.GetListOfLeaves()
 	#print leafs
