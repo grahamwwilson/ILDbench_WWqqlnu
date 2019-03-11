@@ -15,7 +15,7 @@ def GetKeyNames( self, dir = "" ):
         return [key.GetName() for key in gDirectory.GetListOfKeys()]
 TFile.GetKeyNames = GetKeyNames
 
-def GetTreeObject(tree, branchName ):
+def GetTreeObject(tree, branchName ,value):
 	branchesObj = tree.GetListOfBranches()
 	branches = []
 	for b in branchesObj:
@@ -27,6 +27,7 @@ def GetTreeObject(tree, branchName ):
 	print "got branch"
 	print branch
 	print "done"
+	tree.SetBranchAddress(branch,value)
 	#return branch.GetEntries()
 	#ranch.GetLeafEntry
 	#leafs = tree.GetListOfLeaves()
@@ -120,6 +121,8 @@ outputTree.Branch("Total_b", Total_b,"Total_b/F")
 #iterator for tree details
 treedetails_itr = 0;
 
+#tree loop vars
+isMuon = -1
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
 	currentFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filename)
@@ -131,9 +134,9 @@ for filename in FILESUBSET:
 	for tn in treeNames:
 		tree = currentFile.Get(tn)
 
-		isMuon = GetTreeObject(tree, 'isMuon')
-		for entry in isMuon:
-			print entry
+		GetTreeObject(tree, 'isMuon', isMuon )
+		for entry in tree:
+			print isMuon
 
 		break
 		#loop over the tree
