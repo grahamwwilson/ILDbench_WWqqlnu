@@ -121,22 +121,25 @@ outputTree.Branch("Total_b", Total_b,"Total_b/F")
 #iterator for tree details
 treedetails_itr = 0;
 #combine FILESUBSETS
-FILESUPERSET = []
-for f1 in FILESUBSET:
-	FILESUPERSET.append(f1)
-for b1 in BGFILESUBSET:
-	FILESUPERSET.append(b1)
+#FILESUPERSET = []
+#for f1 in FILESUBSET:#
+#	FILESUPERSET.append(f1)
+#for b1 in BGFILESUBSET:
+#	FILESUPERSET.append(b1)
 
-FILESUBSET = FILESUPERSET
+#FILESUBSET = FILESUPERSET
 #tree loop vars
 isMuon = array('i',[0])
 isTau = array('i',[0])
 isElectron = array('i',[0])
 tauType = array('i',[0])
 nTaus = array('i',[0])
+print FILESUBSET
+print BGFILESUBSET
 #loop over the list of files and collect all the trees
-for filename in FILESUBSET:
+for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 	currentFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filename)
+	currentBGFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filenameBG)	
 
 	keyList = currentFile.GetKeyNames('./')
 	print "\nKeys in file:", keyList
@@ -202,7 +205,7 @@ for filename in FILESUBSET:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
-			if isElectron[0] == False and isMuon[0] == False and isTau[0] == False:
+			if isElectron[0] == False and isMuon[0] == False and isTau[0] == False: #this is background
 				Total_b[0] = Total_b[0]+1.
 				round(Total_b[0])
 				if nTaus >= 1:
