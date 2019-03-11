@@ -150,11 +150,11 @@ for filename in FILESUBSET:
 				True
 
 		#populate variables according to the current tree and fill our output tree
-		eff_sL.append(N_s/Total_s)
-		treeNL.append(treedetails[treedetails_itr][0])
-		searchConeL.append(treedetails[treedetails_itr][1])
-		isoConeL.append(treedetails[treedetails_itr][2])
-		isoEL.append(treedetails[treedetails_itr][3])
+#		eff_sL.append(N_s/Total_s)
+#		treeNL.append(treedetails[treedetails_itr][0])
+#		searchConeL.append(treedetails[treedetails_itr][1])
+#		isoConeL.append(treedetails[treedetails_itr][2])
+#		isoEL.append(treedetails[treedetails_itr][3])
 		#tree.Fill()
 
 #we have to loop over the bg file separate
@@ -171,19 +171,19 @@ for filename in BGFILESUBSET:
 		if 0:
 				N_b = N_b + 1.
 
-		eff_bL.append(N_b/Total_b)
-		RRL.append(1. - eff_b)
-		pL.append(N_s / (N_s + N_b))
-		effPL.append(1.)
+#		eff_bL.append(N_b/Total_b)
+#		RRL.append(1. - eff_b)
+#		pL.append(N_s / (N_s + N_b))
+#		effPL.append(1.)
 		
 #loop over everything
-for A,B,C,D,E,F,G,H,I,J,K,L,M in zip(eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL):
-	eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = A,B,C,D,E,F,G,H,I,J,K,L,M
-	effp = eff_s * p
-	outputTree.Fill()
+#for A,B,C,D,E,F,G,H,I,J,K,L,M in zip(eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL):
+#	eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = A,B,C,D,E,F,G,H,I,J,K,L,M
+#	effp = eff_s * p
+#	outputTree.Fill()
 	
 
-outputFile.Write()
+#outputFile.Write()
 		
 
 
