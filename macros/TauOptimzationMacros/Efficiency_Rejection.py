@@ -23,6 +23,14 @@ def GetTreeObject(tree, nevent, branchName ):
 	leafs = tree.GetListOfLeaves()
 	print leafs
 
+def makearray(mini,Maxi,step):
+	#start = mini
+	arr = []
+	while mini < Maxi :
+		arr.append(mini)
+		mini = mini + step
+		mini = round(mini, 4)
+	return arr
 #run over 3 subsets S1, S2, B1
 
 #on run define what subset
@@ -55,9 +63,9 @@ isoEnergyStep = 1. #1gev step
 
 
 #create the parameter sets
-coneValues = np.arange(searchConeAngleMin, searchConeAngleMax, searchConeAngleStep)
-isoAngleValues = np.arange(isoAngleMin, isoAngleMax, isoAngleStep)
-isoEnergyValues = np.arange(isoEnergyMin, isoEnergyMax, isoEnergyStep)
+coneValues = makearray(searchConeAngleMin, searchConeAngleMax, searchConeAngleStep)
+isoAngleValues = makearray(isoAngleMin, isoAngleMax, isoAngleStep)
+isoEnergyValues = makearray(isoEnergyMin, isoEnergyMax, isoEnergyStep)
 
 #make a little sublist of [tree number, cone angle, iso angle, iso energy]
 treedetails = []

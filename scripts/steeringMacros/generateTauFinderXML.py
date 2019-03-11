@@ -39,9 +39,9 @@ coneValues = np.arange(searchConeAngleMin, searchConeAngleMax, searchConeAngleSt
 isoAngleValues = np.arange(isoAngleMin, isoAngleMax, isoAngleStep)
 isoEnergyValues = np.arange(isoEnergyMin, isoEnergyMax, isoEnergyStep)
 
-#print coneValues
-#print isoAngleValues
-#print isoEnergyValues
+print coneValues
+print isoAngleValues
+print isoEnergyValues
 
 nbinsCone = len(coneValues)
 nbinsIsoCone = len(isoAngleValues)
