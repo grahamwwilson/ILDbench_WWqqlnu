@@ -161,62 +161,62 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
-			#	round(Total_s[0])
+				round(Total_s[0])
 				print nTaus
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
-			#		round(N_s[0])
+					round(N_s[0])
 
 		#print N_s[0], Total_s[0]
 			if isTau[0] and PARTICLETYPE == 'TAU0' and tauType[0] == 0:
 				Total_s[0] = Total_s[0]+1.
-			#	round(Total_s[0])
-				if nTaus == 1:
+				round(Total_s[0])
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
-				#	round(N_s[0])
+					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU1' and tauType[0] == 1:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU2' and tauType[0] == 2:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU3' and tauType[0] == 3:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU4' and tauType[0] == 4:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isElectron[0] and PARTICLETYPE == 'ELECTRON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus == 1:
+				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if True: #this is background
 				Total_b[0] = Total_b[0]+1.
-			#	round(Total_b[0])
-				print nTausBG
-				if nTausBG >= 1:
+				round(Total_b[0])
+				#print nTausBG[0]
+				if nTausBG[0] >= 1:
 					N_b[0] = N_b[0] + 1.
-			#		round(N_b[0])
+					round(N_b[0])
 		
 		eff_s[0] = (N_s[0]/Total_s[0])
 		treeN[0] =(treedetails[treedetails_itr][0])
