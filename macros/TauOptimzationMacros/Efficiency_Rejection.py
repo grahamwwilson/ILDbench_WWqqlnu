@@ -145,7 +145,7 @@ for filename in FILESUBSET:
 		GetTreeObject(tree, 'isMuon', isMuon )
 		GetTreeObject(tree, 'nTaus', nTaus )
 		for entry in tree:
-			if isMuon[0] && PARTICLETYPE == 'MUON'::
+			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
 				if nTaus == 1:
