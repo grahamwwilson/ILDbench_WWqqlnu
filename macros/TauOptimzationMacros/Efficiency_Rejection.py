@@ -25,7 +25,7 @@ def GetTreeObject(tree, branchName ,value):
 	#print branches
 	branch = [b for b in branches if branchName in b]
 	#print "got branch"
-	print branch
+	#print branch
 	#print "done"
 	tree.SetBranchAddress(branch[0],value)
 	#return branch.GetEntries()
@@ -161,18 +161,19 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
-				round(Total_s[0])
+			#	round(Total_s[0])
+				print nTaus
 				if nTaus == 1:
 					N_s[0] = N_s[0] + 1.
-					round(N_s[0])
+			#		round(N_s[0])
 
 		#print N_s[0], Total_s[0]
 			if isTau[0] and PARTICLETYPE == 'TAU0' and tauType[0] == 0:
 				Total_s[0] = Total_s[0]+1.
-				round(Total_s[0])
+			#	round(Total_s[0])
 				if nTaus == 1:
 					N_s[0] = N_s[0] + 1.
-					round(N_s[0])
+				#	round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU1' and tauType[0] == 1:
 				Total_s[0] = Total_s[0]+1.
@@ -211,10 +212,11 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 
 			if True: #this is background
 				Total_b[0] = Total_b[0]+1.
-				round(Total_b[0])
+			#	round(Total_b[0])
+				print nTausBG
 				if nTausBG >= 1:
 					N_b[0] = N_b[0] + 1.
-					round(N_b[0])
+			#		round(N_b[0])
 		
 		eff_s[0] = (N_s[0]/Total_s[0])
 		treeN[0] =(treedetails[treedetails_itr][0])
@@ -225,7 +227,9 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		RR[0] = (1. - eff_b[0])
 		p[0] = (N_s[0] / (N_s[0] + N_b[0]))
 		effp[0] = eff_s[0] * p[0]
+		print eff_s[0], eff_b[0], RR[0], treeN[0], searchCone[0], isoCone[0], isoE[0], p[0], effp[0], N_s[0], N_b[0], Total_s[0], Total_b[0]
 		outputTree.Fill()
+		treedetails_itr += 1
 		
 	
 		#loop over the tree
