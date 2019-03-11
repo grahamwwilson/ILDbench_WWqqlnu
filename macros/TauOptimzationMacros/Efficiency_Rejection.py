@@ -121,7 +121,7 @@ for filename in FILESUBSET:
 		tree = currentFile.Get(tn)
 
 		isMuon = GetTreeObject(tree, 'isMuon')
-		for entry in isMuon
+		for entry in isMuon:
 			print entry
 
 		break
