@@ -116,7 +116,7 @@ treedetails_itr = 0;
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
 	currentFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/'+filename)
-	treeNames = currentFile.GetKeyNames('./')
+	treeNames = currentFile.GetKeyNames('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/')
 	#extract each tree
 	for tn in treeNames:
 		tree = currentFile.Get(tn)
