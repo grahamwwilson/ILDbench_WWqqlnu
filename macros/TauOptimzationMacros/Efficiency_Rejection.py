@@ -13,6 +13,14 @@ def GetKeyNames( self, dir = "" ):
         return [key.GetName() for key in gDirectory.GetListOfKeys()]
 TFile.GetKeyNames = GetKeyNames
 
+def GetTreeObject(tree, nevent, branchName ):
+	branches = tree.GetListOfBranches()
+	branch = [b for b in branches if branchName in b]
+	print branch
+	#ranch.GetLeafEntry
+	leafs = tree.GetListOfLeaves()
+	print leafs
+
 #run over 3 subsets S1, S2, B1
 
 #on run define what subset
@@ -102,10 +110,14 @@ for filename in FILESUBSET:
 		#loop over the tree
 		for nevents in tree:
 
+			GetTreeObject(tree, nevents, 'isMuon' ):
+			break
 			if PARTICLETYPE == 'MUON':
-				if nevent.(tn+'isMuon'):
+				#if nevent.(tn+'isMuon'):
+				if 0:
 					Total_s = Total_s+ 1.
-					if nevent.(tn+'nTaus') == 1:
+				#	if nevent.(tn+'nTaus') == 1:
+				if 0:
 						N_s = N_s + 1.
 					
 			if PARTICLETYPE == 'ELECTRON':
@@ -144,7 +156,8 @@ for filename in BGFILESUBSET:
 		#loop over the tree
 		for nevents in tree:
 			Total_b = Total_b + 1.
-			if nevent.(tn+'nTaus') :
+		#if nevent.(tn+'nTaus') :
+		if 0:
 				N_b = N_b + 1.
 
 		eff_bL.append(N_b/Total_b)
