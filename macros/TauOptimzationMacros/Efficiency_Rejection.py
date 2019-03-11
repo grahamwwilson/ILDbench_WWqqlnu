@@ -21,12 +21,12 @@ def GetTreeObject(tree, branchName ,value):
 	for b in branchesObj:
 		branches.append( b.GetName() )
 		
-	print "got branches"
-	print branches
+#	print "got branches"
+	#print branches
 	branch = [b for b in branches if branchName in b]
-	print "got branch"
+	#print "got branch"
 	print branch
-	print "done"
+	#print "done"
 	tree.SetBranchAddress(branch[0],value)
 	#return branch.GetEntries()
 	#ranch.GetLeafEntry
@@ -130,6 +130,9 @@ for b1 in BGFILESUBSET:
 FILESUBSET = FILESUPERSET
 #tree loop vars
 isMuon = array('i',[0])
+isTau = array('i',[0])
+isElectron = array('i',[0])
+tauType = array('i',[0])
 nTaus = array('i',[0])
 #loop over the list of files and collect all the trees
 for filename in FILESUBSET:
@@ -144,7 +147,11 @@ for filename in FILESUBSET:
 
 		GetTreeObject(tree, 'isMuon', isMuon )
 		GetTreeObject(tree, 'nTaus', nTaus )
+		GetTreeObject(tree, 'isTau', isTau)
+		GetTreeObject(tree, 'isElectron', isElectron)
+		GetTreeObject(tree, 'tauType', tauType)
 		for entry in tree:
+			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
@@ -152,11 +159,68 @@ for filename in FILESUBSET:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
-		print N_s[0], Total_s[0]
+		#print N_s[0], Total_s[0]
+			if isTau[0] and PARTICLETYPE == 'TAU0' and tauType[0] == 0:
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isTau[0] and PARTICLETYPE == 'TAU1' and tauType[0] == 1:
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isTau[0] and PARTICLETYPE == 'TAU2' and tauType[0] == 2:
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isTau[0] and PARTICLETYPE == 'TAU3' and tauType[0] == 3:
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isTau[0] and PARTICLETYPE == 'TAU4' and tauType[0] == 4:
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isElectron[0] and PARTICLETYPE == 'ELECTRON':
+				Total_s[0] = Total_s[0]+1.
+				round(Total_s[0])
+				if nTaus == 1:
+					N_s[0] = N_s[0] + 1.
+					round(N_s[0])
+
+			if isElectron[0] == False and isMuon[0] == False and isTau[0] == False:
+				Total_b[0] = Total_b[0]+1.
+				round(Total_b[0])
+				if nTaus >= 1:
+					N_b[0] = N_b[0] + 1.
+					round(N_b[0])
 		
+		eff_s[0] = (N_s/Total_s)
+		treeN[0] =(treedetails[treedetails_itr][0])
+		searchCone[0] = (treedetails[treedetails_itr][1])
+		isoCone[0] = (treedetails[treedetails_itr][2])
+		isoE[0] =(treedetails[treedetails_itr][3])			
+		eff_b[0] =(N_b/Total_b)
+		RR[0] = (1. - eff_b)
+		p[0] = (N_s / (N_s + N_b))
+		effP[0] = eff_s[0] * p[0]
 		outputTree.Fill()
-		break
-	break
+		
+	
 		#loop over the tree
 		#for nevents in tree:
 
