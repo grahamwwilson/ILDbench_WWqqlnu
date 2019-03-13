@@ -140,7 +140,7 @@ while treenum <= totalTrees:
 		file.write(" TauJets"+str(i))
 	file.write(" </parameter>\n")
 	file.write("		<parameter name=\"NFermions\" value=\""+str(nferm)+"\" />\n")
-	file.write("		<parameter name=\"NLeptons\" value=\""+str(nlep)+"\" />\n")
+	file.write("		<parameter name=\"Nleptons\" value=\""+str(nlep)+"\" />\n")
 	file.write("		<parameter name=\"Normalization\" value=\"0.784017\" />\n")
 	file.write("		<parameter name=\"Njets\" value=\"3\" />\n")
 	file.write("		<parameter name=\"Ncuts\" value=\"7\" />\n")
