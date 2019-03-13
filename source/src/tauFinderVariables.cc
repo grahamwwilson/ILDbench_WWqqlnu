@@ -93,9 +93,9 @@ void tauFinderVariables::setNoLep( bool lep ){
 	_nolep = lep;
 }
 void tauFinderVariables::setMCTau( MCParticle*& mcTau ){
-	if( _nolep){
-		 return;
-	}
+	//if( _nolep){
+	//	 return;
+//	}
 
 	_mcTau = mcTau;
 	_mcTauTlv = new TLorentzVector();
@@ -199,9 +199,9 @@ void tauFinderVariables::initLocalTree(){
 
 	std::string vsn(_variableSetName);
 	
-	if(_nolep == false){
+	//if(_nolep == false){
 	_localTree->Branch((vsn+"mcTau").c_str(),"TLorentzVector",&_mcTauTlv,16000,0);
-	}
+//	}
 /*	for(int i=0; i< _nTaus; i++){
 		std::stringstream name;
 		name << _variableSetName << "tauJet" << i;
@@ -226,11 +226,11 @@ void tauFinderVariables::initLocalTree(){
 	
 	_localTree->Branch((vsn+"tauTrueFrac").c_str(), &_tauTrueFrac);
 
-	if(_nolep == false){
+//	if(_nolep == false){
 	_localTree->Branch((vsn+"tauPsi").c_str(), &_tauPsi);
 	_localTree->Branch((vsn+"minTauPsi").c_str(), &_minTauPsi, (vsn+"minTauPsi/D").c_str());
 	_localTree->Branch((vsn+"indexOfMinTauPsi").c_str(), &_indexOfMinTauPsi, (vsn+"indexOfMinTauPsi/I").c_str());
-	}
+//	}
 	
 
 }

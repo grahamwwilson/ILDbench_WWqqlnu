@@ -632,6 +632,58 @@ void WWAnalysis::printSignalVariableSet( eventVariables*& evtVar, jetVariables*&
 	oVar->printOverlayVariables();
 
 }
+void WWAnalysis::initTauWithNoMCLepton(tauFinderVariables*& t){
+
+	//set up a normal tau but dont set any MC info or do matching
+	//assume particles have already been set, just deal with mc stuff
+	std::vector<double> tempD{ -1 };
+	t->_mcTau = new MCParticle();
+	t->_tauPsi = tempD;
+	t->_indexOfMinTauPsi = -1;
+	t->_minTauPsi = -1;
+
+}
+void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when there are no tau jets reconstructed
+
+	t->_nTaus=0;
+	std::vector<int> tempI{ -1 };
+	std::vector<double> tempD{ -1 };
+	t->_tauTrkMult = tempI;
+	t->_tauPfoMult = tempI;
+	t->_tauCharge = tempD;
+	t->_tauNOLTrks = tempI;
+	t->_tauNOLPfos = tempI;
+	t->_tauOLEFrac = tempD;
+	t->_tauOLMFrac = tempD;
+	t->_tauTrueFrac = tempD;
+
+	//std::vector<ReconstructedParticle*> _taus{};
+	std::vector<ReconstructedParticle*> tempP{ new ReconstructedParticle() }
+	_taus = tempP;
+	std::vector<TLorentzVector*> tempT{new TLorentzVector() }
+	_tlvtaus = tempT;
+
+	std::vector<TLorentzVector*> tempT2{};
+	TLorentzVector tlv;
+	tempT2.push_back(tlv);
+	_taustest = tempT2;
+	
+
+	
+	if( tau == NULL){
+		initTauWithNoMCLepton(t);
+	}
+	else{
+		t->setMCTau( tau );
+		//also set null matching
+		t->_tauPsi = tempD;
+		t->_indexOfMinTauPsi = -1;
+		t->_minTauPsi = -1;
+	}
+
+	
+
+}
 void WWAnalysis::SetTauOptimizationVariables(){
 	std::cout<<"Jet collections size "<< _particleCollections.size()<<std::endl;
 	//do tau optimization stuff
@@ -639,8 +691,22 @@ void WWAnalysis::SetTauOptimizationVariables(){
 		//make sure we have jets in this particular collection
 		if( _particleCollections.at(i).size() == 0){
 			std::cout<<"No Taus in: "<<_inputJetCollectionsNames.at(i)<<std::endl;
+
+			//have to save 
+			_mcv.at(i)->setParticles(_mcpartvec);
+			_mcv.at(i)->initMCVars();
+			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
+				//there is a lepton 
+				initEmptyTau(  _tf.at(i), _mcv.at(i)->_MCPF.at(2));
+			}
+			else{
+				//there is no lepton
+			 	initEmptyTau( _tf.at(i), NULL);
+			}
+			_trees.at(i)->Fill();
 		}
 		else{
+			//there are reconstructed taus
 			std::cout<<"setting parts and filling trees"<<std::endl;
 			_mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
 			_mcv.at(i)->initMCVars();
@@ -648,18 +714,21 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
 			//make sure this isnt bg
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
-				//_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
-				_tf.at(i)->setNoLep(false);
+				_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
+				_tf.at(i)->setMCTTauVariables();
+				//_tf.at(i)->setNoLep(false);
 			}
 			else{
-				_tf.at(i)->setNoLep(true);
+				//_tf.at(i)->setNoLep(true);
+				initTauWithNoMCLepton(_tf.at(i) );
 			}
-			_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2));
+			//_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2));
 			_tf.at(i)->setTauVariables();
 			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
-			_tf.at(i)->setMCTTauVariables();	
+				
 			_trees.at(i)->Fill();
 		}
+*/
 	}
 
 
