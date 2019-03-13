@@ -697,7 +697,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_mcv.at(i)->initMCVars();
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
 				//there is a lepton 
-				initEmptyTau(  _tf.at(i), _mcv.at(i)->_MCPF.at(2));
+				initEmptyTau(  _tf.at(i), _mcv.at(i)->_MCPf.at(2));
 			}
 			else{
 				//there is no lepton
@@ -708,23 +708,24 @@ void WWAnalysis::SetTauOptimizationVariables(){
 		else{
 			//there are reconstructed taus
 			std::cout<<"setting parts and filling trees"<<std::endl;
-			_mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
-			_mcv.at(i)->initMCVars();
+			
 
 			_tf.at(i)->setParticles(_particleCollections.at(i), _reco2mcvec);
+			_tf.at(i)->setTauVariables();
+			_tf.at(i)->setTauOLVariables(_mcpartvec);
 			//make sure this isnt bg
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
+				_mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
+				_mcv.at(i)->initMCVars();
 				_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2)); //the mctau is any lepton
 				_tf.at(i)->setMCTTauVariables();
-				//_tf.at(i)->setNoLep(false);
+
 			}
 			else{
-				//_tf.at(i)->setNoLep(true);
+
 				initTauWithNoMCLepton(_tf.at(i) );
 			}
-			//_tf.at(i)->setMCTau(_mcv.at(i)->_MCPf.at(2));
-			_tf.at(i)->setTauVariables();
-			_tf.at(i)->setTauOLVariables(_mcpartvec); //quick fix throw in mcpartvec
+		
 				
 			_trees.at(i)->Fill();
 		}
