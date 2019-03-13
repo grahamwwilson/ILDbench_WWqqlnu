@@ -3,6 +3,8 @@
 #include "EVENT/ReconstructedParticle.h"
 #include "EVENT/LCRelation.h"
 #include "IMPL/LCCollectionVec.h"
+#include "IMPL/MCParticleImpl.h"
+#include "IMPL/ReconstructedParticleImpl.h"
 #include <marlin/Global.h>
 #include "gear/BField.h"
 #include "lcio.h"

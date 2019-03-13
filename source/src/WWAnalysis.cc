@@ -637,7 +637,7 @@ void WWAnalysis::initTauWithNoMCLepton(tauFinderVariables*& t){
 	//set up a normal tau but dont set any MC info or do matching
 	//assume particles have already been set, just deal with mc stuff
 	std::vector<double> tempD{ -1 };
-	t->_mcTau = new MCParticle();
+	t->_mcTau = new MCParticleImpl();
 	t->_tauPsi = tempD;
 	t->_indexOfMinTauPsi = -1;
 	t->_minTauPsi = -1;
@@ -658,9 +658,9 @@ void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when t
 	t->_tauTrueFrac = tempD;
 
 	//std::vector<ReconstructedParticle*> _taus{};
-	std::vector<ReconstructedParticle*> tempP{ new ReconstructedParticle() }
+	std::vector<ReconstructedParticle*> tempP{ new ReconstructedParticleImpl() };
 	_taus = tempP;
-	std::vector<TLorentzVector*> tempT{new TLorentzVector() }
+	std::vector<TLorentzVector*> tempT{new TLorentzVector() };
 	_tlvtaus = tempT;
 
 	std::vector<TLorentzVector*> tempT2{};
