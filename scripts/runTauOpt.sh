@@ -1,6 +1,6 @@
 
 
-DATASET=TauFinder22
+DATASET=TauFinder22B1
 
 
 #remove the output log otherwise it will not overwrite
