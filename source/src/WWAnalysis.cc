@@ -659,14 +659,14 @@ void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when t
 
 	//std::vector<ReconstructedParticle*> _taus{};
 	std::vector<ReconstructedParticle*> tempP{ new ReconstructedParticleImpl() };
-	_taus = tempP;
+	t->_taus = tempP;
 	std::vector<TLorentzVector*> tempT{new TLorentzVector() };
-	_tlvtaus = tempT;
+	t->_tlvtaus = tempT;
 
-	std::vector<TLorentzVector*> tempT2{};
+	std::vector<TLorentzVector> tempT2{};
 	TLorentzVector tlv;
 	tempT2.push_back(tlv);
-	_taustest = tempT2;
+	t->_taustest = tempT2;
 	
 
 	
