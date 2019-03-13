@@ -165,7 +165,7 @@ using namespace lcio;
 //Tau optimization////
  void initTauFinderOptimization();
  void SetTauOptimizationVariables();
- void initEmptyTau(tauFinderVariables*& t);
+ void initEmptyTau(tauFinderVariables*& t, MCParticle* tau);
  void initTauWithNoMCLepton(tauFinderVariables*& t);
  std::vector<tauFinderVariables*> _tf{};
  std::vector<mcVariables*> _mcv{};
