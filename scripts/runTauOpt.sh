@@ -1,6 +1,6 @@
 
 
-DATASET=TauFinder22B1
+DATASET=TauFinder22
 
 
 #remove the output log otherwise it will not overwrite
@@ -11,7 +11,7 @@ Marlin ./steeringMacros/TauFinderSteeringB1LR/${DATASET}.xml > /nfs/dust/ilc/use
 gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/${DATASET}.out
 
 #mv ${DATASET}.out.gz /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs
-mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/${DATASET}.root
+mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/${DATASET}TEST.root
 
 #slcio tends to be really big so normally just overwrite it
 #mv jets.slcio /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/slcioFiles/${DATASET}_jets.slcio
