@@ -4,7 +4,7 @@ from ROOT import TCanvas, TFile, TH1D, TH2D, TProfile, TLegend, TGraph, TTree, g
 import ROOT as rt
 import subprocess
 from array import array
-
+import math
 
 def bash( bashCommand ):
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
@@ -52,6 +52,16 @@ def getmaxenergy( ntaus, vec4):
 			maxE = v.E()
 
 	return maxE
+
+def passAcceptance( flist, fpdglist):
+	passes = True
+	for mcf, pdg in zip(flixt, fpdglist):
+		if abs(pdg) != 12 and abs(pdg) != 14 and abs(pdg) != 16:
+			#no neutrinos allowed
+			if abs( mcf.CosTheta() > 0.995 ):
+				passes = False
+	return passes 
+
 #run over 3 subsets S1, S2, B1
 
 #on run define what subset
@@ -152,6 +162,29 @@ nTausBG = array('i',[0])
 #tauTLV = rt.vector('TLorentzVector')()
 #tauTLVBG = rt.vector('TLorentzVector')()
 
+#look at acceptance
+#currently we only look at 4f events
+mcf0 = TLorentzVector()
+mcf1 = TLorentzVector()
+mcf2 = TLorentzVector()
+mcf3 = TLorentzVector()
+mcf0_pdg = array('i',[0])
+mcf1_pdg = array('i',[0])
+mcf2_pdg = array('i',[0])
+mcf3_pdg = array('i',[0])
+mcf0bg = TLorentzVector()
+mcf1bg = TLorentzVector()
+mcf2bg = TLorentzVector()
+mcf3bg = TLorentzVector()
+mcf0_pdgbg = array('i',[0])
+mcf1_pdgbg = array('i',[0])
+mcf2_pdgbg = array('i',[0])
+mcf3_pdgbg = array('i',[0])
+
+
+
+
+
 print FILESUBSET
 print BGFILESUBSET
 #loop over the list of files and collect all the trees
@@ -176,7 +209,30 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		GetTreeObject(treebg, 'nTaus', nTausBG)
 	#	GetTreeObject(tree, 'tauTLV', tauTLV)
 	#	GetTreeObject(treebg, 'tauTLV', tauTLVBG) 
-		for entry, entryBG in zip(tree, treebg):
+		GetTreeObject(tree, 'MCf0', mcf0)
+		GetTreeObject(tree, 'MCf1', mcf1)
+		GetTreeObject(tree, 'MCf2', mcf2)
+		GetTreeObject(tree, 'MCf3', mcf3)
+		GetTreeObject(tree, 'MCf0_PDG', mcf0_pdg)
+		GetTreeObject(tree, 'MCf1_PDG', mcf1_pdg)
+		GetTreeObject(tree, 'MCf2_PDG', mcf2_pdg)
+		GetTreeObject(tree, 'MCf3_PDG', mcf3_pdg)
+		GetTreeObject(tree, 'MCf0', mcf0bg)
+		GetTreeObject(tree, 'MCf1', mcf1bg)
+		GetTreeObject(tree, 'MCf2', mcf2bg)
+		GetTreeObject(tree, 'MCf3', mcf3bg)
+		GetTreeObject(tree, 'MCf0_PDG', mcf0_pdgbg)
+		GetTreeObject(tree, 'MCf1_PDG', mcf1_pdgbg)
+		GetTreeObject(tree, 'MCf2_PDG', mcf2_pdgbg)
+		GetTreeObject(tree, 'MCf3_PDG', mcf3_pdgbg)
+		
+		#for entry, entryBG in zip(tree, treebg):
+		for entry in tree:
+			mcflist = [ mcf0, mcf1, mcf2, mcf3 ]
+			mcfpdglist = [mcf0_pdg, mcf1_pdg, mcf2_pdg, mcf3_pdg ]
+			if passAcceptance(mcflist, mcfpdglist) == False:
+				continue
+
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
@@ -228,6 +284,12 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 				if nTaus[0] == 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
+
+		for entry in treebg:
+			mcfbglist = [ mcf0bg, mcf1bg, mcf2bg, mcf3bg ]
+			mcfpdgbglist = [mcf0_pdgbg, mcf1_pdgbg, mcf2_pdgbg, mcf3_pdgbg ]
+			if passAcceptance(mcfbglist, mcfpdgbglist) == False:
+				continue
 
 			if True: #this is background
 				Total_b[0] = Total_b[0]+1.
