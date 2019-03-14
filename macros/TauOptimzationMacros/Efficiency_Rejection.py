@@ -1,6 +1,7 @@
 
 
 from ROOT import TCanvas, TFile, TH1D, TH2D, TProfile, TLegend, TGraph, TTree, gDirectory
+import ROOT as rt
 import subprocess
 from array import array
 
@@ -148,8 +149,8 @@ isElectron = array('i',[0])
 tauType = array('i',[0])
 nTaus = array('i',[0])
 nTausBG = array('i',[0])
-tauTLV = []
-tauTLVBG = []
+tauTLV = rt.vector('TLorentzVector')()
+tauTLVBG = rt.vector('TLorentzVector')()
 
 print FILESUBSET
 print BGFILESUBSET
