@@ -16,7 +16,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , i
 	
 
 	for(int i=1; i<=nFiles; i++){
-		std::stringstream fstream << "TauFinder"<< i<<subsetTag<<".root";
+		std::stringstream fstream;
+		fstream << "TauFinder"<< i<<subsetTag<<".root";
 		filenames.push_back( fstream.str() );
 	}
 
