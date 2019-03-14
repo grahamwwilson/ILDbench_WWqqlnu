@@ -41,6 +41,16 @@ def makearray(mini,Maxi,step):
 		mini = mini + step
 		mini = round(mini, 4)
 	return arr
+
+def getmaxenergy( ntaus, vec4):
+	if ntaus == 0:
+		return 0.
+	maxE = 0.
+	for v in vec4:
+		if v.E() > maxE:
+			maxE = v.E()
+
+	return maxE
 #run over 3 subsets S1, S2, B1
 
 #on run define what subset
@@ -102,7 +112,8 @@ BGFILESUBSET = [f for f in LS if BGSUBSET in f]
 outputFile = TFile.Open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/'+SUBSET+PARTICLETYPE+'.root','RECREATE')
 outputTree = TTree(SUBSET+PARTICLETYPE, SUBSET+PARTICLETYPE)
 eff_s, eff_b, RR, treeN, searchCone, isoCone, isoE, p, effp, N_s, N_b, Total_s, Total_b = array( 'f', [ 0. ] ),array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) ,array( 'f', [ 0. ]) 
-eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], [], []
+#eff_sL, eff_bL, RRL, treeNL, searchConeL, isoConeL, isoEL, pL, effpL, N_sL, N_bL, Total_sL, Total_bL = [], [], [], [], [], [], [], [], [], [], [], [], []
+Emax_s, Emax_b = array( 'f', [0.] ), array( 'f', [0.] )
 #set branches
 outputTree.Branch("eff_s",eff_s,"eff_s/F")
 outputTree.Branch("eff_b",eff_b,"eff_b/F")
@@ -117,6 +128,8 @@ outputTree.Branch("N_s",N_s,"N_s/F")
 outputTree.Branch("N_b",N_b,"N_b/F")
 outputTree.Branch("Total_s", Total_s,"Total_s/F")
 outputTree.Branch("Total_b", Total_b,"Total_b/F")
+outputTree.Branch("Emax_s", Emax_s,"Emax_s/F") #the higheest energy tau reconstucted
+outputTree.Branch("Emax_b", Emax_b,"Emax_b/F")
 
 #iterator for tree details
 treedetails_itr = 0;
@@ -135,6 +148,9 @@ isElectron = array('i',[0])
 tauType = array('i',[0])
 nTaus = array('i',[0])
 nTausBG = array('i',[0])
+tauTLV = []
+tauTLVBG = []
+
 print FILESUBSET
 print BGFILESUBSET
 #loop over the list of files and collect all the trees
@@ -157,13 +173,15 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		GetTreeObject(tree, 'isElectron', isElectron)
 		GetTreeObject(tree, 'tauType', tauType)
 		GetTreeObject(treebg, 'nTaus', nTausBG)
+		GetTreeObject(tree, 'tauTLV', tauTLV)
+		GetTreeObject(treebg, 'tauTLV', tauTLVBG) 
 		for entry, entryBG in zip(tree, treebg):
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
 				#print nTaus
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
@@ -171,42 +189,42 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 			if isTau[0] and PARTICLETYPE == 'TAU0' and tauType[0] == 0:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU1' and tauType[0] == 1:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU2' and tauType[0] == 2:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU3' and tauType[0] == 3:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isTau[0] and PARTICLETYPE == 'TAU4' and tauType[0] == 4:
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
 			if isElectron[0] and PARTICLETYPE == 'ELECTRON':
 				Total_s[0] = Total_s[0]+1.
 				round(Total_s[0])
-				if nTaus[0] == 1:
+				if nTaus[0] >= 1:
 					N_s[0] = N_s[0] + 1.
 					round(N_s[0])
 
@@ -227,7 +245,9 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		RR[0] = (1. - eff_b[0])
 		p[0] = (N_s[0] / (N_s[0] + N_b[0]))
 		effp[0] = eff_s[0] * p[0]
-		print eff_s[0], eff_b[0], RR[0], treeN[0], searchCone[0], isoCone[0], isoE[0], p[0], effp[0], N_s[0], N_b[0], Total_s[0], Total_b[0]
+		Emax_s[0] =getmaxenergy( ntaus, tauTLV)
+		Emax_b[0] =getmaxenergy( ntausBG, tauTLVBG)
+		print eff_s[0], eff_b[0], RR[0], treeN[0], searchCone[0], isoCone[0], isoE[0], p[0], effp[0], N_s[0], N_b[0], Total_s[0], Total_b[0], Emax_s[0], Emax_b[0]
 		outputTree.Fill()
 		treedetails_itr += 1
 		
