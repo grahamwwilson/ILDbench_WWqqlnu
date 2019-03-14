@@ -246,8 +246,8 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		RR[0] = (1. - eff_b[0])
 		p[0] = (N_s[0] / (N_s[0] + N_b[0]))
 		effp[0] = eff_s[0] * p[0]
-		Emax_s[0] =getmaxenergy( ntaus, tauTLV)
-		Emax_b[0] =getmaxenergy( ntausBG, tauTLVBG)
+		Emax_s[0] =getmaxenergy( ntaus[0], tauTLV)
+		Emax_b[0] =getmaxenergy( ntausBG[0], tauTLVBG)
 		print eff_s[0], eff_b[0], RR[0], treeN[0], searchCone[0], isoCone[0], isoE[0], p[0], effp[0], N_s[0], N_b[0], Total_s[0], Total_b[0], Emax_s[0], Emax_b[0]
 		outputTree.Fill()
 		treedetails_itr += 1
