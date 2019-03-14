@@ -5,7 +5,7 @@
 //import subprocess
 //from array import array
 //import math
-#include <stringstream>
+
 #include <vector>
 void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , int nFiles){
 	//#on run define what subset
@@ -16,7 +16,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , i
 	
 
 	for(int i=1; i<=nFiles; i++){
-		stringstream fstream << "TauFinder"<< i<<subsetTag<<".root";
+		std::stringstream fstream << "TauFinder"<< i<<subsetTag<<".root";
 		filenames.push_back( fstream.str() );
 	}
 
