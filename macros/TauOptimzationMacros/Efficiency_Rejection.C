@@ -5,7 +5,8 @@
 //import subprocess
 //from array import array
 //import math
-
+#include <stringstream>
+#include <vector>
 void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , int nFiles){
 	//#on run define what subset
 //SUBSET = ['S1', 'S2', 'B1']
