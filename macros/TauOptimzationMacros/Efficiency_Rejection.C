@@ -170,28 +170,40 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			TTree* treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 
 			//declare variables and fill locally
-			TTreeReader sReader(tree);
-			TTreeReader bgReader(treebg);
+		//	TTreeReader sReader(tree);
+		//	TTreeReader bgReader(treebg);
+			bool isMuon; 
+//Abandon ttreereader it sucks do manually
+			// https://root.cern.ch/how/how-read-tree
+			auto bisMuon = tree->GetBranch(treeNames.at(itree)+"isMuon").c_str());
+		  //	auto branch  = theTree->GetBranch("event");
+  			 bisMuon->SetAddress(&isMuon);
+
+			auto nevent = tree->GetEntries();
+   			for (Int_t i=0;i<nevent;i++) {
+      				bisMuon->GetEvent(i);		
+					std::cout<<isMuon<<std::endl;
+			}
 			
 					//here are the variables we fill
-			TTreeReaderValue<bool> isMuon(sReader, (treeNames.at(itree)+"isMuon").c_str());
-			TTreeReaderValue<bool> isTau(sReader, (treeNames.at(itree)+"isTau").c_str());
-			TTreeReaderValue<bool> isElectron(sReader, (treeNames.at(itree)+"isElectron").c_str());
-			TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
-			TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
+		//	TTreeReaderValue<bool> isMuon(sReader, ();
+		//	TTreeReaderValue<bool> isTau(sReader, (treeNames.at(itree)+"isTau").c_str());
+		//	TTreeReaderValue<bool> isElectron(sReader, (treeNames.at(itree)+"isElectron").c_str());
+		//	TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
+		//	TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
 			//mc variables + pdgs
-			TTreeReaderValue<TLorentzVector> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.").c_str());
+		//	TTreeReaderValue<TLorentzVector> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.").c_str());
 
 
-			TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
-			//mc variables + pdgss
-			 while (sReader.Next()) {
+		//	TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
+			////mc variables + pdgss
+		//	 while (sReader.Next()) {
       			
-      			std::cout<< (*mcf0CT).CosTheta() << " ";		
-			}
-			while (bgReader.Next()){
+      	//		std::cout<< (*mcf0CT).CosTheta() << " ";		
+		//	}
+		//	while (bgReader.Next()){
 			//	std::cout<< *nTausBG << " ";
-			}
+	//		}
 
 		}	
 
