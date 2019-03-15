@@ -145,7 +145,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	bool isMuon;
 	TBranch* bisMuon;
 	
-	TLorentzVector MCf0;
+	TLorentzVector* MCf0;
 	TBranch* bMCf0;
 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
@@ -197,7 +197,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
    			for (Int_t i=0;i<nevent;i++) {
       				bisMuon->GetEvent(i);		
 					bMCf0->GetEvent(i);
-					std::cout<<MCf0.CosTheta()<<std::endl;
+					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
 			
 					//here are the variables we fill
