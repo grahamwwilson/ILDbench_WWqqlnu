@@ -8,17 +8,16 @@
 
 #include <vector>
 
-Long64_t LoadTree(Long64_t entry, TTree* fChain, int fCurrent)
-{
-// Set the environment to read one entry
-   if (!fChain) return -5;
-   Long64_t centry = fChain->LoadTree(entry);
-   if (centry < 0) return centry;
-   if (fChain->GetTreeNumber() != fCurrent) {
-      fCurrent = fChain->GetTreeNumber();
-     // Notify();
-   }
-   return centry;
+bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
+
+	std::cout<< fabs(MCf0.CosTheta() <<" "<<fabs(MCf1.CosTheta() > 0.995)<< " "<<fabs(MCf2.CosTheta() > 0.995)<<" "<<fabs(MCf3.CosTheta() > 0.995)<<std::endl;
+	std::cout<< pdg0<<" "<<pdg1<<" "<<pdg2<<" "<<pdg3<<std::endl;
+	if( fabs(MCf0.CosTheta() > 0.995) && abs(pdg0) != 12 && abs(pdg0) != 14 && abs(pdg0) !=16) return false;
+	if( fabs(MCf1.CosTheta() > 0.995) && abs(pdg1) != 12 && abs(pdg1) != 14 && abs(pdg1) !=16) return false;
+	if( fabs(MCf2.CosTheta() > 0.995) && abs(pdg2) != 12 && abs(pdg2) != 14 && abs(pdg2) !=16) return false;
+	if( fabs(MCf3.CosTheta() > 0.995) && abs(pdg3) != 12 && abs(pdg3) != 14 && abs(pdg3) !=16) return false;
+
+	return true;
 }
 std::vector<double> makearray(double mini,double Maxi,double step){
 	//start = mini
@@ -264,18 +263,23 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
-			nevent = 4;
+			nevent = 20;
 
 			//zero counts
 			Total_s = 0.;
 			N_s = 0.;
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
-					//bMCf0->GetEvent(i);
-				//	std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0->CosTheta()<<std::endl;
-										std::cout<<MCf3_PDG<<std::endl;
-				//std::cout<<nTaus<<std::endl;
+
+					if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
+						std::cout<<"FAIL ";
+					 continue;
+					}
+					if( passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
+						std::cout<<"PASS ";
+					}
+		
+				
 				std::string PARTICLETYPE = std::string(particletypeTag);
 				if( isMuon && PARTICLETYPE.compare("MUON")==0 ){
 					Total_s++;
@@ -340,16 +344,17 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//loop over bg tree
 			
 			nevent = treebg->GetEntries();
-			nevent = 4;
+			nevent = 20;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
-					//if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG)
-			
-					//bMCf0->GetEvent(i);
-					//std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0->CosTheta()<<std::endl;
-					std::cout<<MCf3_PDG<<std::endl;
-				//	std::cout<<nTausbg<<std::endl;
+					if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
+						std::cout<<"FAIL ";
+					 continue;
+					}
+					if( passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
+						std::cout<<"PASS ";
+					}
+					
 			}
 			
 
