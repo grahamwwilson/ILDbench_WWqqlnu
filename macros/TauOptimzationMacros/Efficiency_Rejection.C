@@ -63,10 +63,15 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	}
 
 	for(int i=0; i<filenames.size(); i++){
-		std::cout<<filenames.at(i)<<std::endl;
-		std::cout<<bgfilenames.at(i)<<std::endl;
+		std::cout<<filenames.at(i)<<" ";
+	//	std::cout<<bgfilenames.at(i)<<std::endl;
 	}
-
+	std::cout<<std::endl;
+	for(int i=0; i<filenames.size(); i++){
+	//	std::cout<<filenames.at(i)<<std::endl;
+		std::cout<<bgfilenames.at(i)<<" ";;
+	}
+	std::cout<<std::endl;
 
 	//make the arrays
 	double searchConeAngleMin = 0.;
@@ -200,6 +205,11 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
+			//cout<<bgtreeNames.at(i)<<" ";
+		}
+		std::cout<<std::endl;
+		for(int i=0; i<treeNames.size(); i++){
+		//	cout<<treeNames.at(i)<<" ";
 			cout<<bgtreeNames.at(i)<<" ";
 		}
 		std::cout<<std::endl;
