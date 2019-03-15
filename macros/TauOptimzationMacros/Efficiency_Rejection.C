@@ -276,9 +276,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 						std::cout<<"FAIL ";
 					 continue;
 					}
-					if( passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
+					
 						std::cout<<"PASS ";
-					}
+					
 		
 				
 				std::string PARTICLETYPE = std::string(particletypeTag);
@@ -352,9 +352,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 						std::cout<<"FAIL ";
 					 continue;
 					}
-					if( passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
-						std::cout<<"PASS ";
-					}
+					
+					std::cout<<"PASS ";
+					
 					
 			}
 			
