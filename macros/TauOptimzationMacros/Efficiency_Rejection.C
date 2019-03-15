@@ -212,7 +212,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0->E()<<std::endl;
+					//std::cout<<MCf0.E()<<std::endl;
 			}
 	
 		//	 Long64_t nentries = tree->GetEntriesFast();
