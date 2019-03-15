@@ -203,7 +203,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile = TFile::Open(inf.str().c_str());
 
-		if(currentFile == NULL) std::cout<<"NUUUUUUUUUUUUULLLLLLLLLLLLLL"<<std::endl;
+	
 		std::stringstream infbg;
 		infbg<< inpath << bgfilenames.at(ifile);
 		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
@@ -218,9 +218,12 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	
 		std::vector<std::string> treeNames{};
 		std::vector<std::string> bgtreeNames{};
-		for(int nt =0 ; nt<nTreesPerFile; nt++){
+		int nTreesInFile=currentFile->GetListOfKeys()->GetEntries();
+		for(int nt =0 ; nt<nTreesInFile; nt++){
+			
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
 			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
+			
 		} 	
 		
 
