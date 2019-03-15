@@ -370,7 +370,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			isoE = treedetails.at(treeDetailsItr).at(3);
 			p = N_s/ (N_s+N_b);
 			effp = eff_s * p;
-				 
+		
+			std::cout<< eff_s<< " "<< eff_b<<" "<< RR << " "<< treeN<<" "<<searchCone<<" "<<isoCone<<" "<<isoE<<" "<<p<<" "<<effp<<" "<<std::endl;
+
 			outputTree->Fill();
 	
 			treeDetailsItr++;
