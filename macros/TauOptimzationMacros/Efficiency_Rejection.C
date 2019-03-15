@@ -190,7 +190,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       			std::cout<< (*mcf0).CosTheta() << " ";		
 			}
 			while (bgReader.Next()){
-				std::cout<< *nTausBg << " ";
+				std::cout<< *nTausBG << " ";
 			}
 
 		}	
