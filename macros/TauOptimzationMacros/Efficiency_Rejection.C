@@ -143,10 +143,10 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 //	for( int ifile=0; i<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
 	for( int ifile=0; i<1; ifile++){	
 		std::stringstream inf;
-		inf<< inpath << filenames.at(i);
+		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile =  new TFile(inf.str().c_str);
 		std::stringstream infbg;
-		infbg<< inpath << bgfilenames.at(i);
+		infbg<< inpath << bgfilenames.at(ifile);
 		currentBGFile = TFile.Open(infbg.str().c_str());
 
 
