@@ -205,34 +205,39 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		TFile* currentFile =  TFile::Open(inf.str().c_str());
 		std::stringstream infbg;
 		infbg<< inpath << bgfilenames.at(ifile);
-	//	TFile* currentBGFile = TFile::Open(infbg.str().c_str());
+		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
+
+		std::cout<<"Current File "<< inf.str()<<std::endl;
+		std::cout<<"Current BG File "<< infbg.str()<<std::endl;
 
 		//for both files get the branches we need
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
+	/*
 		std::vector<std::string> treeNames{};
-		//std::vector<std::string> bgtreeNames{};
+		std::vector<std::string> bgtreeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
-		///	bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
+			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
-			//cout<<bgtreeNames.at(i)<<" ";
+			cout<<bgtreeNames.at(i)<<" ";
 		}
 		std::cout<<std::endl;
-//		for(int i=0; i<treeNames.size(); i++){
-		//	cout<<treeNames.at(i)<<" ";
-//			cout<<bgtreeNames.at(i)<<" ";
-//		}
+		for(int i=0; i<treeNames.size(); i++){
+			cout<<treeNames.at(i)<<" ";
+			cout<<bgtreeNames.at(i)<<" ";
+		}
 		std::cout<<std::endl;
-
+	*/
 		//loop over all trees
 		for(int itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-		//treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 			
+
 			TList* tl = currentFile->GetListOfKeys();
 			for(int q =0; q<tl->GetEntries(); q++){
 				std::cout<< tl->At(q)->GetName() <<" ";
