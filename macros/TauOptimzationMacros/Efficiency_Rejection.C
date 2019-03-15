@@ -114,7 +114,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		}
 
 	}
-	printvec( treedetails );
+//	printvec( treedetails );
 	
 	std::string path = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/";
 	std::stringstream outstream;
