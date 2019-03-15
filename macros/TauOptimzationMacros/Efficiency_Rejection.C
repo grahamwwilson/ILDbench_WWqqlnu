@@ -185,19 +185,32 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		//	bool isMuon; 
 //Abandon ttreereader it sucks do manually
 			// https://root.cern.ch/how/how-read-tree
-			bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
-
-			bMCf0 = tree->GetBranch((treeNames.at(itree)+"MCf0").c_str());
+			//bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
+			
+			//bMCf0 = tree->GetBranch((treeNames.at(itree)+"MCf0").c_str());
+		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
 		  //	auto branch  = theTree->GetBranch("event");
-  			bisMuon->SetAddress(&isMuon);
+  		//	bisMuon->SetAddress(&isMuon);
 
-			bMCf0->SetAddress(&MCf0);
+		//	bMCf0->SetBranchAddress(&MCf0);
 
-			auto nevent = tree->GetEntries();
+		/*	auto nevent = tree->GetEntries();
    			for (Int_t i=0;i<nevent;i++) {
       				bisMuon->GetEvent(i);		
 					bMCf0->GetEvent(i);
 					std::cout<<MCf0->CosTheta()<<std::endl;
+			}
+	*/
+			 Long64_t nentries = tree->GetEntriesFast();
+
+  			 Long64_t nbytes = 0, nb = 0;
+  			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
+     			Long64_t ientry = LoadTree(jentry);
+     		 	if (ientry < 0) break;
+     			 nb = tree->GetEntry(jentry);   nbytes += nb;
+
+				
+
 			}
 			
 					//here are the variables we fill
