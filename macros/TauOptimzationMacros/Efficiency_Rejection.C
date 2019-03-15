@@ -238,8 +238,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
-			std::cout<<"currentFile tree name "<< tree.GetName()<<std::endl;;
-			std::cout<<"currentBGFile tree name "<< treebg.GetName()<<std::endl;;			
+			std::cout<<"currentFile tree name "<< tree->GetName()<<std::endl;;
+			std::cout<<"currentBGFile tree name "<< treebg->GetName()<<std::endl;;			
 
 
 			std::cout<<"print list of keys current file"<<std::endl;
