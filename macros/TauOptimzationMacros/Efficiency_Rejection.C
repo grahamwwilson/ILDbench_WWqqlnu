@@ -270,7 +270,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						N_s += 1.;
 					}
 				}
-				if(isTau && PARTICLETYPE.compare("TAU0")==0 && tauType == 0){
+				if(isTau && PARTICLETYPE.compare("TAU0")==0){
 					Total_s += 1.;
 					if(nTaus >= 1){
 						N_s += 1.;
@@ -371,7 +371,7 @@ void Efficiency_Rejection(){
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
 	int nFiles = 39;
 	int nTreesPerFile = 50;
-	Efficiency_RejectionRun(subsets[0], ptypes[1], subsets[2], nFiles, nTreesPerFile );
+	Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );
 	Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );
 
 	
