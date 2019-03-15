@@ -144,7 +144,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	for( int ifile=0; ifile<1; ifile++){	
 		std::stringstream inf;
 		inf<< inpath << filenames.at(ifile);
-		TFile* currentFile =  TFile::Open(inf.str().c_str);
+		TFile* currentFile =  TFile::Open(inf.str().c_str());
 		std::stringstream infbg;
 		infbg<< inpath << bgfilenames.at(ifile);
 		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
