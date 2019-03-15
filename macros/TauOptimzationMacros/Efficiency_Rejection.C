@@ -179,18 +179,14 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	TLorentzVector* MCf3 = new TLorentzVector();
 	TBranch* bMCf3;
 
-
-	TLorentzVector* MCf0bg = new TLorentzVector();
-	TBranch* bMCf0bg;
-	TLorentzVector* MCf1bg = new TLorentzVector();
-	TBranch* bMCf1bg;
-	TLorentzVector* MCf2bg = new TLorentzVector();
-	TBranch* bMCf2bg;
-	TLorentzVector* MCf3bg = new TLorentzVector();
-	TBranch* bMCf3bg;
-
-	int nTausbg;
-	TBranch* bnTausbg;
+	int MCf0_PDG;
+	TBranch* bMCf0_PDG;
+	int MCf1_PDG;
+	TBranch* bMCf1_PDG;
+	int MCf2_PDG;
+	TBranch* bMCf2_PDG;
+	int MCf3_PDG;
+	TBranch* bMCf3_PDG;
 
 	//int nTausBG;
 	//TBranch* ntausBG;
@@ -256,6 +252,10 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf0_PDG").c_str(), &MCf0_PDG, &bMCf0_PDG);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf1_PDG").c_str(), &MCf1_PDG, &bMCf1_PDG);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf2_PDG").c_str(), &MCf2_PDG, &bMCf2_PDG);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf3_PDG").c_str(), &MCf3_PDG, &bMCf3_PDG);
 			tree->SetBranchAddress((treeNames.at(itree)+"isMuon").c_str(), &isMuon, &bisMuon);
 			tree->SetBranchAddress((treeNames.at(itree)+"isTau").c_str(), &isTau, &bisTau);
 			tree->SetBranchAddress((treeNames.at(itree)+"isElectron").c_str(), &isElectron, &bisElectron);
@@ -274,6 +274,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					//bMCf0->GetEvent(i);
 				//	std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
+										std::cout<<MCf3_PDG<<std::endl;
 				//std::cout<<nTaus<<std::endl;
 				std::string PARTICLETYPE = std::string(particletypeTag);
 				if( isMuon && PARTICLETYPE.compare("MUON")==0 ){
@@ -330,6 +331,10 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf0_PDG").c_str(), &MCf0_PDG, &bMCf0_PDG);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1_PDG").c_str(), &MCf1_PDG, &bMCf1_PDG);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf2_PDG").c_str(), &MCf2_PDG, &bMCf2_PDG);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf3_PDG").c_str(), &MCf3_PDG, &bMCf3_PDG);
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
 
 			//loop over bg tree
@@ -338,9 +343,12 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			nevent = 4;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
+					if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG)
+			
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
+					std::cout<<MCf3_PDG<<std::endl;
 				//	std::cout<<nTausbg<<std::endl;
 			}
 			
