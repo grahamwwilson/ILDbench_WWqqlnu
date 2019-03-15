@@ -11,9 +11,8 @@ BTYPE="B1"
 nfiles=39
 ntrees=50
 
-root -l
-.x Efficiency_Rejection.C(${SUBSET},${PTYPE},${BTYPE},${nfiles},${ntrees})
-.q
+root -l .x Efficiency_Rejection.C(${SUBSET},${PTYPE},${BTYPE},${nfiles},${ntrees}); .q;
+
 
 
 SUBSET="S1"
