@@ -222,7 +222,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
-			nevent = 1;
+			nevent = 4;
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
@@ -240,7 +240,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//loop over bg tree
 			
 			nevent = treebg->GetEntries();
-			nevent = 1;
+			nevent = 4;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
 					//bMCf0->GetEvent(i);
