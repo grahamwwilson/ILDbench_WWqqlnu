@@ -312,7 +312,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 						N_s++;
 					}
 				}
-				if isElectron && PARTICLETYPE.compare("ELECTRON"){
+				if(isElectron && PARTICLETYPE.compare("ELECTRON")==0){
 					Total_s++;
 
 					if(nTaus >= 1){
@@ -350,8 +350,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//RR = 1. - eff_b;
 			treeN = treeDetails.at(treeDetailsItr).at(0);
 			searchCone = treeDetails.at(treeDetailsItr).at(1);
-			isoCone = treeDetails.at(treeDetailsItr.at(2);
-			isoE = treeDetails.at(treeDetailsItr.at(3);
+			isoCone = treeDetails.at(treeDetailsItr).at(2);
+			isoE = treeDetails.at(treeDetailsItr).at(3);
 			//p = N_s/ (N_s+N_b);
 			//effp = eff_s * p;
 				 
