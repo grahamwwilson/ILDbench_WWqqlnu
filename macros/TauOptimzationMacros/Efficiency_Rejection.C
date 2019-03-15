@@ -258,11 +258,11 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 	
 			//redirect other tree to same vars
- 			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
-			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
-			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
-			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
-			tree->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
+ 			tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
+			tree->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
 
 			//loop over bg tree
 			
