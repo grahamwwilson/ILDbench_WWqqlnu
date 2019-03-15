@@ -217,8 +217,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			int fCurrent = -1
   			 Long64_t nbytes = 0, nb = 0;
   			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
-     			Long64_t ientry = LoadTree(jentry, tree, fCurrent );
-     		 	if (ientry < 0) break;
+     		//	Long64_t ientry = LoadTree(jentry, tree, fCurrent );
+     		 //	if (ientry < 0) break;
      			 nb = tree->GetEntry(jentry);   nbytes += nb;
 
 				std::cout<<MCf0->CosTheta()<<std::endl;
