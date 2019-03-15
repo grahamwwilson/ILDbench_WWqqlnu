@@ -157,7 +157,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	bool isMuon;
 	TBranch* bisMuon;
 	
-	TLorentzVector* MCf0;
+	TLorentzVector* MCf0 = new TLorentzVector();
 	TBranch* bMCf0;
 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
