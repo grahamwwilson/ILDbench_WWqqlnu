@@ -138,6 +138,15 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	outputTree->Branch("Total_b", &Total_b,"Total_b/F");
 
 
+
+	TTree* tree;
+	TTree* treebg;
+	//make reading vars outside the loops
+	bool isMuon;
+	TBranch* bisMuon;
+	
+
+
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
 //	for( int ifile=0; ifile<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
@@ -166,16 +175,16 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 		//loop over all trees
 		for(itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
-			TTree* tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-			TTree* treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
+			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 
 			//declare variables and fill locally
 		//	TTreeReader sReader(tree);
 		//	TTreeReader bgReader(treebg);
-			bool isMuon; 
+		//	bool isMuon; 
 //Abandon ttreereader it sucks do manually
 			// https://root.cern.ch/how/how-read-tree
-			auto bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
+			bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
 		  //	auto branch  = theTree->GetBranch("event");
   			 bisMuon->SetAddress(&isMuon);
 
