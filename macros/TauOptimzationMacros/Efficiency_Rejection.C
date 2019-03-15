@@ -340,7 +340,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				treebg->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0bg->CosTheta()<<std::endl;
+					std::cout<<MCf0->CosTheta()<<std::endl;
 				//	std::cout<<nTausbg<<std::endl;
 			}
 			
