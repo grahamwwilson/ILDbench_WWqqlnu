@@ -160,14 +160,14 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
-			cout<<bgtreeNames.at(i)<<" "
+			cout<<bgtreeNames.at(i)<<" ";
 		}
 		std::cout<<std::endl;
 
 		//loop over all trees
 		for(itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
-			tree = currentFile.Get(treeNames.at(itree).c_str())
-			treebg = currentBGFile.Get(bgtreeNames.at(itree).c_str())	
+			tree = currentFile->Get(treeNames.at(itree).c_str())
+			treebg = currentBGFile->Get(bgtreeNames.at(itree).c_str())	
 
 			//declare variables and fill locally
 			TTreeReader sReader(tree);
