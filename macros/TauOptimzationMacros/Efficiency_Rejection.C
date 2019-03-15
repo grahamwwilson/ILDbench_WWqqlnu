@@ -140,8 +140,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
-//	for( int ifile=0; i<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
-	for( int ifile=0; i<1; ifile++){	
+//	for( int ifile=0; ifile<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
+	for( int ifile=0; ifile<1; ifile++){	
 		std::stringstream inf;
 		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile =  new TFile(inf.str().c_str);
