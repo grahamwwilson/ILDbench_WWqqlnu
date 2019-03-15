@@ -145,7 +145,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	bool isMuon;
 	TBranch* bisMuon;
 	
-
+	TLorentzVector MCf0;
+	TBranch* bMCf0;
 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
@@ -185,8 +186,12 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 //Abandon ttreereader it sucks do manually
 			// https://root.cern.ch/how/how-read-tree
 			bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
+
+			bMCf0 = tree->GetBranch((treeNames.at(itree)+"MCf0").c_str());
 		  //	auto branch  = theTree->GetBranch("event");
-  			 bisMuon->SetAddress(&isMuon);
+  			bisMuon->SetAddress(&isMuon);
+
+			bMCf0->SetAddress(&MCf0);
 
 			auto nevent = tree->GetEntries();
    			for (Int_t i=0;i<nevent;i++) {
