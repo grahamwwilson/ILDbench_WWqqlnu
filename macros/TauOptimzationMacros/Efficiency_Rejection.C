@@ -140,15 +140,15 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	double Total_b; 
 
 //#set branches
-	outputTree->Branch("eff_s",&eff_s,"eff_s/F");
-	outputTree->Branch("eff_b",&eff_b,"eff_b/F");
-	outputTree->Branch("RR",&RR,"RR/F");
-	outputTree->Branch("treeN",&treeN,"treeN/F");
-	outputTree->Branch("searchCone",&searchCone,"searchCone/F");
-	outputTree->Branch("isoCone",&isoCone,"isoCone/F");
-	outputTree->Branch("isoE",&isoE,"isoE/F");
-	outputTree->Branch("p",&p,"p/F");
-	outputTree->Branch("effp",&effp,"effp/F");
+	outputTree->Branch("eff_s",&eff_s,"eff_s/D");
+	outputTree->Branch("eff_b",&eff_b,"eff_b/D");
+	outputTree->Branch("RR",&RR,"RR/D");
+	outputTree->Branch("treeN",&treeN,"treeN/D");
+	outputTree->Branch("searchCone",&searchCone,"searchCone/D");
+	outputTree->Branch("isoCone",&isoCone,"isoCone/D");
+	outputTree->Branch("isoE",&isoE,"isoE/D");
+	outputTree->Branch("p",&p,"p/D");
+	outputTree->Branch("effp",&effp,"effp/D");
 	//outputTree->Branch("N_s",&N_s,"N_s/F")
 	//outputTree->Branch("N_b",&N_b,"N_b/F")
 	//outputTree->Branch("Total_s", &Total_s,"Total_s/F");
