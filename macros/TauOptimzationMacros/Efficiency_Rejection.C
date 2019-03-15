@@ -174,7 +174,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			TTreeReader bgReader(treebg);
 			
 					//here are the variables we fill
-			TTreeReaderValue<bool> isMuon(sReader, (treeNames.at(itree)+"px").c_str());
+			TTreeReaderValue<bool> isMuon(sReader, (treeNames.at(itree)+"isMuon").c_str());
 			//TTreeReaderValue<bool> isTau = array('i',[0])
 			//TTreeReaderValue<bool> isElectron = array('i',[0])
 			//TTreeReaderValue<int> tauType = array('i',[0])
