@@ -214,7 +214,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			}
 	*/
 			 Long64_t nentries = tree->GetEntriesFast();
-			int fCurrent = -1
+			int fCurrent = -1;
   			 Long64_t nbytes = 0, nb = 0;
   			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
      		//	Long64_t ientry = LoadTree(jentry, tree, fCurrent );
