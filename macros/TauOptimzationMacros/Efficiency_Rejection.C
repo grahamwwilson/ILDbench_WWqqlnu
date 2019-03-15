@@ -163,7 +163,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	int tauType;
 	TBranch* btauType;
 	int nTaus;
-	TBranch* nTaus;
+	TBranch* bnTaus;
 	
 	TLorentzVector* MCf0 = new TLorentzVector();
 	TBranch* bMCf0;
@@ -205,7 +205,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		std::cout<<std::endl;
 
 		//loop over all trees
-		for(itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
+		for(int itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 
@@ -231,11 +231,11 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			}
 	
 			//redirect other tree to same vars
- 			treebg->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
-			treebg->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
-			treebg->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
-			treebg->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
-			treebg->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
+ 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
+			treebg->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
 
 			//loop over bg tree
 			
