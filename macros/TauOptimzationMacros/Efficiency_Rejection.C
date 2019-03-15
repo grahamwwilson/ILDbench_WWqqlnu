@@ -33,7 +33,7 @@ void printvec(std::vector<std::vector<double> > v){
 	}
 		std::cout<<std::endl;
 }
-void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , const char* backgroundTag, int nFiles){
+void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , const char* backgroundTag, int nFiles, int nTreesPerFile){
 	//#on run define what subset
 //SUBSET = ['S1', 'S2', 'B1']
 //PARTICLETYPE = ['MUON', 'ELECTRON', 'TAU0', 'TAU1', 'TAU2', 'TAU3', 'TAU4', 'BG1']
@@ -149,7 +149,24 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		infbg<< inpath << bgfilenames.at(ifile);
 		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
 
+		//for both files get the branches we need
+		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
+		
+		std::vector<std::string> treeNames{}
+		for(int nt =0 ; nt<nTreesPerFile; nt++){
+			treeNames.push_back( std::string(currentFile->GelListOfKeys()->at(nt)->GetName()));
+		} 	 		
+		for(int i=0; i<treeNames.size(); i++){
+			cout<<treeNames.at(i)<<" ";
+		}
 
+		//here are the variables we fill
+	//	TTreeReaderValue<bool> isMuon = array('i',[0])
+	//	TTreeReaderValue<bool> isTau = array('i',[0])
+	//	TTreeReaderValue<bool> isElectron = array('i',[0])
+//		TTreeReaderValue<int> tauType = array('i',[0])
+//		TTreeReaderValue<int> nTaus = array('i',[0])
+//		TTreeReaderValue<int> nTausBG = array('i',[0])		
 			
 
 	}
