@@ -113,7 +113,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		}
 
 	}
-	//printvec( treedetails );
+	printvec( treedetails );
 	
 	std::string path = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/";
 	std::stringstream outstream;
@@ -151,8 +151,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	outputTree->Branch("effp",&effp,"effp/F");
 	//outputTree->Branch("N_s",&N_s,"N_s/F")
 	//outputTree->Branch("N_b",&N_b,"N_b/F")
-	outputTree->Branch("Total_s", &Total_s,"Total_s/F");
-	outputTree->Branch("Total_b", &Total_b,"Total_b/F");
+	//outputTree->Branch("Total_s", &Total_s,"Total_s/F");
+	//outputTree->Branch("Total_b", &Total_b,"Total_b/F");
 
 
 
@@ -219,34 +219,15 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
 		} 	
 
-	/* 		
-		for(int i=0; i<treeNames.size(); i++){
-			cout<<treeNames.at(i)<<" ";
-			cout<<bgtreeNames.at(i)<<" ";
-		}
-		std::cout<<std::endl;
-		for(int i=0; i<treeNames.size(); i++){
-			cout<<treeNames.at(i)<<" ";
-			cout<<bgtreeNames.at(i)<<" ";
-		}
-		std::cout<<std::endl;
-	*/
+
 		//loop over all trees
 		for(int itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
-			std::cout<<"currentFile tree name "<< tree->GetName()<<std::endl;;
-			std::cout<<"currentBGFile tree name "<< treebg->GetName()<<std::endl;;			
+		//	std::cout<<"currentFile tree name "<< tree->GetName()<<std::endl;;
+		//	std::cout<<"currentBGFile tree name "<< treebg->GetName()<<std::endl;;			
 
-
-			std::cout<<"print list of keys current file"<<std::endl;
-
-			TList* tl = currentFile->GetListOfKeys();
-			for(int q =0; q<tl->GetEntries(); q++){
-				std::cout<< tl->At(q)->GetName() <<" ";
-			}		
-			std::cout<<std::endl;
 
 		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
@@ -285,44 +266,44 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 				if( isMuon && PARTICLETYPE.compare("MUON")==0 ){
 					Total_s++;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU0")==0 && tauType == 0){
-					Total_s++;
+					Total_s += 1.;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU1")==0 && tauType == 1){
-					Total_s++;
+					Total_s += 1.;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU2")==0 && tauType == 2){
-					Total_s++;
+					Total_s += 1.;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU3")==0 && tauType == 3){
-					Total_s++;
+					Total_s += 1.;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 			 	if(isTau && PARTICLETYPE.compare("TAU4")==0 && tauType == 4){
-					Total_s++;
+					Total_s += 1.;
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				}
 				if(isElectron && PARTICLETYPE.compare("ELECTRON")==0){
-					Total_s++;
+					Total_s += 1.;
 
 					if(nTaus >= 1){
-						N_s++;
+						N_s += 1.;
 					}
 				
 				}
@@ -353,9 +334,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					 continue;
 					}
 					//std::cout<<"PASS "<<std::endl;
-					Total_b++;
+					Total_b += 1.;
 					if(nTaus >= 1){
-						N_b++;
+						N_b += 1.;
 					}
 					
 			}
