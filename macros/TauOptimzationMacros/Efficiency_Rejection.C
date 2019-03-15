@@ -231,9 +231,14 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		for(int itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-		//	treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+		//treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+			
+			TList* tl = currentFile->GetListOfKeys();
+			for(int q =0; q<tl->GetEntries(); q++){
+				std::cout<< tl.At(i)->GetName() <<" ";
+			}		
+			std::cout<<std::endl;
 
-		
 		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
 			tree->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
