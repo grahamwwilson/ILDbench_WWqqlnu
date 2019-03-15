@@ -153,21 +153,40 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
 		std::vector<std::string> treeNames{};
+		std::vector<std::string> bgtreeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
+			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
+			cout<<bgtreeNames.at(i)<<" "
 		}
+		std::cout<<std::endl;
 
-		//here are the variables we fill
-	//	TTreeReaderValue<bool> isMuon = array('i',[0])
-	//	TTreeReaderValue<bool> isTau = array('i',[0])
-	//	TTreeReaderValue<bool> isElectron = array('i',[0])
-//		TTreeReaderValue<int> tauType = array('i',[0])
-//		TTreeReaderValue<int> nTaus = array('i',[0])
-//		TTreeReaderValue<int> nTausBG = array('i',[0])		
+		//loop over all trees
+		for(itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
+			tree = currentFile.Get(treeNames.at(itree).c_str())
+			treebg = currentBGFile.Get(bgtreeNames.at(itree).c_str())	
+
+			//declare variables and fill locally
+			TTreeReader sReader(tree);
+			TTreeReader bgReader(treebg);
 			
+					//here are the variables we fill
+			TTreeReaderValue<bool> isMuon(sReader, (treeNames.at(itree)+"px").c_str());
+			//TTreeReaderValue<bool> isTau = array('i',[0])
+			//TTreeReaderValue<bool> isElectron = array('i',[0])
+			//TTreeReaderValue<int> tauType = array('i',[0])
+			//TTreeReaderValue<int> nTaus = array('i',[0])
+			//TTreeReaderValue<int> nTausBG = array('i',[0])
+			 while (sReader.Next()) {
+      			
+      			std::cout<< *isMuon << " ";		
+			
+
+		}	
+
 
 	}
 }
