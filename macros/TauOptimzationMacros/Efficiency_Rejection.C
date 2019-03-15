@@ -207,25 +207,25 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 		//	bMCf0->SetBranchAddress(&MCf0);
 
-		/*	auto nevent = tree->GetEntries();
+			auto nevent = tree->GetEntries();
    			for (Int_t i=0;i<nevent;i++) {
-      				bisMuon->GetEvent(i);		
-					bMCf0->GetEvent(i);
-					std::cout<<MCf0->CosTheta()<<std::endl;
+      				tree->GetEvent(i);		
+					//bMCf0->GetEvent(i);
+					std::cout<<isMuon<<std::endl;
 			}
 	*/
-			 Long64_t nentries = tree->GetEntriesFast();
-			int fCurrent = -1;
+		//	 Long64_t nentries = tree->GetEntriesFast();
+	/*		int fCurrent = -1;
   			 Long64_t nbytes = 0, nb = 0;
   			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
      		//	Long64_t ientry = LoadTree(jentry, tree, fCurrent );
      		 //	if (ientry < 0) break;
      			 nb = tree->GetEntry(jentry);   nbytes += nb;
-
+				
 				//std::cout<<MCf0->CosTheta()<<std::endl;
 				std::cout<<isMuon<<std::endl;
 
-			}
+			}*/
 			
 					//here are the variables we fill
 		//	TTreeReaderValue<bool> isMuon(sReader, ();
