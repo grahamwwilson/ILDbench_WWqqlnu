@@ -253,7 +253,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 				//	std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
-			currentFile.Close();
+			currentFile->Close();
 			currentFile = TFile::Open(infbg.str().c_str());
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 	
@@ -274,7 +274,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					//std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0bg->CosTheta()<<std::endl;
 			}
-			currentFile.Close();
+			currentFile->Close();
 			break;
 
 		}	
