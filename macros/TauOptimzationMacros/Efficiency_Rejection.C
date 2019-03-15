@@ -198,7 +198,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
 	//for( int ifile=0; ifile<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
-	for( int ifile=0; ifile<filenames.size(); ifile++){	
+	for( int ifile=37; ifile<filenames.size(); ifile++){	
 		std::stringstream inf;
 		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile = TFile::Open(inf.str().c_str());
@@ -220,7 +220,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		std::vector<std::string> bgtreeNames{};
 		int nTreesInFile=currentFile->GetListOfKeys()->GetEntries();
 		std::cout<<"ntreesinFile"<<nTreesInFile<<std::endl;
-		break;
+		
 		for(int nt =0 ; nt<nTreesInFile; nt++){
 			
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
