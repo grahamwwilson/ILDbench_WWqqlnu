@@ -180,17 +180,17 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
 			TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
 			//mc variables + pdgs
-			TTreeReaderValue<double> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.CosTheta()").c_str());
+			TTreeReaderValue<TLorentzVector> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.").c_str());
 
 
 			TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
 			//mc variables + pdgss
 			 while (sReader.Next()) {
       			
-      			std::cout<< *mcf0CT << " ";		
+      			std::cout<< (*mcf0CT).CosTheta() << " ";		
 			}
 			while (bgReader.Next()){
-				std::cout<< *nTausBG << " ";
+			//	std::cout<< *nTausBG << " ";
 			}
 
 		}	
