@@ -264,7 +264,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
-			nevent = 40;
+			nevent = 100;
 
 			//zero counts
 			Total_s = 0.;
