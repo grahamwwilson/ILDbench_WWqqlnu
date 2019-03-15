@@ -180,7 +180,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
 			TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
 			//mc variables + pdgs
-			TTreeReaderValue<double> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.CosTheta").c_str());
+			TTreeReaderValue<double> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.CosTheta()").c_str());
 
 
 			TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
