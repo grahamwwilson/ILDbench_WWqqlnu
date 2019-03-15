@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <math.h>
+using namespace std;
 bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
 
 	std::cout<< fabs(MCf0->CosTheta()) <<" "<<fabs(MCf1->CosTheta())<< " "<<fabs(MCf2->CosTheta()) <<" "<<fabs(MCf3->CosTheta()) <<std::endl;
