@@ -152,7 +152,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		//for both files get the branches we need
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
-		std::vector<std::string> treeNames{}
+		std::vector<std::string> treeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
 			treeNames.push_back( std::string(currentFile->GelListOfKeys()->at(nt)->GetName()));
 		} 	 		
