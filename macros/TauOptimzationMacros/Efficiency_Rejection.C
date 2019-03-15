@@ -204,27 +204,27 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile =  TFile::Open(inf.str().c_str());
 		std::stringstream infbg;
-		infbg<< inpath << bgfilenames.at(ifile);
-		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
+	//	infbg<< inpath << bgfilenames.at(ifile);
+	//	TFile* currentBGFile = TFile::Open(infbg.str().c_str());
 
 		//for both files get the branches we need
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
 		std::vector<std::string> treeNames{};
-		std::vector<std::string> bgtreeNames{};
+		//std::vector<std::string> bgtreeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
-			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
+		///	bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
 			//cout<<bgtreeNames.at(i)<<" ";
 		}
 		std::cout<<std::endl;
-		for(int i=0; i<treeNames.size(); i++){
+//		for(int i=0; i<treeNames.size(); i++){
 		//	cout<<treeNames.at(i)<<" ";
-			cout<<bgtreeNames.at(i)<<" ";
-		}
+//			cout<<bgtreeNames.at(i)<<" ";
+//		}
 		std::cout<<std::endl;
 
 		//loop over all trees
@@ -253,8 +253,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 				//	std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
-
-			tree = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+			currentFile.Close();
+			currentFile = TFile::Open(infbg.str().c_str());
+			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 	
 			//redirect other tree to same vars
  			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
@@ -273,7 +274,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					//std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0bg->CosTheta()<<std::endl;
 			}
-			
+			currentFile.Close();
 			break;
 
 		}	
