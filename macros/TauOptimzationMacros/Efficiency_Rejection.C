@@ -264,7 +264,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
-			nevent = 20;
+			nevent = 40;
 
 			//zero counts
 			Total_s = 0.;
@@ -277,7 +277,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					 continue;
 					}
 					
-						std::cout<<"PASS ";
+						std::cout<<"PASS "<<std::endl;
 					
 		
 				
@@ -345,7 +345,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//loop over bg tree
 			
 			nevent = treebg->GetEntries();
-			nevent = 20;
+			nevent = 40;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
 					if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG) ){
@@ -353,7 +353,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					 continue;
 					}
 					
-					std::cout<<"PASS ";
+					std::cout<<"PASS "<<std::endl;
 					
 					
 			}
