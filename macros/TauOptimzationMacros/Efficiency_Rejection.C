@@ -7,27 +7,152 @@
 //import math
 
 #include <vector>
-void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , int nFiles){
+
+std::vector<double> makearray(double mini,double Maxi,double step){
+	//start = mini
+	std::vector<double> arr;
+	while(mini < Maxi){
+		arr.push_back(mini);
+		mini = mini + step;
+		//mini = round(mini, 4)
+	}
+	return arr;
+}
+void printvec(std::vector<double> v){
+	for(int i=0; i<v.size(); i++){
+		std::cout<<v.at(i)<<" ";
+	}
+		std::cout<<std::endl;
+}
+void printvec(std::vector<std::vector<double> > v){
+	for(int i=0; i<v.size(); i++){
+		for(int j=0; j<v.at(i).size(); j++){
+			std::cout<<v.at(i).at(j)<<" ";
+		}
+		std::cout<<std::endl;
+	}
+		std::cout<<std::endl;
+}
+void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , const char* backgroundTag, int nFiles){
 	//#on run define what subset
 //SUBSET = ['S1', 'S2', 'B1']
 //PARTICLETYPE = ['MUON', 'ELECTRON', 'TAU0', 'TAU1', 'TAU2', 'TAU3', 'TAU4', 'BG1']
 //nFIles = 39
 	std::vector<std::string> filenames{};
-	
+	std::vector<std::string> bgfilenames{};
 
 	for(int i=1; i<=nFiles; i++){
 		std::stringstream fstream;
+		std::stringstream bgfstream;
 		fstream << "TauFinder"<< i<<subsetTag<<".root";
+		bgfstream<< "TauFinder"<<i<<backgroundTag<<".root";
 		filenames.push_back( fstream.str() );
+		bgfilenames.push_back( bgfstream.str() );
 	}
 
-	for(int i=0; i<=filename.size(); i++){
-		std::cout<<filename.at(i)<<" ";
+	for(int i=0; i<filenames.size(); i++){
+		std::cout<<filenames.at(i)<<std::endl;
+		std::cout<<bgfilenames.at(i)<<std::endl;
 	}
 
 
+	//make the arrays
+	double searchConeAngleMin = 0.;
+	double searchConeAngleMax = 0.16;
+	double searchConeAngleStep = 0.01; //#10mrad step
+
+	double isoAngleMin = 0.;
+	double isoAngleMax = 0.10;
+	double isoAngleStep = 0.01;// #10mrad step
+
+	double isoEnergyMin = 0.;
+	double isoEnergyMax = 11.;
+	double isoEnergyStep = 1.;// #1gev step
+
+	//#number of trees per file
+	//#nTreesPerFile = 50
 
 
+//#create the parameter sets
+	std::vector<double> coneValues = makearray(searchConeAngleMin, searchConeAngleMax, searchConeAngleStep);
+	std::vector<double> isoAngleValues = makearray(isoAngleMin, isoAngleMax, isoAngleStep);
+	std::vector<double> isoEnergyValues = makearray(isoEnergyMin, isoEnergyMax, isoEnergyStep);
+	printvec(coneValues);
+	printvec(isoAngleValues);
+	printvec(isoEnergyValues);
+	std::cout<< coneValues.size() * isoAngleValues.size() * isoEnergyValues.size()<<std::endl;
+
+
+	//#make a little sublist of [tree number, cone angle, iso angle, iso energy]
+	std::vector<std::vector<double> > treedetails{};
+	double treenum = 1;
+	for(int c=0 ; c< coneValues.size() ;c++){
+		for( int iA=0; iA< isoAngleValues.size(); iA++){
+			for(int iE=0; iE < isoEnergyValues.size(); iE++){
+				std::vector<double> det{treenum, coneValues.at(c), isoAngleValues.at(iA), isoEnergyValues.at(iE) };
+				treedetails.push_back(det);
+				treenum = treenum + 1.;
+			}
+		}
+
+	}
+	//printvec( treedetails );
+	
+	std::string path = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/EffRootFiles/";
+	std::stringstream outstream;
+	outstream<<path<<subsetTag<<particletypeTag<<".root";	
+	std::string outfilename = outstream.str();
+	TFile* outputFile = new TFile(outfilename.c_str(),"RECREATE");
+
+	std::stringstream outtreename;
+	outtreename<<subsetTag<<particletypeTag;
+	TTree* outputTree = new TTree(outtreename.str().c_str(), outtreename.str().c_str());
+	
+	double eff_s;
+	double eff_b;
+	double RR;
+	double treeN;
+	double searchCone;
+	double isoCone;
+	double isoE;
+	double p;
+	double effp;
+	double N_s;
+	double N_b;
+	double Total_s;
+	double Total_b; 
+
+//#set branches
+	outputTree->Branch("eff_s",&eff_s,"eff_s/F");
+	outputTree->Branch("eff_b",&eff_b,"eff_b/F");
+	outputTree->Branch("RR",&RR,"RR/F");
+	outputTree->Branch("treeN",&treeN,"treeN/F");
+	outputTree->Branch("searchCone",&searchCone,"searchCone/F");
+	outputTree->Branch("isoCone",&isoCone,"isoCone/F");
+	outputTree->Branch("isoE",&isoE,"isoE/F");
+	outputTree->Branch("p",&p,"p/F");
+	outputTree->Branch("effp",&effp,"effp/F");
+	//outputTree->Branch("N_s",&N_s,"N_s/F")
+	//outputTree->Branch("N_b",&N_b,"N_b/F")
+	outputTree->Branch("Total_s", &Total_s,"Total_s/F");
+	outputTree->Branch("Total_b", &Total_b,"Total_b/F");
+
+
+	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
+	//loop over files
+//	for( int ifile=0; i<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
+	for( int ifile=0; i<1; ifile++){	
+		std::stringstream inf;
+		inf<< inpath << filenames.at(i);
+		TFile* currentFile =  new TFile(inf.str().c_str);
+		std::stringstream infbg;
+		infbg<< inpath << bgfilenames.at(i);
+		currentBGFile = TFile.Open(infbg.str().c_str());
+
+
+			
+
+	}
 }
 
 /*
