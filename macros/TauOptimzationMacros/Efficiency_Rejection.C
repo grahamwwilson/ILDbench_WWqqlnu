@@ -11,8 +11,8 @@
 using namespace std;
 bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
 
-	std::cout<< fabs(MCf0->CosTheta()) <<" "<<fabs(MCf1->CosTheta())<< " "<<fabs(MCf2->CosTheta()) <<" "<<fabs(MCf3->CosTheta()) <<std::endl;
-	std::cout<< pdg0<<" "<<pdg1<<" "<<pdg2<<" "<<pdg3<<std::endl;
+	//std::cout<< fabs(MCf0->CosTheta()) <<" "<<fabs(MCf1->CosTheta())<< " "<<fabs(MCf2->CosTheta()) <<" "<<fabs(MCf3->CosTheta()) <<std::endl;
+//	std::cout<< pdg0<<" "<<pdg1<<" "<<pdg2<<" "<<pdg3<<std::endl;
 	if( (fabs(MCf0->CosTheta()) > 0.995) && (std::abs(pdg0) != 12) && (std::abs(pdg0) != 14) && (std::abs(pdg0) !=16) ) { return false;}
 	if( (fabs(MCf1->CosTheta()) > 0.995) && (std::abs(pdg1) != 12) && (std::abs(pdg1) != 14) && (std::abs(pdg1) !=16) ) { return false;}
 	if( (fabs(MCf2->CosTheta()) > 0.995) && (std::abs(pdg2) != 12) && (std::abs(pdg2) != 14) && (std::abs(pdg2) !=16) ) { return false;}
