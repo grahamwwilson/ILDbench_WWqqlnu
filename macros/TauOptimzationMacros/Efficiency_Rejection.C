@@ -213,13 +213,15 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		//for both files get the branches we need
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
-	/*
+	
 		std::vector<std::string> treeNames{};
 		std::vector<std::string> bgtreeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
 			bgtreeNames.push_back( std::string(currentBGFile->GetListOfKeys()->At(nt)->GetName()));
-		} 	 		
+		} 	
+
+	/* 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
 			cout<<bgtreeNames.at(i)<<" ";
@@ -236,7 +238,11 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
-			
+			std::cout<<"currentFile tree name "<< tree.GetName()<<std::endl;;
+			std::cout<<"currentBGFile tree name "<< treebg.GetName()<<std::endl;;			
+
+
+			std::cout<<"print list of keys current file"<<std::endl;
 
 			TList* tl = currentFile->GetListOfKeys();
 			for(int q =0; q<tl->GetEntries(); q++){
@@ -263,16 +269,16 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 				//	std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
-			currentFile->Close();
-			currentFile = TFile::Open(infbg.str().c_str());
-			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
+		//	currentFile->Close();
+		//	currentFile = TFile::Open(infbg.str().c_str());
+		//	tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 	
 			//redirect other tree to same vars
- 			tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
-			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
-			tree->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
-			tree->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
-			tree->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
+ 			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
 
 			//loop over bg tree
 			
