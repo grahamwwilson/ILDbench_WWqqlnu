@@ -226,8 +226,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
-		//	std::cout<<"currentFile tree name "<< tree->GetName()<<std::endl;;
-		//	std::cout<<"currentBGFile tree name "<< treebg->GetName()<<std::endl;;			
+			std::cout<<"currentFile tree name "<< tree->GetName()<<std::endl;;
+			std::cout<<"currentBGFile tree name "<< treebg->GetName()<<std::endl;;			
 
 
 		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
@@ -359,6 +359,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	
 			treeDetailsItr++;
 			
+			if(treeDetailsItr >= treedetails.size()) break;
 
 		}//end tree loop	
 
