@@ -196,6 +196,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			auto nevent = tree->GetEntries();
    			for (Int_t i=0;i<nevent;i++) {
       				bisMuon->GetEvent(i);		
+					bMCf0->GetEvent(i);
 					std::cout<<MCf0.CosTheta()<<std::endl;
 			}
 			
