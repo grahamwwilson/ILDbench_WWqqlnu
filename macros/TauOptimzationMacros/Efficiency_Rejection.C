@@ -154,7 +154,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 		
 		std::vector<std::string> treeNames{};
 		for(int nt =0 ; nt<nTreesPerFile; nt++){
-			treeNames.push_back( std::string(currentFile->GelListOfKeys()->at(nt)->GetName()));
+			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
 		} 	 		
 		for(int i=0; i<treeNames.size(); i++){
 			cout<<treeNames.at(i)<<" ";
