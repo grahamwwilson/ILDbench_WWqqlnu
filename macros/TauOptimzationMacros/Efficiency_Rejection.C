@@ -156,9 +156,27 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	//make reading vars outside the loops
 	bool isMuon;
 	TBranch* bisMuon;
+	bool isTau;
+	TBranch* bisTau;
+	bool isElectron;
+	TBranch* bisElectron;
+	int tauType;
+	TBranch* btauType;
+	int nTaus;
+	TBranch* nTaus;
 	
 	TLorentzVector* MCf0 = new TLorentzVector();
 	TBranch* bMCf0;
+	TLorentzVector* MCf1 = new TLorentzVector();
+	TBranch* bMCf1;
+	TLorentzVector* MCf2 = new TLorentzVector();
+	TBranch* bMCf2;
+	TLorentzVector* MCf3 = new TLorentzVector();
+	TBranch* bMCf3;
+
+	//int nTausBG;
+	//TBranch* ntausBG;
+	//try to use same mcf vars for bg
 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
@@ -191,23 +209,20 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
 			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 
-			//declare variables and fill locally
-		//	TTreeReader sReader(tree);
-		//	TTreeReader bgReader(treebg);
-		//	bool isMuon; 
-//Abandon ttreereader it sucks do manually
-			// https://root.cern.ch/how/how-read-tree
-			//bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
-			
-			//bMCf0 = tree->GetBranch((treeNames.at(itree)+"MCf0").c_str());
+		
 		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
 			tree->SetBranchAddress((treeNames.at(itree)+"isMuon").c_str(), &isMuon, &bisMuon);
-		  //	auto branch  = theTree->GetBranch("event");
-  		//	bisMuon->SetAddress(&isMuon);
+			tree->SetBranchAddress((treeNames.at(itree)+"isTau").c_str(), &isTau, &bisTau);
+			tree->SetBranchAddress((treeNames.at(itree)+"isElectron").c_str(), &isElectron, &bisElectron);
+			tree->SetBranchAddress((treeNames.at(itree)+"tauType").c_str(), &tauType, &btauType);
+			tree->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
 
-		//	bMCf0->SetBranchAddress(&MCf0);
-
+			//loop signal tree
 			auto nevent = tree->GetEntries();
+			nevent = 1;
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
@@ -215,38 +230,25 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
 	
-		//	 Long64_t nentries = tree->GetEntriesFast();
-	/*		int fCurrent = -1;
-  			 Long64_t nbytes = 0, nb = 0;
-  			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
-     		//	Long64_t ientry = LoadTree(jentry, tree, fCurrent );
-     		 //	if (ientry < 0) break;
-     			 nb = tree->GetEntry(jentry);   nbytes += nb;
-				
-				//std::cout<<MCf0->CosTheta()<<std::endl;
-				std::cout<<isMuon<<std::endl;
+			//redirect other tree to same vars
+ 			treebg->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
+			treebg->SetBranchAddress((treeNames.at(itree)+"MCf1").c_str(), &MCf1, &bMCf1);
+			treebg->SetBranchAddress((treeNames.at(itree)+"MCf2").c_str(), &MCf2, &bMCf2);
+			treebg->SetBranchAddress((treeNames.at(itree)+"MCf3").c_str(), &MCf3, &bMCf3);
+			treebg->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
 
-			}*/
+			//loop over bg tree
 			
-					//here are the variables we fill
-		//	TTreeReaderValue<bool> isMuon(sReader, ();
-		//	TTreeReaderValue<bool> isTau(sReader, (treeNames.at(itree)+"isTau").c_str());
-		//	TTreeReaderValue<bool> isElectron(sReader, (treeNames.at(itree)+"isElectron").c_str());
-		//	TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
-		//	TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
-			//mc variables + pdgs
-		//	TTreeReaderValue<TLorentzVector> mcf0CT(sReader, (treeNames.at(itree)+"MCf0.").c_str());
-
-
-		//	TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
-			////mc variables + pdgss
-		//	 while (sReader.Next()) {
-      			
-      	//		std::cout<< (*mcf0CT).CosTheta() << " ";		
-		//	}
-		//	while (bgReader.Next()){
-			//	std::cout<< *nTausBG << " ";
-	//		}
+			nevent = treebg->GetEntries();
+			nevet = 1;
+   			for (Int_t i=0;i<nevent;i++) {
+      				tree->GetEvent(i);		
+					//bMCf0->GetEvent(i);
+					//std::cout<<isMuon<<std::endl;
+					std::cout<<MCf0->CosTheta()<<std::endl;
+			}
+			
+	
 
 		}	
 
