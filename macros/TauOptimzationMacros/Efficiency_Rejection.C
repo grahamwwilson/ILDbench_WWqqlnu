@@ -200,7 +200,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
 			
 			//bMCf0 = tree->GetBranch((treeNames.at(itree)+"MCf0").c_str());
-		//    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
+		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
 			tree->SetBranchAddress((treeNames.at(itree)+"isMuon").c_str(), &isMuon, &bisMuon);
 		  //	auto branch  = theTree->GetBranch("event");
   		//	bisMuon->SetAddress(&isMuon);
@@ -212,6 +212,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					std::cout<<isMuon<<std::endl;
+					std::cout<<MCf0->E()<<std::endl;
 			}
 	
 		//	 Long64_t nentries = tree->GetEntriesFast();
