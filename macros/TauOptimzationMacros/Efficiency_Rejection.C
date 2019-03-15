@@ -175,14 +175,22 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			
 					//here are the variables we fill
 			TTreeReaderValue<bool> isMuon(sReader, (treeNames.at(itree)+"isMuon").c_str());
-			//TTreeReaderValue<bool> isTau = array('i',[0])
-			//TTreeReaderValue<bool> isElectron = array('i',[0])
-			//TTreeReaderValue<int> tauType = array('i',[0])
-			//TTreeReaderValue<int> nTaus = array('i',[0])
-			//TTreeReaderValue<int> nTausBG = array('i',[0])
+			TTreeReaderValue<bool> isTau(sReader, (treeNames.at(itree)+"isTau").c_str());
+			TTreeReaderValue<bool> isElectron(sReader, (treeNames.at(itree)+"isElectron").c_str());
+			TTreeReaderValue<int> tauType(sReader, (treeNames.at(itree)+"tauType").c_str());
+			TTreeReaderValue<int> nTaus(sReader, (treeNames.at(itree)+"nTaus").c_str());
+			//mc variables + pdgs
+			TTreeReaderValue<TLorentzVector> mcf0(sReader, (treeNames.at(itree)+"MCf0").c_str());
+
+
+			TTreeReaderValue<int> nTausBG(bgReader, (bgtreeNames.at(itree)+"nTaus").c_str());
+			//mc variables + pdgss
 			 while (sReader.Next()) {
       			
-      			std::cout<< *isMuon << " ";		
+      			std::cout<< (*mcf0).CosTheta() << " ";		
+			}
+			while (bgReader.Next()){
+				std::cout<< *nTausBg << " ";
 			}
 
 		}	
