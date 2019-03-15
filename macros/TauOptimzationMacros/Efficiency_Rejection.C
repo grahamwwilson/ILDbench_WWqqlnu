@@ -196,6 +196,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 	//TBranch* ntausBG;
 	//try to use same mcf vars for bg
 
+	int treeDetailsItr=0;
+
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
 //	for( int ifile=0; ifile<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
@@ -263,17 +265,66 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			//loop signal tree
 			auto nevent = tree->GetEntries();
 			nevent = 4;
+
+			//zero counts
+			Total_s = 0.;
+			N_s = 0.;
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 				//	std::cout<<isMuon<<std::endl;
-				//	std::cout<<MCf0->CosTheta()<<std::endl;
-				std::cout<<nTaus<<std::endl;
+					std::cout<<MCf0->CosTheta()<<std::endl;
+				//std::cout<<nTaus<<std::endl;
+				std::string PARTICLETYPE = std::string(particletypeTag);
+				if( isMuon && PARTICLETYPE.compare("MUON")==0 ){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+				if(isTau && PARTICLETYPE.compare("TAU0")==0 && tauType == 0){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+				if(isTau && PARTICLETYPE.compare("TAU1")==0 && tauType == 1){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+				if(isTau && PARTICLETYPE.compare("TAU2")==0 && tauType == 2){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+				if(isTau && PARTICLETYPE.compare("TAU3")==0 && tauType == 3){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+			 	if(isTau && PARTICLETYPE.compare("TAU4")==0 && tauType == 4){
+					Total_s++;
+					if(nTaus >= 1){
+						N_s++;
+					}
+				}
+				if isElectron && PARTICLETYPE.compare("ELECTRON"){
+					Total_s++;
+
+					if(nTaus >= 1){
+						N_s++
+					}
+				
+				}
 			}
 		//	currentFile->Close();
 		//	currentFile = TFile::Open(infbg.str().c_str());
 		//	tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-			currentB
+			//currentB
 			//redirect other tree to same vars
  			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
@@ -289,16 +340,31 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				treebg->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
-				//	std::cout<<MCf0bg->CosTheta()<<std::endl;
-					std::cout<<nTausbg<<std::endl;
+					std::cout<<MCf0bg->CosTheta()<<std::endl;
+				//	std::cout<<nTausbg<<std::endl;
 			}
 			
+
+			eff_s = N_s/Total_s;
+			//eff_b = N_b/Total_b;
+			//RR = 1. - eff_b;
+			treeN = treeDetails.at(treeDetailsItr).at(0);
+			searchCone = treeDetails.at(treeDetailsItr).at(1);
+			isoCone = treeDetails.at(treeDetailsItr.at(2);
+			isoE = treeDetails.at(treeDetailsItr.at(3);
+			//p = N_s/ (N_s+N_b);
+			//effp = eff_s * p;
+				 
+			outputTree.Fill();
+	
+			treeDetailsItr++;
 			break;
 
 		}	
 
 		
 	}
+	outputFile.Write();
 }
 
 /*
