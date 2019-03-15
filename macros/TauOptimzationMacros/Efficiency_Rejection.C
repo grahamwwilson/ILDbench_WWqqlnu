@@ -8,6 +8,18 @@
 
 #include <vector>
 
+Long64_t LoadTree(Long64_t entry, TTree* fChain, int fCurrent)
+{
+// Set the environment to read one entry
+   if (!fChain) return -5;
+   Long64_t centry = fChain->LoadTree(entry);
+   if (centry < 0) return centry;
+   if (fChain->GetTreeNumber() != fCurrent) {
+      fCurrent = fChain->GetTreeNumber();
+     // Notify();
+   }
+   return centry;
+}
 std::vector<double> makearray(double mini,double Maxi,double step){
 	//start = mini
 	std::vector<double> arr;
@@ -202,14 +214,14 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			}
 	*/
 			 Long64_t nentries = tree->GetEntriesFast();
-
+			int fCurrent = -1
   			 Long64_t nbytes = 0, nb = 0;
   			 for (Long64_t jentry=0; jentry<nentries;jentry++) {
-     			Long64_t ientry = LoadTree(jentry);
+     			Long64_t ientry = LoadTree(jentry, tree, fCurrent );
      		 	if (ientry < 0) break;
      			 nb = tree->GetEntry(jentry);   nbytes += nb;
 
-				
+				std::cout<<MCf0->CosTheta()<<std::endl;
 
 			}
 			
