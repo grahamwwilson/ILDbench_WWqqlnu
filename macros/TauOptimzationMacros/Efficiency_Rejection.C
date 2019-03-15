@@ -45,16 +45,7 @@ void printvec(std::vector<std::vector<double> > v){
 	}
 		std::cout<<std::endl;
 }
-void Efficiency_Recjection(){
-	std::vector<const char*> subsets{"S1","S2","B1"}
-	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
-	int nFiles = 39;
-	int nTreesPerFile = 50;
-	Efficiency_RecjectionRun(subsets[0], ptypes[1], subsets[2], nFiles, nTreesPerFile );
-	Efficiency_RecjectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );
 
-	
-}
 void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag , const char* backgroundTag, int nFiles, int nTreesPerFile){
 	//#on run define what subset
 //SUBSET = ['S1', 'S2', 'B1']
@@ -375,7 +366,16 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	}//end file loop
 	outputFile->Write();
 }
+void Efficiency_Rejection(){
+	std::vector<const char*> subsets{"S1","S2","B1"};
+	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
+	int nFiles = 39;
+	int nTreesPerFile = 50;
+	Efficiency_RecjectionRun(subsets[0], ptypes[1], subsets[2], nFiles, nTreesPerFile );
+	Efficiency_RecjectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );
 
+	
+}
 
 
 
