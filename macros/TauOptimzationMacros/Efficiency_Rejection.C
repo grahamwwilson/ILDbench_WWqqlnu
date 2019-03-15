@@ -267,12 +267,13 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 				//	std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0->CosTheta()<<std::endl;
+				//	std::cout<<MCf0->CosTheta()<<std::endl;
+				std::cout<<nTaus<<std::endl;
 			}
 		//	currentFile->Close();
 		//	currentFile = TFile::Open(infbg.str().c_str());
 		//	tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-	
+			currentB
 			//redirect other tree to same vars
  			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
@@ -288,7 +289,8 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
       				treebg->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
-					std::cout<<MCf0bg->CosTheta()<<std::endl;
+				//	std::cout<<MCf0bg->CosTheta()<<std::endl;
+					std::cout<<nTausbg<<std::endl;
 			}
 			
 			break;
