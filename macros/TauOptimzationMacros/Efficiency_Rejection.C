@@ -242,17 +242,17 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			nevent = treebg->GetEntries();
 			nevent = 1;
    			for (Int_t i=0;i<nevent;i++) {
-      				tree->GetEvent(i);		
+      				treebg->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
 			
-	
+			break;
 
 		}	
 
-
+		
 	}
 }
 
