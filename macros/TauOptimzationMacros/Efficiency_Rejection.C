@@ -198,7 +198,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	std::string inpath = "/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/";
 	//loop over files
 	//for( int ifile=0; ifile<filenames.size(); ifile++){// filenameBG in zip(FILESUBSET, BGFILESUBSET):
-	for( int ifile=37; ifile<filenames.size(); ifile++){	
+	for( int ifile=0; ifile<filenames.size(); ifile++){	
 		std::stringstream inf;
 		inf<< inpath << filenames.at(ifile);
 		TFile* currentFile = TFile::Open(inf.str().c_str());
@@ -219,6 +219,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		std::vector<std::string> treeNames{};
 		std::vector<std::string> bgtreeNames{};
 		int nTreesInFile=currentFile->GetListOfKeys()->GetEntries();
+		std::cout<<"ntreesinFile"<<nTreesInFile<<std::endl;
+		break;
 		for(int nt =0 ; nt<nTreesInFile; nt++){
 			
 			treeNames.push_back( std::string(currentFile->GetListOfKeys()->At(nt)->GetName()));
@@ -379,13 +381,13 @@ void Efficiency_Rejection(){
 	int nFiles = 39;
 	int nTreesPerFile = 50;
 	Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
-	Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
+	/*Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
 	Efficiency_RejectionRun(subsets[0], ptypes[3], subsets[2], nFiles, nTreesPerFile );//T1
 	Efficiency_RejectionRun(subsets[0], ptypes[4], subsets[2], nFiles, nTreesPerFile );//T2
 	Efficiency_RejectionRun(subsets[0], ptypes[5], subsets[2], nFiles, nTreesPerFile );//T3
 	Efficiency_RejectionRun(subsets[0], ptypes[6], subsets[2], nFiles, nTreesPerFile );//T4
 	Efficiency_RejectionRun(subsets[1], ptypes[1], subsets[2], nFiles, nTreesPerFile );//E0
-	
+	*/
 }
 
 
