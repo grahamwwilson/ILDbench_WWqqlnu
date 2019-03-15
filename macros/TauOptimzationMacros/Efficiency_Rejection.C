@@ -343,7 +343,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			nevent = 4;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
-					if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG)
+					//if( !passAcceptance( MCf0, MCf1, MCf2, MCf3, MCf0_PDG, MCf1_PDG, MCf2_PDG, MCf3_PDG)
 			
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
