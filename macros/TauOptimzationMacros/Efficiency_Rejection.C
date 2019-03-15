@@ -235,7 +235,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			
 			TList* tl = currentFile->GetListOfKeys();
 			for(int q =0; q<tl->GetEntries(); q++){
-				std::cout<< tl.At(i)->GetName() <<" ";
+				std::cout<< tl->At(q)->GetName() <<" ";
 			}		
 			std::cout<<std::endl;
 
