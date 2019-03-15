@@ -316,7 +316,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 					Total_s++;
 
 					if(nTaus >= 1){
-						N_s++
+						N_s++;
 					}
 				
 				}
@@ -348,14 +348,14 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			eff_s = N_s/Total_s;
 			//eff_b = N_b/Total_b;
 			//RR = 1. - eff_b;
-			treeN = treeDetails.at(treeDetailsItr).at(0);
-			searchCone = treeDetails.at(treeDetailsItr).at(1);
-			isoCone = treeDetails.at(treeDetailsItr).at(2);
-			isoE = treeDetails.at(treeDetailsItr).at(3);
+			treeN = treedetails.at(treeDetailsItr).at(0);
+			searchCone = treedetails.at(treeDetailsItr).at(1);
+			isoCone = treedetails.at(treeDetailsItr).at(2);
+			isoE = treedetails.at(treeDetailsItr).at(3);
 			//p = N_s/ (N_s+N_b);
 			//effp = eff_s * p;
 				 
-			outputTree.Fill();
+			outputTree->Fill();
 	
 			treeDetailsItr++;
 			break;
@@ -364,7 +364,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 		
 	}
-	outputFile.Write();
+	outputFile->Write();
 }
 
 /*
