@@ -201,7 +201,9 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	for( int ifile=37; ifile<filenames.size(); ifile++){	
 		std::stringstream inf;
 		inf<< inpath << filenames.at(ifile);
-		TFile* currentFile =  TFile::Open(inf.str().c_str());
+		TFile* currentFile = TFile::Open(inf.str().c_str());
+
+		if(currentFile == NULL) std::cout<<"NUUUUUUUUUUUUULLLLLLLLLLLLLL"<<std::endl;
 		std::stringstream infbg;
 		infbg<< inpath << bgfilenames.at(ifile);
 		TFile* currentBGFile = TFile::Open(infbg.str().c_str());
@@ -209,6 +211,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		std::cout<<"Current File "<< inf.str()<<std::endl;
 		std::cout<<"Current BG File "<< infbg.str()<<std::endl;
 
+		
 		//for both files get the branches we need
 		//(TTree)root_file->Get(root_file->GetListOfKeys()->At(0)->GetName());
 		
