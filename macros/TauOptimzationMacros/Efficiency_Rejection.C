@@ -229,8 +229,9 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 
 		//loop over all trees
 		for(int itree= 0; itree<treeNames.size(); itree++){//,tnbg in zip(treeNames, treeNamesBG):
+			//currentFile
 			tree = (TTree*)currentFile->Get(treeNames.at(itree).c_str());
-			treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
+		//	treebg = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 
 		
 		    tree->SetBranchAddress((treeNames.at(itree)+"MCf0").c_str(), &MCf0, &bMCf0);
@@ -252,20 +253,22 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 				//	std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0->CosTheta()<<std::endl;
 			}
+
+			tree = (TTree*)currentBGFile->Get(bgtreeNames.at(itree).c_str());
 	
 			//redirect other tree to same vars
- 			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
-			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
-			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
-			treebg->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
-			treebg->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
+ 			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf0").c_str(), &MCf0bg, &bMCf0bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf1").c_str(), &MCf1bg, &bMCf1bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf2").c_str(), &MCf2bg, &bMCf2bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"MCf3").c_str(), &MCf3bg, &bMCf3bg);
+			tree->SetBranchAddress((bgtreeNames.at(itree)+"nTaus").c_str(), &nTausbg, &bnTausbg);
 
 			//loop over bg tree
 			
-			nevent = treebg->GetEntries();
+			nevent = tree->GetEntries();
 			nevent = 4;
    			for (Int_t i=0;i<nevent;i++) {
-      				treebg->GetEvent(i);		
+      				tree->GetEvent(i);		
 					//bMCf0->GetEvent(i);
 					//std::cout<<isMuon<<std::endl;
 					std::cout<<MCf0bg->CosTheta()<<std::endl;
