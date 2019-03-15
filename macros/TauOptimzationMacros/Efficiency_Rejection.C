@@ -175,7 +175,7 @@ void Efficiency_Rejection(const char* subsetTag, const char* particletypeTag , c
 			bool isMuon; 
 //Abandon ttreereader it sucks do manually
 			// https://root.cern.ch/how/how-read-tree
-			auto bisMuon = tree->GetBranch(treeNames.at(itree)+"isMuon").c_str());
+			auto bisMuon = tree->GetBranch((treeNames.at(itree)+"isMuon").c_str());
 		  //	auto branch  = theTree->GetBranch("event");
   			 bisMuon->SetAddress(&isMuon);
 
