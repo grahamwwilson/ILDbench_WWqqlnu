@@ -71,9 +71,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink501 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.09" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -85,9 +85,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink502 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.09" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -99,9 +99,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink503 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.09" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -113,9 +113,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink504 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.09" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -127,9 +127,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink505 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -141,9 +141,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink506 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -155,9 +155,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink507 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -169,9 +169,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink508 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -183,8 +183,8 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink509 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
 		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
@@ -197,9 +197,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink510 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -211,9 +211,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink511 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -225,9 +225,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink512 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -239,9 +239,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink513 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -253,9 +253,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink514 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -267,9 +267,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink515 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -281,9 +281,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink516 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.1" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -295,9 +295,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink517 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -309,9 +309,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink518 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -323,8 +323,8 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink519 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
 		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
@@ -337,9 +337,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink520 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -351,9 +351,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink521 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -365,9 +365,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink522 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -379,9 +379,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink523 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -393,9 +393,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink524 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -407,9 +407,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink525 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -421,9 +421,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink526 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -435,9 +435,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink527 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -449,9 +449,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink528 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.11" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -463,8 +463,8 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink529 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
 		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
@@ -477,9 +477,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink530 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -491,9 +491,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink531 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -505,9 +505,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink532 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -519,9 +519,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink533 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -533,9 +533,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink534 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -547,9 +547,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink535 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -561,9 +561,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink536 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -575,9 +575,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink537 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -589,9 +589,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink538 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -603,9 +603,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink539 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -617,9 +617,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink540 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.12" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -631,9 +631,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink541 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -645,9 +645,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink542 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -659,9 +659,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink543 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -673,9 +673,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink544 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -687,9 +687,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink545 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -701,9 +701,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink546 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -715,9 +715,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink547 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -729,9 +729,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink548 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -743,9 +743,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink549 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -757,9 +757,9 @@
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink550 </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
-		<parameter name="searchConeAngle" value="0.04" />
-		<parameter name="isolationConeAngle" value="0.05" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="searchConeAngle" value="0.02" />
+		<parameter name="isolationConeAngle" value="0.13" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>

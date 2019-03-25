@@ -23,12 +23,12 @@ searchConeAngleMax = 0.16
 searchConeAngleStep = 0.01 #10mrad step
 
 isoAngleMin = 0.
-isoAngleMax = 0.11
+isoAngleMax = 0.16
 isoAngleStep = 0.01 #10mrad step
 
 isoEnergyMin = 0.
-isoEnergyMax = 11.
-isoEnergyStep = 1. #1gev step
+isoEnergyMax = 6.
+isoEnergyStep = 0.5 #1gev step
 
 #number of trees per file
 nTreesPerFile = 50

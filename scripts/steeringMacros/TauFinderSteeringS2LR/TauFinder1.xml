@@ -87,7 +87,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -101,7 +101,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -115,7 +115,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -129,7 +129,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -143,7 +143,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -157,7 +157,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -171,7 +171,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -185,7 +185,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -199,7 +199,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -213,7 +213,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.0" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -226,8 +226,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -241,7 +241,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -255,7 +255,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -269,7 +269,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -283,7 +283,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -297,7 +297,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -311,7 +311,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -325,7 +325,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -339,7 +339,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -353,7 +353,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -367,7 +367,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.01" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -380,8 +380,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -394,8 +394,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -409,7 +409,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -423,7 +423,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -437,7 +437,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -451,7 +451,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -465,7 +465,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -479,7 +479,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -493,7 +493,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -507,7 +507,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -521,7 +521,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.02" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -534,8 +534,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -548,8 +548,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -562,8 +562,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -577,7 +577,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -591,7 +591,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -605,7 +605,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="isolationEnergy" value="1.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -619,7 +619,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="6.0" />
+		<parameter name="isolationEnergy" value="1.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -633,7 +633,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="7.0" />
+		<parameter name="isolationEnergy" value="2.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -647,7 +647,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="8.0" />
+		<parameter name="isolationEnergy" value="2.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -661,7 +661,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="9.0" />
+		<parameter name="isolationEnergy" value="3.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -675,7 +675,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.03" />
-		<parameter name="isolationEnergy" value="10.0" />
+		<parameter name="isolationEnergy" value="3.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -688,8 +688,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="isolationConeAngle" value="0.03" />
+		<parameter name="isolationEnergy" value="4.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -702,8 +702,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="isolationConeAngle" value="0.03" />
+		<parameter name="isolationEnergy" value="4.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -716,8 +716,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="isolationConeAngle" value="0.03" />
+		<parameter name="isolationEnergy" value="5.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -730,8 +730,8 @@
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
-		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="isolationConeAngle" value="0.03" />
+		<parameter name="isolationEnergy" value="5.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -745,7 +745,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="isolationEnergy" value="0.0" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -759,7 +759,7 @@
 		<parameter name="cosT_cut" value="0.99" />
 		<parameter name="searchConeAngle" value="0.0" />
 		<parameter name="isolationConeAngle" value="0.04" />
-		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="isolationEnergy" value="0.5" />
 		<parameter name="ptseed" value="5.0" />
 		<parameter name="invariant_mass" value="2.0" />
 	</processor>
@@ -771,7 +771,7 @@
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionsNames">  TauJets1 TauJets2 TauJets3 TauJets4 TauJets5 TauJets6 TauJets7 TauJets8 TauJets9 TauJets10 TauJets11 TauJets12 TauJets13 TauJets14 TauJets15 TauJets16 TauJets17 TauJets18 TauJets19 TauJets20 TauJets21 TauJets22 TauJets23 TauJets24 TauJets25 TauJets26 TauJets27 TauJets28 TauJets29 TauJets30 TauJets31 TauJets32 TauJets33 TauJets34 TauJets35 TauJets36 TauJets37 TauJets38 TauJets39 TauJets40 TauJets41 TauJets42 TauJets43 TauJets44 TauJets45 TauJets46 TauJets47 TauJets48 TauJets49 TauJets50 </parameter>
 		<parameter name="NFermions" value="4" />
-		<parameter name="NLeptons" value="2" />
+		<parameter name="Nleptons" value="0" />
 		<parameter name="Normalization" value="0.784017" />
 		<parameter name="Njets" value="3" />
 		<parameter name="Ncuts" value="7" />
