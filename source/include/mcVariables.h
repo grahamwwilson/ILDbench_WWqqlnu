@@ -33,6 +33,8 @@ class mcVariables{
 	std::vector<TLorentzVector> _MCTauVisibleDaughters{};
 	std::vector<int> _MCTauVisibleDaughters_pdg{};
 	std::vector<double> _MCTauVisibleDaughters_charge{};
+	std::vector<TLorentzVector> _MCTauInvisibleDaughters{};
+	std::vector<int> _MCTauInvisibleDaughters_pdg{};
 
 	TLorentzVector* _mcl{};
 	TLorentzVector* _mcqq{};

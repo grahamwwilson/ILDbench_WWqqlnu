@@ -201,23 +201,37 @@ void mcVariables::initMCVars(){
 					
 					//save stable daughters
 				    std::vector<MCParticle*> dec =  classifyTau::getstablemctauDaughters(daughters.at(I));
-					std::vector<TLorentzVector> mctaudaughters( dec.size() );
-					std::vector<int> mctaudaughterspdg(dec.size() );
-					std::vector<double> mctaudaughterscharge(dec.size() );
+					std::vector<TLorentzVector> mctaudaughters{};
+					std::vector<int> mctaudaughterspdg{};
+					std::vector<double> mctaudaughterscharge{};
+
+					std::vector<TLorentzVector> mcinvisdaughters{};
+					std::vector<int> mcinvisdaughterspdg{};
+
+					
 					for(unsigned int K =0; K<dec.size(); K++){
 						int taupdg = abs(dec.at(K)->getPDG());
 						if( taupdg != 12 && taupdg != 14 && taupdg != 16 ){
 							TLorentzVector t;
 							t.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
-							mctaudaughters.at(K) = t;
-							mctaudaughterspdg.at(K) = dec.at(K)->getPDG();
-							mctaudaughterscharge.at(K) = dec.at(K)->getCharge();
+							mctaudaughters.push_back( t);
+							mctaudaughterspdg.push_back(dec.at(K)->getPDG());
+							mctaudaughterscharge.push_back( dec.at(K)->getCharge());
+						}
+						else{
+							TLorentzVector t;
+							t.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
+							mcinvisdaughters.push_back( t);
+							mcinvisdaughterspdg.push_back(dec.at(K)->getPDG());
 						}
 					}
 
 					_MCTauVisibleDaughters = mctaudaughters;
 					_MCTauVisibleDaughters_pdg = mctaudaughterspdg;
 					_MCTauVisibleDaughters_charge = mctaudaughterscharge;
+
+					_MCTauInvisibleDaughters = mcinvisdaughters;
+					_MCTauInvisibleDaughters_pdg = mcinvisdaughterspdg;
 
 					}//end get mctau
 			
@@ -286,6 +300,9 @@ void mcVariables::initLocalTree(){
 	_localTree->Branch((vsn+"MCTauVisibleDaughters").c_str(),"vector<TLorentzVector>", &_MCTauVisibleDaughters);//TODO fill this
 	_localTree->Branch((vsn+"MCTauVisibleDaughters_pdg").c_str(),"vector<int>", &_MCTauVisibleDaughters_pdg);
 	_localTree->Branch((vsn+"MCTauVisibleDaughters_charge").c_str(),"vector<double>", &_MCTauVisibleDaughters_charge);
+
+	_localTree->Branch((vsn+"MCTauInvisibleDaughters").c_str(),"vector<TLorentzVector>", &_MCTauInvisibleDaughters);
+	_localTree->Branch((vsn+"MCTauInvisibleDaughters_pdg").c_str(),"vector<int>", &_MCTauInvisibleDaughters_pdg);
 
 	_localTree->Branch("mcl","TLorentzVector",&_mcl,16000,0);
 	_localTree->Branch("mcqq","TLorentzVector",&_mcqq,16000,0);
