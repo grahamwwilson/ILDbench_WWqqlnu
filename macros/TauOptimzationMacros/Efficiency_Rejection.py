@@ -1,11 +1,11 @@
 
 
-from ROOT import TCanvas, TFile, TH1D, TH2D, TProfile, TLegend, TGraph, TTree, gDirectory
+from ROOT import TCanvas, TFile, TH1D, TH2D, TProfile, TLegend, TGraph, TTree, gDirectory, TLorentzVector
 import ROOT as rt
 import subprocess
 from array import array
 import math
-
+import ctypes
 def bash( bashCommand ):
 	process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 	#process = subprocess.Popen(bashCommand.split())
@@ -25,14 +25,24 @@ def GetTreeObject(tree, branchName ,value):
 #	print "got branches"
 	#print branches
 	branch = [b for b in branches if branchName in b]
-	#print "got branch"
-	#print branch
-	#print "done"
+#	print "got branch"
+#	print branch
+	#print "done" 
+#	if(not tlv):
 	tree.SetBranchAddress(branch[0],value)
+#	if( tlv ):
+#		tree.SetBranchAddress(branch[0]+'.E' ,value)
 	#return branch.GetEntries()
 	#ranch.GetLeafEntry
 	#leafs = tree.GetListOfLeaves()
 	#print leafs
+def GetBranchName(tree, branchName):
+	branchesObj = tree.GetListOfBranches()
+	branches = []
+	for b in branchesObj:
+		branches.append(b.GetName() )
+	branch = [b for b in branches if branchName in b]
+	return branch[0]
 
 def makearray(mini,Maxi,step):
 	#start = mini
@@ -55,15 +65,17 @@ def getmaxenergy( ntaus, vec4):
 
 def passAcceptance( flist, fpdglist):
 	passes = True
-	for mcf, pdg in zip(flixt, fpdglist):
-		if abs(pdg) != 12 and abs(pdg) != 14 and abs(pdg) != 16:
+	for mcf, pdg in zip(flist, fpdglist):
+		if abs(pdg[0]) != 12 and abs(pdg[0]) != 14 and abs(pdg[0]) != 16:
 			#no neutrinos allowed
-			if abs( mcf.CosTheta() > 0.995 ):
+			if abs( abs(mcf[0]) > 0.995 ):
 				passes = False
 	return passes 
 
 #run over 3 subsets S1, S2, B1
 
+#def tilv( branchname ):
+#	getattr(t,'my4vec.').E()
 #on run define what subset
 SUBSET = ['S1', 'S2', 'B1']
 PARTICLETYPE = ['MUON', 'ELECTRON', 'TAU0', 'TAU1', 'TAU2', 'TAU3', 'TAU4', 'BG1']
@@ -164,18 +176,19 @@ nTausBG = array('i',[0])
 
 #look at acceptance
 #currently we only look at 4f events
-mcf0 = TLorentzVector()
-mcf1 = TLorentzVector()
-mcf2 = TLorentzVector()
-mcf3 = TLorentzVector()
+#mcf0 = TLorentzVector()
+mcf0 = array('d',[0])
+mcf1 = array('d',[0])
+mcf2 = array('d',[0])
+mcf3 = array('d',[0])
 mcf0_pdg = array('i',[0])
 mcf1_pdg = array('i',[0])
 mcf2_pdg = array('i',[0])
 mcf3_pdg = array('i',[0])
-mcf0bg = TLorentzVector()
-mcf1bg = TLorentzVector()
-mcf2bg = TLorentzVector()
-mcf3bg = TLorentzVector()
+mcf0bg = array('d',[0])
+mcf1bg = array('d',[0])
+mcf2bg = array('d',[0])
+mcf3bg = array('d',[0])
 mcf0_pdgbg = array('i',[0])
 mcf1_pdgbg = array('i',[0])
 mcf2_pdgbg = array('i',[0])
@@ -209,30 +222,40 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 		GetTreeObject(treebg, 'nTaus', nTausBG)
 	#	GetTreeObject(tree, 'tauTLV', tauTLV)
 	#	GetTreeObject(treebg, 'tauTLV', tauTLVBG) 
-		GetTreeObject(tree, 'MCf0', mcf0)
-		GetTreeObject(tree, 'MCf1', mcf1)
-		GetTreeObject(tree, 'MCf2', mcf2)
-		GetTreeObject(tree, 'MCf3', mcf3)
+##		GetTreeObject(tree, 'MCf0', mcf0, 1)
+	#	GetTreeObject(tree, 'MCf1', mcf1)
+	#	GetTreeObject(tree, 'MCf2', mcf2)
+	#	GetTreeObject(tree, 'MCf3', mcf3)
 		GetTreeObject(tree, 'MCf0_PDG', mcf0_pdg)
 		GetTreeObject(tree, 'MCf1_PDG', mcf1_pdg)
 		GetTreeObject(tree, 'MCf2_PDG', mcf2_pdg)
 		GetTreeObject(tree, 'MCf3_PDG', mcf3_pdg)
-		GetTreeObject(tree, 'MCf0', mcf0bg)
-		GetTreeObject(tree, 'MCf1', mcf1bg)
-		GetTreeObject(tree, 'MCf2', mcf2bg)
-		GetTreeObject(tree, 'MCf3', mcf3bg)
-		GetTreeObject(tree, 'MCf0_PDG', mcf0_pdgbg)
-		GetTreeObject(tree, 'MCf1_PDG', mcf1_pdgbg)
-		GetTreeObject(tree, 'MCf2_PDG', mcf2_pdgbg)
-		GetTreeObject(tree, 'MCf3_PDG', mcf3_pdgbg)
+#		GetTreeObject(treebg, 'MCf0', mcf0bg)
+#		GetTreeObject(treebg, 'MCf1', mcf1bg)
+#		GetTreeObject(treebg, 'MCf2', mcf2bg)
+#		GetTreeObject(treebg, 'MCf3', mcf3bg)
+	#	
+		GetTreeObject(treebg, 'MCf0_PDG', mcf0_pdgbg)
+		GetTreeObject(treebg, 'MCf1_PDG', mcf1_pdgbg)
+		GetTreeObject(treebg, 'MCf2_PDG', mcf2_pdgbg)
+		GetTreeObject(treebg, 'MCf3_PDG', mcf3_pdgbg)
 		
 		#for entry, entryBG in zip(tree, treebg):
 		for entry in tree:
-			mcflist = [ mcf0, mcf1, mcf2, mcf3 ]
+			#mcflist = [ mcf0, mcf1, mcf2, mcf3 ]
+			mcf0[0] = getattr(entry,GetBranchName(tree,'MCf0')).CosTheta()	
+			mcf1[0] = getattr(entry,GetBranchName(tree,'MCf1')).CosTheta()
+			mcf2[0] = getattr(entry,GetBranchName(tree,'MCf2')).CosTheta()
+			mcf3[0] = getattr(entry,GetBranchName(tree,'MCf3')).CosTheta()
+			#print mcf0[0]
+			mcflist= [mcf0,mcf1,mcf2,mcf3]
 			mcfpdglist = [mcf0_pdg, mcf1_pdg, mcf2_pdg, mcf3_pdg ]
+			#print mcflist
+			#print mcfpdglist
+			#print passAcceptance(mcflist, mcfpdglist)
 			if passAcceptance(mcflist, mcfpdglist) == False:
 				continue
-
+		
 			#does entry pass mc acceptance
 			if isMuon[0] and PARTICLETYPE == 'MUON':
 				Total_s[0] = Total_s[0]+1.
@@ -286,8 +309,16 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 					round(N_s[0])
 
 		for entry in treebg:
+			mcf0bg[0] = getattr(entry,GetBranchName(treebg,'MCf0')).CosTheta()
+                        mcf1bg[0] = getattr(entry,GetBranchName(treebg,'MCf1')).CosTheta()
+                        mcf2bg[0] = getattr(entry,GetBranchName(treebg,'MCf2')).CosTheta()
+                        mcf3bg[0] = getattr(entry,GetBranchName(treebg,'MCf3')).CosTheta()
+
 			mcfbglist = [ mcf0bg, mcf1bg, mcf2bg, mcf3bg ]
 			mcfpdgbglist = [mcf0_pdgbg, mcf1_pdgbg, mcf2_pdgbg, mcf3_pdgbg ]
+			#print mcfbglist
+			#print mcfpdgbglist
+			#print passAcceptance(mcfbglist, mcfpdgbglist)
 			if passAcceptance(mcfbglist, mcfpdgbglist) == False:
 				continue
 
@@ -298,6 +329,8 @@ for filename, filenameBG in zip(FILESUBSET, BGFILESUBSET):
 				if nTausBG[0] >= 1:
 					N_b[0] = N_b[0] + 1.
 					round(N_b[0])
+
+#		break
 		
 		eff_s[0] = (N_s[0]/Total_s[0])
 		treeN[0] =(treedetails[treedetails_itr][0])

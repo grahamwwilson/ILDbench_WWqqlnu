@@ -16,6 +16,10 @@ def bash( bashCommand ):
 bashCommand = 'ls ./steeringMacros/TauFinderSteeringS2LR/'
 #bashCommand = 'ls ./steeringMacros/TauFinderSteeringB1LR/'
 
+#path = './steeringMacros/TauFinderSteeringS1LR/'
+path = './steeringMacros/TauFinderSteeringS2LR/'
+#path = './steeringMacros/TauFinderSteeringB1LR/'
+
 OUTPUT = bash( bashCommand ) #get name of all xml Files
 DATASETLIST = OUTPUT[0].split('\n')
 print DATASETLIST
@@ -28,7 +32,8 @@ for DATASET in DATASETLIST:
 	print DATASETNAME
 	bash('rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out.gz')
 	#bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET+' > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
-	log = bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET)
+	#log = bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET)
+	log = bash('Marlin '+path+DATASET)
 	file = open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out','w')
 	file.write(log[0])
 	bash('gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
