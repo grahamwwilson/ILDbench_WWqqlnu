@@ -771,7 +771,7 @@
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionsNames">  TauJets2251 TauJets2252 TauJets2253 TauJets2254 TauJets2255 TauJets2256 TauJets2257 TauJets2258 TauJets2259 TauJets2260 TauJets2261 TauJets2262 TauJets2263 TauJets2264 TauJets2265 TauJets2266 TauJets2267 TauJets2268 TauJets2269 TauJets2270 TauJets2271 TauJets2272 TauJets2273 TauJets2274 TauJets2275 TauJets2276 TauJets2277 TauJets2278 TauJets2279 TauJets2280 TauJets2281 TauJets2282 TauJets2283 TauJets2284 TauJets2285 TauJets2286 TauJets2287 TauJets2288 TauJets2289 TauJets2290 TauJets2291 TauJets2292 TauJets2293 TauJets2294 TauJets2295 TauJets2296 TauJets2297 TauJets2298 TauJets2299 TauJets2300 </parameter>
 		<parameter name="NFermions" value="4" />
-		<parameter name="Nleptons" value="0" />
+		<parameter name="Nleptons" value="2" />
 		<parameter name="Normalization" value="0.784017" />
 		<parameter name="Njets" value="3" />
 		<parameter name="Ncuts" value="7" />
