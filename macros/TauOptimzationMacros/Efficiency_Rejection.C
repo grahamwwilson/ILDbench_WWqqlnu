@@ -45,7 +45,237 @@ void printvec(std::vector<std::vector<double> > v){
 	}
 		std::cout<<std::endl;
 }
+bool foundMatch( TLorentzVector mcl, std::vector<TLorentzVector> taujets , double& minTauPsi, std::vector<double>& psitau ){
 
+	//match threshold 100mrad
+	double radcut = 0.1;
+	bool pass = false;
+	double cospsi{};
+	double psi{};
+	minTauPsi = 999;
+	for(unsigned int i=0; i< taujets.size(); i++){
+
+		cospsi = mcl.Vect().Dot( taujets.at(i)->Vect() )/ (mcl.Vect().Mag() * taujets.at(i)->Vect().Mag() );
+		psi = acos(cospsi);
+		psitau.at(i) = psi;	
+		if(psi < _minTauPsi ){
+			minTauPsi = psi;
+			//_indexOfMinTauPsi = i;
+			if(minTauPsi <= radcut) pass = true;
+		}
+		
+
+	}	
+	return pass;
+}
+void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector*& mcl , std::vector<int>& RemovalCand){
+	
+		double tolerance =  1e-3;
+		bool skip = false;
+		TLorentzVector tau;
+		for(int i=0; i< V.size(); i++){
+			skip = false;
+			//loop over removal cand, if i == index in removal cand skip
+			for(int j=0; j<RemovalCand.size(); j++){
+				if( i == RemovalCand.at(j)){ 
+					skip = true;
+				}
+			}
+			if(skip) continue;
+			tau += V.at(i);
+		}
+		for(int i=0; i< I.size(); i++){
+			tau += I.at(i);
+		}
+	
+		double Mdiff = tau.M() - mcl->M();
+		std::cout<<"Mdiff "<<Mdiff<<std::endl;
+		
+		if(Mdiff < 0 ){
+			//something is wrong
+			std::cout<<" Mdiff < 0!"<<std::endl;		
+			return;
+		}//stopping condition removed too much
+
+		//look at gamma that minimizes Mdiff - gammaE
+		//loop over visible guys
+		double mindiff= 999.;
+		int candInd = -1;
+		double diff;
+		for(int i=0; i< Vpdg.size(); i++){
+			skip = false;
+			//loop over removal cand, if i == index in removal cand skip
+			for(int j=0; j<RemovalCand.size(); j++){
+				if( i == RemovalCand.at(j)){ 
+					skip = true;
+				}
+			}
+			if(skip) continue;
+
+			
+			if(Vpdg.at(i) == 22){
+				TLorentzVector Vnew;
+				Vnew = tau - V.at(i);	
+				diff = Vnew.M() - mcl->M();
+				if( diff < mindiff && diff > 0.){
+					mindiff = diff;
+					candInd = i;
+				}
+			}
+		}  
+		std::cout<<"mindiff cand i : "<< mindiff<<" "<<candInd<<std::endl;
+		//if we cant find anything just return
+		if( candInd == -1 ) return;
+		//we have a removal candidate
+		//are we within tolerance?
+		if( mindiff <= tolerance ){
+			//dont do anything else just set a candidate to be removed
+			RemovalCand.push_back(candInd); 
+			return;
+		}
+		else{ //try removing another photon
+			RemovalCand.push_back(candInd);
+			removeFSRPhoton(V,I,Vpdg,mcl,RemovalCand);
+
+		}
+	
+		//return;
+}
+//make sure filtered input is an empty vector
+void removeExtraNeutrino(std::vector<TLorentzVector>& Invis, std::vector<int>& InvisPdg, std::vector<TLorentzVector>& filteredInvis, std::vector<int>& filteredInvisPdg, int mcpdg ){
+	
+		//	std::vector<TLorentzVector> filteredInvis{};
+		//	std::vector<int> filteredInvisPdg{};
+			//remove W neutrino
+			for(int i =0; i<Invis.size(); i++){
+				//if the neutrino pdg is same sign remove it
+				if( abs(InvisPdg.at(i)) == 16){
+					if( InvisPdg.at(i) * mcpdg > 0 ){
+						//this is good one push back
+						filteredInvis.push_back( Invis.at(i) );
+						filteredInvisPdg.push_back( InvisPdg.at(i)	);
+					}
+					else{ //its W neutrino do nothing 
+					}
+				}
+				else{
+					//store all other neutrinos
+					filteredInvis.push_back( Invis.at(i) );
+					filteredInvisPdg.push_back( InvisPdg.at(i)	);
+				}
+			}
+}
+void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVector>& unfilteredI, std::vector<TLorentzVector>& filteredV, std::vector<TLorentzVector>& filteredI, std::vector<int>& unfilteredVpdg, std::vector<int>& unfilteredIpdg, std::vector<int>& filteredVpdg, std::vector<int>& filteredIpdg, TLorentzVector*& mcl, int mcpdg){
+
+
+	//boost everything into CM
+	TVector3 mcboost = mcl->BoostVector();
+	mcl->Boost(-mcboost);
+	for(int i =0; i<unfilteredV.size(); i++){
+		unfilteredV.at(i).Boost(-mcboost);
+	}
+	for(int i =0; i<unfilteredI.size(); i++){
+		unfilteredI.at(i).Boost(-mcboost);
+	}
+	
+	
+	//do a mass check within tolerance, if everything is fine just spit out  the input as filtered
+	//hardcoded tolerance 1e-3
+	TLorentzVector tau;
+	double tolerance = 1e-3;
+	for(int i =0; i<unfilteredV.size(); i++){
+		tau+= unfilteredV.at(i);
+	}
+	for(int i =0; i<unfilteredI.size(); i++){
+		tau+= unfilteredI.at(i);
+	}
+
+	if( fabs(tau.M() - mcl->M()) < tolerance){
+		std::cout<< tau.M() <<" "<<mcl->M()<<" within tolerance "<<std::endl;
+
+		//boost and return so we dont double boost later
+		mcl->Boost(mcboost);
+		for(int i =0; i<unfilteredV.size(); i++){
+			unfilteredV.at(i).Boost(mcboost);
+		}
+		for(int i =0; i<unfilteredI.size(); i++){
+			unfilteredI.at(i).Boost(mcboost);
+		}
+		//copy unfiltered to filtered
+		filteredV = unfilteredV;
+		filteredI = unfilteredI;
+		filteredVpdg = unfilteredVpdg;
+		filteredIpdg = unfilteredIpdg;
+
+		return;
+		
+	}
+	else{
+	
+
+		//this function populates the filtered vector itself
+		removeExtraNeutrino( unfilteredI, unfilteredIpdg, filteredI, filteredIpdg, mcpdg);
+		//after extra neutrino is removed, 
+		std::vector<int> partsToBeRemoved{};
+		removeFSRPhoton(unfilteredV , filteredI , unfilteredVpdg, mcl , partsToBeRemoved);
+		//remove the FSR candidates
+		bool skip= false;
+		for(int i=0; i<unfilteredV.size(); i++){
+			skip = false;
+			for( int j=0; j<partsToBeRemoved.size(); j++){
+				if(i== partsToBeRemoved.at(j)){
+					skip = true;
+				}
+			}
+			if(skip) continue;
+
+			filteredV.push_back( unfilteredV.at(i) );
+			filteredVpdg.push_back( unfilteredVpdg.at(i) );
+		}
+	
+	}//end else
+
+
+	//boost back into lab (both filtered and unfiltered)
+	mcl->Boost(mcboost);
+	for(int i =0; i<unfilteredV.size(); i++){
+		unfilteredV.at(i).Boost(mcboost);
+	}
+	for(int i =0; i<unfilteredI.size(); i++){
+		unfilteredI.at(i).Boost(mcboost);
+	}
+	for(int i=0; i<filteredV.size(); i++){
+		filteredV.at(i).Boost(mcboost);
+	}
+	for(int i=0; i<filteredI.size(); i++){
+		filteredI.at(i).Boost(mcboost);
+	}
+
+
+}
+bool foundPromptTauMatch( TLorentzVector mcl, int mclpdg, std::vector<TLorentzVector> mcV, std::vector<TLorentzVector> mcI, std::vector<int> mcVpdg, std::vector<int> mcIpdg, std::vector<TLorentzVector> taujets, double& minTauPsi, std::vector<double>& psitau){
+	double radcut = 0.1;
+	bool pass = false;
+	double cospsi{};
+	double psi{};
+	minTauPsi = 999;
+	std::vector<TLorentzVector> fV{};
+	std::vector<TLorentzVector> fI{};
+	std::vector<int> fVpdg{};
+	std::vector<int> fIpdg{};
+	//first task, remove potential FSR photons
+	filterFSR(mcV, mcI, fV, fI, mcVpdg, mcIpdg, fvPdg, fIpdg, mcl , mclpdg);
+	//second task, match visible non-FSR objects to tau jet
+	TLorentzVector V;
+	for(unsigned int i=0; i< fV.size(); i++){
+		V += fV.at(i);
+	}
+	bool pass = foundMatch( V, taujets , minTauPsi, psitau );
+
+	return pass;
+
+
+}
 void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag , const char* backgroundTag, int nFiles, int nTreesPerFile){
 	//#on run define what subset
 //SUBSET = ['S1', 'S2', 'B1']
@@ -80,12 +310,12 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	double searchConeAngleStep = 0.01; //#10mrad step
 
 	double isoAngleMin = 0.;
-	double isoAngleMax = 0.10;
+	double isoAngleMax = 0.16;
 	double isoAngleStep = 0.01;// #10mrad step
 
 	double isoEnergyMin = 0.;
-	double isoEnergyMax = 11.;
-	double isoEnergyStep = 1.;// #1gev step
+	double isoEnergyMax = 6.;
+	double isoEnergyStep = .5;// #1gev step
 
 	//#number of trees per file
 	//#nTreesPerFile = 50
@@ -126,22 +356,39 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outtreename<<subsetTag<<particletypeTag;
 	TTree* outputTree = new TTree(outtreename.str().c_str(), outtreename.str().c_str());
 	
-	double eff_s;
-	double eff_b;
-	double RR;
+	//double eff_s;
+	//double eff_b;
+	//double RR;
+	double s_ratio; //Ns/Ntot
+	double b_ratio; //Nb/Ntot
+	double ds_ratio; //error on sratio
+	double db_ratio; //error on bratio
+	double s_matchratio; //Nmatch/Ntot
+	double ds_matchratio; //error on smatchratio
+	double singleJetFakeProb; //binomial prob of a single quark jet creating a tau jet
+	double singleJetFakeIneff; //1- singlefakeprob
+	double dsingleJetFakeProb; //"binomial" error on single prob
+	std::vector<double> psitau{};
+	double minTauPsi; //the match psi value
+	double optProd; //singleGetFakeIneff*s_matchratio
+	
 	double treeN;
 	double searchCone;
 	double isoCone;
 	double isoE;
-	double p;
-	double effp;
-	double N_s;
+	//double p;
+	//double effp;
+	double N_s; //number of events with >= 1 reco tau jet
+	double N_match; //number of matches
+	double matchratio; //Nmatch/Ns (matching efficiency)
 	double N_b;
 	double Total_s;
 	double Total_b; 
 
+	//TODO redefine tree etc do matching
+
 //#set branches
-	outputTree->Branch("eff_s",&eff_s,"eff_s/D");
+/*	outputTree->Branch("eff_s",&eff_s,"eff_s/D");
 	outputTree->Branch("eff_b",&eff_b,"eff_b/D");
 	outputTree->Branch("RR",&RR,"RR/D");
 	outputTree->Branch("treeN",&treeN,"treeN/D");
@@ -150,12 +397,34 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outputTree->Branch("isoE",&isoE,"isoE/D");
 	outputTree->Branch("p",&p,"p/D");
 	outputTree->Branch("effp",&effp,"effp/D");
-	//outputTree->Branch("N_s",&N_s,"N_s/F")
-	//outputTree->Branch("N_b",&N_b,"N_b/F")
-	//outputTree->Branch("Total_s", &Total_s,"Total_s/F");
-	//outputTree->Branch("Total_b", &Total_b,"Total_b/F");
-
-
+	outputTree->Branch("N_s",&N_s,"N_s/F")
+	outputTree->Branch("N_b",&N_b,"N_b/F")
+	outputTree->Branch("Total_s", &Total_s,"Total_s/F");
+	outputTree->Branch("Total_b", &Total_b,"Total_b/F");
+*/
+	outputTree->Branch("s_ratio",&s_ratio,"s_ratio/D");
+	outputTree->Branch("b_ratio",&b_ratio,"b_ratio/D");
+	outputTree->Branch("ds_ratio",&ds_ratio,"ds_ratio/D");
+	outputTree->Branch("db_ratio",&db_ratio,"db_ratio/D");
+	outputTree->Branch("s_matchratio",&s_matchratio,"s_matchratio/D");
+	outputTree->Branch("ds_matchratio",&ds_matchratio,"ds_matchratio/D");
+	outputTree->Branch("singleJetFakeProb",&singleJetFakeProb,"singleJetFakeProb/D");
+	outputTree->Branch("singleJetFakeIneff",&singleJetFakeIneff,"singleJetFakeIneff/D");
+	outputTree->Branch("dsingleJetFakeProb", &dsingleJetFakeProb, "dsingleJetFakeProb/D");
+	outputTree->Branch("minTauPsi",&minTauPsi,"minTauPsi/D");
+	outputTree->Branch("optProd",&optProd,"optProd/D");
+	outputTree->Branch("treeN",&treeN,"treeN/D");
+	outputTree->Branch("searchCone",&searchCone,"searchCone/D");
+	outputTree->Branch("isoCone",&isoCone,"isoCone/D");
+	outputTree->Branch("isoE",&isoE,"isoE/D");
+    outputTree->Branch("N_s",&N_s,"N_s/D");
+	outputTree->Branch("N_match",&N_match,"N_match/D");
+    outputTree->Branch("matchratio",&matchratio,"matchratio/D");
+    outputTree->Branch("N_b",&N_b,"N_b/D");
+    outputTree->Branch("Total_s",&Total_s,"Total_s/D");
+    outputTree->Branch("Total_b",&Total_b,"Total_b/D");
+	outputTree->Branch("psitau",&psitau);
+    
 
 	TTree* tree;
 	TTree* treebg;
@@ -170,6 +439,19 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	TBranch* btauType;
 	int nTaus;
 	TBranch* bnTaus;
+
+	std::vector<TLorentzVector> tauTLV{};
+	TBranch* btauTLV{};
+
+	std::vector<int> MCTauVisibleDaughters_pdg{};
+	TBranch* bMCTauVisibleDaughters_pdg{};
+	std::vector<TLorentzVector> MCTauVisibleDaughters{};
+	TBranch* bMCTauVisibleDaughters{};
+
+	std::vector<int> MCTauInvisibleDaughters_pdg{};
+	TBranch* bMCTauInvisibleDaughters_pdg{};
+	std::vector<TLorentzVector> MCTauInvisibleDaughters{};
+	TBranch* bMCTauInvisibleDaughters{};
 	
 	TLorentzVector* MCf0 = new TLorentzVector();
 	TBranch* bMCf0;
@@ -188,6 +470,10 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	TBranch* bMCf2_PDG;
 	int MCf3_PDG;
 	TBranch* bMCf3_PDG;
+
+
+	//Get branches for decay vectors
+
 
 	//int nTausBG;
 	//TBranch* ntausBG;
@@ -253,6 +539,13 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			tree->SetBranchAddress((treeNames.at(itree)+"isElectron").c_str(), &isElectron, &bisElectron);
 			tree->SetBranchAddress((treeNames.at(itree)+"tauType").c_str(), &tauType, &btauType);
 			tree->SetBranchAddress((treeNames.at(itree)+"nTaus").c_str(), &nTaus, &bnTaus);
+			
+			tree->SetBranchAddress((treeNames.at(itree)+"MCTauVisibleDaughters_pdg").c_str(), &MCTauVisibleDaughters_pdg, &bMCTauVisibleDaughters_pdg);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCTauVisibleDaughters").c_str(), &MCTauVisibleDaughters, &bMCTauVisibleDaughters);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCTauInvisibleDaughters_pdg").c_str(), &MCTauInvisibleDaughters_pdg, &bMCTauInvisibleDaughters_pdg);
+			tree->SetBranchAddress((treeNames.at(itree)+"MCTauInvisibleDaughters").c_str(), &MCTauInvisibleDaughters, &bMCTauInvisibleDaughters);
+
+			tree->SetBranchAddress((treeNames.at(itree)+"tauTLV").c_str(),&tauTLV,&btauTLV);
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
@@ -261,6 +554,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			//zero counts
 			Total_s = 0.;
 			N_s = 0.;
+			N_match = 0.;
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
 
@@ -279,11 +573,19 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
+					//do matching
+					if( foundMatch( MCf2, tauTLV, minTauPsi, psitau) ){
+						N_match += 1.;
+					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU0")==0){
 					Total_s += 1.;
 					if(nTaus >= 1){
 						N_s += 1.;
+					}
+					//do fsr removal & matching in tau
+					if(foundPromptTauMatch( MCf2, MCf2_PDGg, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+						N_match += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU1")==0 && tauType == 1){
@@ -291,11 +593,17 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
+					if(foundPromptTauMatch( MCf2, MCf2_PDGg, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+						N_match += 1.;
+					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU2")==0 && tauType == 2){
 					Total_s += 1.;
 					if(nTaus >= 1){
 						N_s += 1.;
+					}
+					if(foundPromptTauMatch( MCf2, MCf2_PDGg, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+						N_match += 1.;
 					}
 				}
 				if(isTau && PARTICLETYPE.compare("TAU3")==0 && tauType == 3){
@@ -303,11 +611,17 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
+					if(foundPromptTauMatch( MCf2, MCf2_PDGg, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+						N_match += 1.;
+					}
 				}
 			 	if(isTau && PARTICLETYPE.compare("TAU4")==0 && tauType == 4){
 					Total_s += 1.;
 					if(nTaus >= 1){
 						N_s += 1.;
+					}
+					if(foundPromptTauMatch( MCf2, MCf2_PDGg, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+						N_match += 1.;
 					}
 				}
 				if(isElectron && PARTICLETYPE.compare("ELECTRON")==0){
@@ -316,7 +630,9 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-				
+					if( foundMatch( MCf2, tauTLV, minTauPsi, psitau) ){
+						N_match += 1.;
+					}
 				}
 			}
 		
@@ -353,17 +669,30 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			}
 			
 
-			eff_s = N_s/Total_s;
-			eff_b = N_b/Total_b;
-			RR = 1. - eff_b;
+		//	eff_s = N_s/Total_s;
+		//	eff_b = N_b/Total_b;
+		//	RR = 1. - eff_b;
 			treeN = treedetails.at(treeDetailsItr).at(0);
 			searchCone = treedetails.at(treeDetailsItr).at(1);
 			isoCone = treedetails.at(treeDetailsItr).at(2);
 			isoE = treedetails.at(treeDetailsItr).at(3);
-			p = N_s/ (N_s+N_b);
-			effp = eff_s * p;
+		//	p = N_s/ (N_s+N_b);
+		//	effp = eff_s * p;
+
+			s_ratio = N_s/Total_s; //Ns/Ntot
+			b_ratio = N_b/Total_b; //Nb/Ntot
+			ds_ratio = sqrt( s_ratio*(1-s_ratio)/Total_s ); //error on sratio
+		   db_ratio = sqrt( b_ratio*(1-b_ratio)/Total_b ); //error on bratio
+			s_matchratio = N_match/Total_s; //Nmatch/Ntot
+		   ds_matchratio = sqrt( s_matchratio*(1-s_matchratio)/ Total_s); //error on smatchratio
+		   singleJetFakeProb = 1- sqrt(sqrt(1-s_ratio )); //binomial prob of a single quark jet creating a tau jet
+		   singleJetFakeIneff = sqrt(sqrt(1-s_ratio)); //1- singlefakeprob
+		   dsingleJetFakeProb = (1./4.) * sqrt( b_ratio/ ( Total_b * sqrt( 1 - b_ratio) ) )	
+		   optProd = singleJetFakeIneff*s_matchratio; //singleGetFakeIneff*s_matchratio
+		   matchratio = N_match/N_s; //Nmatch/Ns (matching efficiency)
+	
 		
-			std::cout<< eff_s<< " "<< eff_b<<" "<< RR << " "<< treeN<<" "<<searchCone<<" "<<isoCone<<" "<<isoE<<" "<<p<<" "<<effp<<" "<<std::endl;
+		//	std::cout<< eff_s<< " "<< eff_b<<" "<< RR << " "<< treeN<<" "<<searchCone<<" "<<isoCone<<" "<<isoE<<" "<<p<<" "<<effp<<" "<<std::endl;
 
 			outputTree->Fill();
 	
@@ -380,7 +709,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 void Efficiency_Rejection(){
 	std::vector<const char*> subsets{"S1","S2","B1"};
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
-	int nFiles = 39;
+	int nFiles = 10;
 	int nTreesPerFile = 50;
 	//Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
 	//Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
