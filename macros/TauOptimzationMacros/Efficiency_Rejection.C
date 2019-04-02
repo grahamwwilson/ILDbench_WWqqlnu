@@ -8,6 +8,9 @@
 
 #include <vector>
 #include <math.h>
+#include "TLorentzVector.h"
+#include "TBranch.h"
+
 using namespace std;
 bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
 
@@ -708,7 +711,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 }
 void Efficiency_Rejection(){
 
-	//gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
+	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
 
 	std::vector<const char*> subsets{"S1","S2","B1"};
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
