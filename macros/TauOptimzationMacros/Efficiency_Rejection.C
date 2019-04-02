@@ -645,9 +645,9 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-				//	if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
-				//		N_match += 1.;
-				//	}
+					if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
+						N_match += 1.;
+					}
 				}
 			}
 		
