@@ -666,6 +666,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			N_b = 0.;
 			
 			nevent = treebg->GetEntries();
+			std::cout<<"Nentries "<< nevent<<std::endl;
 	//		nevent = 40;
    			for (Int_t i=0;i<nevent;i++) {
       				treebg->GetEvent(i);		
