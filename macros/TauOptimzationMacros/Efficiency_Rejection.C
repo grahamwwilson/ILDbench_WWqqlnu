@@ -12,6 +12,10 @@
 #include "TBranch.h"
 #include <sstream>
 #include <iostream>
+#include "TFile.h"
+#include "TTree.h"
+#include <string>
+#include "TVector3.h"
 
 using namespace std;
 bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
