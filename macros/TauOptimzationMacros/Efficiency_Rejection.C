@@ -55,7 +55,7 @@ void printvec(std::vector<std::vector<double> > v){
 	}
 		std::cout<<std::endl;
 }
-bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector> taujets , double& minTauPsi, std::vector<double>& psitau ){
+bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector>& taujets , double& minTauPsi, std::vector<double>& psitau ){
 
 	//match threshold 100mrad
 	double radcut = 0.1;
@@ -65,7 +65,7 @@ bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector> taujets , dou
 	minTauPsi = 999;
 	for(unsigned int i=0; i< taujets.size(); i++){
 
-		cospsi = mcl.Vect().Dot( taujets.at(i).Vect() )/ (mcl.Vect().Mag() * taujets.at(i).Vect().Mag() );
+		cospsi = mcl->Vect().Dot( taujets.at(i).Vect() )/ (mcl->Vect().Mag() * taujets.at(i).Vect().Mag() );
 		psi = acos(cospsi);
 		psitau.at(i) = psi;	
 		if(psi < minTauPsi ){
@@ -640,7 +640,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if( foundMatch( MCf2, tauTLV, minTauPsi, psitau) ){
+					if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
 				}
