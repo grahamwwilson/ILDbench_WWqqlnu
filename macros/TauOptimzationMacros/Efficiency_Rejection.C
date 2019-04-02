@@ -440,17 +440,17 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	int nTaus;
 	TBranch* bnTaus;
 
-	std::vector<TLorentzVector> tauTLV{};
+	std::vector<TLorentzVector>* tauTLV{};
 	TBranch* btauTLV{};
 
-	std::vector<int> MCTauVisibleDaughters_pdg{};
+	std::vector<int>* MCTauVisibleDaughters_pdg{};
 	TBranch* bMCTauVisibleDaughters_pdg{};
-	std::vector<TLorentzVector> MCTauVisibleDaughters{};
+	std::vector<TLorentzVector>* MCTauVisibleDaughters{};
 	TBranch* bMCTauVisibleDaughters{};
 
-	std::vector<int> MCTauInvisibleDaughters_pdg{};
+	std::vector<int>* MCTauInvisibleDaughters_pdg{};
 	TBranch* bMCTauInvisibleDaughters_pdg{};
-	std::vector<TLorentzVector> MCTauInvisibleDaughters{};
+	std::vector<TLorentzVector>* MCTauInvisibleDaughters{};
 	TBranch* bMCTauInvisibleDaughters{};
 	
 	TLorentzVector* MCf0 = new TLorentzVector();
@@ -574,7 +574,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						N_s += 1.;
 					}
 					//do matching
-					if( foundMatch( *MCf2, tauTLV, minTauPsi, psitau) ){
+					if( foundMatch( *MCf2, *tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
 				}
@@ -584,7 +584,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						N_s += 1.;
 					}
 					//do fsr removal & matching in tau
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -593,7 +593,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -602,7 +602,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -611,7 +611,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -620,7 +620,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -707,6 +707,9 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outputFile->Write();
 }
 void Efficiency_Rejection(){
+
+	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
+
 	std::vector<const char*> subsets{"S1","S2","B1"};
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
 	int nFiles = 10;
