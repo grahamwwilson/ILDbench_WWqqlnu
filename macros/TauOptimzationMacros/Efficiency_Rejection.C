@@ -55,7 +55,7 @@ void printvec(std::vector<std::vector<double> > v){
 	}
 		std::cout<<std::endl;
 }
-bool foundMatch( TLorentzVector mcl, std::vector<TLorentzVector> taujets , double& minTauPsi, std::vector<double>& psitau ){
+bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector> taujets , double& minTauPsi, std::vector<double>& psitau ){
 
 	//match threshold 100mrad
 	double radcut = 0.1;
@@ -78,7 +78,7 @@ bool foundMatch( TLorentzVector mcl, std::vector<TLorentzVector> taujets , doubl
 	}	
 	return pass;
 }
-void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector& mcl , std::vector<int>& RemovalCand){
+void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector*& mcl , std::vector<int>& RemovalCand){
 	
 		double tolerance =  1e-3;
 		bool skip = false;
@@ -175,7 +175,7 @@ void removeExtraNeutrino(std::vector<TLorentzVector>& Invis, std::vector<int>& I
 				}
 			}
 }
-void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVector>& unfilteredI, std::vector<TLorentzVector>& filteredV, std::vector<TLorentzVector>& filteredI, std::vector<int>& unfilteredVpdg, std::vector<int>& unfilteredIpdg, std::vector<int>& filteredVpdg, std::vector<int>& filteredIpdg, TLorentzVector& mcl, int mcpdg){
+void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVector>& unfilteredI, std::vector<TLorentzVector>& filteredV, std::vector<TLorentzVector>& filteredI, std::vector<int>& unfilteredVpdg, std::vector<int>& unfilteredIpdg, std::vector<int>& filteredVpdg, std::vector<int>& filteredIpdg, TLorentzVector*& mcl, int mcpdg){
 
 
 	//boost everything into CM
@@ -263,7 +263,7 @@ void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVec
 
 
 }
-bool foundPromptTauMatch( TLorentzVector& mcl, int mclpdg, std::vector<TLorentzVector> mcV, std::vector<TLorentzVector> mcI, std::vector<int> mcVpdg, std::vector<int> mcIpdg, std::vector<TLorentzVector> taujets, double& minTauPsi, std::vector<double>& psitau){
+bool foundPromptTauMatch( TLorentzVector*& mcl, int mclpdg, std::vector<TLorentzVector> mcV, std::vector<TLorentzVector> mcI, std::vector<int> mcVpdg, std::vector<int> mcIpdg, std::vector<TLorentzVector> taujets, double& minTauPsi, std::vector<double>& psitau){
 	double radcut = 0.1;
 
 	double cospsi{};
