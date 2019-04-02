@@ -264,7 +264,7 @@ bool foundPromptTauMatch( TLorentzVector*& mcl, int mclpdg, std::vector<TLorentz
 	std::vector<int> fVpdg{};
 	std::vector<int> fIpdg{};
 	//first task, remove potential FSR photons
-	filterFSR(mcV, mcI, fV, fI, mcVpdg, mcIpdg, fVPdg, fIpdg, mcl , mclpdg);
+	filterFSR(mcV, mcI, fV, fI, mcVpdg, mcIpdg, fVpdg, fIpdg, mcl , mclpdg);
 	//second task, match visible non-FSR objects to tau jet
 	TLorentzVector V;
 	for(unsigned int i=0; i< fV.size(); i++){
@@ -584,7 +584,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						N_s += 1.;
 					}
 					//do fsr removal & matching in tau
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -593,7 +593,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -602,7 +602,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -611,7 +611,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
@@ -620,7 +620,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau){
+					if(foundPromptTauMatch( MCf2, MCf2_PDG, MCTauVisibleDaughters, MCTauInvisibleDaughters,MCTauVisibleDaughters_pdg, MCTauInvisibleDaughters_pdg, tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
 				}
