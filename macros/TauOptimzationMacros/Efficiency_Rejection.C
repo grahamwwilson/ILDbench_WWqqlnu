@@ -426,7 +426,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outputTree->Branch("singleJetFakeProb",&singleJetFakeProb,"singleJetFakeProb/D");
 	outputTree->Branch("singleJetFakeIneff",&singleJetFakeIneff,"singleJetFakeIneff/D");
 	outputTree->Branch("dsingleJetFakeProb", &dsingleJetFakeProb, "dsingleJetFakeProb/D");
-	outputTree->Branch("minTauPsi",&minTauPsi,"minTauPsi/D");
+	//outputTree->Branch("minTauPsi",&minTauPsi,"minTauPsi/D");
 	outputTree->Branch("optProd",&optProd,"optProd/D");
 	outputTree->Branch("treeN",&treeN,"treeN/D");
 	outputTree->Branch("searchCone",&searchCone,"searchCone/D");
@@ -438,7 +438,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
     outputTree->Branch("N_b",&N_b,"N_b/D");
     outputTree->Branch("Total_s",&Total_s,"Total_s/D");
     outputTree->Branch("Total_b",&Total_b,"Total_b/D");
-	outputTree->Branch("psitau",&psitau);
+	//outputTree->Branch("psitau",&psitau);
     
 
 	TTree* tree;
@@ -728,15 +728,15 @@ void Efficiency_Rejection(){
 
 	std::vector<const char*> subsets{"S1","S2","B1"};
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
-	int nFiles = 2;
+	int nFiles = 62;
 	int nTreesPerFile = 50;
-	//Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
+	Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
 	Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
-	//Efficiency_RejectionRun(subsets[0], ptypes[3], subsets[2], nFiles, nTreesPerFile );//T1
-	//Efficiency_RejectionRun(subsets[0], ptypes[4], subsets[2], nFiles, nTreesPerFile );//T2
-	//Efficiency_RejectionRun(subsets[0], ptypes[5], subsets[2], nFiles, nTreesPerFile );//T3
-	//Efficiency_RejectionRun(subsets[0], ptypes[6], subsets[2], nFiles, nTreesPerFile );//T4
-	//Efficiency_RejectionRun(subsets[1], ptypes[1], subsets[2], nFiles, nTreesPerFile );//E0
+	Efficiency_RejectionRun(subsets[0], ptypes[3], subsets[2], nFiles, nTreesPerFile );//T1
+	Efficiency_RejectionRun(subsets[0], ptypes[4], subsets[2], nFiles, nTreesPerFile );//T2
+	Efficiency_RejectionRun(subsets[0], ptypes[5], subsets[2], nFiles, nTreesPerFile );//T3
+	Efficiency_RejectionRun(subsets[0], ptypes[6], subsets[2], nFiles, nTreesPerFile );//T4
+	Efficiency_RejectionRun(subsets[1], ptypes[1], subsets[2], nFiles, nTreesPerFile );//E0
 	
 }
 
