@@ -16,6 +16,7 @@
 #include "TTree.h"
 #include <string>
 #include "TVector3.h"
+#include "TROOT.h"
 
 using namespace std;
 bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector* MCf2, TLorentzVector* MCf3, int pdg0,int pdg1, int pdg2, int pdg3){
@@ -77,7 +78,7 @@ bool foundMatch( TLorentzVector mcl, std::vector<TLorentzVector> taujets , doubl
 	}	
 	return pass;
 }
-void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector*& mcl , std::vector<int>& RemovalCand){
+void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector& mcl , std::vector<int>& RemovalCand){
 	
 		double tolerance =  1e-3;
 		bool skip = false;
@@ -174,7 +175,7 @@ void removeExtraNeutrino(std::vector<TLorentzVector>& Invis, std::vector<int>& I
 				}
 			}
 }
-void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVector>& unfilteredI, std::vector<TLorentzVector>& filteredV, std::vector<TLorentzVector>& filteredI, std::vector<int>& unfilteredVpdg, std::vector<int>& unfilteredIpdg, std::vector<int>& filteredVpdg, std::vector<int>& filteredIpdg, TLorentzVector*& mcl, int mcpdg){
+void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVector>& unfilteredI, std::vector<TLorentzVector>& filteredV, std::vector<TLorentzVector>& filteredI, std::vector<int>& unfilteredVpdg, std::vector<int>& unfilteredIpdg, std::vector<int>& filteredVpdg, std::vector<int>& filteredIpdg, TLorentzVector& mcl, int mcpdg){
 
 
 	//boost everything into CM
@@ -262,7 +263,7 @@ void filterFSR(std::vector<TLorentzVector>& unfilteredV, std::vector<TLorentzVec
 
 
 }
-bool foundPromptTauMatch( TLorentzVector*& mcl, int mclpdg, std::vector<TLorentzVector> mcV, std::vector<TLorentzVector> mcI, std::vector<int> mcVpdg, std::vector<int> mcIpdg, std::vector<TLorentzVector> taujets, double& minTauPsi, std::vector<double>& psitau){
+bool foundPromptTauMatch( TLorentzVector& mcl, int mclpdg, std::vector<TLorentzVector> mcV, std::vector<TLorentzVector> mcI, std::vector<int> mcVpdg, std::vector<int> mcIpdg, std::vector<TLorentzVector> taujets, double& minTauPsi, std::vector<double>& psitau){
 	double radcut = 0.1;
 
 	double cospsi{};
@@ -583,7 +584,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						N_s += 1.;
 					}
 					//do matching
-					if( foundMatch( *MCf2, *tauTLV, minTauPsi, psitau) ){
+					if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
 				}
@@ -639,7 +640,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_s += 1.;
 					}
-					if( foundMatch( *MCf2, tauTLV, minTauPsi, psitau) ){
+					if( foundMatch( MCf2, tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
 				}
