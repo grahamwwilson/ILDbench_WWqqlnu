@@ -708,7 +708,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 }
 void Efficiency_Rejection(){
 
-	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
+	//gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
 
 	std::vector<const char*> subsets{"S1","S2","B1"};
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
