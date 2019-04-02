@@ -57,6 +57,7 @@ void printvec(std::vector<std::vector<double> > v){
 }
 bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector>& taujets , double& minTauPsi, std::vector<double>& psitau ){
 
+	std::vector<double> psis(taujets.size());
 	//match threshold 100mrad
 	double radcut = 0.1;
 	bool pass = false;
@@ -67,15 +68,16 @@ bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector>& taujets , do
 
 		cospsi = mcl->Vect().Dot( taujets.at(i).Vect() )/ (mcl->Vect().Mag() * taujets.at(i).Vect().Mag() );
 		psi = acos(cospsi);
-		psitau.at(i) = psi;	
+		psis.at(i) = psi;	
 		if(psi < minTauPsi ){
 			minTauPsi = psi;
 			//_indexOfMinTauPsi = i;
 			if(minTauPsi <= radcut) pass = true;
 		}
 		
-
+		
 	}	
+	psitau = psis;
 	return pass;
 }
 void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector*& mcl , std::vector<int>& RemovalCand){
