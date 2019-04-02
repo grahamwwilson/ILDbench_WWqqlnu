@@ -453,17 +453,17 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	int nTaus;
 	TBranch* bnTaus;
 
-	std::vector<TLorentzVector>* tauTLV{};
+	std::vector<TLorentzVector>* tauTLV = new std::vector<TLorentzVector>();
 	TBranch* btauTLV{};
 
-	std::vector<int>* MCTauVisibleDaughters_pdg{};
+	std::vector<int>* MCTauVisibleDaughters_pdg = new std::vector<int>();
 	TBranch* bMCTauVisibleDaughters_pdg{};
-	std::vector<TLorentzVector>* MCTauVisibleDaughters{};
+	std::vector<TLorentzVector>* MCTauVisibleDaughters = new std::vector<TLorentzVector>();
 	TBranch* bMCTauVisibleDaughters{};
 
-	std::vector<int>* MCTauInvisibleDaughters_pdg{};
+	std::vector<int>* MCTauInvisibleDaughters_pdg = new std::vector<int>();
 	TBranch* bMCTauInvisibleDaughters_pdg{};
-	std::vector<TLorentzVector>* MCTauInvisibleDaughters{};
+	std::vector<TLorentzVector>* MCTauInvisibleDaughters = new std::vector<TLorentzVector>();
 	TBranch* bMCTauInvisibleDaughters{};
 	
 	TLorentzVector* MCf0 = new TLorentzVector();
