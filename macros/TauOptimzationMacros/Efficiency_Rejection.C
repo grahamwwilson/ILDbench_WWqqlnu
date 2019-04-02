@@ -10,7 +10,7 @@
 #include <math.h>
 #include "TLorentzVector.h"
 #include "TBranch.h"
-#include "stringstream.h"
+#include <sstream>
 #include <iostream>
 
 using namespace std;
