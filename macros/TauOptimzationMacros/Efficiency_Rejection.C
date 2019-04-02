@@ -563,7 +563,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
 			//nevent = 1000;
-
+			std::cout<<"Nentries "<< nevent<<std::endl;
 			//zero counts
 			Total_s = 0.;
 			N_s = 0.;
