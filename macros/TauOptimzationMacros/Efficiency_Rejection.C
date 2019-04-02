@@ -280,7 +280,10 @@ bool foundPromptTauMatch( TLorentzVector*& mcl, int mclpdg, std::vector<TLorentz
 	for(unsigned int i=0; i< fV.size(); i++){
 		V += fV.at(i);
 	}
-	bool pass = foundMatch( V, taujets , minTauPsi, psitau );
+	//copy to ptr
+	TLorentzVector* Vtemp = new TLorentzVector();
+	Vtemp.SetXYZM(V.Px(), V.Py(), V.Pz(), V.M());
+	bool pass = foundMatch( Vtemp, taujets , minTauPsi, psitau );
 
 	return pass;
 
