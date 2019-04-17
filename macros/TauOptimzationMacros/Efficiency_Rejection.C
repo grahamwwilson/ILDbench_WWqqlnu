@@ -91,7 +91,7 @@ void countByBin( int nTaus, double cutparam, bool matchfound,
 					if( nTaus >= 1 ){
 						N.at(j) += 1.;
 					}
-					if(found){
+					if(matchfound){
 						N_match.at(j) +=1.;
 					}
 				}
@@ -436,7 +436,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	for(unsigned int i=0; i< cThetaCuts.size(); i++){
 		std::cout<< cThetaCuts.at(i) <<" ";
 	}
-	std::endl;
+	std::cout<<std::endl;
 	//single jet fake prob must be calculated later if bins are combined
 
 	//efficiencies as a function of trackE+Mult -- call it taujetcomposition
@@ -459,7 +459,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		}	
 	}
 	//check tjcomp bins
-	for(unsigned int i=0; i< tjCompCuts; i++){
+	for(unsigned int i=0; i< tjCompCuts.size(); i++){
 		std::cout<< tjCompCuts.at(i)<< " ";
 	}
 	std::cout<<std::endl;
@@ -679,7 +679,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					//do cTheta eff by bin
 			
 					found = foundMatch( MCf2, *tauTLV, minTauPsi, psitau);
-					countByBin( nTaus, MCf2.CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 
 
 
