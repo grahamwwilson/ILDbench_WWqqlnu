@@ -429,7 +429,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	std::vector<double> Total_b_cTheta(cThetaBins);
 	std::vector<double> cThetaCuts(cThetaBins+1);
 	cThetaCuts.at(0) = -1.;
-	for(int i=1; i < cThetaBins; i++){
+	for(int i=1; i < cThetaBins+1; i++){
 		cThetaCuts.at(i) = cThetaCuts.at(i-1) + .1;
 	}
 	//check costheta bins
@@ -450,7 +450,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	//tjCompCuts.at(0) = 1.01;
 	double trkFrac = 0.01;
 	double jetmult = 1.;
-	for(int i=0; i< tjCompBins; i++){
+	for(int i=0; i< tjCompBins+1; i++){
 		tjCompCuts.at(i) = 	jetmult + trkFrac;
 		trkFrac = trkFrac + 0.01;
 		if(trkFrac > 0.1){
@@ -654,6 +654,11 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			Total_s = 0.;
 			N_s = 0.;
 			N_match = 0.;
+			for(unsigned int i=0; i< N_s_cTheta.size(); i++){
+				N_s_cTheta.at(i)=0.;
+				N_match_cTheta.at(i)=0.;
+				Total_s_cTheta.at(i)=0.;
+			}
    			for (Int_t i=0;i<nevent;i++) {
       				tree->GetEvent(i);		
 
