@@ -821,13 +821,13 @@ void Efficiency_Rejection(){
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
 	int nFiles = 62;
 	int nTreesPerFile = 50;
-	//Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
+	Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
 	//Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
 	//Efficiency_RejectionRun(subsets[0], ptypes[3], subsets[2], nFiles, nTreesPerFile );//T1
 	//Efficiency_RejectionRun(subsets[0], ptypes[4], subsets[2], nFiles, nTreesPerFile );//T2
 	//Efficiency_RejectionRun(subsets[0], ptypes[5], subsets[2], nFiles, nTreesPerFile );//T3
 	//Efficiency_RejectionRun(subsets[0], ptypes[6], subsets[2], nFiles, nTreesPerFile );//T4
-	Efficiency_RejectionRun(subsets[1], ptypes[1], subsets[2], nFiles, nTreesPerFile );//E0
+	//Efficiency_RejectionRun(subsets[1], ptypes[1], subsets[2], nFiles, nTreesPerFile );//E0
 	
 }
 
