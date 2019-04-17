@@ -23,10 +23,11 @@ bool passAcceptance( TLorentzVector* MCf0, TLorentzVector* MCf1, TLorentzVector*
 
 	//std::cout<< fabs(MCf0->CosTheta()) <<" "<<fabs(MCf1->CosTheta())<< " "<<fabs(MCf2->CosTheta()) <<" "<<fabs(MCf3->CosTheta()) <<std::endl;
 //	std::cout<< pdg0<<" "<<pdg1<<" "<<pdg2<<" "<<pdg3<<std::endl;
-	if( (fabs(MCf0->CosTheta()) > 0.995) && (std::abs(pdg0) != 12) && (std::abs(pdg0) != 14) && (std::abs(pdg0) !=16) ) { return false;}
-	if( (fabs(MCf1->CosTheta()) > 0.995) && (std::abs(pdg1) != 12) && (std::abs(pdg1) != 14) && (std::abs(pdg1) !=16) ) { return false;}
-	if( (fabs(MCf2->CosTheta()) > 0.995) && (std::abs(pdg2) != 12) && (std::abs(pdg2) != 14) && (std::abs(pdg2) !=16) ) { return false;}
-	if( (fabs(MCf3->CosTheta()) > 0.995) && (std::abs(pdg3) != 12) && (std::abs(pdg3) != 14) && (std::abs(pdg3) !=16) ) { return false;}
+	//cut reduced from 0.995 to 0.99
+	if( (fabs(MCf0->CosTheta()) > 0.99) && (std::abs(pdg0) != 12) && (std::abs(pdg0) != 14) && (std::abs(pdg0) !=16) ) { return false;}
+	if( (fabs(MCf1->CosTheta()) > 0.99) && (std::abs(pdg1) != 12) && (std::abs(pdg1) != 14) && (std::abs(pdg1) !=16) ) { return false;}
+	if( (fabs(MCf2->CosTheta()) > 0.99) && (std::abs(pdg2) != 12) && (std::abs(pdg2) != 14) && (std::abs(pdg2) !=16) ) { return false;}
+	if( (fabs(MCf3->CosTheta()) > 0.99) && (std::abs(pdg3) != 12) && (std::abs(pdg3) != 14) && (std::abs(pdg3) !=16) ) { return false;}
 
 	return true;
 }
@@ -79,6 +80,24 @@ bool foundMatch( TLorentzVector*& mcl, std::vector<TLorentzVector>& taujets , do
 	}	
 	psitau = psis;
 	return pass;
+}
+void countByBin( int nTaus, double cutparam, bool matchfound,
+	std::vector<double>& N, std::vector<double>& N_match, std::vector<double>& Total, std::vector<double>& cuts){
+
+		
+			for( int j=0; j<cuts.size()-1; j++){
+				if( cutparam <= cuts.at(j) && cutparam < cuts.at(j+1)){
+					Total.at(j) += 1.;
+					if( nTaus >= 1 ){
+						N.at(j) += 1.;
+					}
+					if(found){
+						N_match.at(j) +=1.;
+					}
+				}
+			}
+		
+
 }
 void removeFSRPhoton( std::vector<TLorentzVector>& V , std::vector<TLorentzVector>& I , std::vector<int>& Vpdg, TLorentzVector*& mcl , std::vector<int>& RemovalCand){
 	
@@ -400,6 +419,52 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	double Total_s;
 	double Total_b; 
 
+	//efficiencies as a function of polar angle
+	//calculate errors downstream since bins will be combined (very fine binning upstream here)
+	int cThetaBins = 20; //bins of cosT =.1
+	std::vector<double> N_s_cTheta(cThetaBins);
+	std::vector<double> N_match_cTheta;
+    std::vector<double> Total_s_cTheta(cThetaBins);
+	std::vector<double> N_b_cTheta(cThetaBins);
+	std::vector<double> Total_b_cTheta(cThetaBins);
+	std::vector<double> cThetaCuts(cThetaBins+1);
+	cThetaCuts.at(0) = -1.;
+	for(int i=1; i < cThetaBins; i++){
+		cThetaCuts.at(i) = cThetaCuts.at(i-1) + .1;
+	}
+	//check costheta bins
+	for(unsigned int i=0; i< cThetaCuts.size(); i++){
+		std::cout<< cThetaCuts.at(i) <<" ";
+	}
+	std::endl;
+	//single jet fake prob must be calculated later if bins are combined
+
+	//efficiencies as a function of trackE+Mult -- call it taujetcomposition
+	int tjCompBins = 49;
+	std::vector<double> N_s_tjComp(tjCompBins);
+	std::vector<double> N_match_tjComp(tjCompBins);
+    std::vector<double> Total_s_tjComp(tjCompBins);
+	std::vector<double> N_b_tjComp(tjCompBins);
+	std::vector<double> Total_b_tjComp(tjCompBins);
+	std::vector<double> tjCompCuts(tjCompBins+1);
+	//tjCompCuts.at(0) = 1.01;
+	double trkFrac = 0.01;
+	double jetmult = 1.;
+	for(int i=0; i< tjCompBins; i++){
+		tjCompCuts.at(i) = 	jetmult + trkFrac;
+		trkFrac = trkFrac + 0.01;
+		if(trkFrac > 0.1){
+			trkFrac = 0.01;
+			jetmult = jetmult + 1;
+		}	
+	}
+	//check tjcomp bins
+	for(unsigned int i=0; i< tjCompCuts; i++){
+		std::cout<< tjCompCuts.at(i)<< " ";
+	}
+	std::cout<<std::endl;
+
+
 	//TODO redefine tree etc do matching
 
 //#set branches
@@ -439,7 +504,21 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
     outputTree->Branch("Total_s",&Total_s,"Total_s/D");
     outputTree->Branch("Total_b",&Total_b,"Total_b/D");
 	//outputTree->Branch("psitau",&psitau);
+
+
+	//other efficiencies
+	outputTree->Branch("N_s_cTheta",&N_s_cTheta);
+	outputTree->Branch("N_match_cTheta",&N_match_cTheta);
+	outputTree->Branch("Total_s_cTheta",&Total_s_cTheta);
+//	outputTree->Branch("N_b_cTheta",&N_b_cTheta);
+//	outputTree->Branch("Total_b_cTheta",&Total_b_cTheta);
     
+	//need to add more variables upstream to deal with this
+	outputTree->Branch("N_s_tjComp",&N_s_tjComp);
+	outputTree->Branch("N_match_tjComp",&N_match_tjComp);
+	outputTree->Branch("Total_s_tjComp",&Total_s_tjComp);
+	outputTree->Branch("N_b_tjComp",&N_b_tjComp);
+	outputTree->Branch("Total_b_tjComp",&Total_b_tjComp);
 
 	TTree* tree;
 	TTree* treebg;
@@ -454,6 +533,10 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	TBranch* btauType;
 	int nTaus;
 	TBranch* bnTaus;
+
+	//this will work best for not taus
+	int indexOfMinTauPsi;
+	TBranch* bindexOfMinTauPsi;
 
 	std::vector<TLorentzVector>* tauTLV = new std::vector<TLorentzVector>();
 	TBranch* btauTLV{};
@@ -561,6 +644,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 			tree->SetBranchAddress((treeNames.at(itree)+"MCTauInvisibleDaughters").c_str(), &MCTauInvisibleDaughters, &bMCTauInvisibleDaughters);
 
 			tree->SetBranchAddress((treeNames.at(itree)+"tauTLV").c_str(),&tauTLV,&btauTLV);
+			tree->SetBranchAddress((treeNames.at(itree)+"indexOfMinTauPsi").c_str(), &indexOfMinTauPsi, &bindexOfMinTauPsi);
 
 			//loop signal tree
 			auto nevent = tree->GetEntries();
@@ -581,7 +665,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 						//std::cout<<"PASS "<<std::endl;
 					
 		
-				
+				bool found = false;
 				std::string PARTICLETYPE = std::string(particletypeTag);
 				if( isMuon && PARTICLETYPE.compare("MUON")==0 ){
 					Total_s++;
@@ -592,6 +676,13 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
+					//do cTheta eff by bin
+			
+					found = foundMatch( MCf2, *tauTLV, minTauPsi, psitau);
+					countByBin( nTaus, MCf2.CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
+
+
+
 				}
 				if(isTau && PARTICLETYPE.compare("TAU0")==0){
 					Total_s += 1.;
@@ -681,7 +772,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(nTaus >= 1){
 						N_b += 1.;
 					}
-					
+					//countByBin( nTaus, MCf2.CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 			}
 			
 
@@ -701,8 +792,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		   db_ratio = sqrt( b_ratio*(1-b_ratio)/Total_b ); //error on bratio
 			s_matchratio = N_match/Total_s; //Nmatch/Ntot
 		   ds_matchratio = sqrt( s_matchratio*(1-s_matchratio)/ Total_s); //error on smatchratio
-		   singleJetFakeProb = 1- sqrt(sqrt(1-s_ratio )); //binomial prob of a single quark jet creating a tau jet
-		   singleJetFakeIneff = sqrt(sqrt(1-s_ratio)); //1- singlefakeprob
+		   singleJetFakeProb = 1- sqrt(sqrt(1-b_ratio )); //binomial prob of a single quark jet creating a tau jet
+		   singleJetFakeIneff = sqrt(sqrt(1-b_ratio)); //1- singlefakeprob
 		   dsingleJetFakeProb = (1./4.) * sqrt( b_ratio/ ( Total_b * sqrt( 1 - b_ratio) ) )	;
 		   optProd = singleJetFakeIneff*s_matchratio; //singleGetFakeIneff*s_matchratio
 		   matchratio = N_match/N_s; //Nmatch/Ns (matching efficiency)
