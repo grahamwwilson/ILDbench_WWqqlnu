@@ -423,7 +423,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	//calculate errors downstream since bins will be combined (very fine binning upstream here)
 	int cThetaBins = 20; //bins of cosT =.1
 	std::vector<double> N_s_cTheta(cThetaBins);
-	std::vector<double> N_match_cTheta;
+	std::vector<double> N_match_cTheta(cThetaBins);
     std::vector<double> Total_s_cTheta(cThetaBins);
 	std::vector<double> N_b_cTheta(cThetaBins);
 	std::vector<double> Total_b_cTheta(cThetaBins);
