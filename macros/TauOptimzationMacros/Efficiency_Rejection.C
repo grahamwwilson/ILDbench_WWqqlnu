@@ -698,6 +698,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
+					found = foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 				}
 				if(isTau && PARTICLETYPE.compare("TAU1")==0 && tauType == 1){
 					Total_s += 1.;
@@ -707,6 +709,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
+					found = foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 				}
 				if(isTau && PARTICLETYPE.compare("TAU2")==0 && tauType == 2){
 					Total_s += 1.;
@@ -716,6 +720,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
+					found = foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 				}
 				if(isTau && PARTICLETYPE.compare("TAU3")==0 && tauType == 3){
 					Total_s += 1.;
@@ -725,6 +731,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
+					found = foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 				}
 			 	if(isTau && PARTICLETYPE.compare("TAU4")==0 && tauType == 4){
 					Total_s += 1.;
@@ -734,6 +742,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if(foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau)){
 						N_match += 1.;
 					}
+					found = foundPromptTauMatch( MCf2, MCf2_PDG, *MCTauVisibleDaughters, *MCTauInvisibleDaughters, *MCTauVisibleDaughters_pdg, *MCTauInvisibleDaughters_pdg, *tauTLV, minTauPsi,  psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 				}
 				if(isElectron && PARTICLETYPE.compare("ELECTRON")==0){
 					Total_s += 1.;
@@ -744,6 +754,9 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					if( foundMatch( MCf2, *tauTLV, minTauPsi, psitau) ){
 						N_match += 1.;
 					}
+					found = foundMatch( MCf2, *tauTLV, minTauPsi, psitau);
+					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
+				
 				}
 			}
 		
