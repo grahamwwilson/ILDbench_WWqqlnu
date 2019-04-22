@@ -443,7 +443,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	std::vector<double> N_match_mom( momBins );
 	std::vector<double> Total_s_mom( momBins );
 	std::vector<double> momCuts(momBins+1);
-	momCuts.at(i) = 0.;
+	momCuts.at(0) = 0.;
 	for(int i=1; i< momBins+1; i++){
 		momCuts.at(i) = momCuts.at(i-1) + 10.;
 	}
