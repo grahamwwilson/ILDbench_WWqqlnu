@@ -437,6 +437,22 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 		std::cout<< cThetaCuts.at(i) <<" ";
 	}
 	std::cout<<std::endl;
+
+	int momBins = 20;
+	std::vector<double> N_s_mom( momBins );
+	std::vector<double> N_match_mom( momBins );
+	std::vector<double> Total_s_mom( momBins );
+	std::vector<double> momCuts(momBins+1);
+	momCuts.at(i) = 0.;
+	for(int i=1; i< momBins+1; i++){
+		momCuts.at(i) = momCuts.at(i-1) + 10.;
+	}
+	for(unsigned int i=0; i< momCuts.size(); i++){
+		std::cout<< momCuts.at(i) << " ";
+	}
+	std::cout<<std::endl;
+
+
 	//single jet fake prob must be calculated later if bins are combined
 
 	//efficiencies as a function of trackE+Mult -- call it taujetcomposition
@@ -512,13 +528,17 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outputTree->Branch("Total_s_cTheta",&Total_s_cTheta);
 //	outputTree->Branch("N_b_cTheta",&N_b_cTheta);
 //	outputTree->Branch("Total_b_cTheta",&Total_b_cTheta);
-    
+
 	//need to add more variables upstream to deal with this
 	outputTree->Branch("N_s_tjComp",&N_s_tjComp);
 	outputTree->Branch("N_match_tjComp",&N_match_tjComp);
 	outputTree->Branch("Total_s_tjComp",&Total_s_tjComp);
 	outputTree->Branch("N_b_tjComp",&N_b_tjComp);
 	outputTree->Branch("Total_b_tjComp",&Total_b_tjComp);
+
+	outputTree->Branch("N_s_mom", &N_s_mom);
+	outputTree->Branch("N_match_mom", &N_match_mom);
+	outputTree->Branch("Total_s_mom", &Total_s_mom);
 
 	TTree* tree;
 	TTree* treebg;
@@ -686,6 +706,8 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					found = foundMatch( MCf2, *tauTLV, minTauPsi, psitau);
 					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 
+					countByBin( nTaus, MCf2->P(), found, N_s_mom, N_match_mom, Total_s_mom, momCuts);
+
 
 
 				}
@@ -839,8 +861,8 @@ void Efficiency_Rejection(){
 	std::vector<const char*> ptypes{"MUON", "ELECTRON", "TAU0", "TAU1", "TAU2", "TAU3", "TAU4"};
 	int nFiles = 62;
 	int nTreesPerFile = 50;
-	//Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
-	Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
+	Efficiency_RejectionRun(subsets[0], ptypes[0], subsets[2], nFiles, nTreesPerFile );//M0
+	//Efficiency_RejectionRun(subsets[0], ptypes[2], subsets[2], nFiles, nTreesPerFile );//T0
 	//Efficiency_RejectionRun(subsets[0], ptypes[3], subsets[2], nFiles, nTreesPerFile );//T1
 	//Efficiency_RejectionRun(subsets[0], ptypes[4], subsets[2], nFiles, nTreesPerFile );//T2
 	//Efficiency_RejectionRun(subsets[0], ptypes[5], subsets[2], nFiles, nTreesPerFile );//T3
