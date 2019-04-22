@@ -457,7 +457,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	int sThetaBins = 20;
 	std::vector<double> N_s_sTheta(sThetaBins);
 	std::vector<double> N_match_sTheta(sThetaBins);
-	std::vector<double> Total_s_mom( sThetaBins );
+	std::vector<double> Total_s_sTheta( sThetaBins );
 	std::vector<double> sThetaCuts;
 	sThetaCuts = cThetaCuts;
 
@@ -720,7 +720,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 
 					countByBin( nTaus, MCf2->P(), found, N_s_mom, N_match_mom, Total_s_mom, momCuts);
 					
-					countByBin( nTaus,  -(MCf_PDG/abs(MCf2_PDG))*sin(MCf2->Theta()), found, N_s_sTheta, N_match_sTheta, Total_s_sTheta, sThetaCuts);
+					countByBin( nTaus,  -(MCf2_PDG/abs(MCf2_PDG))*sin(MCf2->Theta()), found, N_s_sTheta, N_match_sTheta, Total_s_sTheta, sThetaCuts);
 
 
 				}
