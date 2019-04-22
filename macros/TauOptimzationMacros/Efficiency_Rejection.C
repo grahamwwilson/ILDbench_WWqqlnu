@@ -86,7 +86,7 @@ void countByBin( int nTaus, double cutparam, bool matchfound,
 
 		
 			for( int j=0; j<cuts.size()-1; j++){
-				if( cutparam <= cuts.at(j) && cutparam < cuts.at(j+1)){
+				if( cutparam >= cuts.at(j) && cutparam < cuts.at(j+1)){
 					Total.at(j) += 1.;
 					if( nTaus >= 1 ){
 						N.at(j) += 1.;
@@ -421,6 +421,7 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 
 	//efficiencies as a function of polar angle
 	//calculate errors downstream since bins will be combined (very fine binning upstream here)
+	//( -q cos theta) 
 	int cThetaBins = 20; //bins of cosT =.1
 	std::vector<double> N_s_cTheta(cThetaBins);
 	std::vector<double> N_match_cTheta(cThetaBins);
@@ -452,6 +453,13 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	}
 	std::cout<<std::endl;
 
+	//q sintheta
+	int sThetaBins = 20;
+	std::vector<double> N_s_sTheta(sThetaBins);
+	std::vector<double> N_match_sTheta(sThetaBins);
+	std::vector<double> Total_s_mom( sThetaBins );
+	std::vector<double> sThetaCuts;
+	sThetaCuts = cThetaCuts;
 
 	//single jet fake prob must be calculated later if bins are combined
 
@@ -539,6 +547,10 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 	outputTree->Branch("N_s_mom", &N_s_mom);
 	outputTree->Branch("N_match_mom", &N_match_mom);
 	outputTree->Branch("Total_s_mom", &Total_s_mom);
+
+	outputTree->Branch("N_s_sTheta", &N_s_sTheta);
+	outputTree->Branch("N_match_sTheta",&N_match_sTheta);
+	outputTree->Branch("Total_s_sTheta",&Total_s_sTheta);
 
 	TTree* tree;
 	TTree* treebg;
@@ -704,10 +716,11 @@ void Efficiency_RejectionRun(const char* subsetTag, const char* particletypeTag 
 					//do cTheta eff by bin
 			
 					found = foundMatch( MCf2, *tauTLV, minTauPsi, psitau);
-					countByBin( nTaus, MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
+					countByBin( nTaus, (MCf2_PDG/abs(MCf2_PDG)) *MCf2->CosTheta(), found, N_s_cTheta, N_match_cTheta, Total_s_cTheta, cThetaCuts);
 
 					countByBin( nTaus, MCf2->P(), found, N_s_mom, N_match_mom, Total_s_mom, momCuts);
-
+					
+					countByBin( nTaus,  -(MCf_PDG/abs(MCf2_PDG))*sin(MCf2->Theta()), found, N_s_sTheta, N_match_sTheta, Total_s_sTheta, sThetaCuts);
 
 
 				}
