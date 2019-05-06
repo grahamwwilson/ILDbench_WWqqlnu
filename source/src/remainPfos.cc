@@ -12,7 +12,7 @@ TLorentzVector* remainPfos::createReconstructedParticleTLV(ReconstructedParticle
 void remainPfos::setParticles( std::vector<ReconstructedParticle*>& taus, std::vector<ReconstructedParticle*>& remainpfos){
 
 	_taus = taus;
-	std::vector<TlorentzVector> tlv( _taus.size() );
+	std::vector<TLorentzVector> tlv( _taus.size() );
 	_tlvtaus = tlv;
 	for( unsigned int i=0; i< _tlvtaus.size(); i++ ){
 		_tlvtaus.at(i) = *(createReconstructedParticleTLV(_taus.at(i)));
@@ -66,7 +66,7 @@ void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVe
 		//pull the tau apart and add each component
 		std::vector<ReconstructedParticle*> unselectedComponents = _taus.at(i)->getParticles();
 		for( unsigned int j=0; j< unselectedComponents.size(); j++){
-			selremainpfos.push_back( *(createReconstructedParticleTLV( _unselectedComponents.at(j))) );
+			selremainpfos.push_back( *(createReconstructedParticleTLV( unselectedComponents.at(j))) );
 		}
 		
 	}
