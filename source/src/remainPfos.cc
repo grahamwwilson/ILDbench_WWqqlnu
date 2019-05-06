@@ -4,7 +4,7 @@ remainPfos::remainPfos( const char* variableSetName, TTree*& tree){
 	_localTree = tree;
 	_variableSetName = variableSetName;
 }
-TLorentzVector* tauFinderVariables::createReconstructedParticleTLV(ReconstructedParticle* p){
+TLorentzVector* remainPfos::createReconstructedParticleTLV(ReconstructedParticle* p){
 	TLorentzVector* t = new TLorentzVector();
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
@@ -44,9 +44,9 @@ void remainPfos::setESelIndex(){
 	if(_tlvtaus.size() == 0) return;	
 	int EIndex=-1;
 	double Emax = 0.;
-	for(unsigned int i=0; i< _tlvtaus.size(); i++){
-		if(_tlvtaus.at(i).getEnergy() > Emax){
-			Emax = _tlvtaus.at(i).getEnergy();
+	for(unsigned int i=0; i< _taus.size(); i++){
+		if(_taus.at(i)->getEnergy() > Emax){
+			Emax = _taus.at(i)->getEnergy();
 			EIndex = i;
 		}
 	}
@@ -58,13 +58,13 @@ void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVe
 	if(_tlvtaus.size() == 0 ) return;
 
 	//add all remain pfos immediately
-	for(unsigned int i=0; i< _tlvremainpfos; i++){
+	for(unsigned int i=0; i< _tlvremainpfos.size(); i++){
 		selremainpfos.push_back( _tlvremainpfos.at(i) );
 	}
-	for(unsigned int i=0; i< _tlvtaus; i++){
+	for(unsigned int i=0; i< _tlvtaus.size(); i++){
 		if(i == selIndex) continue;
 		//pull the tau apart and add each component
-		std::vector<ReconstructedParticle*> unselectedComponents = _tlvtaus.at(i)->getParticles();
+		std::vector<ReconstructedParticle*> unselectedComponents = _taus.at(i)->getParticles();
 		for( unsigned int j=0; j< unselectedComponents.size(); j++){
 			selremainpfos.push_back( *(createReconstructedParticleTLV( _unselectedComponents.at(j))) );
 		}

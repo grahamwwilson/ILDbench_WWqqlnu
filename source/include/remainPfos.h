@@ -19,7 +19,7 @@ class remainPfos{
 	public:
 	remainPfos( const char* variableSetName, TTree*& tree);
 
-	void setParticles( std::vector<ReconstructedParticle*>& taus, std::vectror<ReconstructedParticle*>& remainpfos)//, std::vector<LCRelation*>& pfo2mc);
+	void setParticles( std::vector<ReconstructedParticle*>& taus, std::vector<ReconstructedParticle*>& remainpfos);//, std::vector<LCRelation*>& pfo2mc);
 	void initLocalTree();
 
 	TTree* _localTree{};
