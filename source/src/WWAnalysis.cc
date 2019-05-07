@@ -481,7 +481,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_mcv.at(i)->setParticles(_mcpartvec);
 			_mcv.at(i)->initMCVars();
 
-			_rp.at(i)->setParticles(_remainCollections.at(i));
+			_rp.at(i)->setParticles( _particleCollections.at(i),_remainCollections.at(i));
 			_rp.at(i)->setESelIndex();
 			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos );
 			
@@ -523,7 +523,7 @@ void WWAnalysis::processEvent( LCEvent * evt ) {
 // FindJets(evt);
 for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindPFOCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
-	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _inputRemainCollectionsNames.at(i));
+	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _remainCollections.at(i));
 }
 
 //doing tau optimization
