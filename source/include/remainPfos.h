@@ -46,7 +46,8 @@ class remainPfos{
 	TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 	void setMCSelIndex( int index );
 	void setESelIndex();
-	void populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVector>& selremainpfos );
+	void populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVector>& selremainpfos );\
+	void evaluateSelection();
 
 };
 #endif

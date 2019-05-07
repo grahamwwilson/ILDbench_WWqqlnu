@@ -150,8 +150,8 @@ void WWAnalysis::init() {
 		std::vector<ReconstructedParticle*> Jcollection{};
 		std::vector<ReconstructedParticle*> Rcollection{};
 		initParticleCollections.at(i)=Jcollection ;
-		initRemainCollections.at(i)=Rcollection;
 		//_particleCollections.push_back(collection);
+		initRemainCollections.at(i)=Rcollection;
 	}
 	_particleCollections = initParticleCollections;
 	_remainCollections = initRemainCollections;
@@ -495,6 +495,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 
 				_rp.at(i)->setMCSelIndex( _tf.at(i)->_indexOfMinTauPsi );
 				_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_mcselindex, _rp.at(i)->_mcselremainpfos );
+				_rp.at(i)->evaluateSelection();
 
 			}
 			else{

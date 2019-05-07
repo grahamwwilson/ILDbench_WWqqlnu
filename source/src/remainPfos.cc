@@ -71,6 +71,16 @@ void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVe
 		
 	}
 }
+void remainPfos::evaluateSelection(){
+	
+	if(_mcselindex == _eselindex){
+		_esel_match_mcsel=1.0;
+	}
+	else{
+		_esel_match_mcsel=0.0;
+	}
+
+}
 void remainPfos::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"mcselremainpfos").c_str(),"vector<TLorentzVector>", &_mcselremainpfos);
