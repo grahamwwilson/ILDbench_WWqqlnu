@@ -496,7 +496,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 				_rp.at(i)->setMCSelIndex( _tf.at(i)->_indexOfMinTauPsi );
 				_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_mcselindex, _rp.at(i)->_mcselremainpfos );
 				_rp.at(i)->evaluateSelection();
-				std::cout<< "mcindex "<< _rp.at(i)->mcselindex<<" eindex "<< _rp.at(i)->_eselindex<<std::endl;
+				std::cout<< "mcindex "<< _rp.at(i)->_mcselindex<<" eindex "<< _rp.at(i)->_eselindex<<std::endl;
 
 			}
 			else{
