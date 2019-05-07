@@ -126,7 +126,6 @@ void WWAnalysis::initTauFinderOptimization(){
 				_trees.at(i)->Branch("xsecerr",&_xsecerr,"xsecerr/D");
 				_trees.at(i)->Branch("nevt",&_nEvt,"nevt/I");
 
-			((vsn+"eselmatchmcsel").c_str(),&_esel_match_mcsel, (vsn+"eselmatchmcsel/D").c_str() )
 				_tf.at(i) = new tauFinderVariables(_inputJetCollectionsNames.at(i).c_str(), _trees.at(i));
 				_tf.at(i)->initLocalTree();
 				_mcv.at(i) = new mcVariables(_inputJetCollectionsNames.at(i).c_str(), _nfermions, _nleptons, _trees.at(i));
@@ -146,7 +145,7 @@ void WWAnalysis::init() {
 
 //init particle collection vectors
 	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
-	std::vector<std::vector<Reconstructedparticle*> > initRemainCollections( _inputRemainCollectionsNames.size());
+	std::vector<std::vector<ReconstructedParticle*> > initRemainCollections( _inputRemainCollectionsNames.size());
 	for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 		std::vector<ReconstructedParticle*> Jcollection{};
 		std::vector<ReconstructedParticle*> Rcollection{};
