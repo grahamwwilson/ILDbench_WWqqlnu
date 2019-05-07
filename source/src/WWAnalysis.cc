@@ -150,7 +150,7 @@ void WWAnalysis::init() {
 		std::vector<ReconstructedParticle*> Jcollection{};
 		std::vector<ReconstructedParticle*> Rcollection{};
 		initParticleCollections.at(i)=Jcollection ;
-		initRemainCollections.at(i)=Rcollection{};
+		initRemainCollections.at(i)=Rcollection;
 		//_particleCollections.push_back(collection);
 	}
 	_particleCollections = initParticleCollections;
