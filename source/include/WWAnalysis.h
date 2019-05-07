@@ -32,6 +32,7 @@
 #include "HistoManager.h"
 #include "tauFinderVariables.h"
 #include "mcVariables.h"
+#include "remainPfos.h"
 
 
 //#define ncuts 7
@@ -77,22 +78,14 @@ using namespace lcio;
 
  //collection gathering
   bool FindMCParticles( LCEvent* evt );
- // bool FindJets( LCEvent* evt ) ;
-  bool FindPFOs( LCEvent* evt ) ;
   bool FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec );
   bool FindTracks( LCEvent* evt );
   bool FindRecoToMCRelation( LCEvent* evt );
- // bool FindJetsWithOverlay( LCEvent* evt );
-  bool FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec );
 
-	void processSignalVariableSet(LCEvent* evt, std::vector<LCRelation*> pfo2mc, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets);
-	void printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, overlayVariables*& oVar );
-
+	
    void processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc);
 
-   void processVariables(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets );
 
-   void processBackground(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets);
 
 
 	
@@ -115,42 +108,9 @@ using namespace lcio;
 
   protected:
 
- //variable helper classes
- eventVariables* ev_eekt{};
- jetVariables* jv_eekt{};
- anaVariables* ana_eekt{};
- overlayVariables* ov_eekt{};
- 
-	eventVariables* ev_pure{};
-	jetVariables*	jv_pure{};
-	anaVariables*  ana_pure{};
 
-	eventVariables* ev_kt15{};
- jetVariables* jv_kt15{};
- anaVariables* ana_kt15{};
- overlayVariables* ov_kt15{};
-
-	eventVariables* ev_kt08{};
- jetVariables* jv_kt08{};
- anaVariables* ana_kt08{};
- overlayVariables* ov_kt08{};
-
-	//testing classes for tau finder
-	tauFinderVariables* tfv{};
-	eventVariables* ev_tfv{};
-
-//overlay removed from eekt variables set
-// eventVariables* ev_eekt_no_overlay{};
-// jetVariables* jv_eekt_no_overlay{};
-// anaVariables* ana_eekt_no_overlay{};
-
- PandoraPfoVariables* ppfov{};
- PandoraPfoVariables* ppfoPure{};
- //overlayVariables* ppfo_ovr{};
- HistoManager* h1{};
-//TTree
   TFile* file{};
-  TTree* _tree{};//general tree
+ // TTree* _tree{};//general tree
 
   TTree* _puretree{};
   TTree* _eekttree{};
@@ -165,23 +125,25 @@ using namespace lcio;
  std::vector<TTree*> _trees{};
 
 //Tau optimization////
+ int _tauoptmode{};
  void initTauFinderOptimization();
  void SetTauOptimizationVariables();
  void initEmptyTau(tauFinderVariables*& t, MCParticle* tau);
  void initTauWithNoMCLepton(tauFinderVariables*& t);
  std::vector<tauFinderVariables*> _tf{};
  std::vector<mcVariables*> _mcv{};
+ std::vector<remainPfos*> _rp{};
 
+
+TTree* _tree{};//single run tree
+//non tau optimization
 
   int _nRun{};
   int _nEvt{};
+  double _xsec{}; 
+  double _xsecerr{};
 
 std::string _outpath;
-
-
-
-
-
 
 
 //the total number of unique cuts applied (for histogram indexing)
@@ -197,14 +159,6 @@ std::string _outpath;
   std::vector<ReconstructedParticle*> _purePFOs{};
   std::vector<LCRelation*> _reco2mcvec{};
  
- std::vector<ReconstructedParticle*> _eektJets{};
-  std::vector<ReconstructedParticle*> _kt08Jets{};
-
-  std::vector<ReconstructedParticle*> _kt15Jets{};
-  std::vector<ReconstructedParticle*> _pureJets{};
-
-
-  std::vector<ReconstructedParticle*> _tauJets{};
 
  
  
@@ -229,24 +183,16 @@ std::string _outpath;
 
   //input collections
   std::string _inputMcParticleCollectionName{};
-  std::string _inputJetCollectionName{};
-  std::string _inputJetWithOverlayCollectionName{};
-  std::string _inputParticleCollectionName{};
+
   std::string _inputTrackCollectionName{};
   std::string _inputRecoRelationCollectionName{};
 
-  std::vector<std::string> _inputJetCollectionsNames{};
   std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
+ // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
- // std::< std::vector<std::string> > jetCollectionNames{};
+  std::< std::vector<std::string> > jetCollectionNames{};
 
-  std::string _JetCollName_eekt = "eektJets";
-  std::string _JetCollName_kt15 = "kt15Jets";
-  std::string _JetCollName_kt08 = "kt08Jets";
-  std::string _JetCollName_pure = "pureJets";
-  std::string _PfoCollName_pure = "purgedPFOs";
-  //taufinding
-	std::string _JetCollName_tau = "tauJets";
+
 
 
 
