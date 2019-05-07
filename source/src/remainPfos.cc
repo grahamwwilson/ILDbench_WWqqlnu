@@ -73,7 +73,7 @@ void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVe
 }
 void remainPfos::evaluateSelection(){
 	
-	if(_mcselindex == _eselindex){
+	if(_mcselindex == _eselindex && _mcselindex != -1){
 		_esel_match_mcsel=1.0;
 	}
 	else{
