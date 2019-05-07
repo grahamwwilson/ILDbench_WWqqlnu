@@ -35,6 +35,9 @@ void remainPfos::setParticles( std::vector<ReconstructedParticle*>& taus, std::v
 	
 	_esel_match_mcsel = -1.;
 
+	_mcselindex = -1;
+	_eselindex = -1;
+
 }
 void remainPfos::setMCSelIndex( int index ){
 	_mcselindex = index;
