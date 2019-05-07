@@ -110,16 +110,6 @@ using namespace lcio;
 
 
   TFile* file{};
- // TTree* _tree{};//general tree
-
-  TTree* _puretree{};
-  TTree* _eekttree{};
-  TTree* _kt15tree{};
-  TTree* _kt08tree{};
-
-  //taufinder tree
-  TTree* _tautree{};
-
 
 
  std::vector<TTree*> _trees{};
@@ -188,9 +178,14 @@ std::string _outpath;
   std::string _inputRecoRelationCollectionName{};
 
   std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
+  std::vector<std::vector<Reconstructedparticle*> > _remainCollections{};
  // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
-  std::< std::vector<std::string> > jetCollectionNames{};
+  std::vector<std::vector<std::string> > _inputJetCollectionsNames{};
+  std::vector<std::vector<std::string> > _inputRemainCollectionsNames{};
+
+	
+
 
 
 

@@ -29,31 +29,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 				_inputMcParticleCollectionName,
 				inputMcParticleCollectionName);
 
-	//input collection parameters
-	std::string inputJetCollectionName = "x";
-  	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
-			     	"InputJetCollectionName" , 
-			     	"Input Jet Collection Name "  ,
-			     	_inputJetCollectionName,
-			      	inputJetCollectionName);
-
-
-
-	//collection for fast jet with no prior overlay removal
-	std::string inputJetWithOverlayCollectionName = "x";
-  	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
-			     	"InputJetWithOverlayCollectionName" , 
-			     	"Input Jet With Overlay Collection Name "  ,
-			     	_inputJetWithOverlayCollectionName,
-			      	inputJetWithOverlayCollectionName);
-
-	//input track and particle collections:
-	std::string inputParticleCollectionName = "x";
-  	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
-			     	"InputParticleCollectionName" , 
-			     	"Input Particle Collection Name "  ,
-			     	_inputParticleCollectionName,
-			      	inputParticleCollectionName);
+	
 
  	std::string inputTrackCollectionName = "x";
   	registerInputCollection( LCIO::TRACK,
