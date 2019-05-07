@@ -178,7 +178,7 @@ std::string _outpath;
   std::string _inputRecoRelationCollectionName{};
 
   std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
-  std::vector<std::vector<Reconstructedparticle*> > _remainCollections{};
+  std::vector<std::vector<ReconstructedParticle*> > _remainCollections{};
  // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
   std::vector<std::vector<std::string> > _inputJetCollectionsNames{};

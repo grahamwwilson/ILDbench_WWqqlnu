@@ -47,7 +47,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
     	//input remain collection 
 	std::vector<std::string> inputRemainCollectionsNames{"x"};
-	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
+	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
 					"InputRemainCollectionsNames",
 					"Input Remain Collections Name",
 					_inputRemainCollectionsNames,
