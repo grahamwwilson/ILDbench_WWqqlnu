@@ -457,7 +457,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 	for(unsigned int i=0; i<_tf.size(); i++){
 		//make sure we have jets in this particular collection
 		if( _particleCollections.at(i).size() == 0){
-			std::cout<<"No Taus in: "<<_inputJetCollectionsNames.at(i)<<std::endl;
+			std::cout<<"No Taus in: "<< _inputJetCollectionsNames.at(i)<<std::endl;
 
 			//have to save 
 			_mcv.at(i)->setParticles(_mcpartvec);

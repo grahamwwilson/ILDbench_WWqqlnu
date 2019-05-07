@@ -181,8 +181,8 @@ std::string _outpath;
   std::vector<std::vector<ReconstructedParticle*> > _remainCollections{};
  // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
-  std::vector<std::vector<std::string> > _inputJetCollectionsNames{};
-  std::vector<std::vector<std::string> > _inputRemainCollectionsNames{};
+  std::vector<std::string> _inputJetCollectionsNames{};
+  std::vector<std::string> _inputRemainCollectionsNames{};
 
 	
 
