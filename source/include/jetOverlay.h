@@ -27,10 +27,12 @@ class jetOverlay{
 		TTree* _localTree{};
 		unsigned int _nJets{};
 		const char* _variableSetName{};
+
+		std::vector<LCRelation*> _pfo2mc{};
 		std::vector<MCParticle*> _MCOverlay{};
 		std::vector<int> _MCOverlayIDs{};
 
-		std:vector<ReconstructedParticle*> _jets{};
+		std::vector<ReconstructedParticle*> _jets{};
 		std::vector< std::vector<ReconstructedParticle*> > _overlayParticles{};
 		std::vector< std::vector<TLorentzVector> > _tlvoverlayParticles{};
 

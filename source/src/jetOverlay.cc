@@ -49,8 +49,8 @@ void jetOverlay::setParticles(std::vector<ReconstructedParticle*>& jets, std::ve
 		_tlvoverlayParticles.at(i).clear();
 	}
 
-	std::vector<std::vector<ReconstructedParticle*> op(njets);
-	std::vector<std::vector<TLorentzVector> tlop(njets);
+	std::vector<std::vector<ReconstructedParticle*> > op(njets);
+	std::vector<std::vector<TLorentzVector> > tlop(njets);
 
 	_overlayParticles = op;
 	_tlvoverlayParticles = tlop;
