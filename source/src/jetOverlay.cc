@@ -2,7 +2,7 @@
 
 
 
-overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree){
+jetOverlay::jetOverlay(const char* variableSetName, TTree*& tree){
 	
 
 
@@ -12,12 +12,12 @@ overlayVariables::overlayVariables(const char* variableSetName, TTree*& tree){
 
 
 }
-TLorentzVector* overlayVariables::createReconstructedParticleTLV(ReconstructedParticle* p){
+TLorentzVector* jetOverlay::createReconstructedParticleTLV(ReconstructedParticle* p){
 	TLorentzVector* t = new TLorentzVector();
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
-void overlayVariables::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
+void jetOverlay::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec ){
 	
 	//this skims over mcparts and creates a list of all the overlay particles
 	for( unsigned int i=0; i<mcpartvec.size(); i++){
@@ -31,7 +31,7 @@ void overlayVariables::setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::ve
 	 std::sort (MCOverlayIDs.begin(), MCOverlayIDs.end());	
 
 }
-void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc, int njets, std::vector<MCParticle*>& mcpartvec){
+void jetOverlay::setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc, int njets, std::vector<MCParticle*>& mcpartvec){
 
 	
 
@@ -58,7 +58,7 @@ void overlayVariables::setParticles(std::vector<ReconstructedParticle*>& jets, s
 	setMCOverlay( _MCOverlay, _MCOverlayIDs, mcpartvec);
 
 }
-bool overlayVariables::particleIsOverlay(int id ){
+bool jetOverlay::particleIsOverlay(int id ){
 	//find particle in LCRelation list
 	for(unsigned int i=0; i<_pfo2mc.size(); i++){
 			
@@ -79,7 +79,7 @@ bool overlayVariables::particleIsOverlay(int id ){
 	}
 		return false;
 }
-void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles,  const std::vector<ReconstructedParticle*>& jetParticles ){
+void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles,  const std::vector<ReconstructedParticle*>& jetParticles ){
 		
 
 	//loop over thejet particles, if it is overlay keep it
@@ -94,7 +94,7 @@ void overlayVariables::setOverlayParticles(std::vector<ReconstructedParticle*>& 
 
 
 }
-void overlayVariables::setOverlayparticles(){
+void jetOverlay::setOverlayparticles(){
 	if(_nJets == 1){//special case 
 		setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets
 	}
@@ -105,7 +105,7 @@ void overlayVariables::setOverlayparticles(){
 	}
 
 }
-void overlayVariables::initLocalTree(){
+void jetOverlay::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"JetOLtlv").c_str(), "vector<vector<TLorentzVector> >", &_tlvoverlayParticles);
 }

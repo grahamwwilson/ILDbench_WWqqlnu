@@ -21,7 +21,7 @@ using namespace lcio;
 class jetOverlay{
 
 	public:
-		overlayVariables( const char* variableSetName, Tree*& tree );
+		jetOverlay( const char* variableSetName, TTree*& tree );
 		void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc, int njets);
 
 		TTree* _localTree{};
