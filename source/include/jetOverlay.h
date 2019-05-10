@@ -22,7 +22,7 @@ class jetOverlay{
 
 	public:
 		jetOverlay( const char* variableSetName, TTree*& tree );
-		void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc, int njets);
+		void setParticles(std::vector<ReconstructedParticle*>& jets, std::vector<LCRelation*>& pfo2mc, int njets, std::vector<MCParticle*>& mcpartvec);
 
 		TTree* _localTree{};
 		unsigned int _nJets{};
@@ -36,8 +36,11 @@ class jetOverlay{
 
 		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );	
 		TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
-		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, ReconstructedParticle*& purgedJet, TLorentzVector*& purgedTLVJet, const std::vector<ReconstructedParticle*>& jetParticles );
+		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles );
+		void setOverlayParticles();
 		bool particleIsOverlay(int id );
+
+		void initLocalTree();
 
 };
 #endif
