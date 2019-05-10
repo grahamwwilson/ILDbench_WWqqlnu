@@ -94,18 +94,18 @@ void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overla
 
 
 }
-void jetOverlay::setOverlayParticles(){
+void jetOverlay::setOverlay(){
 	
-	else{
+	
 		for(unsigned int i=0; i< _nJets; i++){
 			if(_nJets==1){
-						setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets);
+				setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets);
 			}
 			else{
 				setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i) ,  _jets.at(i)->getParticles());
 			}
 		}	
-	}
+	
 
 }
 void jetOverlay::initLocalTree(){

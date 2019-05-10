@@ -39,7 +39,7 @@ class jetOverlay{
 		void setMCOverlay(std::vector<MCParticle*>& MCOverlay, std::vector<int>& MCOverlayIDs, std::vector<MCParticle*>& mcpartvec );	
 		TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 		void setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles, const std::vector<ReconstructedParticle*>& jetParticles );
-		void setOverlayParticles();
+		void setOverlay();
 		bool particleIsOverlay(int id );
 
 		void initLocalTree();
