@@ -35,6 +35,8 @@ class overlayVariables{
 		std::vector<ReconstructedParticle*> _jets{};
 		std::vector<ReconstructedParticle*> _purgedJets{};//jets free from overlay
 		std::vector<TLorentzVector*> _tlvpurgedJets{};
+		
+	//	std::vector<TLorentzVector> _OLParticles{}; // not per jet just in total
 
 		std::vector< std::vector<ReconstructedParticle*> > _overlayParticles{};//populate from a set of reco jets
 		std::vector< std::vector<TLorentzVector*> > _tlvoverlayParticles{};
@@ -89,6 +91,8 @@ class overlayVariables{
 		void setTotalVariables();
 
 		void printOverlayVariables();
+
+	//	std:vector<ReconstructedParticle*> 
 
 };
 #endif

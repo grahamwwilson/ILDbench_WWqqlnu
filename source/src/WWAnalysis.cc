@@ -113,11 +113,13 @@ void WWAnalysis::initTauFinderOptimization(){
 			std::vector<mcVariables*> m(_inputJetCollectionsNames.size());
 
 			std::vector<remainPfos*> r(_inputRemainCollectionsNames.size());
+			std::vector<overlayVariables*> orp(_inputRemainCollectionsNames.size());
 
 			_trees = t;
 			_tf = f;
 			_mcv = m;
 			_rp = r;
+		
 
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
 				_trees.at(i) = new TTree(_inputJetCollectionsNames.at(i).c_str(), _inputJetCollectionsNames.at(i).c_str());
@@ -132,6 +134,7 @@ void WWAnalysis::initTauFinderOptimization(){
 				_mcv.at(i)->initLocalTree();
 				_rp.at(i) = new remainPfos(_inputRemainCollectionsNames.at(i).c_str(), _trees.at(i));
 				_rp.at(i)->initLocalTree();
+			
 				
 			}
 
@@ -488,6 +491,8 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_rp.at(i)->setParticles( _particleCollections.at(i),_remainCollections.at(i));
 			_rp.at(i)->setESelIndex();
 			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos );
+
+
 			
 			//make sure this isnt bg
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
@@ -501,6 +506,9 @@ void WWAnalysis::SetTauOptimizationVariables(){
 				_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_mcselindex, _rp.at(i)->_mcselremainpfos );
 				_rp.at(i)->evaluateSelection();
 				std::cout<< "mcindex "<< _rp.at(i)->_mcselindex<<" eindex "<< _rp.at(i)->_eselindex<<std::endl;
+
+				//do overlay for rp
+				
 
 			}
 			else{

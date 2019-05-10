@@ -251,7 +251,7 @@ void overlayVariables::printOverlayVariables(){
 
 }
 void overlayVariables::initLocalTree(){
-	
+	/*
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
 		name << _variableSetName << "jet"<<i<<"_ovrSum";
@@ -264,14 +264,16 @@ void overlayVariables::initLocalTree(){
 		_localTree->Branch(name.str().c_str(),"TLorentzVector", &_tlvpurgedJets.at(i),16000,0);
 	}
 	
-	
+	*/
 
 	std::string vsn(_variableSetName);
-	
-	_localTree->Branch((vsn+"ovr_totalMass").c_str(), &_overlay_totalMass, (vsn+"ovr_totalMass/D").c_str());		
-	_localTree->Branch((vsn+"ovr_totalEnergy").c_str(), &_overlay_totalEnergy, (vsn+"ovr_totalEnergy/D").c_str());
-	_localTree->Branch((vsn+"ovr_cosTheta.").c_str(), &_overlay_cosTheta);
-	_localTree->Branch((vsn+"ovr_phi.").c_str(), &_overlay_phi);							
+	_localTree->Branch((vsn+"JetOLtlv").c_str(), "vector<vector<TLorentzVector> >", &_tlvoverlayParticles);
+
+	//_localTree->Branch((vsn+"OLtlv").c_str(), "vector<TLorentzVector>", &_OLParticles);	
+	//_localTree->Branch((vsn+"ovr_totalMass").c_str(), &_overlay_totalMass, (vsn+"ovr_totalMass/D").c_str());		
+	//_localTree->Branch((vsn+"ovr_totalEnergy").c_str(), &_overlay_totalEnergy, (vsn+"ovr_totalEnergy/D").c_str());
+	//_localTree->Branch((vsn+"ovr_cosTheta.").c_str(), &_overlay_cosTheta);
+	//_localTree->Branch((vsn+"ovr_phi.").c_str(), &_overlay_phi);							
 
 	if(_tagOpt){
 		_localTree->Branch((vsn+"upliketag_ovr").c_str(),"TLorentzVector",&_upliketag_overlay, 16000,0);
