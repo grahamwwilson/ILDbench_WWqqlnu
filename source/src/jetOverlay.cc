@@ -79,14 +79,14 @@ bool jetOverlay::particleIsOverlay(int id ){
 	}
 		return false;
 }
-void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector*>& tlvoverlayParticles,  const std::vector<ReconstructedParticle*>& jetParticles ){
+void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector>& tlvoverlayParticles,  const std::vector<ReconstructedParticle*>& jetParticles ){
 		
 
 	//loop over thejet particles, if it is overlay keep it
 	for(unsigned int i=0; i< jetParticles.size(); i++){
 		if(particleIsOverlay( jetParticles.at(i)->id() )){
 			overlayParticles.push_back(jetParticles.at(i));
-			tlvoverlayParticles.push_back( createReconstructedParticleTLV( jetParticles.at(i) ));
+			tlvoverlayParticles.push_back( *createReconstructedParticleTLV( jetParticles.at(i) ));
 		}
 
 	}
