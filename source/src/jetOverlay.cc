@@ -94,7 +94,7 @@ void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overla
 
 
 }
-void jetOverlay::setOverlayparticles(){
+void jetOverlay::setOverlayParticles(){
 	if(_nJets == 1){//special case 
 		setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets
 	}
