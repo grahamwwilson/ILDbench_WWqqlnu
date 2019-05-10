@@ -95,12 +95,15 @@ void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overla
 
 }
 void jetOverlay::setOverlayParticles(){
-	if(_nJets == 1){//special case 
-		setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets
-	}
+	
 	else{
 		for(unsigned int i=0; i< _nJets; i++){
-			setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i) ,  _jets.at(i)->getParticles());
+			if(_nJets==1){
+						setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets);
+			}
+			else{
+				setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i) ,  _jets.at(i)->getParticles());
+			}
 		}	
 	}
 
