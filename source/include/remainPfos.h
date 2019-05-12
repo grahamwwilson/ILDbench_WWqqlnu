@@ -36,9 +36,11 @@ class remainPfos{
 
 	//tau selected by mc matching
 	std::vector<TLorentzVector> _mcselremainpfos{};
+	std::vector<ReconstructedParticle*> _mcselremainRP{};
 	
 	//tau selected by highest energy
 	std::vector<TLorentzVector> _eselremainpfos{};
+	std::vector<ReconstructedParticle*> _eselremainRP{};
 
 	//flag if mcsel and esel select the same tau jet 1.0 = yes, 0.0 = no
 	double _esel_match_mcsel{};

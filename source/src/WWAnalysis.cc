@@ -115,10 +115,13 @@ void WWAnalysis::initTauFinderOptimization(){
 			std::vector<remainPfos*> r(_inputRemainCollectionsNames.size());
 			std::vector<overlayVariables*> orp(_inputRemainCollectionsNames.size());
 
+			std::vector<jetOverlay*> j1(_inputRemainCollectionsNames.size());
+
 			_trees = t;
 			_tf = f;
 			_mcv = m;
 			_rp = r;
+			_ol1j = j1;
 		
 
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
@@ -134,6 +137,8 @@ void WWAnalysis::initTauFinderOptimization(){
 				_mcv.at(i)->initLocalTree();
 				_rp.at(i) = new remainPfos(_inputRemainCollectionsNames.at(i).c_str(), _trees.at(i));
 				_rp.at(i)->initLocalTree();
+
+				_ol1j.at(i) = new jetOverlay(_inputRemainCollectionsNames.at(i).c_str(), _trees.at(i));
 			
 				
 			}
@@ -490,9 +495,11 @@ void WWAnalysis::SetTauOptimizationVariables(){
 
 			_rp.at(i)->setParticles( _particleCollections.at(i),_remainCollections.at(i));
 			_rp.at(i)->setESelIndex();
-			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos );
+			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos , _rp.at(i)->_eselremainRP);
 
-
+			//can look at overlay without an mc lep
+			_ol1j.at(i)->setParticles(_rp.at(i)->_eselremainRP, _reco2mcvec, 1, _mcpartvec);
+			_ol1j.at(i)->setOverlay();
 			
 			//make sure this isnt bg
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
@@ -503,11 +510,11 @@ void WWAnalysis::SetTauOptimizationVariables(){
 				_tf.at(i)->setTauOLVariables(_mcpartvec);
 
 				_rp.at(i)->setMCSelIndex( _tf.at(i)->_indexOfMinTauPsi );
-				_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_mcselindex, _rp.at(i)->_mcselremainpfos );
+				_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_mcselindex, _rp.at(i)->_mcselremainpfos, _rp.at(i)->_mcselremainRP );
 				_rp.at(i)->evaluateSelection();
 				std::cout<< "mcindex "<< _rp.at(i)->_mcselindex<<" eindex "<< _rp.at(i)->_eselindex<<std::endl;
 
-				//do overlay for rp
+				
 				
 
 			}

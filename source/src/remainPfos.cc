@@ -29,9 +29,15 @@ void remainPfos::setParticles( std::vector<ReconstructedParticle*>& taus, std::v
 	//make fresh vector because we are going to use push_back
 	std::vector<TLorentzVector> mcsel{};
 	_mcselremainpfos = mcsel;
+
+	std::vector<ReconstructedParticle*> mcrp{};
+	_mcselremainRP = mcrp;
 	
 	std::vector<TLorentzVector> esel{};
 	_eselremainpfos = esel;
+
+	std::vector<ReconstructedParticle*> rmrp{};
+	_eselremainRP = rmrp;
 	
 	_esel_match_mcsel = -1.;
 
@@ -57,12 +63,13 @@ void remainPfos::setESelIndex(){
 	_eselindex = EIndex;
 }
 //populate mcselremain based on mcselection
-void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVector>& selremainpfos ){
+void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVector>& selremainpfos, std::vector<ReconstructedParticle*>& selremainRP ){
 	if(_tlvtaus.size() == 0 ) return;
 
 	//add all remain pfos immediately
 	for(unsigned int i=0; i< _tlvremainpfos.size(); i++){
 		selremainpfos.push_back( _tlvremainpfos.at(i) );
+		selremainRP.push_back( _remainpfos.at(i) );
 	}
 	for(unsigned int i=0; i< _tlvtaus.size(); i++){
 		if(i == selIndex) continue;
@@ -70,6 +77,7 @@ void remainPfos::populateRemainFromSelIndex(int selIndex, std::vector<TLorentzVe
 		std::vector<ReconstructedParticle*> unselectedComponents = _taus.at(i)->getParticles();
 		for( unsigned int j=0; j< unselectedComponents.size(); j++){
 			selremainpfos.push_back( *(createReconstructedParticleTLV( unselectedComponents.at(j))) );
+			selremainRP.push_back( unselectedComponents.at(j) );
 		}
 		
 	}

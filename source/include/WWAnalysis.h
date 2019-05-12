@@ -33,6 +33,7 @@
 #include "tauFinderVariables.h"
 #include "mcVariables.h"
 #include "remainPfos.h"
+#include "jetOverlay.h"
 
 
 //#define ncuts 7
@@ -123,6 +124,7 @@ using namespace lcio;
  std::vector<tauFinderVariables*> _tf{};
  std::vector<mcVariables*> _mcv{};
  std::vector<remainPfos*> _rp{};
+ std::vector<jetOverlay*> _ol1j{};
 
 
 
