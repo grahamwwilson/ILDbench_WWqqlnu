@@ -139,6 +139,7 @@ void WWAnalysis::initTauFinderOptimization(){
 				_rp.at(i)->initLocalTree();
 
 				_ol1j.at(i) = new jetOverlay(_inputRemainCollectionsNames.at(i).c_str(), _trees.at(i));
+				_ol1j.at(i)->initLocalTree();
 			
 				
 			}
