@@ -37,6 +37,7 @@ void jetOverlay::setParticles(std::vector<ReconstructedParticle*>& jets, std::ve
 
 	_jets = jets;
 	_pfo2mc = pfo2mc;
+	_nJets = njets;
 
 	//clear vectors that are event dependent (using pushback)
 	_MCOverlay.clear();
@@ -97,6 +98,7 @@ std::cout<<"jets from set overlay size 2 "<<  _jets.size() <<std::endl;
 void jetOverlay::setOverlay(){
 	
 		std::cout<<"jets from set overlay size "<<  _jets.size() <<std::endl;
+		std::cout<<" N JETS "<< _nJets <<std::endl;
 		for(unsigned int i=0; i< _nJets; i++){
 			if(_nJets==1){
 				std::cout<<" JETS DEBUG SIZE "<< _jets.size()<<std::endl;
