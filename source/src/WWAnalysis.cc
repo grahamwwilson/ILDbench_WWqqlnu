@@ -498,10 +498,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_rp.at(i)->setESelIndex();
 			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos , _rp.at(i)->_eselremainRP);
 
-			std::cout<<"from rpfo size "<< _rp.at(i)->_eselremainRP.size() << std::endl;
-			for(int q=0; q< _rp.at(i)->_eselremainRP.size(); q++){
-					std::cout<<_rp.at(i)->_eselremainRP.at(q)->getEnergy()<<std::endl;
-			}
+
 
 			//can look at overlay without an mc lep
 			_ol1j.at(i)->setParticles(_rp.at(i)->_eselremainRP, _reco2mcvec, 1, _mcpartvec);
@@ -530,8 +527,8 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			}
 		
 				//debug print OL
-			std::cout<<"debug print OL"<<std::endl;
-			_ol1j.at(i)->printOL();
+			//std::cout<<"debug print OL"<<std::endl;
+			//_ol1j.at(i)->printOL();
 			_trees.at(i)->Fill();
 		}
 
