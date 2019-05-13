@@ -524,7 +524,9 @@ void WWAnalysis::SetTauOptimizationVariables(){
 				initTauWithNoMCLepton(_tf.at(i) );
 			}
 		
-				
+				//debug print OL
+			std::cout<<"debug print OL"<<std::endl;
+			_ol1j->printOL();
 			_trees.at(i)->Fill();
 		}
 
