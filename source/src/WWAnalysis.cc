@@ -499,7 +499,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			_rp.at(i)->populateRemainFromSelIndex(_rp.at(i)->_eselindex, _rp.at(i)->_eselremainpfos , _rp.at(i)->_eselremainRP);
 
 			std::cout<<"from rpfo size "<< _rp.at(i)->_eselremainRP.size() << std::endl;
-			for(int q=0; q< _rp.at(q)->_eselremainRP.size(); q++){
+			for(int q=0; q< _rp.at(i)->_eselremainRP.size(); q++){
 					std::cout<<_rp.at(i)->_eselremainRP.at(q)->getEnergy()<<std::endl;
 			}
 

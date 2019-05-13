@@ -96,7 +96,7 @@ void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overla
 }
 void jetOverlay::setOverlay(){
 	
-	
+		std::cout<<"jets from set overlay size "<<  _jets.size() <<std::endl;
 		for(unsigned int i=0; i< _nJets; i++){
 			if(_nJets==1){
 				std::cout<<" JETS DEBUG SIZE "<< _jets.size()<<std::endl;
