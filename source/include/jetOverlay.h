@@ -44,7 +44,7 @@ class jetOverlay{
 
 		void initLocalTree();
 
-		void PrintOL();
+		void printOL();
 
 };
 #endif
