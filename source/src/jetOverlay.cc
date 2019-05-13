@@ -112,7 +112,7 @@ void jetOverlay::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"JetOLtlv").c_str(), "vector<vector<TLorentzVector> >", &_tlvoverlayParticles);
 }
-void jetOverlay::PrintOL(){
+void jetOverlay::printOL(){
 	for(unsigned int i=0; i<_tlvoverlayParticles.size(); i++){
 		std::cout<<"jet "<<i<<" size: "<< _tlvoverlayParticles.at(i).size()<<std::endl;
 		for(unsigned int j=0; j<_tlvoverlayParticles.at(i).size(); i++){

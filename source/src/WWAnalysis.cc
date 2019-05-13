@@ -526,7 +526,7 @@ void WWAnalysis::SetTauOptimizationVariables(){
 		
 				//debug print OL
 			std::cout<<"debug print OL"<<std::endl;
-			_ol1j->printOL();
+			_ol1j.at(i)->printOL();
 			_trees.at(i)->Fill();
 		}
 
