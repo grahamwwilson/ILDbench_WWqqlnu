@@ -81,7 +81,7 @@ bool jetOverlay::particleIsOverlay(int id ){
 }
 void jetOverlay::setOverlayParticles(std::vector<ReconstructedParticle*>& overlayParticles, std::vector<TLorentzVector>& tlvoverlayParticles,  const std::vector<ReconstructedParticle*>& jetParticles ){
 		
-
+std::cout<<"jets from set overlay size 2 "<<  _jets.size() <<std::endl;
 	//loop over thejet particles, if it is overlay keep it
 	for(unsigned int i=0; i< jetParticles.size(); i++){
 		if(particleIsOverlay( jetParticles.at(i)->id() )){
