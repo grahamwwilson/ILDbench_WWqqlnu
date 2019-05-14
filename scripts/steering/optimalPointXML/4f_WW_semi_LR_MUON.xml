@@ -34,7 +34,7 @@
 		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> preRemainPFOs </parameter>
 		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> preTauJets </parameter>
 		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs </parameter>
-		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> TauJets </paramter>
+		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> TauJets </parameter>
 	</processor>
 
 	<processor name= "MyWWAnalysis" type="WWAnalysis">
