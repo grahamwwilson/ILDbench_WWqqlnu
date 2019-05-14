@@ -18,7 +18,7 @@ TauSelector::TauSelector() : Processor("TauSelector") {
 			     	_inputRemainCollectionName,
 			      	inputParticleCollectionName);
 
-	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
+	registerInputCollection( LCIO::RECONSTRUCTEDPARTICLE,
 					"InputTauJetCollectionName" ,
 					"Input Tau Jet Particle Collection Name " ,
 					_inputTauJetCollectionName,
@@ -31,7 +31,7 @@ TauSelector::TauSelector() : Processor("TauSelector") {
                     _outputRemainCollectionName,
                      outputParticleCollectionName);
 
-	registerOutputCollection( LCIO:RECONSTRUCTEDPARTICLE,
+	registerOutputCollection( LCIO::RECONSTRUCTEDPARTICLE,
 					"OutputTauJetCollectionName ",
 					_outputTauJetCollectionName,
 					outputParticleCollectionName);
