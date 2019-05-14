@@ -97,11 +97,9 @@ std::cout<<"jets from set overlay size 2 "<<  _jets.size() <<std::endl;
 }
 void jetOverlay::setOverlay(){
 	
-		std::cout<<"jets from set overlay size "<<  _jets.size() <<std::endl;
-		std::cout<<" N JETS "<< _nJets <<std::endl;
+
 		for(unsigned int i=0; i< _nJets; i++){
 			if(_nJets==1){
-				std::cout<<" JETS DEBUG SIZE "<< _jets.size()<<std::endl;
 				setOverlayParticles( _overlayParticles.at(i), _tlvoverlayParticles.at(i), _jets);
 			}
 			else{
