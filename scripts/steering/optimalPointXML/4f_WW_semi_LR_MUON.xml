@@ -6,6 +6,7 @@
 		<processor name= "MyTauSelector" />
 		<processor name= "MyRemainJets" />
 		<processor name= "MyRemainJets2" />
+		<processor name= "MyRemainJets3" />
 		<processor name= "MyWWAnalysis" />
 	</execute>
  
@@ -43,7 +44,7 @@
   <processor name="MyRemainJets" type="FastJetProcessor">
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> RemainPFOs </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJetsy03 </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJets01 </parameter>
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
     <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
@@ -54,11 +55,22 @@
   <processor name="MyRemainJets2" type="FastJetProcessor">
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> RemainPFOs </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
-    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJetsy04 </parameter>
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJets02 </parameter>
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
     <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
     <parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 0.0005 </parameter>
+    <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
+  </processor>
+
+  <processor name="MyRemainJets3" type="FastJetProcessor">
+    <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> RemainPFOs </parameter>
+    <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
+    <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJets03 </parameter>
+    <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
+    <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+    <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 0.00005 </parameter>
     <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
 
@@ -69,7 +81,7 @@
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionsNames">  TauJets </parameter>
 		<parameter name="InputRemainCollectionsNames"> RemainPFOs </parameter>
-  		<parameter name="InputRemainJetCollectionsNames"> RemainJetsy03 RemainJetsy04</parameter>
+  		<parameter name="InputRemainJetCollectionsNames"> RemainJets01 RemainJets02 RemainJets03</parameter>
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />
 		<parameter name="Normalization" value="0.784017" />
