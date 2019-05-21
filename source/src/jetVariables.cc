@@ -18,6 +18,25 @@ jetVariables::jetVariables(eventVariables*& evtvar, std::string inputJetCollecti
 
 
 }
+jetVariables::jetVariables(const char* variableSetName, TTree*& tree){
+		_localTree = tree;
+		_variableSetName = variableSetName;
+}
+TLorentzVector* jetVariables::createReconstructedParticleTLV(ReconstructedParticle* p){
+	TLorentzVector* t = new TLorentzVector();
+	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
+	return t;
+}
+void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent* evt){
+	_jets = jets;
+	std::vector<TLorentzVector> tlv(_jets.size());
+	for(unsigned int i=0; i< _jets.size(); i++){
+		tlv.at(i) = *createReconstructedParticleTLV( _jets.at(i) );
+	}
+
+	_localEvt = evt;
+	setLogYVariables(logyMinus, logyPlus);
+}
 void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
 	_jets = jets;
@@ -169,14 +188,16 @@ void jetVariables::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"logyMinus").c_str(), &_logyMinus,(vsn+"logyMinus/D").c_str());
 	_localTree->Branch((vsn+"logyPlus").c_str(), &_logyPlus,(vsn+"logyPlus/D").c_str());
-	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
-	
+	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_tlvoverlayParticles);
+//	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
+/*	
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
 		name << _variableSetName << "jetMaxCosPsi"<<i;
 		_localTree->Branch(name.str().c_str(), &_jetMaxCosPsi.at(i), (name.str()+"/D").c_str());
 	}
-
+*/
+/*
 	_localTree->Branch((vsn+"mctlepPfoMult").c_str(), &_mctlepPfoMult, (vsn+"mctlepPfoMult/I").c_str());
 	_localTree->Branch((vsn+"mctlepTrkMult").c_str(), &_mctlepTrkMult, (vsn+"mctlepTrkMult/I").c_str());
 	_localTree->Branch((vsn+"mctUpPfoMult").c_str(), &_mctUpPfoMult, (vsn+"mctUpPfoMult/I").c_str());
@@ -190,4 +211,5 @@ void jetVariables::initLocalTree(){
 
 	_localTree->Branch((vsn+"analepPfoMult").c_str(), &_analepPfoMult, (vsn+"analepPfoMult/I").c_str());
 	_localTree->Branch((vsn+"analepTrkMult").c_str(), &_analepTrkMult, (vsn+"analepTrkMult/I").c_str());
+*/
 }

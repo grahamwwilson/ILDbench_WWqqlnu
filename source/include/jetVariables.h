@@ -12,7 +12,9 @@ class jetVariables{
 	public:
 
 	jetVariables(eventVariables*& evtvar, std::string inputJetCollectionName);
+	jetVariables(const char* variableSetName, TTree*& tree);
 	void setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets);
+	void setParticles(std::vector<ReconstructedParticle*> jets, LCEvent*& evt);
 	void initLocalTree();
 
 	LCEvent* _localEvt{};
@@ -24,6 +26,7 @@ class jetVariables{
 	unsigned int _nJets{};
 	std::vector<ReconstructedParticle*> _jets{};
 	std::vector<TLorentzVector*> _tlvjets{};
+	std::vector<TLorentzVector> _jetstlv{};
 
 	double _logyMinus{};
 	double _logyPlus{};

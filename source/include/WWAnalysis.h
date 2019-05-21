@@ -118,13 +118,14 @@ using namespace lcio;
 //Tau optimization////
  int _tauoptmode{};
  void initTauFinderOptimization();
- void SetTauOptimizationVariables();
+ void SetTauOptimizationVariables(LCEvent* evt);
  void initEmptyTau(tauFinderVariables*& t, MCParticle* tau);
  void initTauWithNoMCLepton(tauFinderVariables*& t);
  std::vector<tauFinderVariables*> _tf{};
  std::vector<mcVariables*> _mcv{};
  std::vector<remainPfos*> _rp{};
  std::vector<jetOverlay*> _ol1j{};
+ std::vector<std::vector<jetVariables*> > _js{};//2d because we can have mulitple jet collection for one parameter set
 
 
 
@@ -183,10 +184,13 @@ std::string _outpath;
 
   std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
   std::vector<std::vector<ReconstructedParticle*> > _remainCollections{};
+  std::vector<std::vector<ReconstructedParticle*> > _remainJetCollections{};
+  
  // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
   std::vector<std::string> _inputJetCollectionsNames{};
   std::vector<std::string> _inputRemainCollectionsNames{};
+  std::vector<std::string> _inputRemainJetsCollNames{};
 
 	
 

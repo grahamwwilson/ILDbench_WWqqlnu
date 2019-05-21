@@ -53,6 +53,13 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 					_inputRemainCollectionsNames,
 					inputRemainCollectionsNames);
 
+	std::vector<std::string> inputRemainJetsCollNames{"x"};
+	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
+					"InputRemainJetCollectionsNames",
+					"name of jet collection formed from Remain Pfos",
+					_inputRemainJetsCollNames,
+					inputRemainJetsCollNames);
+
 
 	std::string inputRecoRelationCollectionName = "x";
   	registerInputCollection( LCIO::LCRELATION,
@@ -122,6 +129,9 @@ void WWAnalysis::initTauFinderOptimization(){
 			_mcv = m;
 			_rp = r;
 			_ol1j = j1;
+
+			std::vector<jetVariables*> jsup( _inputRemainJetsCollNames.size() );
+			_js = jsup;
 		
 
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
@@ -165,7 +175,13 @@ void WWAnalysis::init() {
 	_particleCollections = initParticleCollections;
 	_remainCollections = initRemainCollections;
 
-
+	//init remainjet collections
+	std::vector<std::vector<ReconstructedParticle*> > initRemainJetColl(_inputRemainJetCollectionsNames.size());
+	for(unsigned int i=0; i<_inputRemainJetCollectionsNames; i++){
+		std::vector<ReconstructedParticle*> Jcollection{};
+		initRemainJetColl.at(i) = Jcollection;
+	}
+	_remainJetCollections = initRemainJetColl;
 
 
 // std::cout<<"set filepath "<<std::endl;
@@ -459,7 +475,7 @@ void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when t
 	
 
 }
-void WWAnalysis::SetTauOptimizationVariables(){
+void WWAnalysis::SetTauOptimizationVariables(LCEvent *evt){
 	std::cout<<"Jet collections size "<< _particleCollections.size()<<std::endl;
 	//do tau optimization stuff
 	for(unsigned int i=0; i<_tf.size(); i++){
@@ -503,7 +519,20 @@ void WWAnalysis::SetTauOptimizationVariables(){
 			//can look at overlay without an mc lep
 			_ol1j.at(i)->setParticles(_rp.at(i)->_eselremainRP, _reco2mcvec, 1, _mcpartvec);
 			_ol1j.at(i)->setOverlay();
-			
+
+			//if i=1 then J>= 1 dont allow multi jets when looping over multi parameter points of tau jets
+			//if there taus then there are remain pfos to be clustered separately
+			if( _tf.size == 1 ){
+				for(unsigned int J=0; J<_remainJetCollections.size(); J++){
+					_js.at(J)->setParticles(_remainJetCollections.at(J), evt);
+				}			
+			}
+			else if( _tf.size > 1){
+				
+				_js.at(i)->setParticles(_remainJetCollections.at(i), evt);
+			}
+	
+
 			//make sure this isnt bg
 			if( _mcv.at(i)->_isMuon || _mcv.at(i)->_isTau || _mcv.at(i)->_isElectron){
 			//	_mcv.at(i)->setParticles(_mcpartvec);//throw in any jets
@@ -551,9 +580,12 @@ for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindPFOCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
 	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _remainCollections.at(i));
 }
+for(unsigned int i=0; i<_inputRemainJetCollectionsNames.size(); i++){
+	FindPFOCollection(evt, _inputRemainJetCollectionsNames.at(i), _particleCollections.at(i));
+}
 
 //doing tau optimization
-SetTauOptimizationVariables();
+SetTauOptimizationVariables(evt);
 
 
  _nEvt++;
