@@ -158,8 +158,10 @@ void WWAnalysis::initTauFinderOptimization(){
 			for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
 				if(_inputJetCollectionsNames.size() == 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(0));
+					_js.at(i)->initLocalTree();
 				}else if( _inputJetCollectionsNames.size() > 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
+					_js.at(i)->initLocalTree();
 				}
 			}
 			
