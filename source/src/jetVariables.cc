@@ -40,7 +40,7 @@ void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEven
 		tlv.at(i) = *createReconstructedParticleTLV( jets.at(i) );
 	}
    	std::cout<<"before setting evt"<<std::endl;
-	_localEvt = evt;
+//	_localEvt = evt;
 	std::cout<<"set evt"<<std::endl;
 //	setLogYVariables(_logyMinus, _logyPlus);
 }
