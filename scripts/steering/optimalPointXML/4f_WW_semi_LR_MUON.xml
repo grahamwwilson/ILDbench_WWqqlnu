@@ -4,6 +4,7 @@
 	<execute>
  		<processor name= "MyTauFinder" />
 		<processor name= "MyTauSelector" />
+		<processor name= "MyRemainJets" />
 		<processor name= "MyWWAnalysis" />
 	</execute>
  
@@ -38,7 +39,7 @@
 	</processor>
 
 	 <!-- eekt test jets -->
-  <processor name="pureJets" type="FastJetProcessor">
+  <processor name="MyRemainJets" type="FastJetProcessor">
     <parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> RemainPFOs </parameter>
     <!--verbosity level of this processor ("DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT")-->
     <parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJetsInc </parameter>
