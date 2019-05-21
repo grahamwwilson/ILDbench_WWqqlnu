@@ -154,8 +154,13 @@ void WWAnalysis::initTauFinderOptimization(){
 			std::vector<jetVariables*> jsup( _inputRemainJetsCollNames.size() );
 			_js = jsup;
 			
+			
 			for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
-				_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
+				if(_inputJetCollectionsNames.size() ==1){
+					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(0));
+				}else if( _inputJetCollectionsNames.size() > 1){
+					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
+				}
 			}
 			
 
