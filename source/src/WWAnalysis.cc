@@ -475,7 +475,7 @@ void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when t
 	
 
 }
-void WWAnalysis::SetTauOptimizationVariables(LCEvent *evt){
+void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 	std::cout<<"Jet collections size "<< _particleCollections.size()<<std::endl;
 	//do tau optimization stuff
 	for(unsigned int i=0; i<_tf.size(); i++){
@@ -581,7 +581,7 @@ for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _remainCollections.at(i));
 }
 for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
-	FindPFOCollection(evt, _inputRemainJetsCollNames.at(i), _particleCollections.at(i));
+	FindPFOCollection(evt, _inputRemainJetsCollNames.at(i), _remainJetCollections.at(i));
 }
 
 //doing tau optimization
