@@ -525,8 +525,11 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 			//if i=1 then J>= 1 dont allow multi jets when looping over multi parameter points of tau jets
 			//if there taus then there are remain pfos to be clustered separately
 			if( _tf.size() == 1 ){
-				std::cout<<"about to loop over collection"<<std::endl;
+				std::cout<<"about to loop over collection size "<< _remainJetCollections.size()<<std::endl;
 				for(unsigned int J=0; J<_remainJetCollections.size(); J++){
+					for(unsigned int K=0; K<_remainJetCollections.at(J).size(); K++){
+						std::cout<<_remainJetCollections.at(J).at(K)->getEnergy()<<std::endl;
+					}
 					_js.at(J)->setParticles(_remainJetCollections.at(J), evt);
 				}			
 			}
