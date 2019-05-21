@@ -130,18 +130,6 @@ void WWAnalysis::initTauFinderOptimization(){
 			_rp = r;
 			_ol1j = j1;
 
-			std::vector<jetVariables*> jsup( _inputRemainJetsCollNames.size() );
-			_js = jsup;
-			if(_inputJetCollectionsNames.size() == 1){
-				for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
-					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
-				}
-			}else if(_inputJetCollectionsNames.size() > 1 ){
-				for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
-					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
-				}	
-				
-			}
 		
 
 			for(unsigned int i=0; i< _inputJetCollectionsNames.size(); i++){
@@ -161,7 +149,14 @@ void WWAnalysis::initTauFinderOptimization(){
 				_ol1j.at(i) = new jetOverlay(_inputRemainCollectionsNames.at(i).c_str(), _trees.at(i));
 				_ol1j.at(i)->initLocalTree();
 			
-				
+			}
+
+			std::vector<jetVariables*> jsup( _inputRemainJetsCollNames.size() );
+			_js = jsup;
+			if(_inputJetCollectionsNames.size() == 1){
+				for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
+					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
+				}
 			}
 
 			
