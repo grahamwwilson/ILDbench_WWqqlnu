@@ -27,6 +27,10 @@ TLorentzVector* jetVariables::createReconstructedParticleTLV(ReconstructedPartic
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
+void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
+	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
+    logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
+}
 void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent*& evt){
 	_jets = jets;
 	std::vector<TLorentzVector> tlv(_jets.size());
@@ -35,17 +39,14 @@ void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEven
 	}
 
 	_localEvt = evt;
-	setLogYVariables(logyMinus, logyPlus);
+	setLogYVariables(_logyMinus, _logyPlus);
 }
 void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
 	_jets = jets;
 	_tlvjets = tlvjets;
 }
-void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
-	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
-    logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
-}
+
 void jetVariables::setjetLeastTrks(int& jetLeastNTrks){
 	int mintrks = 999;
 	int trkcount=0;

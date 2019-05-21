@@ -176,8 +176,8 @@ void WWAnalysis::init() {
 	_remainCollections = initRemainCollections;
 
 	//init remainjet collections
-	std::vector<std::vector<ReconstructedParticle*> > initRemainJetColl(_inputRemainJetCollNames.size());
-	for(unsigned int i=0; i<_inputRemainJetCollNames; i++){
+	std::vector<std::vector<ReconstructedParticle*> > initRemainJetColl(_inputRemainJetsCollNames.size());
+	for(unsigned int i=0; i<_inputRemainJetsCollNames; i++){
 		std::vector<ReconstructedParticle*> Jcollection{};
 		initRemainJetColl.at(i) = Jcollection;
 	}
@@ -580,8 +580,8 @@ for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindPFOCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
 	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _remainCollections.at(i));
 }
-for(unsigned int i=0; i<_inputRemainJetCollectionsNames.size(); i++){
-	FindPFOCollection(evt, _inputRemainJetCollectionsNames.at(i), _particleCollections.at(i));
+for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
+	FindPFOCollection(evt, _inputRemainJetsCollNames.at(i), _particleCollections.at(i));
 }
 
 //doing tau optimization
