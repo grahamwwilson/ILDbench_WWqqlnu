@@ -39,6 +39,7 @@ void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEven
 	for(unsigned int i=0; i< jets.size(); i++){
 		tlv.at(i) = *createReconstructedParticleTLV( jets.at(i) );
 	}
+	_jetstlv = tlv;
    	//std::cout<<"before setting evt"<<std::endl;
 	_localEvt = evt;
 	//std::cout<<"set evt"<<std::endl;
@@ -193,8 +194,8 @@ void jetVariables::printJetVariables(){
 void jetVariables::initLocalTree(){
 
 	std::string vsn(_variableSetName);
-	_localTree->Branch((vsn+"yMinus").c_str(), &_logyMinus,(vsn+"yMinus/D").c_str());
-	_localTree->Branch((vsn+"yPlus").c_str(), &_logyPlus,(vsn+"yPlus/D").c_str());
+	_localTree->Branch((vsn+"yMinus").c_str(), &_yMinus,(vsn+"yMinus/D").c_str());
+	_localTree->Branch((vsn+"yPlus").c_str(), &_yPlus,(vsn+"yPlus/D").c_str());
 	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_jetstlv);
 //	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
 /*	
