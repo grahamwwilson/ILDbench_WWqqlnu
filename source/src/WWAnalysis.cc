@@ -177,7 +177,7 @@ void WWAnalysis::init() {
 
 	//init remainjet collections
 	std::vector<std::vector<ReconstructedParticle*> > initRemainJetColl(_inputRemainJetsCollNames.size());
-	for(unsigned int i=0; i<_inputRemainJetsCollNames; i++){
+	for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
 		std::vector<ReconstructedParticle*> Jcollection{};
 		initRemainJetColl.at(i) = Jcollection;
 	}
