@@ -530,7 +530,7 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 					for(unsigned int K=0; K<_remainJetCollections.at(J).size(); K++){
 						std::cout<<_remainJetCollections.at(J).at(K)->getEnergy()<<std::endl;
 					}
-					_js.at(J)->setParticles(_remainJetCollections.at(J), evt);
+					_js.at(J)->setParticles(_remainJetCollections.at(J), evt, _inputRemainJetsCollNames.at(J));
 				}			
 			}
 			else if( _tf.size() > 1){
