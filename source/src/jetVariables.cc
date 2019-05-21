@@ -31,13 +31,13 @@ void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
 	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
     logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
 }
-void jetVariables::setParticles(const std::vector<ReconstructedParticle*>& jets, LCEvent* evt){
+void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent* evt){
 	std::cout<<" inside set parts"<<std::endl;
-	_jets = jets;
-	std::cout<<"jets size "<< _jets.size()<<std::endl;
-	std::vector<TLorentzVector> tlv(_jets.size());
-	for(unsigned int i=0; i< _jets.size(); i++){
-		tlv.at(i) = *createReconstructedParticleTLV( _jets.at(i) );
+//	_jets = jets;
+	std::cout<<"jets size "<< jets.size()<<std::endl;
+	std::vector<TLorentzVector> tlv(jets.size());
+	for(unsigned int i=0; i< jets.size(); i++){
+		tlv.at(i) = *createReconstructedParticleTLV( jets.at(i) );
 	}
 
 	_localEvt = evt;
