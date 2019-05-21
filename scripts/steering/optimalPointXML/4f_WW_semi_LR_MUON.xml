@@ -46,7 +46,7 @@
     <!--Selects the algorithm and its parameters. E.g. 'kt_algorithm 0.7' or 'ee_kt_algorithm'. For a full list of supported algorithms, see the logfile after execution.-->
     <parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
     <!--One of 'Inclusive <minPt>', 'InclusiveIterativeNJets <nrJets> <minE>', 'ExclusiveNJets <nrJets>', 'ExclusiveYCut <yCut>'. Note: not all modes are available for all algorithms.-->
-    <parameter name="clusteringMode" type="StringVec"> Inclusive 0  </parameter>
+    <parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 0.03  </parameter>
     <parameter name="recombinationScheme" type="string"> E_scheme </parameter>
   </processor>
 
