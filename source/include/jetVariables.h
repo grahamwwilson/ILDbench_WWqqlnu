@@ -64,6 +64,6 @@ class jetVariables{
 	
 	void printVec(std::vector<double> v);
 
-
+	TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 };
 #endif

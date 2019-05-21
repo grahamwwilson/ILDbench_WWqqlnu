@@ -125,7 +125,7 @@ using namespace lcio;
  std::vector<mcVariables*> _mcv{};
  std::vector<remainPfos*> _rp{};
  std::vector<jetOverlay*> _ol1j{};
- std::vector<std::vector<jetVariables*> > _js{};//2d because we can have mulitple jet collection for one parameter set
+ std::vector<jetVariables*> _js{};//2d because we can have mulitple jet collection for one parameter set
 
 
 
@@ -178,7 +178,6 @@ std::string _outpath;
 
   //input collections
   std::string _inputMcParticleCollectionName{};
-
   std::string _inputTrackCollectionName{};
   std::string _inputRecoRelationCollectionName{};
 

@@ -27,7 +27,7 @@ TLorentzVector* jetVariables::createReconstructedParticleTLV(ReconstructedPartic
 	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
 	return t;
 }
-void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent* evt){
+void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent*& evt){
 	_jets = jets;
 	std::vector<TLorentzVector> tlv(_jets.size());
 	for(unsigned int i=0; i< _jets.size(); i++){
@@ -188,7 +188,7 @@ void jetVariables::initLocalTree(){
 	std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"logyMinus").c_str(), &_logyMinus,(vsn+"logyMinus/D").c_str());
 	_localTree->Branch((vsn+"logyPlus").c_str(), &_logyPlus,(vsn+"logyPlus/D").c_str());
-	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_tlvoverlayParticles);
+	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_jetstlv);
 //	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
 /*	
 	for(unsigned int i=0; i< _nJets; i++){
