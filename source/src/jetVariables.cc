@@ -42,10 +42,10 @@ void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEven
    	//std::cout<<"before setting evt"<<std::endl;
 	_localEvt = evt;
 	//std::cout<<"set evt"<<std::endl;
-	setLogYVariables(_logyMinus, _logyPlus);
+//	setLogYVariables(_logyMinus, _logyPlus);
 
-//	_logyMinus =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n-1,n}" ));
-//    _logyPlus  =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n,n+1}" ));
+	_logyMinus =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n-1,n}" ));
+    _logyPlus  =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n,n+1}" ));
 }
 void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
