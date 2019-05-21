@@ -156,7 +156,7 @@ void WWAnalysis::initTauFinderOptimization(){
 			
 			
 			for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
-				if(_inputJetCollectionsNames.size() ==1){
+				if(_inputJetCollectionsNames.size() == 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(0));
 				}else if( _inputJetCollectionsNames.size() > 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
@@ -541,6 +541,7 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 						std::cout<<_remainJetCollections.at(J).at(K)->getEnergy()<<std::endl;
 					}
 					std::cout<<"y+ "<<evt->getCollection(_inputRemainJetsCollNames.at(J))->getParameters().getFloatVal( "y_{n,n+1}" )<<std::endl;
+					std::cout<<"coll name "<< _inputRemainJetsCollNames.at(J)<<std::endl;
 					_js.at(J)->setParticles(_remainJetCollections.at(J), evt, _inputRemainJetsCollNames.at(J));
 				}			
 			}

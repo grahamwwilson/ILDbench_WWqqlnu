@@ -81,7 +81,7 @@
 		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
 		<parameter name="InputJetCollectionsNames">  TauJets </parameter>
 		<parameter name="InputRemainCollectionsNames"> RemainPFOs </parameter>
-  		<parameter name="InputRemainJetCollectionsNames"> RemainJets01 RemainJets02 RemainJets03</parameter>
+  		<parameter name="InputRemainJetCollectionsNames"> RemainJets01 RemainJets02 RemainJets03 </parameter>
 		<parameter name="NFermions" value="4" />
 		<parameter name="Nleptons" value="2" />
 		<parameter name="Normalization" value="0.784017" />
