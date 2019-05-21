@@ -44,8 +44,8 @@ void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEven
 	//std::cout<<"set evt"<<std::endl;
 //	setLogYVariables(_logyMinus, _logyPlus);
 
-	_logyMinus =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n-1,n}" ));
-    _logyPlus  =(double) std::log( evt->getCollection(collname)->getParameters().getFloatVal( "y_{n,n+1}" ));
+	_yMinus =(double)  evt->getCollection(collname)->getParameters().getFloatVal( "y_{n-1,n}" );
+    _yPlus  =(double) evt->getCollection(collname)->getParameters().getFloatVal( "y_{n,n+1}" );
 }
 void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
@@ -193,8 +193,8 @@ void jetVariables::printJetVariables(){
 void jetVariables::initLocalTree(){
 
 	std::string vsn(_variableSetName);
-	_localTree->Branch((vsn+"logyMinus").c_str(), &_logyMinus,(vsn+"logyMinus/D").c_str());
-	_localTree->Branch((vsn+"logyPlus").c_str(), &_logyPlus,(vsn+"logyPlus/D").c_str());
+	_localTree->Branch((vsn+"yMinus").c_str(), &_logyMinus,(vsn+"yMinus/D").c_str());
+	_localTree->Branch((vsn+"yPlus").c_str(), &_logyPlus,(vsn+"yPlus/D").c_str());
 	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_jetstlv);
 //	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
 /*	

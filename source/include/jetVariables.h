@@ -30,6 +30,8 @@ class jetVariables{
 
 	double _logyMinus{};
 	double _logyPlus{};
+	double _yMinus{};
+	double _yPlus{};
 	std::vector<double> _jetMaxCosPsi{};
 	int _jetLeastNTrks{}; //least tracks not including 0 tracks
 
