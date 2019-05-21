@@ -535,7 +535,7 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 			}
 			else if( _tf.size() > 1){
 				
-				_js.at(i)->setParticles(_remainJetCollections.at(i), evt);
+				_js.at(i)->setParticles(_remainJetCollections.at(i), evt, _inputRemainJetsCollNames.at(i));
 			}
 	
 
