@@ -14,7 +14,7 @@ class jetVariables{
 	jetVariables(eventVariables*& evtvar, std::string inputJetCollectionName);
 	jetVariables(const char* variableSetName, TTree*& tree);
 	void setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets);
-	void setParticles(std::vector<ReconstructedParticle*> jets, LCEvent* evt);
+	void setParticles(std::vector<ReconstructedParticle*> jets, LCEvent* evt, std::string collname);
 	void initLocalTree();
 
 	LCEvent* _localEvt{};
