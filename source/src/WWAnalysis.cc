@@ -153,15 +153,21 @@ void WWAnalysis::initTauFinderOptimization(){
 
 			std::vector<jetVariables*> jsup( _inputRemainJetsCollNames.size() );
 			_js = jsup;
-			
+			std::vector<jetOverlay*> olnj( _inputRemainJetsCollNames.size() );
+			_rjOL = olnj;
 			
 			for(unsigned int i=0; i< _inputRemainJetsCollNames.size(); i++){
 				if(_inputJetCollectionsNames.size() == 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(0));
 					_js.at(i)->initLocalTree();
+					_rjOL.at(i) = new jetOverlay( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(0));
+					_rjOL.at(i)->initLocalTree();
+
 				}else if( _inputJetCollectionsNames.size() > 1){
 					_js.at(i) = new jetVariables( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
 					_js.at(i)->initLocalTree();
+					_rjOL.at(i) = new jetOverlay( _inputRemainJetsCollNames.at(i).c_str(), _trees.at(i));
+					_rjOL.at(i)->initLocalTree();
 				}
 			}
 			
@@ -545,11 +551,15 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 					//std::cout<<"y+ "<<evt->getCollection(_inputRemainJetsCollNames.at(J))->getParameters().getFloatVal( "y_{n,n+1}" )<<std::endl;
 					//std::cout<<"coll name "<< _inputRemainJetsCollNames.at(J)<<std::endl;
 					_js.at(J)->setParticles(_remainJetCollections.at(J), evt, _inputRemainJetsCollNames.at(J));
+					_rjOL.at(J)->setParticles( _remainJetCollections.at(J), _reco2mcvec, _remainJetCollections.at(J).size(), _mcpartvec);
+					_rjOL.at(J)->setOverlay();
 				}			
 			}
 			else if( _tf.size() > 1){
 				
 				_js.at(i)->setParticles(_remainJetCollections.at(i), evt, _inputRemainJetsCollNames.at(i));
+				_rjOL.at(J)->setParticles( _remainJetCollections.at(i), _reco2mcvec, _remainJetCollections.at(i).size(), _mcpartvec);
+				_rjOL.at(J)->setOverlay();
 			}
 	
 

@@ -126,7 +126,7 @@ using namespace lcio;
  std::vector<remainPfos*> _rp{};
  std::vector<jetOverlay*> _ol1j{};
  std::vector<jetVariables*> _js{};//2d because we can have mulitple jet collection for one parameter set
-
+ std::vector<jetOverlay*> _rjOL{};
 
 
 
