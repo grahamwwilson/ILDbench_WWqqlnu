@@ -19,8 +19,8 @@
 
 	<processor name= "MyTauFinder" type="TauFinder" >
 		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
-		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets </parameter>
-		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> preTauJets </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> preRemainPFOs </parameter>
 		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink </parameter>
 		<parameter name="pt_cut" value="0.2" />
 		<parameter name="cosT_cut" value="0.99" />
@@ -61,3 +61,5 @@
  		<parameter name="Ncuts" value="7" /> 
 		<parameter name="OutPath" value="/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut5e-06S1" /> 
 	</processor> 
+
+</marlin>

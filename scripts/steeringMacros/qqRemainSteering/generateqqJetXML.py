@@ -52,8 +52,8 @@ for y in ycuts:
 
 	file.write("	<processor name= \"MyTauFinder\" type=\"TauFinder\" >\n" )
 	file.write("		<parameter name=\"PFOCollection\" type=\"string\" lcioInType=\"ReconstructedParticle\"> PandoraPFOs </parameter>\n")
-	file.write("		<parameter name=\"TauRecCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> TauJets </parameter>\n")
-	file.write("		<parameter name=\"TauRecRestCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> RemainPFOs </parameter>\n")
+	file.write("		<parameter name=\"TauRecCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> preTauJets </parameter>\n")
+	file.write("		<parameter name=\"TauRecRestCollection\" type=\"string\" lcioOutType=\"ReconstructedParticle\"> preRemainPFOs </parameter>\n")
 	file.write("		<parameter name=\"TauRecLinkCollectionName\" type=\"string\" lcioOutType=\"LCRelation\"> TauLink </parameter>\n")
 	file.write("		<parameter name=\"pt_cut\" value=\"0.2\" />\n")
 	file.write("		<parameter name=\"cosT_cut\" value=\"0.99\" />\n")
