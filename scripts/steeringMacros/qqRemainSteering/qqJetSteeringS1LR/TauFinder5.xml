@@ -59,7 +59,7 @@
 		<parameter name="XsecError" value="10.6" /> 
 		<parameter name="Njets" value="3" />
  		<parameter name="Ncuts" value="7" /> 
-		<parameter name="OutPath" value="/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut1e-05S1" /> 
+		<parameter name="OutPath" value="/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut5S1" /> 
 	</processor> 
 
 </marlin>

@@ -146,6 +146,7 @@ void WWAnalysis::initTauFinderOptimization(){
 				_trees.at(i)->Branch("xsec",&_xsec,"xsec/D");
 				_trees.at(i)->Branch("xsecerr",&_xsecerr,"xsecerr/D");
 				_trees.at(i)->Branch("nevt",&_nEvt,"nevt/I");
+				_trees.at(i)->Branch("ycut",&_ycut,"ycut/I");
 
 				_tf.at(i) = new tauFinderVariables(_inputJetCollectionsNames.at(i).c_str(), _trees.at(i));
 				_tf.at(i)->initLocalTree();

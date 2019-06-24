@@ -97,7 +97,7 @@ for y in ycuts:
 	file.write("		<parameter name=\"XsecError\" value=\"10.6\" /> \n" )
 	file.write("		<parameter name=\"Njets\" value=\"3\" />\n " )
 	file.write("		<parameter name=\"Ncuts\" value=\"7\" /> \n" )
-	file.write("		<parameter name=\"OutPath\" value=\"/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut"+str(y)+tag+"\" /> \n")
+	file.write("		<parameter name=\"OutPath\" value=\"/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut"+str(filenum)+tag+"\" /> \n")
 	file.write("	</processor> \n")
 	file.write("\n")
 
