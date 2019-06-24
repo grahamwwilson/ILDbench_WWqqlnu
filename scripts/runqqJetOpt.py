@@ -8,9 +8,9 @@ def bash( bashCommand ):
 
 
 #[ path , subset ]
-args = ["./steeringMacros/qqRemainSteering/qqJetSteeringS1LR", "S1" ]
-#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringS2LR", "S2" ]
-#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringB1LR", "B1" ]
+args = ["./steeringMacros/qqRemainSteering/qqJetSteeringS1LR/", "S1" ]
+#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringS2LR/", "S2" ]
+#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringB1LR/", "B1" ]
 
 path = args[0]
 
