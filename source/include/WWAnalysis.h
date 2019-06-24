@@ -138,6 +138,8 @@ TTree* _tree{};//single run tree
   double _xsec{}; 
   double _xsecerr{};
 
+  double _remainYcut{};
+
 std::string _outpath;
 
 

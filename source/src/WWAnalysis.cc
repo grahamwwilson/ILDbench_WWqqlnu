@@ -69,6 +69,14 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 			      	inputRecoRelationCollectionName);
 
 	//parameters for running in backgrounds: #fermions, # leptons
+	//need to store y cut for remain jets, i dont see how to pull it from lcio
+	//only store 1 value -- restrict us to 1 jet collection per run
+	registerProcessorParameter("RemainYCut",
+								"Ycut for remain jet collection",
+								_remainYcut,
+								(double) -1.);
+
+
 	registerProcessorParameter("NFermions",
 								"number of fermions in event",
 								_nfermions,
