@@ -52,7 +52,8 @@
 		<parameter name="InputJetCollectionsNames">  TauJets </parameter>
  		<parameter name="InputRemainCollectionsNames"> RemainPFOs </parameter>
  		<parameter name="InputRemainJetCollectionsNames"> RemainJets </parameter>
- 		<parameter name="NFermions" value="4" /> 
+ 		<parameter name="RemainYCut" value="0.0005" /> 
+		<parameter name="NFermions" value="4" /> 
 		<parameter name="Nleptons" value="2" /> 
 		<parameter name="Normalization" value="0.784017" /> 
 		<parameter name="Xsec" value="9521.45" /> 

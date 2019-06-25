@@ -90,6 +90,7 @@ for y in ycuts:
 	file.write("		<parameter name=\"InputJetCollectionsNames\">  TauJets </parameter>\n ")
 	file.write("		<parameter name=\"InputRemainCollectionsNames\"> RemainPFOs </parameter>\n ")
   	file.write("		<parameter name=\"InputRemainJetCollectionsNames\"> RemainJets </parameter>\n ")
+	file.write("		<parameter name=\"RemainYCut\" value=\""+ str(y) +"\" /> \n")
 	file.write("		<parameter name=\"NFermions\" value=\"4\" /> \n")
 	file.write("		<parameter name=\"Nleptons\" value=\"2\" /> \n")
 	file.write("		<parameter name=\"Normalization\" value=\"0.784017\" /> \n")
