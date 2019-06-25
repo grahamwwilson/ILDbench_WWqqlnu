@@ -44,7 +44,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 							"Name of the Input particle collections",
 							_inputJetCollectionsNames,
 							inputCollectionNames);
-
+ 
     	//input remain collection 
 	std::vector<std::string> inputRemainCollectionsNames{"x"};
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,

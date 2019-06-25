@@ -79,7 +79,7 @@ for y in ycuts:
 	file.write("		<parameter name=\"algorithm\" type=\"StringVec\"> ee_kt_algorithm </parameter>\n")
 	file.write("		<parameter name=\"clusteringMode\" type=\"StringVec\"> ExclusiveYCut "+ str(y) +" </parameter> \n ")
 	file.write("		<parameter name=\"recombinationScheme\" type=\"string\"> E_scheme </parameter> \n")
-	file.write("	</processor>\n")
+	file.write("	</processor>\n") 
 
 
 	file.write("	<processor name= \"MyWWAnalysis\" type=\"WWAnalysis\">\n")
