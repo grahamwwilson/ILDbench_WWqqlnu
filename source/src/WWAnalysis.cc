@@ -606,7 +606,7 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 }
 void WWAnalysis::processEvent( LCEvent * evt ) {
 
- 
+ std::cout<<"Ycut: "<< _remainYcut<<std::endl;
  std::cout<<"event No. "<< _nEvt<<std::endl;
  // Get Process name and cross section
  //  *_Process = evt->getParameters().getStringVal("Process");
