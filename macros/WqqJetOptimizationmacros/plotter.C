@@ -50,19 +50,19 @@ void plotter(){
 	f5->GetObject("cut5_4_11", optDiff);
 	f7->GetObject("cut5_4_11", hiDiff);
 
-	plot(optDiff,"test","",1);
+//	plot(optDiff,"test","",1);
 
-/*	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
+	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
 	std::vector<int> col{1,2,3};
 	std::vector<int> lin{1,1,1};
 	std::vector<std::string> legdesc{"ycut1","ycut2","ycut3"}; 
-	plotsuper( hdiffvec, col, lin, legdesc, "", "SupDiff","./plots/", 1);
+	plotsuper( hdiffvec, col, lin, legdesc, " ", "SupDiff","", 1);
 	
 
 	//no cut diff
 	TH1D* nocutDiff;
 	f0->GetObject("cut0_0_0", nocutDiff);
-	plot( nocutDiff, "nocutDiff","./plots/",1);
+	plot( nocutDiff, "nocutDiff","",1);
 
 
 
@@ -75,9 +75,9 @@ void plotter(){
 	std::vector<int> col2{1,2};
 	std::vector<int> lin2{1,1};
 	std::vector<std::string> legdesc2{"nocutmass","cutoptmass"};
-	plotsuper( hmassvec, col2, lin2, legdesc2,"","SupMass","./plots/",1);
+	plotsuper( hmassvec, col2, lin2, legdesc2," ","SupMass","",1);
 
-*/
+
 	//TGraphs
 	TGraph* FWHM_pt;
 	TGraph* Mode_pt;
