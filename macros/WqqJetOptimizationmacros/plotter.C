@@ -46,13 +46,13 @@ void plotter(){
 	TH1D* lowDiff;
 	TH1D* hiDiff;
 	
-	f0->GetObject("cut5_4_11", lowDiff);
+	f0->GetObject("cut0_4_11", lowDiff);
 	f5->GetObject("cut5_4_11", optDiff);
-	f7->GetObject("cut5_4_11", hiDiff);
+	f7->GetObject("cut7_4_11", hiDiff);
 
-	plot(optDiff,"test","",1);
-	plot(lowDiff,"test2","",1);
-	plot(hiDiff,"test3","",1);
+//	plot(optDiff,"test","",1);
+//	plot(lowDiff,"test2","",1);
+//	plot(hiDiff,"test3","",1);
 
 	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
 	std::vector<int> col{1,2,3};
@@ -61,7 +61,7 @@ void plotter(){
 	plotsuper( hdiffvec, col, lin, legdesc, " ", "SupDiff","", 1);
 	
 
-/*	//no cut diff
+	//no cut diff
 	TH1D* nocutDiff;
 	f0->GetObject("cut0_0_0", nocutDiff);
 	plot( nocutDiff, "nocutDiff","",1);
@@ -78,7 +78,7 @@ void plotter(){
 	std::vector<int> lin2{1,1};
 	std::vector<std::string> legdesc2{"nocutmass","cutoptmass"};
 	plotsuper( hmassvec, col2, lin2, legdesc2," ","SupMass","",1);
-*/
+
 
 	//TGraphs
 	TGraph* FWHM_pt;
