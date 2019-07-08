@@ -14,10 +14,14 @@ void plotter(){
 	int fileNo = 0; 
 
 
-	std::vector<TFile*> filevec(8);
-	for(unsigned int i=0; i<filevec.size(); i++){
-		filevec.at(i) = TFile::Open( (path+filename+std::to_string(fileNo)+".root").c_str() );
-	}
+//	std::vector<TFile*> filevec(8);
+//	for(unsigned int i=0; i<filevec.size(); i++){
+//		filevec.at(i) = TFile::Open( (path+filename+std::to_string(fileNo)+".root").c_str() );
+//		fileNo++;
+//	}
+	TFile* f0 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile0.root");
+	TFile* f5 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile5.root");
+	TFile* f7 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile7.root");
 
 	//example code
 	/*TFile *f = TFile::Open("../jpsi20gev_cal/MassConstraint_calibrated.root");
@@ -42,9 +46,9 @@ void plotter(){
 	TH1D* lowDiff;
 	TH1D* hiDiff;
 	
-	filevec.at(0)->GetObject("cut5_4_11", lowDiff);
-	filevec.at(5)->GetObject("cut5_4_11", optDiff);
-	filevec.at(7)->GetObject("cut5_4_11", hiDiff);
+	f0->GetObject("cut5_4_11", lowDiff);
+	f5->GetObject("cut5_4_11", optDiff);
+	f7->GetObject("cut5_4_11", hiDiff);
 
 	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
 	std::vector<int> col{1,2,3};
@@ -55,7 +59,7 @@ void plotter(){
 
 	//no cut diff
 	TH1D* nocutDiff;
-	filevec.at(0)->GetObject("cut0_0_0", nocutDiff);
+	f0->GetObject("cut0_0_0", nocutDiff);
 	plot( nocutDiff, "nocutDiff","./plots/",1);
 
 
@@ -63,8 +67,8 @@ void plotter(){
 	//mass distributions
 	TH1D* nocutMass;
 	TH1D* optMass;
-	filevec.at(0)->GetObject("masscut0_0_0", nocutMass);
-	filevec.at(5)->GetObject("masscut5_4_11", optMass);
+	f0->GetObject("masscut0_0_0", nocutMass);
+	f5->GetObject("masscut5_4_11", optMass);
 	std::vector<TH1D*> hmassvec{ optMass, nocutMass};
 	std::vector<int> col2{1,2};
 	std::vector<int> lin2{1,1};
