@@ -2,6 +2,7 @@
 #include "plotTools.C"
 #include <string>
 #include <fstream>
+#include <vector>
 
 	ofstream logfile;
 	std::string path1= "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputLogs/";

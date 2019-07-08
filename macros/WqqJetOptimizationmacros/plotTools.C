@@ -1,3 +1,5 @@
+#include "TGraph.h"
+#include "TLegend.h"
 
 
 TH1D* initTH1D( std::string varname, std::string name, int bins, double xlow, double xup){
