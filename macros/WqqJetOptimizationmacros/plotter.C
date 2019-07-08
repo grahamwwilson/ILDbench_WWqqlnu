@@ -162,7 +162,7 @@ void plotter(){
 
 
 	//test
-	plot( FWHM_pt, "testg","ap","",1);
+	plot( FWHM_pt, "testg","","",1);
 
 	
 
