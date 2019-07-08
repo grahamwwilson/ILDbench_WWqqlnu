@@ -1,6 +1,8 @@
 
 #include "plotTools.C"
-#include
+#include <vector>
+#include "TFile.h"
+
 
 void plotter(){
 
@@ -34,7 +36,7 @@ void plotter(){
 	TFile *fout = new TFile("formattedplots.root","RECREATE");
 	*/
 
-	TFile *fout = new TFile("optPlots.root","RECREATE");
+	TFile *fout = new TFile("./plots/optPlots.root","RECREATE");
 
 	TH1D* optDiff;
 	TH1D* lowDiff;
