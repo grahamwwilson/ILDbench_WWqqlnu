@@ -241,7 +241,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	int ind=0;
 	for(unsigned int i =0; i< ptcuts.size(); i++){
 		if(ptcuts.at(i) == -1){
-			ptcutx[inx] = 0;
+			ptcutx[ind] = 0;
 			ind++;
 			continue;
 		}
