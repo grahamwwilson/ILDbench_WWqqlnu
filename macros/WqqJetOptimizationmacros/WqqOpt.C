@@ -26,7 +26,7 @@
 	std::vector<double> ycutID{};
 
 //require pt higher than pt cut and require particles more central than cost cut
-void Loop(Wqqtree& mclass, std::vector<double> ptcutPerHist, std::vector<double> costcutPerHist, std::vector<TH1D*> cuthists , double& y)
+void Loop(Wqqtree& mclass, std::vector<double> ptcutPerHist, std::vector<double> costcutPerHist, std::vector<TH1D*> cuthists , std::vector<TH1D*> masshists, double& y)
 {
 
    if (mclass.fChain == 0) return;
@@ -61,6 +61,7 @@ void Loop(Wqqtree& mclass, std::vector<double> ptcutPerHist, std::vector<double>
 			}
 
 		cuthists.at(i)->Fill(  Ws.at(i).M()- mclass.mcqq->M() );
+		masshists.at(i)->Fill( Ws.at(i).M() );
 	}
 	
    }
@@ -203,6 +204,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	print(costcuts);
 
 	std::vector<TH1D*> cuthists{};
+	std::vector<TH1D*> masshists{};
 	//std::vector<double> ptcutPerHist{};
 	//std::vector<double> costcutPerHist{};
 	//std::vector<double> ycutPerHist{};
@@ -213,8 +215,10 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 
 				
 			//do loops over the trees
-			TH1D* hist = initTH1D( "cut"+std::to_string(ycutNo)+"_"+std::to_string(i)+"_"+std::to_string(j), "Generator Mass Difference;  M_{qq}^{meas} - M_{qq}^{gen}", 400, -100, 100);
+			TH1D* hist = initTH1D( "cut"+std::to_string(ycutNo)+"_"+std::to_string(i)+"_"+std::to_string(j), "Generator Mass Difference;  M_{qq}^{meas} - M_{qq}^{gen}; Events Per 0.5 GeV Bin", 400, -100, 100);
+			TH1D* qqmass = initTH1D( "masscut"+std::to_string(ycutNo)"_"+std::to_string(i)+"_"+std::to_string(j)," W #rightarrow qq Mass; Mass [GeV]; Events Per 0.5 GeV Bin", 200, 30., 130. );
 			cuthists.push_back(hist);	
+			masshists.push_back(hist);
 			ptcutPerHist.push_back(ptcuts.at(i));
 			costcutPerHist.push_back(costcuts.at(j));
 			ptcutID.push_back(i);
@@ -226,7 +230,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	}
 	//	print(ptcutPerHist);
 	//	print(costcutPerHist);
-			Loop( tree, ptcutPerHist, costcutPerHist , cuthists, ycut);
+			Loop( tree, ptcutPerHist, costcutPerHist , cuthists, masshists, ycut);
 
 	int itr= FWHM.size();
 	int j;
