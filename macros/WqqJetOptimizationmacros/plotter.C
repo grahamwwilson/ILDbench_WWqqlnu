@@ -133,13 +133,13 @@ void plotter(){
 //	gr1->SetMarkerColor(kBlue);
 //    gr1->SetMarkerStyle(21);
 
-	FWHM_pt->SetMarkerColor(1);
+	FWHM_pt->SetMarkerColor(kBlue);
 	Mode_pt->SetMarkerColor(1);
 	ModeEnt_pt->SetMarkerColor(1);
 	FWHM_cost->SetMarkerColor(1);
 	Mode_cost->SetMarkerColor(1);
 	ModeEnt_cost->SetMarkerColor(1);
-	FWHM_pt->SetMarkerSize(1);
+	FWHM_pt->SetMarkerStyle(21);
 	Mode_pt->SetMarkerSize(1);
 	ModeEnt_pt->SetMarkerSize(1);
 	FWHM_cost->SetMarkerSize(1);
