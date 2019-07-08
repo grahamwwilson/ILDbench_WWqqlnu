@@ -57,8 +57,8 @@ void plotter(){
 	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
 	std::vector<int> col{1,2,3};
 	std::vector<int> lin{1,1,1};
-	std::vector<std::string> legdesc{"ycut1","ycut2","ycut3"}; 
-	plotsuper( hdiffvec, col, lin, legdesc, " ", "SupDiff","", 1);
+	std::vector<std::string> legdesc{"YCut 5e-5","YCut 1e-3","YCut 5e-6"}; 
+	plotsuper( hdiffvec, col, lin, legdesc, "WW#rightarrow qq #mu #nu eLpR", "SupDiff","", 1);
 	
 
 	//no cut diff
@@ -76,8 +76,8 @@ void plotter(){
 	std::vector<TH1D*> hmassvec{ optMass, nocutMass};
 	std::vector<int> col2{1,2};
 	std::vector<int> lin2{1,1};
-	std::vector<std::string> legdesc2{"nocutmass","cutoptmass"};
-	plotsuper( hmassvec, col2, lin2, legdesc2," ","SupMass","",1);
+	std::vector<std::string> legdesc2{"YCut 5e-6, Pt>2GeV","YCut 1e-3, No Cuts"};
+	plotsuper( hmassvec, col2, lin2, legdesc2,"WW#rightarrow qq #mu #nu eLpR","SupMass","",1);
 
 
 	//TGraphs
@@ -88,10 +88,82 @@ void plotter(){
 	TGraph* Mode_cost;
 	TGraph* ModeEnt_cost;
 
-	
+
+	TGraph* FWHM_ptLO;
+	TGraph* Mode_ptLO;
+	TGraph* ModeEnt_ptLO;
+	TGraph* FWHM_costLO;
+	TGraph* Mode_costLO;
+	TGraph* ModeEnt_costLO;
+
+	TGraph* FWHM_ptHI;
+	TGraph* Mode_ptHI;
+	TGraph* ModeEnt_ptHI;
+	TGraph* FWHM_costHI;
+	TGraph* Mode_costHI;
+	TGraph* ModeEnt_costHI;
+
+	f5->GetObject("fwhm_pt5", FWHM_pt);
+	f5->GetObject("mode_pt 5", Mode_pt);
+	f5->GetObject("modeEnt_pt 5", ModeEnt_pt);
+
+	f5->GetObject("fwhm_cost5", FWHM_cost);
+	f5->GetObject("mode_cost5", Mode_cost);
+	f5->GetObject("modeEnd_cost5", ModeEnt_cost);
+
+	f0->GetObject("fwhm_pt0", FWHM_ptLO);
+	f0->GetObject("mode_pt 0", Mode_ptLO);
+	f0->GetObject("modeEnt_pt 0", ModeEnt_ptLO);
+
+	f0->GetObject("fwhm_cost0", FWHM_costLO);
+	f0->GetObject("mode_cost0", Mode_costLO);
+	f0->GetObject("modeEnd_cost0", ModeEnt_costLO);
+
+	f7->GetObject("fwhm_pt7", FWHM_ptHI);
+	f7->GetObject("mode_pt 7", Mode_ptHI);
+	f7->GetObject("modeEnt_pt 7", ModeEnt_ptHI);
+
+	f7->GetObject("fwhm_cost7", FWHM_costHI);
+	f7->GetObject("mode_cost7", Mode_costHI);
+	f7->GetObject("modeEnd_cost7", ModeEnt_costHI);
 
 
+	TMultiGraph *mgfwhmPT = new TMultiGraph();
+	mgfwhmPT->Add(FWHM_pt,"*");
+	mgfwhmPT->Add(FWHM_ptLO,"*");
+	mgfwhmPT->Add(FWHM_ptHI,"*");
+	plot(mgfwhmPT, "mgfwhmPt", "","", 1);
 
+	TMultiGraph *mgmodePT = new TMultiGraph();
+	mgmodePT->Add(Mode_pt,"*");
+	mgmodePT->Add(Mode_ptLO,"*");
+	mgmodePT->Add(Mode_ptHI,"*");
+	plot(mgmodePT, "mgmodePt", "","", 1);
+
+	TMultiGraph *mgmodeEntPT = new TMultiGraph();
+	mgmodeEntPT->Add(ModeEnt_pt,"*");
+	mgmodeEntPT->Add(ModeEnt_ptLO,"*");
+	mgmodeEntPT->Add(ModeEnt_ptHI,"*");
+	plot(mgmodeEntPT, "mgmodeEntPt", "","", 1);
+/// cost next
+
+	TMultiGraph *mgfwhmCOST = new TMultiGraph();
+	mgfwhmCOST->Add(FWHM_cost,"*");
+	mgfwhmCOST->Add(FWHM_costLO,"*");
+	mgfwhmCOST->Add(FWHM_costHI,"*");
+	plot(mgfwhmCOST, "mgfwhmPt", "","", 1);
+
+	TMultiGraph *mgmodeCOST = new TMultiGraph();
+	mgmodeCOST->Add(Mode_cost,"*");
+	mgmodeCOST->Add(Mode_costLO,"*");
+	mgmodeCOST->Add(Mode_costHI,"*");
+	plot(mgmodePT, "mgmodePt", "","", 1);
+
+	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
+	mgmodeEntCOST->Add(ModeEnt_cost,"*");
+	mgmodeEntCOST->Add(ModeEnt_costLO,"*");
+	mgmodeEntCOST->Add(ModeEnt_costHI,"*");
+	plot(mgmodeEntPT, "mgmodeEntPt", "","", 1);
 	
 
 }
