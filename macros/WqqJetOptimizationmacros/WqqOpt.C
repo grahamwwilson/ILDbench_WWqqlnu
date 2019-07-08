@@ -169,7 +169,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	//instantiate make files
 	Wqqtree tree(filename, treename);
 	std::string path2 = "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/";
-	TFile* f = new TFile((path2+filename+std::to_string(ycutNo)+".root").c_str(),"RECREATE");
+	TFile* f = new TFile((path2+"optfile"+std::to_string(ycutNo)+".root").c_str(),"RECREATE");
 	
 	
 	//get the yvalue for this this file
@@ -341,6 +341,7 @@ void WqqOpt(){
 //	int ycutNo = 0;
 	std::string path = "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/";
 	for( int ycutNo = 0; ycutNo< files.size(); ycutNo++){
+		std::cout<<"running file no. "<<ycutNo<<std::endl;
 		AnalyzeFile(path+files.at(ycutNo),"TauJets", ycutNo);
 	}
 	
