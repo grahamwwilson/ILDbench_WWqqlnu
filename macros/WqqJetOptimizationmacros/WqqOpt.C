@@ -313,6 +313,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 
 
 	f->Write();
+	f->Close();
 	
 }
 void printOptimal(){
