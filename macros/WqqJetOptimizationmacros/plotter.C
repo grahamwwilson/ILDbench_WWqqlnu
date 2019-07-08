@@ -134,35 +134,46 @@ void plotter(){
 //    gr1->SetMarkerStyle(21);
 
 	FWHM_pt->SetMarkerColor(kBlue);
-	Mode_pt->SetMarkerColor(1);
-	ModeEnt_pt->SetMarkerColor(1);
-	FWHM_cost->SetMarkerColor(1);
-	Mode_cost->SetMarkerColor(1);
-	ModeEnt_cost->SetMarkerColor(1);
+	Mode_pt->SetMarkerColor(kBlue);
+	ModeEnt_pt->SetMarkerColor(kBlue);
+	FWHM_cost->SetMarkerColor(kBlue);
+	Mode_cost->SetMarkerColor(kBlue);
+	ModeEnt_cost->SetMarkerColor(kBlue);
 	FWHM_pt->SetMarkerStyle(21);
-	Mode_pt->SetMarkerSize(1);
-	ModeEnt_pt->SetMarkerSize(1);
-	FWHM_cost->SetMarkerSize(1);
-	Mode_cost->SetMarkerSize(1);
-	ModeEnt_cost->SetMarkerSize(1);
+	Mode_pt->SetMarkerStyle(21);
+	ModeEnt_pt->SetMarkerStyle(21);
+	FWHM_cost->SetMarkerStyle(21);
+	Mode_cost->SetMarkerStyle(21);
+	ModeEnt_cost->SetMarkerStyle(21);
 
-	FWHM_ptLO->SetMarkerColor(1);
-	Mode_ptLO->SetMarkerColor(1);
-	ModeEnt_ptLO->SetMarkerColor(1);
-	FWHM_costLO->SetMarkerColor(1);
-	Mode_costLO->SetMarkerColor(1);
-	ModeEnt_costLO->SetMarkerColor(1);
+	FWHM_ptLO->SetMarkerColor(kRed);
+	Mode_ptLO->SetMarkerColor(kRed);
+	ModeEnt_ptLO->SetMarkerColor(kRed);
+	FWHM_costLO->SetMarkerColor(kRed);
+	Mode_costLO->SetMarkerColor(kRed);
+	ModeEnt_costLO->SetMarkerColor(kRed);
+	FWHM_ptLO->SetMarkerStyle(22);
+	Mode_ptLO->SetMarkerStyle(22);
+	ModeEnt_ptLO->SetMarkerStyle(22);
+	FWHM_costLO->SetMarkerStyle(22);
+	Mode_costLO->SetMarkerStyle(22);
+	ModeEnt_costLO->SetMarkerStyle(22);
 
-	FWHM_ptHI->SetMarkerColor(1);
-	Mode_ptHI->SetMarkerColor(1);
-	ModeEnt_ptHI->SetMarkerColor(1);
-	FWHM_costHI->SetMarkerColor(1);
-	Mode_costHI->SetMarkerColor(1);
-	ModeEnt_costHI->SetMarkerColor(1);
-
+	FWHM_ptHI->SetMarkerColor(kGreen);
+	Mode_ptHI->SetMarkerColor(kGreen);
+	ModeEnt_ptHI->SetMarkerColor(kGreen);
+	FWHM_costHI->SetMarkerColor(kGreen);
+	Mode_costHI->SetMarkerColor(kGreen);
+	ModeEnt_costHI->SetMarkerColor(kGreen);
+	FWHM_ptHI->SetMarkerStyle(23);
+	Mode_ptHI->SetMarkerStyle(23);
+	ModeEnt_ptHI->SetMarkerStyle(23);
+	FWHM_costHI->SetMarkerStyle(23);
+	Mode_costHI->SetMarkerStyle(23);
+	ModeEnt_costHI->SetMarkerStyle(23);
 
 	//test
-	plot( FWHM_pt, "testg","","",1);
+	//plot( FWHM_pt, "testg","","",1);
 
 	
 
@@ -170,38 +181,38 @@ void plotter(){
 	mgfwhmPT->Add(FWHM_pt);
 	mgfwhmPT->Add(FWHM_ptLO);
 	mgfwhmPT->Add(FWHM_ptHI);
-	plot(mgfwhmPT, "mgfwhmPt", "","", 1);
+	plot(mgfwhmPT, "mgfwhmPt", "LP","", 1);
 
 	TMultiGraph *mgmodePT = new TMultiGraph();
 	mgmodePT->Add(Mode_pt);
 	mgmodePT->Add(Mode_ptLO);
 	mgmodePT->Add(Mode_ptHI);
-	plot(mgmodePT, "mgmodePt", "","", 1);
+	plot(mgmodePT, "mgmodePt", "LP","", 1);
 
 	TMultiGraph *mgmodeEntPT = new TMultiGraph();
 	mgmodeEntPT->Add(ModeEnt_pt);
 	mgmodeEntPT->Add(ModeEnt_ptLO);
 	mgmodeEntPT->Add(ModeEnt_ptHI);
-	plot(mgmodeEntPT, "mgmodeEntPt", "ap","", 1);
+	plot(mgmodeEntPT, "mgmodeEntPt", "LP","", 1);
 /// cost next
 
 	TMultiGraph *mgfwhmCOST = new TMultiGraph();
 	mgfwhmCOST->Add(FWHM_cost);
 	mgfwhmCOST->Add(FWHM_costLO);
 	mgfwhmCOST->Add(FWHM_costHI);
-	plot(mgfwhmCOST, "mgfwhmCost", "","", 1);
+	plot(mgfwhmCOST, "mgfwhmCost", "LP","", 1);
 
 	TMultiGraph *mgmodeCOST = new TMultiGraph();
 	mgmodeCOST->Add(Mode_cost);
 	mgmodeCOST->Add(Mode_costLO);
 	mgmodeCOST->Add(Mode_costHI);
-	plot(mgmodePT, "mgmodeCost", "","", 1);
+	plot(mgmodePT, "mgmodeCost", "LP","", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
 	mgmodeEntCOST->Add(ModeEnt_cost);
 	mgmodeEntCOST->Add(ModeEnt_costLO);
 	mgmodeEntCOST->Add(ModeEnt_costHI);
-	plot(mgmodeEntPT, "mgmodeEntCost", "","", 1);
+	plot(mgmodeEntPT, "mgmodeEntCost", "LP","", 1);
 	
 
 }
