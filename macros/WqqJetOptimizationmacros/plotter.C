@@ -181,38 +181,38 @@ void plotter(){
 	mgfwhmPT->Add(FWHM_pt);
 	mgfwhmPT->Add(FWHM_ptLO);
 	mgfwhmPT->Add(FWHM_ptHI);
-	plot(mgfwhmPT, "mgfwhmPt", "LP","", 1);
+	plot(mgfwhmPT, "mgfwhmPt", "ALP","", 1);
 
 	TMultiGraph *mgmodePT = new TMultiGraph();
 	mgmodePT->Add(Mode_pt);
 	mgmodePT->Add(Mode_ptLO);
 	mgmodePT->Add(Mode_ptHI);
-	plot(mgmodePT, "mgmodePt", "LP","", 1);
+	plot(mgmodePT, "mgmodePt", "ALP","", 1);
 
 	TMultiGraph *mgmodeEntPT = new TMultiGraph();
 	mgmodeEntPT->Add(ModeEnt_pt);
 	mgmodeEntPT->Add(ModeEnt_ptLO);
 	mgmodeEntPT->Add(ModeEnt_ptHI);
-	plot(mgmodeEntPT, "mgmodeEntPt", "LP","", 1);
+	plot(mgmodeEntPT, "mgmodeEntPt", "alp","", 1);
 /// cost next
 
 	TMultiGraph *mgfwhmCOST = new TMultiGraph();
 	mgfwhmCOST->Add(FWHM_cost);
 	mgfwhmCOST->Add(FWHM_costLO);
 	mgfwhmCOST->Add(FWHM_costHI);
-	plot(mgfwhmCOST, "mgfwhmCost", "LP","", 1);
+	plot(mgfwhmCOST, "mgfwhmCost", "ALP","", 1);
 
 	TMultiGraph *mgmodeCOST = new TMultiGraph();
 	mgmodeCOST->Add(Mode_cost);
 	mgmodeCOST->Add(Mode_costLO);
 	mgmodeCOST->Add(Mode_costHI);
-	plot(mgmodePT, "mgmodeCost", "LP","", 1);
+	plot(mgmodePT, "mgmodeCost", "ALP","", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
 	mgmodeEntCOST->Add(ModeEnt_cost);
 	mgmodeEntCOST->Add(ModeEnt_costLO);
 	mgmodeEntCOST->Add(ModeEnt_costHI);
-	plot(mgmodeEntPT, "mgmodeEntCost", "LP","", 1);
+	plot(mgmodeEntPT, "mgmodeEntCost", "ALP","", 1);
 	
 
 }
