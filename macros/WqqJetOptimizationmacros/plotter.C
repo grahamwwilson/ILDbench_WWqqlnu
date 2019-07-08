@@ -130,8 +130,8 @@ void plotter(){
 	f7->GetObject("modeEnt_cost7", ModeEnt_costHI);
 
 
-	gr1->SetMarkerColor(kBlue);
-    gr1->SetMarkerStyle(21);
+//	gr1->SetMarkerColor(kBlue);
+//    gr1->SetMarkerStyle(21);
 
 	FWHM_pt->SetMarkerColor(1);
 	Mode_pt->SetMarkerColor(1);
