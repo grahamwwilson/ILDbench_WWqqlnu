@@ -138,7 +138,7 @@ public :
 #endif
 
 #ifdef Wqqtree_cxx
-Wqqtree::Wqqtree(std::string filename, std::string treename, TTree *tree=0) : fChain(0) 
+Wqqtree::Wqqtree(std::string filename, std::string treename) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
