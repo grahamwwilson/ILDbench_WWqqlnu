@@ -236,11 +236,15 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	int j;
 
 	//init 2d plots
-	double* ptcutx = new double[ptcuts.size()-1];
+	double* ptcutx = new double[ptcuts.size()];
 	double* costcutx = new double[costcuts.size()-1];
 	int ind=0;
-	for(unsigned int i =0; i< ptcuts.size()-1; i++){
-		if(ptcuts.at(i) == -1) continue;
+	for(unsigned int i =0; i< ptcuts.size(); i++){
+		if(ptcuts.at(i) == -1){
+			ptcutx[inx] = 0;
+			ind++;
+			continue;
+		}
 		ptcutx[ind] = ptcuts.at(i);
 		ind++;
 	}
@@ -252,11 +256,11 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	}
 	
 	
-	double* fwhm_pt = new double[ptcuts.size()-1];
+	double* fwhm_pt = new double[ptcuts.size()];
 	double* fwhm_cost = new double[costcuts.size()-1];
-	double* mode_pt = new double[ptcuts.size()-1];
+	double* mode_pt = new double[ptcuts.size()];
 	double* mode_cost = new double[costcuts.size()-1];
-	double* modeEnt_pt = new double[ptcuts.size()-1];
+	double* modeEnt_pt = new double[ptcuts.size()];
 	double* modeEnt_cost = new double[costcuts.size()-1];
 	
 	///test plots
@@ -282,7 +286,13 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	int ptitr = 0;
 	for(unsigned int i=0; i<cuthists.size(); i++){
 		j = i+itr;
-		if(ptcutPerHist.at(i)== -1 && costcutPerHist.at(i) == -1) continue;		
+		if(ptcutPerHist.at(i)== -1 && costcutPerHist.at(i) == -1){
+			fwhm_pt[ptitr]=FWHM.at(j);
+			mode_pt[ptitr] = MODE.at(j);
+			modeEnt_pt[ptitr] = MODEENTRIES.at(j);
+			ptitr++;
+			continue;
+		} 		
 
 		if(ptcutPerHist.at(i) == -1 ){
 			//fill cost cut only

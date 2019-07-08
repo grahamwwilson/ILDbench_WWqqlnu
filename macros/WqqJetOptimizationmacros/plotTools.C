@@ -19,32 +19,32 @@ TGraph* initTGraph( std::string varname, std::string name, int nbins, double* xv
 	return g;
 } 
 void plot( TMultiGraph* mg, std::string cname, std::string opt, std::string tag, bool save){
-	TCanvas *c = new TCanvas(cname.c_str(), "m", 800,800);
+	TCanvas *c = new TCanvas(cname.c_str(), "m", 900,700);
 	mg->Draw(opt.c_str());
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
 void plot( TGraph* g, std::string cname,  std::string opt, std::string tag, bool save){
-	TCanvas *c = new TCanvas(cname.c_str(),"m",800,800);
+	TCanvas *c = new TCanvas(cname.c_str(),"m",900,700);
 	g->Draw(opt.c_str());
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
 void plot( TH1D* h , std::string cname , std::string tag, bool save){
-	TCanvas *c = new TCanvas(cname.c_str(),"m",800,800);
+	TCanvas *c = new TCanvas(cname.c_str(),"m",900,700);
 	h->Draw();
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
 void plot( TH2D* h, std::string cname, std::string opt, std::string tag, bool save){
-	TCanvas *c = new TCanvas(cname.c_str(), "m",800,600);
+	TCanvas *c = new TCanvas(cname.c_str(), "m",900,700);
 	h->Draw(opt.c_str());
     if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
 void plotsuper( std::vector<TH1D*> hvec, std::vector<int> colors, std::vector<int> linestyles, std::vector<std::string> hlegdesc,std::string legheader, std::string cname, std::string tag, bool save){
 	
-	TCanvas* c = new TCanvas((tag+cname).c_str(),"m",800,800);
+	TCanvas* c = new TCanvas((tag+cname).c_str(),"m",900,700);
 	//c->SetLogy();
 	int color =1;
 	for(unsigned int i=0; i< colors.size(); i++){
