@@ -216,7 +216,7 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 				
 			//do loops over the trees
 			TH1D* hist = initTH1D( "cut"+std::to_string(ycutNo)+"_"+std::to_string(i)+"_"+std::to_string(j), "Generator Mass Difference;  M_{qq}^{meas} - M_{qq}^{gen}; Events Per 0.5 GeV Bin", 400, -100, 100);
-			TH1D* qqmass = initTH1D( "masscut"+std::to_string(ycutNo)"_"+std::to_string(i)+"_"+std::to_string(j)," W #rightarrow qq Mass; Mass [GeV]; Events Per 0.5 GeV Bin", 200, 30., 130. );
+			TH1D* qqmass = initTH1D( "masscut"+std::to_string(ycutNo)+"_"+std::to_string(i)+"_"+std::to_string(j)," W #rightarrow qq Mass; Mass [GeV]; Events Per 0.5 GeV Bin", 200, 30., 130. );
 			cuthists.push_back(hist);	
 			masshists.push_back(hist);
 			ptcutPerHist.push_back(ptcuts.at(i));
