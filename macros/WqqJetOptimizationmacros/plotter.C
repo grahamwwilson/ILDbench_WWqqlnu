@@ -181,6 +181,8 @@ void plotter(){
 	mgfwhmPT->Add(FWHM_pt);
 	mgfwhmPT->Add(FWHM_ptLO);
 	mgfwhmPT->Add(FWHM_ptHI);
+	mgfwhmPT->GetXaxis()->SetTitle("Pt Cut [GeV]");
+	mgfwhmPT->GetYaxis()->SetTitle("Full Width Half Maximum [GeV]");
 	plot(mgfwhmPT, "mgfwhmPt", "ALP","", 1);
 
 	TMultiGraph *mgmodePT = new TMultiGraph();
