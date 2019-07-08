@@ -338,7 +338,7 @@ void WqqOpt(){
 	  	logfile.open (path1+"optlog.log");
 
 	std::vector<std::string> files{ "WqqOptycut1S1file.root" , "WqqOptycut2S1file.root" , "WqqOptycut3S1file.root" , "WqqOptycut4S1file.root" , "WqqOptycut5S1file.root" , "WqqOptycut6S1file.root", "WqqOptycut7S1file.root", "WqqOptycut8S1file.root"};
-	TFile* f = new TFile("test.root","RECREATE");
+//	TFile* f = new TFile("test.root","RECREATE");
 //	int ycutNo = 0;
 	std::string path = "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/";
 	for( int ycutNo = 0; ycutNo< files.size(); ycutNo++){
