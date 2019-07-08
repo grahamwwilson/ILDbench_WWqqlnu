@@ -189,19 +189,19 @@ void plotter(){
 	mgfwhmCOST->Add(FWHM_cost);
 	mgfwhmCOST->Add(FWHM_costLO);
 	mgfwhmCOST->Add(FWHM_costHI);
-	plot(mgfwhmCOST, "mgfwhmPt", "","", 1);
+	plot(mgfwhmCOST, "mgfwhmCost", "","", 1);
 
 	TMultiGraph *mgmodeCOST = new TMultiGraph();
 	mgmodeCOST->Add(Mode_cost);
 	mgmodeCOST->Add(Mode_costLO);
 	mgmodeCOST->Add(Mode_costHI);
-	plot(mgmodePT, "mgmodePt", "","", 1);
+	plot(mgmodePT, "mgmodeCost", "","", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
 	mgmodeEntCOST->Add(ModeEnt_cost);
 	mgmodeEntCOST->Add(ModeEnt_costLO);
 	mgmodeEntCOST->Add(ModeEnt_costHI);
-	plot(mgmodeEntPT, "mgmodeEntPt", "","", 1);
+	plot(mgmodeEntPT, "mgmodeEntCost", "","", 1);
 	
 
 }
