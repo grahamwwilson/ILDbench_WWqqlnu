@@ -55,7 +55,7 @@ void plotter(){
 
 	//no cut diff
 	TH1D* nocutDiff;
-	filevec.att(0)->GetObject("cut0_0_0", nocutDiff);
+	filevec.at(0)->GetObject("cut0_0_0", nocutDiff);
 	plot( nocutDiff, "nocutDiff","./plots/",1);
 
 
