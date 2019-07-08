@@ -109,7 +109,7 @@ void plotter(){
 
 	f5->GetObject("fwhm_cost5", FWHM_cost);
 	f5->GetObject("mode_cost5", Mode_cost);
-	f5->GetObject("modeEnd_cost5", ModeEnt_cost);
+	f5->GetObject("modeEnt_cost5", ModeEnt_cost);
 
 	f0->GetObject("fwhm_pt0", FWHM_ptLO);
 	f0->GetObject("mode_pt 0", Mode_ptLO);
@@ -117,7 +117,7 @@ void plotter(){
 
 	f0->GetObject("fwhm_cost0", FWHM_costLO);
 	f0->GetObject("mode_cost0", Mode_costLO);
-	f0->GetObject("modeEnd_cost0", ModeEnt_costLO);
+	f0->GetObject("modeEnt_cost0", ModeEnt_costLO);
 
 	f7->GetObject("fwhm_pt7", FWHM_ptHI);
 	f7->GetObject("mode_pt 7", Mode_ptHI);
@@ -125,8 +125,11 @@ void plotter(){
 
 	f7->GetObject("fwhm_cost7", FWHM_costHI);
 	f7->GetObject("mode_cost7", Mode_costHI);
-	f7->GetObject("modeEnd_cost7", ModeEnt_costHI);
+	f7->GetObject("modeEnt_cost7", ModeEnt_costHI);
 
+
+	//test
+	plot( FWHM_pt, "testg","ap","",1);
 
 	TMultiGraph *mgfwhmPT = new TMultiGraph();
 	mgfwhmPT->Add(FWHM_pt,"*");
@@ -144,7 +147,7 @@ void plotter(){
 	mgmodeEntPT->Add(ModeEnt_pt,"*");
 	mgmodeEntPT->Add(ModeEnt_ptLO,"*");
 	mgmodeEntPT->Add(ModeEnt_ptHI,"*");
-	plot(mgmodeEntPT, "mgmodeEntPt", "","", 1);
+	plot(mgmodeEntPT, "mgmodeEntPt", "ap","", 1);
 /// cost next
 
 	TMultiGraph *mgfwhmCOST = new TMultiGraph();
