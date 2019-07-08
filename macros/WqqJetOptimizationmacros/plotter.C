@@ -1,5 +1,6 @@
 
-
+#include "plotTools.C"
+#include
 
 void plotter(){
 
@@ -32,5 +33,55 @@ void plotter(){
 	
 	TFile *fout = new TFile("formattedplots.root","RECREATE");
 	*/
+
+	TFile *fout = new TFile("optPlots.root","RECREATE");
+
+	TH1D* optDiff;
+	TH1D* lowDiff;
+	TH1D* hiDiff;
+	
+	filevec.at(0)->GetObject("cut5_4_11", lowDiff);
+	filevec.at(5)->GetObject("cut5_4_11", optDiff);
+	filevec.at(7)->GetObject("cut5_4_11", hiDiff);
+
+	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
+	std::vector<int> col{1,2,3};
+	std::vector<int> lin{1,1,1};
+	std::vector<std::string> legdesc{"ycut1","ycut2","ycut3"}; 
+	plotsuper( hdiffvec, col, lin, legdesc, "", "SupDiff","./plots/", 1);
+	
+
+	//no cut diff
+	TH1D* nocutDiff;
+	filevec.att(0)->GetObject("cut0_0_0", nocutDiff);
+	plot( nocutDiff, "nocutDiff","./plots/",1);
+
+
+
+	//mass distributions
+	TH1D* nocutMass;
+	TH1D* optMass;
+	filevec.at(0)->GetObject("masscut0_0_0", nocutMass);
+	filevec.at(5)->GetObject("masscut5_4_11", optMass);
+	std::vector<TH1D*> hmassvec{ optMass, nocutMass};
+	std::vector<int> col2{1,2};
+	std::vector<int> lin2{1,1};
+	std::vector<std::string> legdesc2{"nocutmass","cutoptmass"};
+	plotsuper( hmassvec, col2, lin2, legdesc2,"","SupMass","./plots/",1);
+
+
+	//TGraphs
+	TGraph* FWHM_pt;
+	TGraph* Mode_pt;
+	TGraph* ModeEnt_pt;
+	TGraph* FWHM_cost;
+	TGraph* Mode_cost;
+	TGraph* ModeEnt_cost;
+
+	
+
+
+
+	
 
 }
