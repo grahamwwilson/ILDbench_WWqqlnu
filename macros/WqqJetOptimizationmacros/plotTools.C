@@ -3,6 +3,7 @@
 #include "TH1D.h"
 #include "TH2D.h"
 #include "TCanvas.h"
+#include "TMultiGraph.h"
 
 
 TH1D* initTH1D( std::string varname, std::string name, int bins, double xlow, double xup){
