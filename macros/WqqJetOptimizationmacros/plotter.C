@@ -22,7 +22,7 @@ void plotter(){
 	TFile* f0 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile0.root");
 	TFile* f5 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile5.root");
 	TFile* f7 = TFile::Open("/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles/optfile7.root");
-
+							//afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/OptimizationOutputFiles
 	//example code
 	/*TFile *f = TFile::Open("../jpsi20gev_cal/MassConstraint_calibrated.root");
 	TFile *f2 = TFile::Open("../pi010gev_cal/MassConstraint_calibrated.root");
@@ -50,7 +50,9 @@ void plotter(){
 	f5->GetObject("cut5_4_11", optDiff);
 	f7->GetObject("cut5_4_11", hiDiff);
 
-	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
+	plot(optDiff,"test","",1);
+
+/*	std::vector<TH1D*> hdiffvec{ optDiff, lowDiff, hiDiff };
 	std::vector<int> col{1,2,3};
 	std::vector<int> lin{1,1,1};
 	std::vector<std::string> legdesc{"ycut1","ycut2","ycut3"}; 
@@ -75,7 +77,7 @@ void plotter(){
 	std::vector<std::string> legdesc2{"nocutmass","cutoptmass"};
 	plotsuper( hmassvec, col2, lin2, legdesc2,"","SupMass","./plots/",1);
 
-
+*/
 	//TGraphs
 	TGraph* FWHM_pt;
 	TGraph* Mode_pt;

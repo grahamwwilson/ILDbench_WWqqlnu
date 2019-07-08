@@ -38,7 +38,7 @@ void plot( TH2D* h, std::string cname, std::string opt, std::string tag, bool sa
 void plotsuper( std::vector<TH1D*> hvec, std::vector<int> colors, std::vector<int> linestyles, std::vector<std::string> hlegdesc,std::string legheader, std::string cname, std::string tag, bool save){
 	
 	TCanvas* c = new TCanvas((tag+cname).c_str(),"m",800,600);
-	c->SetLogy();
+	//c->SetLogy();
 	int color =1;
 	for(unsigned int i=0; i< colors.size(); i++){
 		hvec.at(i)->SetLineColor(colors.at(i));
