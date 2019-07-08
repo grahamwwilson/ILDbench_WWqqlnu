@@ -103,6 +103,8 @@ void plotter(){
 	TGraph* Mode_costHI;
 	TGraph* ModeEnt_costHI;
 
+
+
 	f5->GetObject("fwhm_pt5", FWHM_pt);
 	f5->GetObject("mode_pt 5", Mode_pt);
 	f5->GetObject("modeEnt_pt 5", ModeEnt_pt);
@@ -128,44 +130,77 @@ void plotter(){
 	f7->GetObject("modeEnt_cost7", ModeEnt_costHI);
 
 
+	gr1->SetMarkerColor(kBlue);
+    gr1->SetMarkerStyle(21);
+
+	FWHM_pt->SetMarkerColor(1);
+	Mode_pt->SetMarkerColor(1);
+	ModeEnt_pt->SetMarkerColor(1);
+	FWHM_cost->SetMarkerColor(1);
+	Mode_cost->SetMarkerColor(1);
+	ModeEnt_cost->SetMarkerColor(1);
+	FWHM_pt->SetMarkerSize(1);
+	Mode_pt->SetMarkerSize(1);
+	ModeEnt_pt->SetMarkerSize(1);
+	FWHM_cost->SetMarkerSize(1);
+	Mode_cost->SetMarkerSize(1);
+	ModeEnt_cost->SetMarkerSize(1);
+
+	FWHM_ptLO->SetMarkerColor(1);
+	Mode_ptLO->SetMarkerColor(1);
+	ModeEnt_ptLO->SetMarkerColor(1);
+	FWHM_costLO->SetMarkerColor(1);
+	Mode_costLO->SetMarkerColor(1);
+	ModeEnt_costLO->SetMarkerColor(1);
+
+	FWHM_ptHI->SetMarkerColor(1);
+	Mode_ptHI->SetMarkerColor(1);
+	ModeEnt_ptHI->SetMarkerColor(1);
+	FWHM_costHI->SetMarkerColor(1);
+	Mode_costHI->SetMarkerColor(1);
+	ModeEnt_costHI->SetMarkerColor(1);
+
+
 	//test
 	plot( FWHM_pt, "testg","ap","",1);
 
+	
+
 	TMultiGraph *mgfwhmPT = new TMultiGraph();
-	mgfwhmPT->Add(FWHM_pt,"*");
-	mgfwhmPT->Add(FWHM_ptLO,"*");
-	mgfwhmPT->Add(FWHM_ptHI,"*");
+	mgfwhmPT->Add(FWHM_pt);
+	mgfwhmPT->Add(FWHM_ptLO);
+	mgfwhmPT->Add(FWHM_ptHI);
 	plot(mgfwhmPT, "mgfwhmPt", "","", 1);
 
 	TMultiGraph *mgmodePT = new TMultiGraph();
-	mgmodePT->Add(Mode_pt,"*");
-	mgmodePT->Add(Mode_ptLO,"*");
-	mgmodePT->Add(Mode_ptHI,"*");
+	mgmodePT->Add(Mode_pt);
+	mgmodePT->Add(Mode_ptLO);
+	mgmodePT->Add(Mode_ptHI);
 	plot(mgmodePT, "mgmodePt", "","", 1);
 
 	TMultiGraph *mgmodeEntPT = new TMultiGraph();
-	mgmodeEntPT->Add(ModeEnt_pt,"*");
-	mgmodeEntPT->Add(ModeEnt_ptLO,"*");
-	mgmodeEntPT->Add(ModeEnt_ptHI,"*");
+	mgmodeEntPT->Add(ModeEnt_pt);
+	mgmodeEntPT->Add(ModeEnt_ptLO);
+	mgmodeEntPT->Add(ModeEnt_ptHI);
 	plot(mgmodeEntPT, "mgmodeEntPt", "ap","", 1);
 /// cost next
 
 	TMultiGraph *mgfwhmCOST = new TMultiGraph();
-	mgfwhmCOST->Add(FWHM_cost,"*");
-	mgfwhmCOST->Add(FWHM_costLO,"*");
-	mgfwhmCOST->Add(FWHM_costHI,"*");
+	mgfwhmCOST->Add(FWHM_cost);
+	mgfwhmCOST->Add(FWHM_costLO);
+	mgfwhmCOST->Add(FWHM_costHI);
 	plot(mgfwhmCOST, "mgfwhmPt", "","", 1);
 
 	TMultiGraph *mgmodeCOST = new TMultiGraph();
-	mgmodeCOST->Add(Mode_cost,"*");
-	mgmodeCOST->Add(Mode_costLO,"*");
-	mgmodeCOST->Add(Mode_costHI,"*");
+	mgmodeCOST->Add(Mode_cost);
+	mgmodeCOST->Add(Mode_costLO);
+	mgmodeCOST->Add(Mode_costHI);
 	plot(mgmodePT, "mgmodePt", "","", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
-	mgmodeEntCOST->Add(ModeEnt_cost,"*");
-	mgmodeEntCOST->Add(ModeEnt_costLO,"*");
-	mgmodeEntCOST->Add(ModeEnt_costHI,"*");
+	mgmodeEntCOST->Add(ModeEnt_cost);
+	mgmodeEntCOST->Add(ModeEnt_costLO);
+	mgmodeEntCOST->Add(ModeEnt_costHI);
 	plot(mgmodeEntPT, "mgmodeEntPt", "","", 1);
 	
 
