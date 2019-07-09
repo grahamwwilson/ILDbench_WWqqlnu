@@ -316,11 +316,11 @@ void AnalyzeFile(std::string filename, std::string treename, int ycutNo){
 	g->Write();
 	g = initTGraph("fwhm_cost"+std::to_string(ycutNo),"",costcuts.size()-1,costcutx,fwhm_cost);
 	g->Write();
-	g =initTGraph("mode_pt "+std::to_string(ycutNo),"", ptcuts.size(),ptcutx,mode_pt);
+	g =initTGraph("mode_pt"+std::to_string(ycutNo),"", ptcuts.size(),ptcutx,mode_pt);
 	g->Write();
 	g= initTGraph("mode_cost"+std::to_string(ycutNo),"", costcuts.size()-1,costcutx,mode_cost);
 	g->Write();
-	g =initTGraph("modeEnt_pt "+std::to_string(ycutNo),"", ptcuts.size(),ptcutx,modeEnt_pt);
+	g =initTGraph("modeEnt_pt"+std::to_string(ycutNo),"", ptcuts.size(),ptcutx,modeEnt_pt);
 	g->Write();
 	g= initTGraph("modeEnt_cost"+std::to_string(ycutNo),"", costcuts.size()-1,costcutx,modeEnt_cost);
 	g->Write();
