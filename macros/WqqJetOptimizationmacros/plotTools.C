@@ -23,6 +23,7 @@ void plot( TMultiGraph* mg, std::string cname, std::string opt, std::string tag,
 	mg->Draw(opt.c_str());
  	mg->GetXaxis()->SetTitle(xaxisTitle.c_str()); 
 	mg->GetYaxis()->SetTitle(yaxisTitle.c_str()); 
+	c->BuildLegend();
 	c->Update();
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
