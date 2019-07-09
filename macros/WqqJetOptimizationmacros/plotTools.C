@@ -39,7 +39,7 @@ void plot( TH1D* h , std::string cname , std::string tag, bool save){
 	TCanvas *c = new TCanvas(cname.c_str(),"m",900,700);
 	h->Draw();
 	if(!save) return;
-	c->Print((tag+cname+".pdf").c_str());
+	c->Print((tag+cname+".root").c_str());
 }
 void plot( TH2D* h, std::string cname, std::string opt, std::string tag, bool save){
 	TCanvas *c = new TCanvas(cname.c_str(), "m",900,700);
