@@ -76,7 +76,7 @@ void plotter(){
 	std::vector<TH1D*> hmassvec{ optMass, nocutMass};
 	std::vector<int> col2{1,2};
 	std::vector<int> lin2{1,1};
-	std::vector<std::string> legdesc2{"YCut 5e-6, Pt>2GeV","YCut 1e-3, No Cuts"};
+	std::vector<std::string> legdesc2{"YCut 5e-5, Pt>2GeV","YCut 1e-3, No Cuts"};
 	plotsuper( hmassvec, col2, lin2, legdesc2,"WW#rightarrow qq #mu #nu eLpR","SupMass","",1);
 
 
@@ -108,44 +108,44 @@ void plotter(){
 	f5->GetObject("fwhm_pt5", FWHM_pt);
 	f5->GetObject("mode_pt5", Mode_pt);
 	f5->GetObject("modeEnt_pt5", ModeEnt_pt);
-	FWHM_pt->SetName("Ycut 5e-6");
-	Mode_pt->SetName("Ycut 5e-6");
-	ModeEnt_pt->SetName("YCut 5e-6");
+	FWHM_pt->SetName("YCut 5e-5");
+	Mode_pt->SetName("YCut 5e-5");
+	ModeEnt_pt->SetName("YCut 5e-5");
 
 	f5->GetObject("fwhm_cost5", FWHM_cost);
 	f5->GetObject("mode_cost5", Mode_cost);
 	f5->GetObject("modeEnt_cost5", ModeEnt_cost);
-	FWHM_cost->SetName("Ycut 5e-6");
-	Mode_cost->SetName("Ycut 5e-6");
-	ModeEnt_cost->SetName("YCut 5e-6");
+	FWHM_cost->SetName("YCcut 5e-5");
+	Mode_cost->SetName("YCut 5e-5");
+	ModeEnt_cost->SetName("YCut 5e-5");
 
 	f0->GetObject("fwhm_pt0", FWHM_ptLO);
 	f0->GetObject("mode_pt0", Mode_ptLO);
 	f0->GetObject("modeEnt_pt0", ModeEnt_ptLO);
-	FWHM_ptLO->SetName("Ycut 1e-3");
-	Mode_ptLO->SetName("Ycut 1e-3");
-	ModeEnt_ptLO->SetName("Ycut 1e-3");
+	FWHM_ptLO->SetName("YCut 1e-3");
+	Mode_ptLO->SetName("YCut 1e-3");
+	ModeEnt_ptLO->SetName("YCut 1e-3");
 
 	f0->GetObject("fwhm_cost0", FWHM_costLO);
 	f0->GetObject("mode_cost0", Mode_costLO);
 	f0->GetObject("modeEnt_cost0", ModeEnt_costLO);
-	FWHM_costLO->SetName("Ycut 1e-3");
-	Mode_costLO->SetName("Ycut 1e-3");
-	ModeEnt_costLO->SetName("Ycut 1e-3");
+	FWHM_costLO->SetName("YCut 1e-3");
+	Mode_costLO->SetName("YCut 1e-3");
+	ModeEnt_costLO->SetName("YCut 1e-3");
 
 	f7->GetObject("fwhm_pt7", FWHM_ptHI);
 	f7->GetObject("mode_pt7", Mode_ptHI);
 	f7->GetObject("modeEnt_pt7", ModeEnt_ptHI);
-	FWHM_ptHI->SetName("Ycut 5e-6");
-	Mode_ptHI->SetName("Ycut 5e-6");
-	ModeEnt_ptHI->SetName("Ycut 5e-6");
+	FWHM_ptHI->SetName("YCut 5e-6");
+	Mode_ptHI->SetName("YCut 5e-6");
+	ModeEnt_ptHI->SetName("YCut 5e-6");
 
 	f7->GetObject("fwhm_cost7", FWHM_costHI);
 	f7->GetObject("mode_cost7", Mode_costHI);
 	f7->GetObject("modeEnt_cost7", ModeEnt_costHI);
-	FWHM_costHI->SetName("Ycut 5e-6");
-	Mode_costHI->SetName("Ycut 5e-6");
-	ModeEnt_costHI->SetName("Ycut 5e-6");
+	FWHM_costHI->SetName("YCut 5e-6");
+	Mode_costHI->SetName("YCut 5e-6");
+	ModeEnt_costHI->SetName("YCut 5e-6");
 
 //	gr1->SetMarkerColor(kBlue);
 //    gr1->SetMarkerStyle(21);
