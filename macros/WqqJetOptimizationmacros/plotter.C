@@ -110,7 +110,7 @@ void plotter(){
 	f5->GetObject("modeEnt_pt5", ModeEnt_pt);
 	FWHM_pt->SetTitle("Ycut 5e-6 Pt>2GeV");
 	Mode_pt->SetTitle("Ycut 5e-6 Pt>2GeV");
-	ModeEnt_pt_SetTitle("YCut 5e-6 Pt>2GeV");
+	ModeEnt_pt->SetTitle("YCut 5e-6 Pt>2GeV");
 
 	f5->GetObject("fwhm_cost5", FWHM_cost);
 	f5->GetObject("mode_cost5", Mode_cost);
