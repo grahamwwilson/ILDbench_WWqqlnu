@@ -208,13 +208,13 @@ void plotter(){
 	mgmodeCOST->Add(Mode_cost);
 	mgmodeCOST->Add(Mode_costLO);
 	mgmodeCOST->Add(Mode_costHI);
-	plot(mgmodePT, "mgmodeCost", "ALP","","Cos#theta Cut ", "Mode [GeV]", 1);
+	plot(mgmodeCOST, "mgmodeCost", "ALP","","Cos#theta Cut ", "Mode [GeV]", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
 	mgmodeEntCOST->Add(ModeEnt_cost);
 	mgmodeEntCOST->Add(ModeEnt_costLO);
 	mgmodeEntCOST->Add(ModeEnt_costHI);
-	plot(mgmodeEntPT, "mgmodeEntCost", "ALP","","Cos#theta Cut ", "Mode Entries", 1);
+	plot(mgmodeEntCOST, "mgmodeEntCost", "ALP","","Cos#theta Cut ", "Mode Entries", 1);
 	
 
 }
