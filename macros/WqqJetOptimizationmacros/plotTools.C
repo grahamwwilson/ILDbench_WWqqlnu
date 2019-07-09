@@ -78,5 +78,5 @@ void plotsuper( std::vector<TH1D*> hvec, std::vector<int> colors, std::vector<in
 	leg->SetBorderSize(1);                          // Include border
 	leg->Draw();
     if(!save) return;
-    c->Print((tag+cname+".pdf").c_str());
+    c->Print((tag+cname+".root").c_str());
 }
