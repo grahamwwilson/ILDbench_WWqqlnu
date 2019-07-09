@@ -114,7 +114,7 @@ void plotter(){
 	f5->GetObject("modeEnt_cost5", ModeEnt_cost);
 
 	f0->GetObject("fwhm_pt0", FWHM_ptLO);
-	f0->GetObject("mode_pt 0", Mode_ptLO);
+	f0->GetObject("mode_pt0", Mode_ptLO);
 	f0->GetObject("modeEnt_pt 0", ModeEnt_ptLO);
 
 	f0->GetObject("fwhm_cost0", FWHM_costLO);
@@ -122,8 +122,8 @@ void plotter(){
 	f0->GetObject("modeEnt_cost0", ModeEnt_costLO);
 
 	f7->GetObject("fwhm_pt7", FWHM_ptHI);
-	f7->GetObject("mode_pt 7", Mode_ptHI);
-	f7->GetObject("modeEnt_pt 7", ModeEnt_ptHI);
+	f7->GetObject("mode_pt7", Mode_ptHI);
+	f7->GetObject("modeEnt_pt7", ModeEnt_ptHI);
 
 	f7->GetObject("fwhm_cost7", FWHM_costHI);
 	f7->GetObject("mode_cost7", Mode_costHI);
