@@ -183,38 +183,38 @@ void plotter(){
 	mgfwhmPT->Add(FWHM_ptHI);
 //	mgfwhmPT->GetXaxis()->SetTitle("Pt Cut [GeV]");
 //	mgfwhmPT->GetYaxis()->SetTitle("Full Width Half Maximum [GeV]");
-	plot(mgfwhmPT, "mgfwhmPt", "ALP","", 1);
-
+	plot(mgfwhmPT, "mgfwhmPt", "ALP","", "Pt Cut [GeV]", "Full Width Half Maximum [GeV]", 1);
+	
 	TMultiGraph *mgmodePT = new TMultiGraph();
 	mgmodePT->Add(Mode_pt);
 	mgmodePT->Add(Mode_ptLO);
 	mgmodePT->Add(Mode_ptHI);
-	plot(mgmodePT, "mgmodePt", "ALP","", 1);
+	plot(mgmodePT, "mgmodePt", "ALP","","Pt Cut [GeV]", "Mode [GeV]", 1);
 
 	TMultiGraph *mgmodeEntPT = new TMultiGraph();
 	mgmodeEntPT->Add(ModeEnt_pt);
 	mgmodeEntPT->Add(ModeEnt_ptLO);
 	mgmodeEntPT->Add(ModeEnt_ptHI);
-	plot(mgmodeEntPT, "mgmodeEntPt", "alp","", 1);
+	plot(mgmodeEntPT, "mgmodeEntPt", "alp","","Pt Cut [GeV]", "Mode Entries", 1);
 /// cost next
 
 	TMultiGraph *mgfwhmCOST = new TMultiGraph();
 	mgfwhmCOST->Add(FWHM_cost);
 	mgfwhmCOST->Add(FWHM_costLO);
 	mgfwhmCOST->Add(FWHM_costHI);
-	plot(mgfwhmCOST, "mgfwhmCost", "ALP","", 1);
+	plot(mgfwhmCOST, "mgfwhmCost", "ALP","","Cos#theta Cut ", "Full Width Half Maximum [GeV]", 1);
 
 	TMultiGraph *mgmodeCOST = new TMultiGraph();
 	mgmodeCOST->Add(Mode_cost);
 	mgmodeCOST->Add(Mode_costLO);
 	mgmodeCOST->Add(Mode_costHI);
-	plot(mgmodePT, "mgmodeCost", "ALP","", 1);
+	plot(mgmodePT, "mgmodeCost", "ALP","","Cos#theta Cut ", "Mode [GeV]", 1);
 
 	TMultiGraph *mgmodeEntCOST = new TMultiGraph();
 	mgmodeEntCOST->Add(ModeEnt_cost);
 	mgmodeEntCOST->Add(ModeEnt_costLO);
 	mgmodeEntCOST->Add(ModeEnt_costHI);
-	plot(mgmodeEntPT, "mgmodeEntCost", "ALP","", 1);
+	plot(mgmodeEntPT, "mgmodeEntCost", "ALP","","Cos#theta Cut ", "Mode Entries", 1);
 	
 
 }

@@ -18,15 +18,19 @@ TGraph* initTGraph( std::string varname, std::string name, int nbins, double* xv
 	g->SetTitle(name.c_str());
 	return g;
 } 
-void plot( TMultiGraph* mg, std::string cname, std::string opt, std::string tag, bool save){
+void plot( TMultiGraph* mg, std::string cname, std::string opt, std::string tag, std::string xaxisTitle, std::string yaxisTitle, bool save){
 	TCanvas *c = new TCanvas(cname.c_str(), "m", 900,700);
 	mg->Draw(opt.c_str());
+ 	mg->GetXaxis()->SetTitle(xaxisTitle.c_str()); 
+	mg->GetYaxis()->SetTitle(yaxisTitle.c_str()); 
+	c.Update();
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
 void plot( TGraph* g, std::string cname,  std::string opt, std::string tag, bool save){
 	TCanvas *c = new TCanvas(cname.c_str(),"m",900,700);
 	g->Draw(opt.c_str());
+	
 	if(!save) return;
 	c->Print((tag+cname+".pdf").c_str());
 }
