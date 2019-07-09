@@ -108,6 +108,9 @@ void plotter(){
 	f5->GetObject("fwhm_pt5", FWHM_pt);
 	f5->GetObject("mode_pt5", Mode_pt);
 	f5->GetObject("modeEnt_pt5", ModeEnt_pt);
+	FWHM_pt->SetTitle("Ycut 5e-6 Pt>2GeV");
+	Mode_pt->SetTitle("Ycut 5e-6 Pt>2GeV");
+	ModeEnt_pt_SetTitle("YCut 5e-6 Pt>2GeV");
 
 	f5->GetObject("fwhm_cost5", FWHM_cost);
 	f5->GetObject("mode_cost5", Mode_cost);
@@ -116,6 +119,9 @@ void plotter(){
 	f0->GetObject("fwhm_pt0", FWHM_ptLO);
 	f0->GetObject("mode_pt0", Mode_ptLO);
 	f0->GetObject("modeEnt_pt0", ModeEnt_ptLO);
+	FWHM_ptLO->SetTitle("Ycut abc");
+	Mode_ptLO->SetTitle("Ycut abc");
+	ModeEnt_ptLO->SetTitle("Ycut abc");
 
 	f0->GetObject("fwhm_cost0", FWHM_costLO);
 	f0->GetObject("mode_cost0", Mode_costLO);
@@ -124,6 +130,9 @@ void plotter(){
 	f7->GetObject("fwhm_pt7", FWHM_ptHI);
 	f7->GetObject("mode_pt7", Mode_ptHI);
 	f7->GetObject("modeEnt_pt7", ModeEnt_ptHI);
+	FWHM_ptHI->SetTitle("Ycut xyz");
+	Mode_ptHI->SetTitle("Ycut xyz");
+	ModeEnt_ptHI->SetTitle("Ycut xyz");
 
 	f7->GetObject("fwhm_cost7", FWHM_costHI);
 	f7->GetObject("mode_cost7", Mode_costHI);
