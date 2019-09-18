@@ -1,0 +1,66 @@
+<!-- automatically generated steering -->
+
+ <marlin>
+	<execute>
+ 		<processor name= "MyTauFinder" />
+		<processor name= "MyTauSelector" />
+		<processor name= "MyRemainJets" />
+		<processor name= "MyWWAnalysis" />
+	</execute>
+ 
+	<global>
+		<parameter name="LCIOInputFiles"> /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_0.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_1.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_2.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_3.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n002.d_dstm_10318_4.slcio /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n002.d_dstm_10318_5.slcio </parameter>
+		<parameter name="SkipNEvents " value = "0" />
+		<parameter name="MaxRecordNumber" value = "0" />
+		<parameter name="SupressCheck" value = "false" />
+		<parameter name="GearXMLFile" value = "gear_ILD_l5_v02_dd4hep.xml" />
+		<parameter name="Verbosity"  options = "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT" > DEBUG </parameter>
+	</global>
+
+	<processor name= "MyTauFinder" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> preTauJets </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> preRemainPFOs </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.03" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="3." />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauSelector" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> preRemainPFOs </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> preTauJets </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> TauJets </parameter>
+	</processor>
+	<processor name="MyRemainJets" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> RemainPFOs </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> RemainJets </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 0.001 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+	<processor name= "MyWWAnalysis" type="WWAnalysis">
+		<parameter name="McParticleCollectionName" value="MCParticle" />
+		<parameter name="InputParticleColletionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
+		<parameter name="InputJetCollectionsNames">  TauJets </parameter>
+ 		<parameter name="InputRemainCollectionsNames"> RemainPFOs </parameter>
+ 		<parameter name="InputRemainJetCollectionsNames"> RemainJets </parameter>
+ 		<parameter name="RemainYCut" value="0.001" /> 
+		<parameter name="NFermions" value="4" /> 
+		<parameter name="Nleptons" value="2" /> 
+		<parameter name="Normalization" value="0.784017" /> 
+		<parameter name="Xsec" value="9521.45" /> 
+		<parameter name="XsecError" value="10.6" /> 
+		<parameter name="Njets" value="3" />
+ 		<parameter name="Ncuts" value="7" /> 
+		<parameter name="OutPath" value="/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/WqqJetOptFiles/RootFiles/WqqOptycut1S1" /> 
+	</processor> 
+
+</marlin>

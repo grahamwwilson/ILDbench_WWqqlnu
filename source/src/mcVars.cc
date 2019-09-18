@@ -1,8 +1,9 @@
-#include "mcVariables.h"
+#include "mcVars.h"
 
 
-mcVariables::mcVariables(const char* variableSetName, int nfermions, int nleptons, TTree*& tree){
-	_variableSetName = variableSetName;
+//mcVariables::mcVariables(const char* variableSetName, int nfermions, int nleptons, TTree*& tree){
+mcVars::mcVars( int nfermions, int nleptons, TTree* tree);
+//	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
 	
@@ -21,14 +22,39 @@ mcVariables::mcVariables(const char* variableSetName, int nfermions, int nlepton
 	_MCPf = mcpf;
 
 
+	std::vector<double> mcfpx(nfermions);
+	std::vector<double> mcfpy(nfermions);
+	std::vector<double> mcfpz(nfermions);
+	std::vector<double> mcfE(nfermions);
+	_MCfpx = mcfpx;
+	_MCfpy = mcfpy;
+	_MCfpz = mcfpz;
+	_MCfE = mcfE;
+
+	std::vector<double> mcfprodx(nfermions);
+	std::vector<double> mcfprody(nfermions);
+	std::vector<double> mcfprodz(nfermions);
+	_MCfprodVtxX = mcfprodx;
+	_MCfprodVtxY = mcfprody;
+	_MCfprodVtxZ = mcfprodz;
+
+	std::vector<double> mcfendx(nfermions);
+	std::vector<double> mcfendy(nfermions);
+	std::vector<double> mcfendz(nfermions);
+	
+	_MCfendVtxX = mcfendx;
+	_MCfendVtxY = mcfendy;
+	_MCfendVtxZ = mcfendz;
+
+	initLocalTree();
 
 
 }
-void mcVariables::setParticles(std::vector<MCParticle*>& mcpartvec ){
+void mcVars::setParticles(std::vector<MCParticle*>& mcpartvec ){
 	_mcpartvec = mcpartvec;
 }
 //recursive helper
-bool mcVariables::allChildrenAreSimulation(MCParticle* p){
+bool mcVars::allChildrenAreSimulation(MCParticle* p){
 	std::vector<MCParticle*> d = p->getDaughters();
 	bool flag = true;
 	for(unsigned int i=0; i<d.size(); i++){
@@ -40,7 +66,7 @@ bool mcVariables::allChildrenAreSimulation(MCParticle* p){
 }
 //recursive function to go through and look at the decay chain of a particle
 //look at specifically charged particles
-void mcVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP){
+void mcVars::exploreDaughterParticles(MCParticle* p , std::vector<MCParticle*>& FSP){
 	if(p->isCreatedInSimulation()) return;
 
 	//std::cout<<p->id()<<" ";
@@ -62,7 +88,7 @@ void mcVariables::exploreDaughterParticles(MCParticle* p , std::vector<MCParticl
 	}
 		
 }
-void mcVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
+void mcVars::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
   int countparts=0;
   int counttracks=0;
   for(unsigned int i=0; i<FSPs.size(); i++){
@@ -84,7 +110,7 @@ void mcVariables::getMCLeptonMult(std::vector<MCParticle*>& FSPs){
   _mclepPfoMult = countparts;
   _mclepTrkMult = counttracks;
 }
-int mcVariables::getTauDecayMode(MCParticle* mctau){
+int mcVars::getTauDecayMode(MCParticle* mctau){
 		//1= muon 2=elec 3=had1p 4=had3p 5=other (5p)
 		//with the tau mcp get its immediate decay products
 		//from daniels code decayChPi=0, decayRho, decayA1_1p, decayA1_3p , decayEl, decayMu , decayW , decayK , decayMultiprong , decayOthersingleprong, decayUnrecognised
@@ -111,7 +137,7 @@ int mcVariables::getTauDecayMode(MCParticle* mctau){
 		return 5;
 		
 }
-void mcVariables::initMCVars(){
+void mcVars::initMCVars(){
 
 	for(unsigned int i=0; i<_mcpartvec.size(); i++){
 		std::vector<int> parentpdgs{};
@@ -151,6 +177,21 @@ void mcVariables::initMCVars(){
 				_MCPf[j] = daughters.at(j);
                 *_MCf[j] = mcVec;
                 _MCfpdg[j] = daughters.at(j)->getPDG();
+		
+			//set 4momentum
+			_MCfpx[j] = daughters.at(j)->getMomentum()[0];
+			_MCfpy[j] = daughters.at(j)->getMomentum()[1];
+			_MCfpz[j] = daughters.at(j)->getMomentum()[2];
+			_MCfE[j] = daughters.at(j)->getEnergy();
+
+			//set vtx
+			_MCfprodVtxX[j] = daughters.at(j)->getVertex()[0];
+			_MCfprodVtxY[j] = daughters.at(j)->getVertex()[1];
+			_MCfprodVtxZ[j]	= daughters.at(j)->getVertex()[2];
+			
+			_MCfendVtxX[j] = daughters.at(j)->getEndpoint()[0];
+			_MCfendVtxY[j] = daughters.at(j)->getEndpoint()[1];
+			_MCfendVtxZ[j] = daughters.at(j)->getEndpoint()[2];
 
 				//is this the lepton?
 				if(abs(_MCfpdg[j]) == 13  || abs(_MCfpdg[j]) == 15 || abs(_MCfpdg[j]) == 11){
@@ -208,6 +249,22 @@ void mcVariables::initMCVars(){
 					std::vector<TLorentzVector> mcinvisdaughters{};
 					std::vector<int> mcinvisdaughterspdg{};
 
+					std::vector<bool> vtxisNOTParentEnd{};
+					
+					std::vector<double> vispx{};
+					std::vector<double> vixpy{};
+					std::vector<double> vispz{};
+					std::vector<double> visE{};
+
+					std::vector<double> visx{};
+					std::vector<double> visy{};
+					std::vector<double> visz{};
+
+					std::vector<double> invpx{};
+					std::vector<double> invpy{};
+					std::vector<double> invpz{};
+					std::vector<double> invE{};
+
 					
 					for(unsigned int K =0; K<dec.size(); K++){
 						int taupdg = abs(dec.at(K)->getPDG());
@@ -217,12 +274,26 @@ void mcVariables::initMCVars(){
 							mctaudaughters.push_back( t);
 							mctaudaughterspdg.push_back(dec.at(K)->getPDG());
 							mctaudaughterscharge.push_back( dec.at(K)->getCharge());
+							vispx.push_back(dec.at(K)->getMomentum()[0]);
+							vispy.push_back(dec.at(K)->getMomentum()[1]);
+							vispz.push_back(dec.at(K)->getMomentum()[2]);
+							visE.push_back(dec.at(K)->getEnergy());
+							vtxisNOTParentEnd.push_back(dec.at(K)->vertexIsNotEndpointOfParent());
+							visx.push_back(dec.at(K)->getVertex()[0]);
+							visy.push_back(dec.at(K)->getVertex()[1]);
+							visz.push_back(dec.at(K)->getVertex()[2]);						
+	
 						}
 						else{
 							TLorentzVector t;
 							t.SetXYZM(dec.at(K)->getMomentum()[0], dec.at(K)->getMomentum()[1], dec.at(K)->getMomentum()[2], dec.at(K)->getMass() );
 							mcinvisdaughters.push_back( t);
 							mcinvisdaughterspdg.push_back(dec.at(K)->getPDG());
+							invpx.push_back(dec.at(K)->getMomentum()[0]);
+							invpy.push_back(dec.at(K)->getMomentum()[1]);
+							invpz.push_back(dec.at(K)->getMomentum()[2]);
+							invE.push_back(dec.at(K)->getEnergy());
+
 						}
 					}
 
@@ -232,6 +303,21 @@ void mcVariables::initMCVars(){
 
 					_MCTauInvisibleDaughters = mcinvisdaughters;
 					_MCTauInvisibleDaughters_pdg = mcinvisdaughterspdg;
+
+					_genTauVisVtxisNOTParentEnd = vtxisNOTParentEnd;
+
+					_genTauVisPx = vispx;
+					_genTauVisPy = vispy;
+					_genTauVisPz = vispz;
+					_genTauVisE = visE;
+					_genTauVisX = visx;
+					_genTauVisY = visy;
+					_genTauVisZ = visz;
+					
+					_genTauIPx = invpx;
+					_genTauIPy = invpy;
+					_genTauIPz = invpz;
+					_genTauIE = invE;	
 
 					}//end get mctau
 			
@@ -275,11 +361,52 @@ void mcVariables::initMCVars(){
 	//if nothing is found return 
 	return;
 }
-void mcVariables::initLocalTree(){
-	std::string vsn(_variableSetName);
+void mcVars::initLocalTree(){
+//	std::string vsn(_variableSetName);
 
 	/*** Tree MC info ***/
-	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
+
+	_localTree->Branch("genMuon", &_isMuon,"isMuon/O");
+	_localTree->Branch("genTau",&_isTau,"isTau/O");
+	_localTree->Branch("genElectron",&_isElectron,"isElectron/O");
+	_localTree->Branch("genTauType",&_tauType,"tauType/I");
+
+	_localTree->Branch("MCf_PDG", "vector<int>", &_MCfpdg);
+		
+	_localTree->Branch("MCf_Px", "vector<double>", &_MCfpx);
+	_localTree->Branch("MCf_Py", "vector<double>", &_MCfpy);
+	_localTree->Branch("MCf_Pz", "vector<double>", &_MCfpz);
+	_localTree->Branch("MCf_E", "vector<double>", &_MCfE);
+	
+	//mc vertex info
+	_localTree->Branch("MCfprodVtxX", "vector<double>", &_MCfprodVtxX);
+	_localTree->Branch("MCfprodVtxY", "vector<double>", &_MCfprodVtxY);
+	_localTree->Branch("MCfprodVtxZ", "vector<double>", &_MCfprodVtxZ);
+
+	_localTree->Branch("MCfendVtxX", "vector<double>", &_MCfendVtxX);
+	_localTree->Branch("MCfendVtxY", "vector<double>", &_MCfendVtxY);
+	_localTree->Branch("MCfendVtxZ", "vector<double>", &_MCfendVtxZ);
+	
+	//extra tau info
+	_localTree->Branch("genTauVisPDG", "vector<int>", &_MCTauVisibleDaughters_pdg);
+	_localTree->Branch("genTauVisPx", "vector<double>", &_genTauVisPx);
+	_localTree->Branch("genTauVisPy", "vector<double>", &_genTauVisPy);
+	_localTree->Branch("genTauVisPz", "vector<double>", &_genTauVisPz);
+	_localTree->Branch("genTauVisVtxisNOTParentEnd", "vector<bool>", &_genTauVisVtxisNOTParentEnd);
+
+	_localTree->Branch("genTauVisX", "vector<double>", &_genTauVisX);
+	_localTree->Branch("genTauVisY", "vector<double>", &_genTauVisY);
+	_localTree->Branch("genTauVisZ", "vector<double>", &_genTauVisZ);
+
+	_localTree->Branch("genTauIPDG", "vector<int>", &_MCTauInvisibleDaughters_pdg);
+	_localTree->Branch("genTauIPx", "vector<double>", &_genTauIPx);
+	_localTree->Branch("genTauIPy", "vector<double>", &_genTauIPy);
+	_localTree->Branch("genTauIPz", "vector<double>", &_genTauIPz);
+
+
+
+
+/*	_localTree->Branch((vsn+"isMuon").c_str(), &_isMuon,(vsn+"isMuon/O").c_str());
 	_localTree->Branch((vsn+"isTau").c_str(),&_isTau,(vsn+"isTau/O").c_str());
 	_localTree->Branch((vsn+"isElectron").c_str(),&_isElectron,(vsn+"isElectron/O").c_str());
 	_localTree->Branch((vsn+"tauType").c_str(),&_tauType,(vsn+"tauType/I").c_str());
@@ -308,7 +435,7 @@ void mcVariables::initLocalTree(){
 	_localTree->Branch((vsn+"mcqq").c_str(),"TLorentzVector",&_mcqq,16000,0);
 	//_localTree->Branch("mcqq.",&_mcl);
 	
-	
+*/	
 
 	
 }

@@ -1,14 +1,15 @@
-#include "WWAnalysis.h"
+#include "WWAnalysis2.h"
 
-WWAnalysis aWWAnalysis;
+WWAnalysis2 aWWAnalysis2;
 
 
-WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
+WWAnalysis2::WWAnalysis2() : Processor("WWAnalysis2") {
 
 
 	//load vector<TLorentzVector>
 	//gROOT->ProcessLine("cd()");
-	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
+//
+//	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
 
   // register steering parameters: name, description, class-variable, default value
 
@@ -17,11 +18,11 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 	                             _printing,
 	                             (int)5 ) ;
 
-	registerProcessorParameter( "RunSignalMode",
+/*	registerProcessorParameter( "RunSignalMode",
 								"toggle to run over signal or bg events",
 								_runSignalMode,
 								(int) 1 );
-
+*/
 	std::string inputMcParticleCollectionName = "x";
 	registerInputCollection( LCIO::MCPARTICLE,
 				"McParticleCollectionName" ,
@@ -40,34 +41,38 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 
 	std::vector<std::string> inputCollectionNames{ "x" };
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
-							"InputJetCollectionsNames",
-							"Name of the Input particle collections",
-							_inputJetCollectionsNames,
+							"InputTauJetCollectionsNames",
+							"Name of the Input Tau Jet collections",
+							_tauJetCollectionsNames,
 							inputCollectionNames);
+
+	registerInputCollections( LCIO::RECONSTRUCTEDPARTICL, "InputTauCandCollectionsNames", _tauCandCollectionsNames, inputCollectionNames);
+
+	
  
     	//input remain collection 
 	std::vector<std::string> inputRemainCollectionsNames{"x"};
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
-					"InputRemainCollectionsNames",
+					"InputRemainPFOCollectionsNames",
 					"Input Remain Collections Name",
-					_inputRemainCollectionsNames,
+					_remPFOCollectionsNames,
 					inputRemainCollectionsNames);
 
 	std::vector<std::string> inputRemainJetsCollNames{"x"};
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
 					"InputRemainJetCollectionsNames",
 					"name of jet collection formed from Remain Pfos",
-					_inputRemainJetsCollNames,
+					_remJetCollNames,
 					inputRemainJetsCollNames);
 
 
-	std::string inputRecoRelationCollectionName = "x";
+/*	std::string inputRecoRelationCollectionName = "x";
   	registerInputCollection( LCIO::LCRELATION,
 			     	"InputRecoRelationCollectionName" , 
 			     	"Input Reco Relation Collection Name "  ,
 			     	_inputRecoRelationCollectionName,
 			      	inputRecoRelationCollectionName);
-
+*/
 	//parameters for running in backgrounds: #fermions, # leptons
 	//need to store y cut for remain jets, i dont see how to pull it from lcio
 	//only store 1 value -- restrict us to 1 jet collection per run
@@ -87,11 +92,11 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								_nleptons,
 								(int) 2);
    
-	registerProcessorParameter("Normalization",
+/*	registerProcessorParameter("Normalization",
 								"event normalization bg/signal",
 								weight,
 								(double) 1.0);//deprecate this
-
+*/
 	registerProcessorParameter("Xsec",
 								"Process crossection in fb",
 								_xsec,
@@ -102,7 +107,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								_xsecerr,
 								(double) 1.0);
 
-	registerProcessorParameter("Njets",
+/*	registerProcessorParameter("Njets",
 								"number of jets from fast jet",
 								_nJets,
 								(int) 3);
@@ -111,7 +116,7 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 								"nmber of event selection cuts",
 								ncuts,
 								(int) 0);
-
+*/
 	std::string defaultpath= "./";
 	registerProcessorParameter("OutPath",
 							   "path of output rootfile",
@@ -122,10 +127,34 @@ WWAnalysis::WWAnalysis() : Processor("WWAnalysis") {
 }
 	
 
-void WWAnalysis::initTauFinderOptimization(){
+//void WWAnalysis2::initTauFinderOptimization(){
+void WWAnalysis2::inittree(){
+		
+		TTree* t = new TTree("tree","Tree");	
+		int nColl = _tauJetCollectionsNames.size();
 
+		//init 1 mc
+		mcVars* mcv = new mcVars(_nfermion, _nlepton, t);
+		
+		std::vector< tauJet* > tauJet(nColl);
+		std::vector< tauCand* > tauCand(nColl);
+		std::vector< remainjet* > remJets(nColl);	
+
+		
+		t->Branch("xsec",&_xsec,"xsec/D");
+		t->Branch("xsecerr",&_xsecerr,"xsecerr/D");
+		t->Branch("nevt",&_nEvt,"nevt/I");
+		t->Branch("ycut",&_remainYcut,"ycut/D");
+
+		for(unsigned int i=0; i<nColl; i++){
+			tauJet.at(i) = new tauJet(t);
+			tauCand.at(i) = new tauCand(t);
+			remJets.at(i) = new remainjet(t);		
+		}
+
+		
 		//the number of tau jet collections should match the number of remain collections
-			std::vector<TTree*> t(_inputJetCollectionsNames.size());
+/*			std::vector<TTree*> t(_inputJetCollectionsNames.size());
 			std::vector<tauFinderVariables*> f(_inputJetCollectionsNames.size());
 			std::vector<mcVariables*> m(_inputJetCollectionsNames.size());
 
@@ -188,11 +217,11 @@ void WWAnalysis::initTauFinderOptimization(){
 					_rjOL.at(i)->initLocalTree();
 				}
 			}
-			
+	*/			
 
 			
 }
-void WWAnalysis::init() {
+void WWAnalysis2::init() {
   
   streamlog_out(DEBUG) << "   init called  " << std::endl;
   // usually a good idea to
@@ -233,7 +262,7 @@ void WWAnalysis::init() {
 
 	
 }
-void WWAnalysis::processRunHeader( LCRunHeader* run) {
+void WWAnalysis2::processRunHeader( LCRunHeader* run) {
   streamlog_out(MESSAGE) << " processRunHeader "  << run->getRunNumber() << std::endl ;
 }
 
@@ -242,7 +271,7 @@ locate the pfo collection with specified name
 populated the global pfo vectors with particles from that collection for this event
 ******************/
 
-bool WWAnalysis::FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec ){
+bool WWAnalysis2::FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec ){
 	bool collectionFound = false;
 
   	// clear old global pfovector
@@ -278,7 +307,7 @@ bool WWAnalysis::FindPFOCollection( LCEvent* evt, std::string PfoCollectionName,
 locate the track collection with specified name
 populate the global track vectors with tracks from the collection for this event
 ******************/
-bool WWAnalysis::FindTracks( LCEvent* evt ) {
+bool WWAnalysis2::FindTracks( LCEvent* evt ) {
 
 	bool collectionFound = false;
 
@@ -311,7 +340,7 @@ bool WWAnalysis::FindTracks( LCEvent* evt ) {
 
   	return collectionFound;
 }
-bool WWAnalysis::FindMCParticles( LCEvent* evt ){
+bool WWAnalysis2::FindMCParticles( LCEvent* evt ){
    
 	bool collectionFound = false;
 
@@ -345,7 +374,7 @@ bool WWAnalysis::FindMCParticles( LCEvent* evt ){
   
   	return collectionFound;
 }
-bool WWAnalysis::FindRecoToMCRelation( LCEvent* evt ){
+bool WWAnalysis2::FindRecoToMCRelation( LCEvent* evt ){
    
 	bool collectionFound = false;
 
@@ -444,7 +473,7 @@ MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MC
 */
 
 
-void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
+void WWAnalysis2::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
 /*	oVar->setParticles(jets, pfo2mc);
 
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, mcpartvec );
@@ -459,7 +488,7 @@ void WWAnalysis::processOverlayVariables(overlayVariables*& oVar, std::vector<Re
 
 
 
-void WWAnalysis::initTauWithNoMCLepton(tauFinderVariables*& t){
+void WWAnalysis2::initTauWithNoMCLepton(tauFinderVariables*& t){
 
 	//set up a normal tau but dont set any MC info or do matching
 	//assume particles have already been set, just deal with mc stuff
@@ -470,7 +499,7 @@ void WWAnalysis::initTauWithNoMCLepton(tauFinderVariables*& t){
 	t->_minTauPsi = -1;
 
 }
-void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when there are no tau jets reconstructed
+void WWAnalysis2::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when there are no tau jets reconstructed
 
 	t->_nTaus=0;
 	std::vector<int> tempI{ -1 };
@@ -511,7 +540,7 @@ void WWAnalysis::initEmptyTau(tauFinderVariables*& t, MCParticle* tau ){//when t
 	
 
 }
-void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
+void WWAnalysis2::SetTauOptimizationVariables(LCEvent* evt){
 	std::cout<<"Jet collections size "<< _particleCollections.size()<<std::endl;
 	//do tau optimization stuff
 	for(unsigned int i=0; i<_tf.size(); i++){
@@ -616,7 +645,7 @@ void WWAnalysis::SetTauOptimizationVariables(LCEvent* evt){
 	_trees.at(0)->Fill();
 
 }
-void WWAnalysis::processEvent( LCEvent * evt ) {
+void WWAnalysis2::processEvent( LCEvent * evt ) {
 
  std::cout<<"Ycut: "<< _remainYcut<<std::endl;
  std::cout<<"event No. "<< _nEvt<<std::endl;
@@ -636,12 +665,12 @@ for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
 }
 
 //doing tau optimization
-SetTauOptimizationVariables(evt);
+//SetTauOptimizationVariables(evt);
 
 
  _nEvt++;
 }
-void WWAnalysis::end(){
+void WWAnalysis2::end(){
 
 	
 
