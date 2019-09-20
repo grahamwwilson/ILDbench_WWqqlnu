@@ -46,23 +46,23 @@ WWAnalysis2::WWAnalysis2() : Processor("WWAnalysis2") {
 							_tauJetCollectionsNames,
 							inputCollectionNames);
 
-	registerInputCollections( LCIO::RECONSTRUCTEDPARTICL, "InputTauCandCollectionsNames", _tauCandCollectionsNames, inputCollectionNames);
+	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE, "InputTauCandCollectionsNames","tau candidates", _tauCandCollectionsNames, inputCollectionNames);
 
 	
  
     	//input remain collection 
-	std::vector<std::string> inputRemainCollectionsNames{"x"};
+/*	std::vector<std::string> inputRemainCollectionsNames{"x"};
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
 					"InputRemainPFOCollectionsNames",
 					"Input Remain Collections Name",
 					_remPFOCollectionsNames,
 					inputRemainCollectionsNames);
-
+*/
 	std::vector<std::string> inputRemainJetsCollNames{"x"};
 	registerInputCollections( LCIO::RECONSTRUCTEDPARTICLE,
 					"InputRemainJetCollectionsNames",
 					"name of jet collection formed from Remain Pfos",
-					_remJetCollNames,
+					_remJetCollectionsNames,
 					inputRemainJetsCollNames);
 
 
@@ -134,10 +134,10 @@ void WWAnalysis2::inittree(){
 		int nColl = _tauJetCollectionsNames.size();
 
 		//init 1 mc
-		mcVars* mcv = new mcVars(_nfermion, _nlepton, t);
-		
-		std::vector< tauJet* > tauJet(nColl);
-		std::vector< tauCand* > tauCand(nColl);
+		mcVars* mcv = new mcVars(_nfermions, _nleptons, t);
+		_mcv = mcv;	
+		std::vector< tauJet* > tauJets(nColl);
+		std::vector< tauCand* > tauCands(nColl);
 		std::vector< remainjet* > remJets(nColl);	
 
 		
@@ -147,11 +147,13 @@ void WWAnalysis2::inittree(){
 		t->Branch("ycut",&_remainYcut,"ycut/D");
 
 		for(unsigned int i=0; i<nColl; i++){
-			tauJet.at(i) = new tauJet(t);
-			tauCand.at(i) = new tauCand(t);
-			remJets.at(i) = new remainjet(t);		
+			tauJets.at(i) = new tauJet(i,t);
+			tauCands.at(i) = new tauCand(i,t);
+			remJets.at(i) = new remainjet(i,t);		
 		}
-
+		_tauJets = tauJets;
+		_tauCands = tauCands;
+		_remJets = remJets;
 		
 		//the number of tau jet collections should match the number of remain collections
 /*			std::vector<TTree*> t(_inputJetCollectionsNames.size());
@@ -228,18 +230,32 @@ void WWAnalysis2::init() {
   printParameters() ;
 
 //init particle collection vectors
-	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
-	std::vector<std::vector<ReconstructedParticle*> > initRemainCollections( _inputRemainCollectionsNames.size());
-	for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
-		std::vector<ReconstructedParticle*> Jcollection{};
-		std::vector<ReconstructedParticle*> Rcollection{};
-		initParticleCollections.at(i)=Jcollection ;
-		//_particleCollections.push_back(collection);
-		initRemainCollections.at(i)=Rcollection;
-	}
-	_particleCollections = initParticleCollections;
-	_remainCollections = initRemainCollections;
+//	std::vector<std::vector<ReconstructedParticle*> > initParticleCollections(_inputJetCollectionsNames.size());
+//	std::vector<std::vector<ReconstructedParticle*> > initRemainCollections( _inputRemainCollectionsNames.size());
+	int size = _tauJetCollectionsNames.size();
+	std::vector<std::vector<ReconstructedParticle*> > initTauJetColls(size);
+	std::vector<std::vector<ReconstructedParticle*> > initTauCandColls(size);
+	std::vector<std::vector<ReconstructedParticle*> > initRemJetColls(size);
 
+	
+	for(unsigned int i=0; i<size; i++){
+		std::vector<ReconstructedParticle*> TJcoll{};
+		std::vector<ReconstructedParticle*> TCcoll{};
+		std::vector<ReconstructedParticle*> RJcoll{};
+		//initParticleCollections.at(i)=Jcollection ;
+		//_particleCollections.push_back(collection);
+		//initRemainCollections.at(i)=Rcollection;
+		initTauJetColls.at(i) = TJcoll;
+		initTauCandColls.at(i) = TCcoll;
+		initRemJetColls.at(i) = RJcoll;
+
+	}
+//	_particleCollections = initParticleCollections;
+//	_remainCollections = initRemainCollections;
+	_tauJetCollections = initTauJetColls;
+	_tauCandCollections = initTauCandColls;
+	_remJetCollections = initRemJetColls;
+/*
 	//init remainjet collections
 	std::vector<std::vector<ReconstructedParticle*> > initRemainJetColl(_inputRemainJetsCollNames.size());
 	for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
@@ -247,13 +263,13 @@ void WWAnalysis2::init() {
 		initRemainJetColl.at(i) = Jcollection;
 	}
 	_remainJetCollections = initRemainJetColl;
-
+*/
 
 // std::cout<<"set filepath "<<std::endl;
   _outpath = _outpath+"file.root";
   file = new TFile(_outpath.c_str(),"RECREATE");
 
-  initTauFinderOptimization();
+  inittree();
 	
   _nRun = 0;
   _nEvt = 0;
@@ -374,7 +390,7 @@ bool WWAnalysis2::FindMCParticles( LCEvent* evt ){
   
   	return collectionFound;
 }
-bool WWAnalysis2::FindRecoToMCRelation( LCEvent* evt ){
+/*bool WWAnalysis2::FindRecoToMCRelation( LCEvent* evt ){
    
 	bool collectionFound = false;
 
@@ -407,7 +423,7 @@ bool WWAnalysis2::FindRecoToMCRelation( LCEvent* evt ){
 	}
   
   	return collectionFound;
-}
+}*/
 
 
 
@@ -473,7 +489,7 @@ MCParticle* WWAnalysis::classifyEvent2fermion( std::vector<TLorentzVector*>& _MC
 */
 
 
-void WWAnalysis2::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
+//void WWAnalysis2::processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc){
 /*	oVar->setParticles(jets, pfo2mc);
 
 	oVar->setMCOverlay(oVar->_MCOverlay, oVar->_MCOverlayIDs, mcpartvec );
@@ -484,10 +500,10 @@ void WWAnalysis2::processOverlayVariables(overlayVariables*& oVar, std::vector<R
 //	std::cout<<"4"<<std::endl;
 	oVar->setTotalVariables();
 */
-}
+//}//
 
 
-
+/*
 void WWAnalysis2::initTauWithNoMCLepton(tauFinderVariables*& t){
 
 	//set up a normal tau but dont set any MC info or do matching
@@ -644,6 +660,21 @@ void WWAnalysis2::SetTauOptimizationVariables(LCEvent* evt){
 	}
 	_trees.at(0)->Fill();
 
+}*/
+void WWAnalysis2::FillNtuple( LCEvent * evt ) {
+
+	int ncoll = _tauJetCollectionsNames.size();
+	//do mc separate
+	_mcv->initMCVars();	
+	
+	//fill various classes
+	for(int i=0; i<ncoll; i++){
+		_tauJets.at(i)->setParticles(_tauJetCollections.at(i));
+		_tauCands.at(i)->setParticles(_tauCandCollections.at(i));
+		_remJets.at(i)->setParticles(_remJetCollections.at(i));
+	}
+
+	_tree->Fill();
 }
 void WWAnalysis2::processEvent( LCEvent * evt ) {
 
@@ -653,20 +684,29 @@ void WWAnalysis2::processEvent( LCEvent * evt ) {
  //  *_Process = evt->getParameters().getStringVal("Process");
  // _xsec = evt->getParameters().getFloatVal("CrossSection_fb");
 
- FindRecoToMCRelation( evt );
+// FindRecoToMCRelation( evt );
  FindMCParticles(evt);
 // FindJets(evt);
+//
+int ncoll = _tauJetCollectionsNames.size();
+for(int i=0; i< ncoll; i++){
+	FindPFOCollection(evt, _tauJetCollectionsNames.at(i), _tauJetCollections.at(i));
+	FindPFOCollection(evt, _tauCandCollectionsNames.at(i), _tauCandCollections.at(i));
+	FindPFOCollection(evt, _remJetCollectionsNames.at(i), _remJetCollections.at(i));
+} 
+/*
 for(unsigned int i=0; i<_inputJetCollectionsNames.size(); i++){
 	FindPFOCollection(evt, _inputJetCollectionsNames.at(i), _particleCollections.at(i));
 	FindPFOCollection(evt, _inputRemainCollectionsNames.at(i), _remainCollections.at(i));
 }
 for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
 	FindPFOCollection(evt, _inputRemainJetsCollNames.at(i), _remainJetCollections.at(i));
-}
+}*/
 
 //doing tau optimization
 //SetTauOptimizationVariables(evt);
 
+	FillNtuple(evt);
 
  _nEvt++;
 }

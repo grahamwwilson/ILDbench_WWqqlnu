@@ -1,6 +1,6 @@
 
-#ifndef _TAUJETS_
-#define _TAUJETS_
+#ifndef _TAUCAND_
+#define _TAUCAND_
 
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
@@ -11,13 +11,15 @@
 #include "TLorentzVector.h"
 #include <math.h>
 #include <iostream>
+#include <marlin/Global.h>
+#include "gear/BField.h"
 //#include "overlayVariables.h"
 #include <sstream>
 using namespace lcio;
-class tauJet{
+class tauCand{
 
 	public:
-	tauJet( int id,  TTree* tree);
+	tauCand(int id, TTree* tree);
 
 	void setParticles( std::vector<ReconstructedParticle*>& taus);// std::vector<ReconstructedParticle*>& remainpfos);//, std::vector<LCRelation*>& pfo2mc);
 	void initLocalTree();
@@ -26,13 +28,35 @@ class tauJet{
 	
 	TTree* _localTree{};
 	
-	int ntau{};
-	std::vector<double> _tauPx{};
-	std::vector<double> _tauPy{};
-	std::vector<double> _tauPz{};
-	std::vector<double> _tauE{};
-	std::vector<int> _nTrks{};
-	std::vector<int> _nPfos{};
+	//int ntau{};
+	
+	double _candPx{};
+	double _candPy{};
+	double _candPz{};
+	double _candE{};
+	int _candnTrks{};
+	int _candnPfos{};
+
+	//store all cand pfos, store track parameters covariance matrix, store pandora pfo cov matrix as well
+	//neutrals
+	std::vector<double> _candNeuPx{};
+	std::vector<double> _candNeuPy{};
+	std::vector<double> _candNeuPz{};
+	std::vector<double> _candNeuE{};
+
+	std::vector< std::vector<float> > _neuCov{};	
+
+	
+	//tracks
+	std::vector<double> _candTrkd0{};
+	std::vector<double> _candTrkPhi{};
+	std::vector<double> _candTrkOm{};
+	std::vector<double> _candTrkz0{};
+	std::vector<double> _candTrktlam{};
+
+	std::vector< std::vector<float> >_trkCov{};
+
+	
 
 	//lets not store all tau pfo for now
 	//std::vector<std::vector<double> > _tauPfoQ{};

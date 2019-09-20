@@ -33,6 +33,9 @@
 #include "tauFinderVariables.h"
 //#include "mcVariables.h"
 #include "mcVars.h"
+#include "tauJet.h"
+#include "tauCand.h"
+#include "remainjet.h"
 #include "remainPfos.h"
 #include "jetOverlay.h"
 
@@ -131,13 +134,13 @@ using namespace lcio;
  //std::vector<jetVariables*> _js{};//2d because we can have mulitple jet collection for one parameter set
  //std::vector<jetOverlay*> _rjOL{};
 
- mcVars* _mcv{}
+ mcVars* _mcv{};
  std::vector<tauJet*> _tauJets{};
- std::vector<tauCand*> _tauCand{}; //energy selected
- std::vector<remainJet*> _remJets{};
+ std::vector<tauCand*> _tauCands{}; //energy selected
+ std::vector<remainjet*> _remJets{};
  
  
-
+void FillNtuple(LCEvent* evt);
 
  
 //TTree* _tree{};//single run tree
@@ -191,7 +194,7 @@ std::string _outpath;
 
   //input collections
   std::string _inputMcParticleCollectionName{};
-//  std::string _inputTrackCollectionName{};
+  std::string _inputTrackCollectionName{};
 //  std::string _inputRecoRelationCollectionName{};
  
 
@@ -203,7 +206,7 @@ std::string _outpath;
   std::vector<std::vector<ReconstructedParticle*> > _tauJetCollections{};
   std::vector<std::vector<ReconstructedParticle*> > _tauCandCollections{};
   std::vector<std::vector<ReconstructedParticle*> > _remJetCollections{};
-  std::vector<std::vector<Reconstructedparticle*> > _remPFOCollections{};
+//  std::vector<std::vector<Reconstructedparticle*> > _remPFOCollections{};
  // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
  // std::vector<std::string> _inputJetCollectionsNames{};
@@ -212,7 +215,7 @@ std::string _outpath;
  std::vector<std::string> _tauJetCollectionsNames{};
  std::vector<std::string> _tauCandCollectionsNames{};
  std::vector<std::string> _remJetCollectionsNames{};
- std::vector<std::string> _remPFOCollectionsNames{};
+ //std::vector<std::string> _remPFOCollectionsNames{};
 
 	
 

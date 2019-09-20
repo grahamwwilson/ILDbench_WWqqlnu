@@ -1,6 +1,6 @@
 
-#ifndef _TAUJETS_
-#define _TAUJETS_
+#ifndef _REMAINJET_
+#define _REMAINJET_
 
 #include "EVENT/MCParticle.h"
 #include "EVENT/ReconstructedParticle.h"
@@ -14,25 +14,25 @@
 //#include "overlayVariables.h"
 #include <sstream>
 using namespace lcio;
-class tauJet{
+class remainjet{
 
 	public:
-	tauJet( int id,  TTree* tree);
+	remainjet(int id, TTree* tree);
 
-	void setParticles( std::vector<ReconstructedParticle*>& taus);// std::vector<ReconstructedParticle*>& remainpfos);//, std::vector<LCRelation*>& pfo2mc);
-	void initLocalTree();
+	void setParticles(  std::vector<ReconstructedParticle*>& jets);// std::vector<ReconstructedParticle*>& remainpfos);//, std::vector<LCRelation*>& pfo2mc);
+	void initLocalTree();	
 	int _id{};
 
 	
 	TTree* _localTree{};
 	
-	int ntau{};
-	std::vector<double> _tauPx{};
-	std::vector<double> _tauPy{};
-	std::vector<double> _tauPz{};
-	std::vector<double> _tauE{};
-	std::vector<int> _nTrks{};
-	std::vector<int> _nPfos{};
+	int njets{};
+	std::vector<double> _remPx{};
+	std::vector<double> _remPy{};
+	std::vector<double> _remPz{};
+	std::vector<double> _remE{};
+	//std::vector<int> _nTrks{};
+	//std::vector<int> _nPfos{};
 
 	//lets not store all tau pfo for now
 	//std::vector<std::vector<double> > _tauPfoQ{};

@@ -2,7 +2,7 @@
 
 
 //mcVariables::mcVariables(const char* variableSetName, int nfermions, int nleptons, TTree*& tree){
-mcVars::mcVars( int nfermions, int nleptons, TTree* tree);
+mcVars::mcVars( int nfermions, int nleptons, TTree* tree){
 //	_variableSetName = variableSetName;
 	_nfermions = nfermions;
 	_nleptons = nleptons;
@@ -252,7 +252,7 @@ void mcVars::initMCVars(){
 					std::vector<bool> vtxisNOTParentEnd{};
 					
 					std::vector<double> vispx{};
-					std::vector<double> vixpy{};
+					std::vector<double> vispy{};
 					std::vector<double> vispz{};
 					std::vector<double> visE{};
 
