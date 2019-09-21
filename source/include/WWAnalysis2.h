@@ -39,6 +39,10 @@
 #include "remainPfos.h"
 #include "jetOverlay.h"
 
+#ifdef __MAKECINT__
+#pragma link C++ class vector< vector<float> >+;
+#endif
+
 
 //#define ncuts 7
 //if we change nferm we need to recompile and also change _nfermion and _nleptons in xml
@@ -150,9 +154,16 @@ void FillNtuple(LCEvent* evt);
   //event info
   int _nRun{};
   int _nEvt{};
-  double _xsec{}; 
-  double _xsecerr{};
+  float _xsec{}; 
+  float _xsecerr{};
   double _remainYcut{};
+  std::string _beampart1{};
+  std::string _beampart2{};
+  std::string _polarization1{};
+  std::string _polarization2{};
+
+
+
 
 std::string _outpath;
 

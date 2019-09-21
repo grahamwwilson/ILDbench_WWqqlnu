@@ -392,6 +392,7 @@ void mcVars::initLocalTree(){
 	_localTree->Branch("genTauVisPx", "vector<double>", &_genTauVisPx);
 	_localTree->Branch("genTauVisPy", "vector<double>", &_genTauVisPy);
 	_localTree->Branch("genTauVisPz", "vector<double>", &_genTauVisPz);
+	_localTree->Branch("genTauVisE", "vector<double>", &_genTauVisE);
 	_localTree->Branch("genTauVisVtxisNOTParentEnd", "vector<bool>", &_genTauVisVtxisNOTParentEnd);
 
 	_localTree->Branch("genTauVisX", "vector<double>", &_genTauVisX);

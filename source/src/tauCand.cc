@@ -100,13 +100,23 @@ void tauCand::setParticles( std::vector<ReconstructedParticle*>& taus){// std::v
 		}//end parts loop
 
 	}//end loop over all taus
+	if(taus.size()>0){
 	_candPx =px.at(0);
 	_candPy = py.at(0);
 	_candPz = pz.at(0);
 	_candE = E.at(0);
 	_candnTrks = ntrk.at(0);
 	_candnPfos = pfos.at(0);
+	}
+	else{	
+	_candPx = 999;
+	_candPy = 999;
+	_candPz = 999;
+	_candE = 999;
+	_candnTrks = -1;
+	_candnPfos = -1;
 
+	}
 	_candNeuPx = nepx;
 	_candNeuPy = nepy;
 	_candNeuPz = nepz;
@@ -209,25 +219,25 @@ void tauCand::initLocalTree(){
 	std::string id = ss.str();
 
 	//_localTree->Branch("ntau", &ntau, "ntau/I");
-	_localTree->Branch(("candPx"+id).c_str(), &_candPx, "candPx/D");
-	_localTree->Branch(("candPy"+id).c_str(), &_candPy, "candPy/D");
-	_localTree->Branch(("candPz"+id).c_str(), &_candPz, "candPz/D");
-	_localTree->Branch(("candE"+id).c_str(), &_candE, "candE/D");
-	_localTree->Branch(("candNTrks"+id).c_str(), &_candnTrks, "candNTrks/I");
-	_localTree->Branch(("candNPfos"+id).c_str(),  &_candnPfos, "candNTrks/I");		
+	_localTree->Branch(("candPx"+id).c_str(), &_candPx);
+	_localTree->Branch(("candPy"+id).c_str(), &_candPy);
+	_localTree->Branch(("candPz"+id).c_str(), &_candPz);
+	_localTree->Branch(("candE"+id).c_str(), &_candE);
+	_localTree->Branch(("candNTrks"+id).c_str(), &_candnTrks);
+	_localTree->Branch(("candNPfos"+id).c_str(),  &_candnPfos);		
 
 	_localTree->Branch(("candNeuPx"+id).c_str(), "vector<double>", &_candNeuPx);
 	_localTree->Branch(("candNeuPy"+id).c_str(), "vector<double>", &_candNeuPy);
 	_localTree->Branch(("candNeuPz"+id).c_str(), "vector<double>", &_candNeuPz);
 	_localTree->Branch(("candNeuE"+id).c_str(), "vector<double>", &_candNeuE);
-	_localTree->Branch(("candNeuCov"+id).c_str(), "vector<vector<double> >" ,&_neuCov);
+//	_localTree->Branch(("candNeuCov"+id).c_str(), "vector<vector<float> >" ,&_neuCov);
 
 	_localTree->Branch(("candTrkd0"+id).c_str(), "vector<double>", &_candTrkd0);
 	_localTree->Branch(("candTrkPhi"+id).c_str(), "vector<double>", &_candTrkPhi);
 	_localTree->Branch(("candTrkOm"+id).c_str(), "vector<double>", &_candTrkOm);
 	_localTree->Branch(("candTrkz0"+id).c_str(), "vector<double>", &_candTrkz0);
 	_localTree->Branch(("candTrktlam"+id).c_str(), "vector<double>", &_candTrktlam);
-	_localTree->Branch(("candTrkCov"+id).c_str(), "vector<vector<double> >",&_trkCov);
+	_localTree->Branch(("candTrkCov"+id).c_str(), "vector<vector<float> >",&_trkCov);
 /*std::string vsn(_variableSetName);
 	_localTree->Branch((vsn+"mcselremainpfos").c_str(),"vector<TLorentzVector>", &_mcselremainpfos);
 	_localTree->Branch((vsn+"eselremainpfos").c_str(),"vector<TLorentzVector>", &_eselremainpfos);

@@ -128,7 +128,7 @@ void tauJet::initLocalTree(){
 	std::stringstream ss;
 	ss<< _id;
 	std::string id = ss.str();
-	_localTree->Branch(("ntau"+id).c_str(), &ntau, "ntau/I");
+	_localTree->Branch(("ntau"+id).c_str(), &ntau);
 	_localTree->Branch(("tauPx"+id).c_str(), "vector<double>", &_tauPx);
 	_localTree->Branch(("tauPy"+id).c_str(), "vector<double>", &_tauPy);
 	_localTree->Branch(("tauPz"+id).c_str(), "vector<double>", &_tauPz);

@@ -9,7 +9,7 @@ WWAnalysis2::WWAnalysis2() : Processor("WWAnalysis2") {
 	//load vector<TLorentzVector>
 	//gROOT->ProcessLine("cd()");
 //
-//	gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
+	//gROOT->ProcessLine(".L ~/work/repos/ILDbench_WWqqlnu/source/src/loader.C+");
 
   // register steering parameters: name, description, class-variable, default value
 
@@ -97,7 +97,7 @@ WWAnalysis2::WWAnalysis2() : Processor("WWAnalysis2") {
 								weight,
 								(double) 1.0);//deprecate this
 */
-	registerProcessorParameter("Xsec",
+/*	registerProcessorParameter("Xsec",
 								"Process crossection in fb",
 								_xsec,
 								(double) 1.0);
@@ -106,7 +106,7 @@ WWAnalysis2::WWAnalysis2() : Processor("WWAnalysis2") {
 							   "Error on cross section in fb",
 								_xsecerr,
 								(double) 1.0);
-
+*/
 /*	registerProcessorParameter("Njets",
 								"number of jets from fast jet",
 								_nJets,
@@ -132,19 +132,28 @@ void WWAnalysis2::inittree(){
 		
 		TTree* t = new TTree("tree","Tree");	
 		int nColl = _tauJetCollectionsNames.size();
-
-		//init 1 mc
-		mcVars* mcv = new mcVars(_nfermions, _nleptons, t);
-		_mcv = mcv;	
+	
 		std::vector< tauJet* > tauJets(nColl);
 		std::vector< tauCand* > tauCands(nColl);
 		std::vector< remainjet* > remJets(nColl);	
 
 		
-		t->Branch("xsec",&_xsec,"xsec/D");
-		t->Branch("xsecerr",&_xsecerr,"xsecerr/D");
+		t->Branch("xsec",&_xsec,"xsec/F");
+		t->Branch("xsecerr",&_xsecerr,"xsecerr/F");
+		//beam scenario
+		t->Branch("beampart1","string", &_beampart1);
+		t->Branch("beampart2","string", &_beampart2);
+		t->Branch("polarization1", "string", &_polarization1);
+		t->Branch("polarization2", "string", &_polarization2);
+
 		t->Branch("nevt",&_nEvt,"nevt/I");
 		t->Branch("ycut",&_remainYcut,"ycut/D");
+
+		
+		//init 1 mc
+		mcVars* mcv = new mcVars(_nfermions, _nleptons, t);
+		_mcv = mcv;	
+	
 
 		for(unsigned int i=0; i<nColl; i++){
 			tauJets.at(i) = new tauJet(i,t);
@@ -154,6 +163,7 @@ void WWAnalysis2::inittree(){
 		_tauJets = tauJets;
 		_tauCands = tauCands;
 		_remJets = remJets;
+		_tree = t;
 		
 		//the number of tau jet collections should match the number of remain collections
 /*			std::vector<TTree*> t(_inputJetCollectionsNames.size());
@@ -665,19 +675,31 @@ void WWAnalysis2::FillNtuple( LCEvent * evt ) {
 
 	int ncoll = _tauJetCollectionsNames.size();
 	//do mc separate
+//	std::cout<< "populating mc "<<std::endl;
+	_mcv->setParticles(_mcpartvec);
 	_mcv->initMCVars();	
-	
+//	std::cout<<"mc populated"<<std::endl;	
 	//fill various classes
 	for(int i=0; i<ncoll; i++){
-		_tauJets.at(i)->setParticles(_tauJetCollections.at(i));
-		_tauCands.at(i)->setParticles(_tauCandCollections.at(i));
-		_remJets.at(i)->setParticles(_remJetCollections.at(i));
-	}
 
+//		std::cout<<" populating taujet "<<i<<std::endl;
+		_tauJets.at(i)->setParticles(_tauJetCollections.at(i));
+//		std::cout<<"taujet populated "<<std::endl;
+
+//		std::cout<<"populating taucand "<<i<<std::endl;
+		_tauCands.at(i)->setParticles(_tauCandCollections.at(i));
+//		std::cout<<"taucand populated "<<std::endl;
+
+//		std::cout<<"populating rem "<<i<< std::endl;
+		_remJets.at(i)->setParticles(_remJetCollections.at(i));
+//		std::cout<<"rem populated "<<std::endl;
+	}
+//	std::cout<<"filling tree"<<std::endl;
 	_tree->Fill();
+//	std::cout<<"tree filled"<<std::endl;
 }
 void WWAnalysis2::processEvent( LCEvent * evt ) {
-
+ //std::cout<<"
  std::cout<<"Ycut: "<< _remainYcut<<std::endl;
  std::cout<<"event No. "<< _nEvt<<std::endl;
  // Get Process name and cross section
@@ -705,6 +727,14 @@ for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
 
 //doing tau optimization
 //SetTauOptimizationVariables(evt);
+//extract event level information
+ 
+	_xsec = evt->parameters().getFloatVal("crossSection");
+	_xsecerr = evt->parameters().getFloatVal("crossSectionError");
+	_beampart1 = evt->parameters().getStringVal("beam_particle1");
+	_beampart2 = evt->parameters().getStringVal("beam_particle2");
+	_polarization1 = evt->parameters().getStringVal("polarization1");
+	_polarization2 = evt->parameters().getStringVal("polarization2");
 
 	FillNtuple(evt);
 

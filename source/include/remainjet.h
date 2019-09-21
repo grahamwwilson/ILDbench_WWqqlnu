@@ -31,6 +31,9 @@ class remainjet{
 	std::vector<double> _remPy{};
 	std::vector<double> _remPz{};
 	std::vector<double> _remE{};
+	
+	std::vector< std::vector<float> > _remCov{};
+
 	//std::vector<int> _nTrks{};
 	//std::vector<int> _nPfos{};
 
