@@ -1,5 +1,5 @@
 import subprocess
-
+import sys
 def bash( bashCommand ):
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         #process = subprocess.Popen(bashCommand.split())
@@ -7,33 +7,20 @@ def bash( bashCommand ):
         return output ,error
 
 
-#[ path , subset ]
-args = ["./steeringMacros/wwv2Steering/", "S1" ]
-#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringS2LR/", "S2" ]
-#args = ["./steeringMacros/qqRemainSteering/qqJetSteeringB1LR/", "B1" ]
+#path = args[0]
 
-path = args[0]
+#need path RunLogs and Root files
+#need path to xml
+xml = sys.argv[1]
+pathrunlog = sys.argv[2]
+dataset = sys.argv[3]
+print "starting run with", xml, pathrunlog
+bash('rm '+pathrunlog+dataset+'.out.gz')
+log = bash('Marlin '+xml)
+file = open(pathrunlog+dataset+'.out','w')
+file.write(log[0])
+bash('gzip '+pathrunlog+dataset+'.out')
 
-#get the list of xml files
-OUTPUT = bash( "ls "+path )
-DATASETLIST =  OUTPUT[0].split('\n')
-print DATASETLIST
 
 
-SUBSET = args[1]
-
-for DATASET in DATASETLIST:
-        if DATASET == '': continue
-        print "Starting Run "+ DATASET
-        DATASETNAME = DATASET[:-4]
-        DATASETNAME = DATASETNAME+SUBSET
-        print DATASETNAME
-        bash('rm /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/v2files/RunLogs/'+DATASETNAME+'.out.gz')
-        #bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET+' > /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RunLogs/'+DATASETNAME+'.out')
-        #log = bash('Marlin ./steeringMacros/TauFinderSteeringS1LR/'+DATASET)
-        log = bash('Marlin '+path+DATASET)
-        file = open('/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/v2files/RunLogs/'+DATASETNAME+'.out','w')
-        file.write(log[0])
-        bash('gzip /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/v2files/RunLogs/'+DATASETNAME+'.out')
-        bash('mv /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/v2files/RootFiles/file.root /nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/v2files/RootFiles/'+DATASETNAME+'.root')
 

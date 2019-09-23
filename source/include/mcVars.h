@@ -78,10 +78,10 @@ class mcVars{
 	int _mclepTrkMult{};
 	int _mclepPfoMult{};
 	//event information
-	bool _isTau{};
+	int _isTau{};
 	int _tauType{}; //0=not a tau event 1=muon 2=electron 3=had1p 4=had3p 5=other
-	bool _isMuon{};
-	bool _isElectron{};
+	int _isMuon{};
+	int _isElectron{};
 
 
 	void initMCVars();

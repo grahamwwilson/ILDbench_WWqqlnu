@@ -214,9 +214,9 @@ void mcVars::initMCVars(){
 			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ||
 				std::find(daughterpdgs.begin(),daughterpdgs.end(), -13) != daughterpdgs.end() ){
 				//identify event containing muon
-				_isMuon = true;
-				_isTau = false;
-				_isElectron = false;
+				_isMuon = 1;
+				_isTau = 0;
+				_isElectron = 0;
 				_tauType = 0;
 				//get true charge of the muon
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 13) != daughterpdgs.end() ){
@@ -230,9 +230,9 @@ void mcVars::initMCVars(){
 				std::find(daughterpdgs.begin(),daughterpdgs.end(), -15) != daughterpdgs.end() ){
 				//ntau++;
 				//identify event containing a tau
-				_isTau = true;
-				_isMuon = false;
-				_isElectron=false;
+				_isTau = 1;
+				_isMuon = 0;
+				_isElectron=0;
 				
 
 				
@@ -337,9 +337,9 @@ void mcVars::initMCVars(){
 			if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ||
 				std::find(daughterpdgs.begin(),daughterpdgs.end(), -11) != daughterpdgs.end() ){
 				//identify event containing electron
-				_isMuon = false;
-				_isTau = false;
-				_isElectron = true;
+				_isMuon = 0;
+				_isTau = 0;
+				_isElectron = 1;
 				_tauType = 0;
 				//get true charge of the electron
 				if (std::find(daughterpdgs.begin(),daughterpdgs.end(), 11) != daughterpdgs.end() ){
@@ -366,9 +366,9 @@ void mcVars::initLocalTree(){
 
 	/*** Tree MC info ***/
 
-	_localTree->Branch("genMuon", &_isMuon,"isMuon/O");
-	_localTree->Branch("genTau",&_isTau,"isTau/O");
-	_localTree->Branch("genElectron",&_isElectron,"isElectron/O");
+	_localTree->Branch("genMuon", &_isMuon,"isMuon/I");
+	_localTree->Branch("genTau",&_isTau,"isTau/I");
+	_localTree->Branch("genElectron",&_isElectron,"isElectron/I");
 	_localTree->Branch("genTauType",&_tauType,"tauType/I");
 
 	_localTree->Branch("MCf_PDG", "vector<int>", &_MCfpdg);

@@ -157,10 +157,10 @@ void FillNtuple(LCEvent* evt);
   float _xsec{}; 
   float _xsecerr{};
   double _remainYcut{};
-  std::string _beampart1{};
-  std::string _beampart2{};
-  std::string _polarization1{};
-  std::string _polarization2{};
+  int _beampart1{};
+  int _beampart2{};
+  int _polarization1{};
+  int _polarization2{};
 
 
 

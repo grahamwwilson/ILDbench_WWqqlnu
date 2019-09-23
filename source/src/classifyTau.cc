@@ -76,7 +76,7 @@ int classifyTau::getMCdecayMode( std::vector < MCParticle* > mcps ) {
       break;
     default:
       cout << "unknown pdg " << mcps[i]->getPDG() << endl;
-      assert(0);
+   //   assert(0);
     }
   }
 
@@ -103,7 +103,7 @@ int classifyTau::getMCdecayMode( std::vector < MCParticle* > mcps ) {
     cout << " chg " <<  nChg;
     cout << " neu " <<  nNeu;
     cout << endl;    
-    assert(0);
+   // assert(0);
   }
 
   return decayMode;

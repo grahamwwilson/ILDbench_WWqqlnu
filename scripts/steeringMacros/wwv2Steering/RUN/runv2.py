@@ -14,7 +14,7 @@ def bash( bashCommand ):
 xml = sys.argv[1]
 pathrunlog = sys.argv[2]
 dataset = sys.argv[3]
-print "starting run with", xml, runlog
+print "starting run with", xml, pathrunlog
 bash('rm '+pathrunlog+dataset+'.out.gz')
 log = bash('Marlin '+xml)
 file = open(pathrunlog+dataset+'.out','w')

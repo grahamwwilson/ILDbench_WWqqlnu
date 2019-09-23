@@ -141,10 +141,10 @@ void WWAnalysis2::inittree(){
 		t->Branch("xsec",&_xsec,"xsec/F");
 		t->Branch("xsecerr",&_xsecerr,"xsecerr/F");
 		//beam scenario
-		t->Branch("beampart1","string", &_beampart1);
-		t->Branch("beampart2","string", &_beampart2);
-		t->Branch("polarization1", "string", &_polarization1);
-		t->Branch("polarization2", "string", &_polarization2);
+		t->Branch("beampart1", &_beampart1, "beampart1/I");
+		t->Branch("beampart2", &_beampart2, "beampart2/I");
+		t->Branch("polarization1", &_polarization1, "polarization1/I");
+		t->Branch("polarization2", &_polarization2, "polarization2/I");
 
 		t->Branch("nevt",&_nEvt,"nevt/I");
 		t->Branch("ycut",&_remainYcut,"ycut/D");
@@ -728,13 +728,40 @@ for(unsigned int i=0; i<_inputRemainJetsCollNames.size(); i++){
 //doing tau optimization
 //SetTauOptimizationVariables(evt);
 //extract event level information
- 
+std::string bp1;
+std::string bp2;
+std::string pol1;
+std::string pol2; 
 	_xsec = evt->parameters().getFloatVal("crossSection");
 	_xsecerr = evt->parameters().getFloatVal("crossSectionError");
-	_beampart1 = evt->parameters().getStringVal("beam_particle1");
-	_beampart2 = evt->parameters().getStringVal("beam_particle2");
-	_polarization1 = evt->parameters().getStringVal("polarization1");
-	_polarization2 = evt->parameters().getStringVal("polarization2");
+	
+	bp1 = evt->parameters().getStringVal("beam_particle1");
+	bp2 = evt->parameters().getStringVal("beam_particle2");
+	
+	pol1 = evt->parameters().getStringVal("polarization1");
+	pol2 = evt->parameters().getStringVal("polarization2");
+
+	if( bp1.compare("e1") == 0){
+		_beampart1 = -1;
+		_beampart2 = 1;
+	}
+	else{
+		_beampart1 = 1;
+		_beampart2 = -1;
+	}
+
+	if(pol1.compare("L")){
+		_polarization1 = -1;
+	}
+	else{ 
+		_polarization1 = 1;
+	}
+	if(pol2.compare("L")){
+		_polarization2 = -1;
+	}
+	else{
+		_polarization2 = 1;
+	}
 
 	FillNtuple(evt);
 
