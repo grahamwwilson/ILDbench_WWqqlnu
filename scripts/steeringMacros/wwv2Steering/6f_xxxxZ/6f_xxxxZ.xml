@@ -1,0 +1,225 @@
+<!-- automatically generated steering -->
+<!-- muons and taus files only -->
+ <marlin>
+	<execute>
+ 		<processor name= "MyTauFinderMuon" />
+		<processor name= "MyTauFinderElec"/>
+		<processor name= "MyTauFinderTauElec"/>
+		<processor name= "MyTauFinderTauH1P" />
+		<processor name= "MyTauFinderTauH3P" />
+
+		<processor name= "MyTauSelectorMuon" />
+		<processor name= "MyTauSelectorElec" />
+		<processor name= "MyTauSelectorTauElec" />
+		<processor name= "MyTauSelectorTauH1P" />
+		<processor name= "MyTauSelectorTauH3P" />
+		
+		<processor name= "MyRemainJetsMuon" />
+		<processor name= "MyRemainJetsElec" />
+		<processor name= "MyRemainJetsTauElec" />
+		<processor name= "MyRemainJetsTauH1P" />
+		<processor name= "MyRemainJetsTauH3P" />
+
+
+		<processor name= "MyWWAnalysis" />
+	</execute>
+ 
+	<global>
+		<parameter name="LCIOInputFiles"> 
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108523.Pvvvvxx.eL.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108524.Pvvvvxx.eR.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108525.Pvvvvyy.eL.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108526.Pvvvvyy.eR.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108527.Pxxxxee.eL.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108528.Pxxxxee.eL.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108528.Pxxxxee.eL.pR.n001.d_dstm_10338_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108529.Pxxxxee.eR.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108530.Pxxxxee.eR.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108531.Pxxxxvv.eL.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108532.Pxxxxvv.eR.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108533.Pxxxxll.eL.pR.n001.d_dstm_10333_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108533.Pxxxxll.eL.pR.n001.d_dstm_10333_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108534.Pxxxxll.eR.pL.n001.d_dstm_10333_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108534.Pxxxxll.eR.pL.n001.d_dstm_10333_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108535.Pxxxxxx.eL.pR.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108535.Pxxxxxx.eL.pR.n001.d_dstm_10338_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108536.Pxxxxxx.eR.pL.n001.d_dstm_10338_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/6f_xxxxZ/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I108536.Pxxxxxx.eR.pL.n001.d_dstm_10338_1.slcio
+	</parameter>
+		<parameter name="SkipNEvents " value = "0" />
+		<parameter name="MaxRecordNumber" value = "0" />
+		<parameter name="SupressCheck" value = "false" />
+		<parameter name="GearXMLFile" value = "gear_ILD_l5_v02_dd4hep.xml" />
+		<parameter name="Verbosity"  options = "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT" > DEBUG </parameter>
+	</global>
+
+	<processor name= "MyTauFinderMuon" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJetsMuon </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOsMuon </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLinkMuon </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.03" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="3." />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinderElec" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJetsElec </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOsElec </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLinkElec </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.04" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="4." />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+	
+	<processor name= "MyTauFinderTauElec" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJetsTauElec </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOsTauElec </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLinkTauElec </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.05" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="3.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinderTauH1P" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJetsTauH1P </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOsTauH1P </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLinkTauH1P </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.07" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="4.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinderTauH3P" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJetsTauH3P </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOsTauH3P </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLinkTauH3P </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.07" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="5.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+
+	<processor name= "MyTauSelectorMuon" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> RemainPFOsMuon </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> TauJetsMuon </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandRemainPFOsMuon </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandMuon </parameter>
+	</processor>
+
+	<processor name= "MyTauSelectorElec" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> RemainPFOsElec </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> TauJetsElec </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandRemainPFOsElec </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandElec </parameter>
+	</processor>
+
+	<processor name= "MyTauSelectorTauElec" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> RemainPFOsTauElec </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> TauJetsTauElec </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandRemainPFOsTauElec </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandTauElec </parameter>
+	</processor>
+
+	<processor name= "MyTauSelectorTauH1P" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> RemainPFOsTauH1P </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> TauJetsTauH1P </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandRemainPFOsTauH1P </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandTauH1P </parameter>
+	</processor>
+
+	<processor name= "MyTauSelectorTauH3P" type="TauSelector" >
+		<parameter name="InputRemainCollectionName" type="string" lcioInType="ReconstructedParticle"> RemainPFOsTauH3P </parameter>
+		<parameter name="InputTauJetCollectionName" type="string" lcioInType="ReconstructedParticle"> TauJetsTauH3P </parameter>
+		<parameter name="OutputRemainCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandRemainPFOsTauH3P </parameter>
+ 		<parameter name="OutputTauJetCollectionName" type="string" lcioOutType="ReconstructedParticle"> CandTauH3P </parameter>
+	</processor>
+
+
+
+	<processor name="MyRemainJetsMuon" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> CandRemainPFOsMuon </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> CandRemainJetsMuon </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 5e-5 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+
+	<processor name="MyRemainJetsElec" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> CandRemainPFOsElec </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> CandRemainJetsElec </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 5e-5 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+
+	<processor name="MyRemainJetsTauElec" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> CandRemainPFOsTauElec </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> CandRemainJetsTauElec </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 5e-5 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+
+	<processor name="MyRemainJetsTauH1P" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> CandRemainPFOsTauH1P </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> CandRemainJetsTauH1P </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 5e-5 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+
+	<processor name="MyRemainJetsTauH3P" type="FastJetProcessor">
+		<parameter name="recParticleIn" type="string" lcioInType="ReconstructedParticle"> CandRemainPFOsTauH3P </parameter>
+		<parameter name="jetOut" type="string" lcioOutType="ReconstructedParticle"> CandRemainJetsTauH3P </parameter>
+		<parameter name="algorithm" type="StringVec"> ee_kt_algorithm </parameter>
+		<parameter name="clusteringMode" type="StringVec"> ExclusiveYCut 5e-5 </parameter> 
+ 		<parameter name="recombinationScheme" type="string"> E_scheme </parameter> 
+	</processor>
+
+
+
+	<processor name= "MyWWAnalysis" type="WWAnalysis2">
+		<parameter name="McParticleCollectionName" value="MCParticle" />
+		<parameter name="InputParticleColletionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
+	<!--	<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" /> -->
+		<parameter name="InputTauJetCollectionsNames">  TauJetsMuon TauJetsElec TauJetsTauElec TauJetsTauH1P TauJetsTauH3P </parameter>
+ 		<parameter name="InputTauCandCollectionsNames"> CandMuon CandElec CandTauElec CandTauH1P CandTauH3P </parameter>
+ 		<parameter name="InputRemainJetCollectionsNames"> CandRemainJetsMuon CandRemainJetsElec CandRemainJetsTauElec CandRemainJetsTauH1P CandRemainJetsTauH3P </parameter>
+ 		<parameter name="RemainYCut" value="5e-5" /> 
+		<parameter name="NFermions" value="4" /> 
+		<parameter name="Nleptons" value="2" /> 
+	<!--	<parameter name="Normalization" value="0.784017" /> -->
+<!--		<parameter name="Xsec" value="9521.45" /> 
+		<parameter name="XsecError" value="10.6" /> -->
+	<!--	<parameter name="Njets" value="3" />
+ 		<parameter name="Ncuts" value="7" /> -->
+		<parameter name="OutPath" value="/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_xxxxZ/6f_xxxxZ" /> 
+	</processor> 
+
+</marlin>

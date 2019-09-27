@@ -17,8 +17,8 @@ void remainjet::setParticles( std::vector<ReconstructedParticle*>& jets){// std:
 	std::vector<double> py(njets);
 	std::vector<double> pz(njets);
 	std::vector<double> E(njets);
-	//std::vector<int> ntrks(ntau);
-	//std::vector<int> pfos(ntau);	
+	std::vector<int> ntrks(njets);
+	std::vector<int> pfos(njets);	
 	std::vector< std::vector<float> > remCovs{};
 	std::vector<float> remCov{};	
 
@@ -31,21 +31,21 @@ void remainjet::setParticles( std::vector<ReconstructedParticle*>& jets){// std:
 		remCov = tempcov;
 		remCovs.push_back(remCov);
 		//count multiplicity
-	/*	pfos.at(i) = taus.at(i)->getParticles().size();
+		pfos.at(i) = jets.at(i)->getParticles().size();
 	        ntrks.at(i) = 0;
 		for(unsigned int j=0; j< pfos.at(i); j++){
-			if( taus.at(i)->getparticles().at(j)->getCharge() != 0	){
-				ntrks.at(i) = trks.at(i)+1;
+			if( jets.at(i)->getParticles().at(j)->getCharge() != 0	){
+				ntrks.at(i) = ntrks.at(i)+1;
 			}
-		}*/
+		}
 	}
 	_remPx =px;
 	_remPy = py;
 	_remPz = pz;
 	_remE = E;
 	_remCov = remCovs;
-	//_nTrks = ntrks;
-	//_nPfos = pfos;
+	_remNtrk = ntrks;
+	_remNpfo = pfos;
 	
 /*	_taus = taus;
 	std::vector<TLorentzVector> tlv( _taus.size() );
@@ -135,6 +135,8 @@ void remainjet::initLocalTree(){
 	ss << _id;
 	std::string id = ss.str();
 	_localTree->Branch(("njets"+id).c_str(), &njets);
+	_localTree->Branch(("remNtrk"+id).c_str(),"vector<int>", &_remNtrk);
+	_localTree->Branch(("remNpfo"+id).c_str(),"vector<int>", &_remNpfo);
 	_localTree->Branch(("remPx"+id).c_str(), "vector<double>", &_remPx);
 	_localTree->Branch(("remPy"+id).c_str(), "vector<double>", &_remPy);
 	_localTree->Branch(("remPz"+id).c_str(), "vector<double>", &_remPz);

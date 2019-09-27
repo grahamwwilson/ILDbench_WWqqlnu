@@ -145,11 +145,17 @@ void WWAnalysis2::inittree(){
 		t->Branch("beampart2", &_beampart2, "beampart2/I");
 		t->Branch("polarization1", &_polarization1, "polarization1/I");
 		t->Branch("polarization2", &_polarization2, "polarization2/I");
-
+		
+		t->Branch("nLL",&_nLL,"nLL/I");
+		t->Branch("nRR",&_nRR,"nRR/I");
+		t->Branch("nLR",&_nLR,"nLR/I");
+		t->Branch("nRL",&_nRL,"nRL/I");
+	
 		t->Branch("nevt",&_nEvt,"nevt/I");
 		t->Branch("ycut",&_remainYcut,"ycut/D");
 
-		
+		t->Branch("nPandoraTrks",&_nPandoraTrks,"nPandoraTrks/I");
+		t->Branch("nPandoraPfos",&_nPandoraPfos,"nPandoraPfos/I");	
 		//init 1 mc
 		mcVars* mcv = new mcVars(_nfermions, _nleptons, t);
 		_mcv = mcv;	
@@ -284,7 +290,10 @@ void WWAnalysis2::init() {
   _nRun = 0;
   _nEvt = 0;
 
-
+  _nLL = 0;
+  _nRR = 0;
+  _nLR = 0;
+  _nRL = 0;
 
 	
 }
@@ -677,7 +686,9 @@ void WWAnalysis2::FillNtuple( LCEvent * evt ) {
 	//do mc separate
 //	std::cout<< "populating mc "<<std::endl;
 	_mcv->setParticles(_mcpartvec);
-	_mcv->initMCVars();	
+//remove mc population for now (to make higgs go faster)
+//	_mcv->initMCVars();	
+//
 //	std::cout<<"mc populated"<<std::endl;	
 	//fill various classes
 	for(int i=0; i<ncoll; i++){
@@ -710,6 +721,9 @@ void WWAnalysis2::processEvent( LCEvent * evt ) {
  FindMCParticles(evt);
 // FindJets(evt);
 //
+//automatically load PandoraPFOs to get multiplicity
+FindPFOCollection( evt, "PandoraPFOs", _pandoraPFOs);
+
 int ncoll = _tauJetCollectionsNames.size();
 for(int i=0; i< ncoll; i++){
 	FindPFOCollection(evt, _tauJetCollectionsNames.at(i), _tauJetCollections.at(i));
@@ -741,6 +755,8 @@ std::string pol2;
 	pol1 = evt->parameters().getStringVal("polarization1");
 	pol2 = evt->parameters().getStringVal("polarization2");
 
+		
+
 	if( bp1.compare("e1") == 0){
 		_beampart1 = -1;
 		_beampart2 = 1;
@@ -762,6 +778,30 @@ std::string pol2;
 	else{
 		_polarization2 = 1;
 	}
+
+
+	//fill pandora pfo vars
+	_nPandoraPfos = _pandoraPFOs.size();
+	_nPandoraTrks = 0;
+	for(unsigned int i=0; i<_pandoraPFOs.size(); i++){
+		if(_pandoraPFOs.at(i)->getCharge() != 0){
+			_nPandoraTrks = _nPandoraTrks + 1;
+		}
+	}
+
+	if(_polarization1 == -1 && _polarization2 == -1){
+		_nLL++;
+	}
+	if(_polarization1 == -1 && _polarization2 == 1){
+		_nLR++;
+	}
+	if(_polarization1 == 1 && _polarization2 == 1){
+		_nRR++;
+	}
+	if(_polarization1 == 1 && _polarization2 == -1){
+		_nRL++;
+	}
+
 
 	FillNtuple(evt);
 

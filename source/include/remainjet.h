@@ -27,6 +27,8 @@ class remainjet{
 	TTree* _localTree{};
 	
 	int njets{};
+	std::vector<int> _remNtrk{};
+	std::vector<int> _remNpfo{};
 	std::vector<double> _remPx{};
 	std::vector<double> _remPy{};
 	std::vector<double> _remPz{};

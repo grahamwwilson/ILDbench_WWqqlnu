@@ -30,3 +30,14 @@ python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/script
 
 python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/4f_ZZ_semileptonic/4f_ZZ_semileptonic.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_semileptonic/RunLogs/" "4f_ZZ_semileptonic"
 
+python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/eeH/eeH.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/eeH/RunLogs/" "eeH"
+
+python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/mumuH/mumuH.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/mumuH/RunLogs/" "mumuH"
+
+
+python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/tautauH/tautauH.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/tautauH/RunLogs/" "tautauH"
+
+
+python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/qqH/qqH.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/qqH/RunLogs/" "qqH"
+
+python runv2.py "/afs/desy.de/user/a/anguiano/work/repos/ILDbench_WWqqlnu/scripts/steeringMacros/wwv2Steering/nunuH/nunuH.xml" "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/nunuH/RunLogs/" "nunuH"

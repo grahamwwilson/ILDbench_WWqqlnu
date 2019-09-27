@@ -162,7 +162,13 @@ void FillNtuple(LCEvent* evt);
   int _polarization1{};
   int _polarization2{};
 
+  int _nPandoraTrks{};
+  int _nPandoraPfos{};
 
+  int _nLL{};
+  int _nRR{};
+  int _nLR{};
+  int _nRL{};
 
 
 std::string _outpath;
@@ -206,8 +212,8 @@ std::string _outpath;
   //input collections
   std::string _inputMcParticleCollectionName{};
   std::string _inputTrackCollectionName{};
-//  std::string _inputRecoRelationCollectionName{};
- 
+//  std::string _inputRecoRelationCollectionName{}; 
+  std::vector<ReconstructedParticle*> _pandoraPFOs{}; 
 
 
   //std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
