@@ -13,6 +13,7 @@
 #include "TKey.h"
 #include "TH1.h"
 #include <string>
+
 #include "TLorentzVector.h"
 //#include "TIter.h"
 class histset{
@@ -30,6 +31,11 @@ class histset{
 	  int _nLR;
 	  int _nRL;
 	  int _nRR;
+	
+	double _evtwLL;
+	double _evtwLR;
+	double _evtwRL;
+	double _evtwRR;
 
 	void setWeightParams(double iLumi, double Pem, double Pep, int nLL, int nLR, int nRL, int nRR );
 
@@ -53,6 +59,12 @@ class histset{
 	TH1D* mwhadHist{};
 	TH1D* EcomHist{};
 	TH1D* nRemHist{};
+	TH1D* vrecoilHist{};
+	TH1D* wlrecoilHist{};
+	TH1D* ntracksHist{};
+	TH1D* costwlHist{};
+	TH1D* costwqHist{};
+	TH1D* qcostHist{};
 	  //locate the histogram and perform ptr copying 
 	  void FillTH1(int index, double x, double w);
 	  void FillTH2(int index, double x, double y);
@@ -65,7 +77,8 @@ class histset{
 	
 	//cut flow stuff
 	bool orderCuts = true;
-	std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks", "esum","roots","mwlep", "mwhad", "costwl", "costwq"};
+	//std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks", "esum","roots","mwlep", "mwhad", "costwl", "costwq"};
+	std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks", "esum", "roots", "mwhad", "qcostw"};
 	std::vector<int> _nLLpass{};
 	std::vector<int> _nLRpass{};
 	std::vector<int> _nRLpass{};
@@ -75,6 +88,7 @@ class histset{
 	std::vector<int>& getPassPol(int pol1, int pol2);
 
 	void printtables();
+	void normtables();
 
 	//cut descriptions
 	// lepton = ntau0 > 0
@@ -160,13 +174,21 @@ void printvec(std::vector<type> vec){
 	std::cout<<vec[i]<<" ";
 	}
 	std::cout<<std::endl;
+}
+void histset::normtables(){
+	for(unsigned int i=0; i<_nLLpass.size(); i++){
+		_nLLpass[i]= _nLLpass[i]*_evtwLL;
+		_nLRpass[i]= _nLRpass[i]*_evtwLR;
+		_nRLpass[i]= _nRLpass[i]*_evtwRL;
+		_nRRpass[i]= _nRRpass[i]*_evtwRR;
+	}
 } 
 void histset::printtables(){
 	//sum tot
 	for(unsigned int i=0; i< _nTotpass.size(); i++){
 		_nTotpass.at(i) = _nLLpass[i] + _nLRpass[i] + _nRLpass[i] + _nRRpass[i];
 	}	
-	std::cout<<" cut "<<" ";
+	std::cout<<"* "<<_tag<<" cut "<<" ";
 	printvec( _cutsequence );
 	std::cout<<" LL "<<" ";
 	printvec( _nLLpass );
@@ -176,18 +198,28 @@ void histset::printtables(){
 	printvec( _nRLpass );
 	std::cout<<" RR " << " ";
 	printvec( _nRRpass );
-	std::cout<<" tot " << " ";
+	std::cout<<"* "<<_tag<<" tot " << " ";
 	printvec( _nTotpass );
+	
 	
 }
 void histset::init(){
 	EvisHist = new TH1D((_tag+"EvisHist").c_str(),"Visible Energy;GeV; Entries per 10 GeV bin", 70, 0 , 700 );
 	PtvisHist = new TH1D((_tag+"PtvisHist").c_str(),"Visible Pt; GeV; Entries per 10 GeV bin",50,0,500);
 	nLepHist = new TH1D((_tag+"nLepHist").c_str(),"Number of Reconstructed Leptons; n #l jets; Entries Per Lepton",11,-0.5,10.5);
-	mwlepHist = new TH1D((_tag+"mwlepHist").c_str(),"W #rightarrow #l #nu Reconstructed Mass; Mass GeV; Entries Per 5 GeV Bin", 50,0,250);
+	mwlepHist = new TH1D((_tag+"mwlepHist").c_str(),"W #rightarrow l #nu Reconstructed Mass; Mass GeV; Entries Per 5 GeV Bin", 50,0,250);
 	mwhadHist = new TH1D((_tag+"mwhadHist").c_str(),"W #rightarrow qq Reconstructed Mass;Mass GeV; Entries Per 5 GeV Bin", 50,0,250);
 	EcomHist = new TH1D((_tag+"EcomHist").c_str(),"#sqrt{s};GeV; Entries per 10 GeV bin", 70,0, 700);
 	nRemHist = new TH1D((_tag+"nRemHist").c_str(), "Number of Jet Fragments;N Jets",21,-0.5,20.5);
+	vrecoilHist = new TH1D((_tag+"vrecoilHist").c_str(),"Mass^{2} Recoiling from qql;  GeV^{2}; Entries per 1e4 GeV^{2} bin",25,0,250000);
+	wlrecoilHist = new TH1D((_tag+"wlrecoilHist").c_str(),"Mass^{2} Recoiling from qq; GeV^{2}; Entries per 1e4 GeV^{2} bin",25,0,250000);
+	ntracksHist = new TH1D((_tag+"ntracksHist").c_str(),"Total Track Multiplicity; N Tracks",101,-0.5,100.5);
+	costwlHist = new TH1D((_tag+"costwlHist").c_str(),"Leptonic W cos#theta;cos#theta;Entries per .01 bin",200,-1,1);
+	costwqHist = new TH1D((_tag+"costwqHist").c_str(),"Hadronic W cos#theta;cos#theta;Entries per .01 bin",200,-1,1);
+	qcostHist = new TH1D((_tag+"qcostHist").c_str(),"W Scattering angle; -qcos#theta",200,-1,1);
+
+	
+
 //init TH1D
 	//TH1Manager.at(ind_EvisHist) = new ROOT::TThreadedObject<TH1D>("EvisHist", "Visble Energy;GeV;Entries per 10 GeV bin", 70, 0, 700);
 // init TH2D
@@ -290,6 +322,21 @@ bool costwcut(int& count, double costw){
 	}
 	return false;
 }
+bool qcostw(int& count,double ql, double qq, double qcostl,double qcostqq){
+	//determination of W- only
+	double qcost;
+	if(ql <0){
+		qcost = qcostl;
+	}
+	else{
+		qcost = qcostqq;
+	}
+	if( (qcost > -0.95) ){
+		count++;
+		return true;
+	}
+	return false;
+}
 std::vector<int>& histset::getPassPol(int pol1, int pol2){
 	if(pol1 == -1 && pol2 == -1) return _nLLpass;
 	if(pol1 == -1 && pol2 == 1) return _nLRpass;
@@ -305,6 +352,8 @@ void histset::AnalyzeEntry(myselector& s){
 //	 Pem = -0.8;
 //	 Pep = 0.3;
 
+	double xangle = 0.007;//7 millrad xangle boost
+
 	double fRm = 0.5*(1+_Pem);
 	double fLm = 1-fRm;
 
@@ -312,9 +361,9 @@ void histset::AnalyzeEntry(myselector& s){
 	double fLp = 1-fRp;
 
 	double wpolLR = fLm*fRp;
-	double wpolRL = fRm*fLp;
-	double wpolLL = fLm*fLp;
-	double wpolRR = fRm*fRp;
+	double  wpolRL = fRm*fLp;
+	double  wpolLL = fLm*fLp;
+	double  wpolRR = fRm*fRp;
 
 	double xsec_new;
 	double nev;
@@ -343,6 +392,21 @@ void histset::AnalyzeEntry(myselector& s){
 	double thisLumi = ((double)nev)/xsec_new;
 	evtw = _iLumi/thisLumi;	
 
+	//norm for Nevt table later, calculate every step because its easier
+	if(pol1 == -1 && pol2 == -1){
+		_evtwLL=evtw;
+	}
+	if(pol1 == -1 && pol2 ==1){
+		_evtwLR=evtw;
+	}
+	if(pol1 == 1 && pol2 == -1){
+		_evtwRL=evtw;
+	}
+	if(pol1 == 1 && pol2 == 1){
+		_evtwRR=evtw;
+	}
+
+
 	auto candE0 = *(s.candE0);	
 	auto& remE0_preclean = s.remE0;
 	auto& remPx0_preclean = s.remPx0;
@@ -356,6 +420,9 @@ void histset::AnalyzeEntry(myselector& s){
 
 	auto nPandoraTrks = *(s.nPandoraTrks);
 
+	ntracksHist->Fill(nPandoraTrks,evtw);
+
+          //locate the histo
 	nLepHist->Fill(nlep, evtw);
 //	nRemHist->Fill(njets0, evtw);
 	if(nlep ==0) return;
@@ -369,6 +436,7 @@ void histset::AnalyzeEntry(myselector& s){
 
 	for(unsigned int i = 0; i< remE0_preclean.GetSize(); i++){
 		double pt = sqrt(remPx0_preclean[i]*remPx0_preclean[i] + remPy0_preclean[i]*remPy0_preclean[i]);
+		
 		if(pt > 2){
 			remPx0.push_back( remPx0_preclean[i]);
 			remPy0.push_back( remPy0_preclean[i]);
@@ -394,12 +462,15 @@ void histset::AnalyzeEntry(myselector& s){
 		Pzjets = Pzjets + remPz0[i];
 	}
 
+
+
+
 	double Ptjets= sqrt(Pxjets*Pxjets + Pyjets*Pyjets);
 	double Ptcand = sqrt(candPx0*candPx0 + candPy0*candPy0);
 	double Evis = candE0 + Ejets;
 	//FillTH1(ind_EvisHist, Evis);
-	EvisHist->Fill(Evis, evtw);
-	PtvisHist->Fill(Ptjets+Ptcand, evtw);
+//	EvisHist->Fill(Evis, evtw);
+//	PtvisHist->Fill(Ptjets+Ptcand, evtw);
 
 //	nLepHist->Fill(nlep, evtw);
 //	nRemHist->Fill(njets0, evtw);
@@ -420,24 +491,130 @@ void histset::AnalyzeEntry(myselector& s){
 	Pzmiss = -Pzmiss;
 
 	double Pmiss = sqrt(Pxmiss*Pxmiss + Pymiss*Pymiss + Pzmiss*Pzmiss);
+	
+
 
 	//lep mass is 4vec lep + miss
 	//
-	TLorentzVector lep0(candPx0,candPy0, candPz0, candE0 );
-	TLorentzVector nu0(Pxmiss, Pymiss, Pzmiss, Pmiss );
+	TVector3 xangleBoost(-sin(0.007),0,0);
 
-	TLorentzVector Wlep0 = lep0+nu0;
-	mwlepHist->Fill(Wlep0.M(), evtw);
+	TLorentzVector lep0(candPx0,candPy0, candPz0, candE0 );
+	//TLorentzVector nu0(Pxmiss, Pymiss, Pzmiss, Pmiss );
+	
+	lep0.Boost(xangleBoost);
+	//nu0.Boost(xangleBoost);
+
+//	TLorentzVector Wlep0 = lep0+nu0;
+//	mwlepHist->Fill(Wlep0.M(), evtw);
+
+
 
 	//get had mass
 	TLorentzVector Wqq0(Pxjets, Pyjets, Pzjets, Ejets);
+	Wqq0.Boost(xangleBoost);
+
+	
+
+	EvisHist->Fill((lep0+Wqq0).E(), evtw);
+	PtvisHist->Fill((lep0+Wqq0).Pt(), evtw);
+
+	//TLorentzVector nu0(-(Wqq0+lep0));
+	TLorentzVector nu0;
+	nu0.SetXYZM(-(Wqq0+lep0).Px(), -(Wqq0+lep0).Py(), -(Wqq0+lep0).Pz(), 0 );
+	TLorentzVector Wlep0 = lep0+nu0;
+	mwlepHist->Fill(Wlep0.M(), evtw);
+
 	mwhadHist->Fill(Wqq0.M(), evtw);
+
+	costwlHist->Fill(Wlep0.CosTheta(),evtw);
+	costwqHist->Fill(Wqq0.CosTheta(),evtw);
 	
 	//boost to CM
 	TLorentzVector Tot = Wlep0+Wqq0;
-	TVector3 cmboost =  Tot.BoostVector();
-	Tot.Boost(-cmboost);	
+	//TVector3 cmboost =  Tot.BoostVector();
+	//Tot.Boost(-cmboost);	
+        
 	EcomHist->Fill(Tot.E(), evtw);
+
+	//std::cout<<"TOT: "<<Tot.E()<<" "<<Tot.Px()<<" "<<Tot.Py()<<" "<<Tot.Pz()<<std::endl;
+	//test boost things
+	//std::cout<<"boostVector "<<cmboost.Px()<<" "<<cmboost.Py()<<" "<<cmboost.Pz()<<std::endl;
+	//try boosting vectors by sin(.007)	
+
+	//recoiling masses
+	//
+	// neutrino mass recoiling against lep + qq
+	TLorentzVector qql = lep0+Wqq0;
+	double mvrecoil = 500*500 + qql.M()*qql.M() - 2*500*qql.E(); //should be 0?
+	
+	// wlep mass recoiling against qq
+	double mwlrecoil = 500*500 + Wqq0.M()*Wqq0.M() - 2*500*Wqq0.E(); // should be the nominal Wmass
+
+	//adjust masses if <0
+/*	if(mvrecoil < 0){
+		mvrecoil= sqrt(-mvrecoil);
+		//reassign to negative mass
+		mvrecoil = -mvrecoil;
+	}
+	else{
+		mvrecoil = sqrt(mvrecoil);		
+	}
+	if(mwlrecoil < 0){
+		mwlrecoil = sqrt(-mwlrecoil);
+		mwlrecoil = -mwlrecoil;
+	}
+	else{
+		mwlrecoil = sqrt(mwlrecoil);
+	}
+*/
+
+
+	vrecoilHist->Fill(mvrecoil,evtw);
+	wlrecoilHist->Fill(mwlrecoil,evtw);
+
+
+	//make some charge determination for each W	
+	double qwl;
+	double qwqq;
+	auto& candTrkOm0 = s.candTrkOm0;
+	auto& candTrktlam0 = s.candTrktlam0;
+
+	double BField = 3.5;
+	const double c = 2.99792458e8; // m*s^-1        
+  	const double mm2m = 1e-3;
+  	const double eV2GeV = 1e-9;
+  	const double eB = BField*c*mm2m*eV2GeV;
+
+	std::vector<double> trackP(candTrkOm0.GetSize());
+	std::vector<double> trackq(candTrkOm0.GetSize());
+
+	for(unsigned int i=0; i< candTrkOm0.GetSize(); i++){
+		double q = candTrkOm0[i]/fabs(candTrkOm0[i]);
+		double om = candTrkOm0[i];
+		double tanl = candTrktlam0[i];
+		trackq.at(i) = q;
+		trackP.at(i) = 	q*eB/om * sqrt(1+tanl*tanl);
+	}
+	//
+	//if there is 1 or !3 tracks take highest P track as wl charge
+	if(trackq.size() != 3){
+		int indexPMax=0;
+		double PMax =0;
+		for(unsigned int i=0; i<trackP.size(); i++){
+			if(trackP.at(i) > PMax){
+				PMax = trackP.at(i);
+				indexPMax = i;
+			}
+		}
+		qwl = trackq.at(indexPMax);
+		qwqq = qwl*(-1.);	
+	}
+	if(trackq.size() == 3){
+		qwl = trackq.at(0) + trackq.at(1) + trackq.at(2);
+		qwqq = qwl*(-1.);
+	}
+	qcostHist->Fill(-qwl*Wlep0.CosTheta());
+	qcostHist->Fill(-qwqq*Wqq0.CosTheta());
 
 // apply cuts
 //
@@ -476,6 +653,11 @@ void histset::AnalyzeEntry(myselector& s){
 		}
 		if( cut.compare("costwq")==0){
 			pass = costwcut(getPassPol(pol1,pol2)[i], Wqq0.CosTheta());
+			if(!pass & orderCuts) break;
+		}
+		if( cut.compare("qcostw")==0){// w scattering angle
+			pass = qcostw(getPassPol(pol1,pol2)[i],qwl,qwqq, -qwl*Wlep0.CosTheta(), -qwqq*Wqq0.CosTheta());
+
 			if(!pass & orderCuts) break;
 		}
 

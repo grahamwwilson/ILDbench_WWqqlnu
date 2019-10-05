@@ -366,10 +366,10 @@ void mcVars::initLocalTree(){
 
 	/*** Tree MC info ***/
 
-	_localTree->Branch("genMuon", &_isMuon,"isMuon/I");
-	_localTree->Branch("genTau",&_isTau,"isTau/I");
-	_localTree->Branch("genElectron",&_isElectron,"isElectron/I");
-	_localTree->Branch("genTauType",&_tauType,"tauType/I");
+	_localTree->Branch("isMuon", &_isMuon);
+	_localTree->Branch("isTau",&_isTau);
+	_localTree->Branch("isElectron",&_isElectron);
+	_localTree->Branch("TauType",&_tauType);
 
 	_localTree->Branch("MCf_PDG", "vector<int>", &_MCfpdg);
 		

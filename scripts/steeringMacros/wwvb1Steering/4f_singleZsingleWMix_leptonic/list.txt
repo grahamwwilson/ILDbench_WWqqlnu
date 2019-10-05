@@ -1,0 +1,17 @@
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250049.P4f_szeorsw_l.eL.pL.n001.d_dstm_10293_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250049.P4f_szeorsw_l.eL.pL.n001.d_dstm_10293_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250049.P4f_szeorsw_l.eL.pL.n001.d_dstm_10293_2.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250049.P4f_szeorsw_l.eL.pL.n001.d_dstm_10293_3.slcio
+
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250050.P4f_szeorsw_l.eL.pR.n001.d_dstm_10293_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250050.P4f_szeorsw_l.eL.pR.n001.d_dstm_10293_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250050.P4f_szeorsw_l.eL.pR.n001.d_dstm_10293_2.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250050.P4f_szeorsw_l.eL.pR.n001.d_dstm_10293_3.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250050.P4f_szeorsw_l.eL.pR.n001.d_dstm_10293_4.slcio
+
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250051.P4f_szeorsw_l.eR.pR.n001.d_dstm_10293_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250051.P4f_szeorsw_l.eR.pR.n001.d_dstm_10293_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250051.P4f_szeorsw_l.eR.pR.n001.d_dstm_10293_2.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250051.P4f_szeorsw_l.eR.pR.n001.d_dstm_10293_3.slcio
+
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_singleZsingleWMix_leptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250052.P4f_szeorsw_l.eR.pL.n001.d_dstm_10293_0.slcio

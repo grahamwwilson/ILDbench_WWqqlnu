@@ -36,9 +36,15 @@
 #include "tauJet.h"
 #include "tauCand.h"
 #include "remainjet.h"
+#include "fitJet.h"
 #include "remainPfos.h"
 #include "jetOverlay.h"
-
+#include "JetFitObject.h"
+#include "NeutrinoFitObject.h"
+#include "ISRPhotonFitObject.h"
+#include "MomentumConstraint.h"
+#include "OPALFitterGSL.h"
+#include "MassConstraint.h"
 #ifdef __MAKECINT__
 #pragma link C++ class vector< vector<float> >+;
 #endif
@@ -49,7 +55,7 @@
 //#define nferm 4
 
 using namespace lcio;
-
+using namespace marlin;
 	/** WWAnalysis:<br>
  *
  * 
@@ -90,7 +96,7 @@ using namespace lcio;
   bool FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec );
   bool FindTracks( LCEvent* evt );
   bool FindRecoToMCRelation( LCEvent* evt );
-
+ void dofit(int coneNumber );
 	
  //  void processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc);
 
@@ -142,7 +148,7 @@ using namespace lcio;
  std::vector<tauJet*> _tauJets{};
  std::vector<tauCand*> _tauCands{}; //energy selected
  std::vector<remainjet*> _remJets{};
- 
+ std::vector<fitJet*> _fitJets{}; 
  
 void FillNtuple(LCEvent* evt);
 
@@ -170,6 +176,11 @@ void FillNtuple(LCEvent* evt);
   int _nLR{};
   int _nRL{};
 
+
+//fitt variables
+ std::vector<int> _wwlike{0,0,0,0,0};
+// double _fitprob{};
+// double _chi2{};
 
 std::string _outpath;
 

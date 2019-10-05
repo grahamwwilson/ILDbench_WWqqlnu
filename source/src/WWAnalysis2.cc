@@ -136,7 +136,7 @@ void WWAnalysis2::inittree(){
 		std::vector< tauJet* > tauJets(nColl);
 		std::vector< tauCand* > tauCands(nColl);
 		std::vector< remainjet* > remJets(nColl);	
-
+		std::vector< fitJet* > fitJets(nColl);
 		
 		t->Branch("xsec",&_xsec,"xsec/F");
 		t->Branch("xsecerr",&_xsecerr,"xsecerr/F");
@@ -155,7 +155,8 @@ void WWAnalysis2::inittree(){
 		t->Branch("ycut",&_remainYcut,"ycut/D");
 
 		t->Branch("nPandoraTrks",&_nPandoraTrks,"nPandoraTrks/I");
-		t->Branch("nPandoraPfos",&_nPandoraPfos,"nPandoraPfos/I");	
+		t->Branch("nPandoraPfos",&_nPandoraPfos,"nPandoraPfos/I");
+		t->Branch("wwlike","vector<int>",&_wwlike );	
 		//init 1 mc
 		mcVars* mcv = new mcVars(_nfermions, _nleptons, t);
 		_mcv = mcv;	
@@ -164,11 +165,13 @@ void WWAnalysis2::inittree(){
 		for(unsigned int i=0; i<nColl; i++){
 			tauJets.at(i) = new tauJet(i,t);
 			tauCands.at(i) = new tauCand(i,t);
-			remJets.at(i) = new remainjet(i,t);		
+			remJets.at(i) = new remainjet(i,t);
+			fitJets.at(i) = new fitJet(i,t);		
 		}
 		_tauJets = tauJets;
 		_tauCands = tauCands;
 		_remJets = remJets;
+		_fitJets = fitJets;
 		_tree = t;
 		
 		//the number of tau jet collections should match the number of remain collections
@@ -687,7 +690,7 @@ void WWAnalysis2::FillNtuple( LCEvent * evt ) {
 //	std::cout<< "populating mc "<<std::endl;
 	_mcv->setParticles(_mcpartvec);
 //remove mc population for now (to make higgs go faster)
-//	_mcv->initMCVars();	
+	_mcv->initMCVars();	
 //
 //	std::cout<<"mc populated"<<std::endl;	
 	//fill various classes
@@ -708,6 +711,138 @@ void WWAnalysis2::FillNtuple( LCEvent * evt ) {
 //	std::cout<<"filling tree"<<std::endl;
 	_tree->Fill();
 //	std::cout<<"tree filled"<<std::endl;
+}
+void WWAnalysis2::dofit(int coneNumber){
+	//determine WWlike
+	if(_nPandoraTrks < 10) return;
+	if(_tauCandCollections.at(coneNumber).size() < 1) return;
+	std::vector<ReconstructedParticle*> qqjets = _remJetCollections.at(coneNumber);
+	if(qqjets.size() < 1) return;
+
+	//do pt<2 cut on remjets transfer RP* to TLV
+	std::vector<TLorentzVector> qqtlv{};
+	for(unsigned int i=0; i< qqjets.size(); i++){
+	//	TLorentzVector p;
+		double px = qqjets.at(i)->getMomentum()[0];
+		double py = qqjets.at(i)->getMomentum()[1];
+		double pt = sqrt( px*px + py*py);
+		if( pt > 2){
+			double pz = qqjets.at(i)->getMomentum()[2];
+			double E = qqjets.at(i)->getEnergy();
+			TLorentzVector p(px,py,pz,E);
+			qqtlv.push_back(p);
+		}
+	}
+	//form wqq from qqtlv
+	TLorentzVector Wqq;
+	for(unsigned int i=0; i< qqtlv.size(); i++){
+		Wqq += qqtlv.at(i);
+	}
+
+	//qq mass check
+	if( Wqq.M() < 30 ) return;
+	if( Wqq.M() > 140 ) return;
+
+	//at this point the event is WWLike
+	_wwlike.at(coneNumber)=1;
+	std::cout<<"WWLIKE!"<<std::endl;
+	double qqdE = 1.2 * sqrt(Wqq.E());
+	double dphi = 0.1;
+	double dtheta = 0.1;
+
+	//all criteria passed at this point, start up the constrained fit
+	JetFitObject *qqJFO = new JetFitObject( Wqq.E(), Wqq.Theta(), Wqq.Phi(), qqdE, dtheta, dphi, Wqq.M());
+
+//prepare Wl side of the event //try to do this with lepton fit object later.. just use jets for now
+	ReconstructedParticle* l = _remJetCollections.at(coneNumber).at(0);
+	TLorentzVector lep(l->getMomentum()[0], l->getMomentum()[1], l->getMomentum()[2], l->getEnergy());
+	//create neutrino (remember it will still be boosted in x)
+	TLorentzVector nu;
+	nu.SetXYZM( 3.5-(lep.Px()+Wqq.Px()), -(lep.Py()+Wqq.Py()), -(lep.Pz()+Wqq.Pz()), 0. );
+	
+	double ldE = 1.2 * sqrt( lep.E() );
+	JetFitObject *lJFO = new JetFitObject( lep.E(), lep.Theta(), lep.Phi(), ldE, dtheta, dphi);
+
+	double ndE = 1.;
+	NeutrinoFitObject *nFO = new NeutrinoFitObject( nu.E(), nu.Theta(), nu.Phi(), ndE, dtheta, dphi);
+
+	MomentumConstraint pxc (0, 1, 0, 0, 3.5);//xangle boost 3.5Gev in x
+        pxc.setName("sum(p_x)");
+	pxc.addToFOList( *qqJFO );
+	pxc.addToFOList( *lJFO );
+	pxc.addToFOList( *nFO );
+        
+	MomentumConstraint pyc (0, 0, 1);
+        pyc.setName("sum(p_y)");
+	pyc.addToFOList( *qqJFO );
+	pyc.addToFOList( *lJFO );
+	pyc.addToFOList( *nFO );
+
+        MomentumConstraint pzc (0, 0, 0, 1);
+        pzc.setName("sum(p_z)");
+	pzc.addToFOList( *qqJFO );
+	pzc.addToFOList( *lJFO );
+	pzc.addToFOList( *nFO );
+
+	MomentumConstraint ec(1, 0, 0, 0, 500);
+        ec.setName("sum(E)");
+	ec.addToFOList( *qqJFO );
+	ec.addToFOList( *lJFO );
+	ec.addToFOList( *nFO );
+
+
+//  b = (double) 0.00464564*( std::log(_ecm*_ecm*3814714.)-1. );
+  //= 2*alpha/pi*( ln(s/m_e^2)-1 )
+  //  ISRPzMaxB = std::pow((double)_isrpzmax,b);
+	double b =  0.00464564*( std::log(500*500*3814714.)-1. );
+	double ISRPzMaxB = std::pow(225.,b);
+	ISRPhotonFitObject *photon = new ISRPhotonFitObject (0., 0., -pzc.getValue(), b, ISRPzMaxB);
+	
+	pxc.addToFOList (*(photon));
+        pyc.addToFOList (*(photon));
+        pzc.addToFOList (*(photon));
+        ec.addToFOList  (*(photon));
+		
+        MassConstraint w(0.);
+        w.addToFOList (*qqJFO, 1);
+        w.addToFOList (*lJFO, 2);
+        w.addToFOList (*nFO, 2);
+
+	BaseFitter *pfitter;
+	pfitter = new OPALFitterGSL();
+	BaseFitter &fitter = *pfitter;
+
+	fitter.addFitObject( *qqJFO );
+	fitter.addFitObject( *lJFO );
+	fitter.addFitObject( *nFO );
+	fitter.addFitObject( *photon);
+
+	fitter.addConstraint (pxc);
+        fitter.addConstraint (pyc);
+        fitter.addConstraint (pzc);
+        fitter.addConstraint (ec);
+        fitter.addConstraint (w);
+
+	//_fitprob = fitter.fit();
+	//_chi2 = fitter.getChi2();
+	double fitprob;
+	double chi2;
+	
+	fitprob = fitter.fit();
+	chi2 = fitter.getChi2();
+std::cout<<fitprob<<" ";
+//	TLorentzVector* qqtlv = new TLorentzVector(qqJFO->getPx(), qqJFO->getPy(), qqJFO->getPz(), qqJFO->getE());
+//	TLorentzVector* ltlv = new TLorentzVector(lJFO->getPx(), lJFO->getPy(), lJFO->getPz(), lJFO->getE());
+//	TLorentzVector* nutlv = new TLorentVector(nFO->getPx(), nFO->getPy(), nFO->getPz(), nFO->getE());
+//	TLorentzVector* gtlv = new TLorentzVector(photon->getPx(), photon->getPy(), photon->getPz(), photon->getE());
+	
+	//gotta stick fit objects onto vector
+	std::vector<JetFitObject*> qqvec{ qqJFO };
+	std::vector<JetFitObject*> lvec{ lJFO };
+	
+
+	_fitJets.at(coneNumber)->setParticles(qqvec, lvec, nFO, photon, w, fitprob, chi2);
+
 }
 void WWAnalysis2::processEvent( LCEvent * evt ) {
  //std::cout<<"
@@ -766,13 +901,13 @@ std::string pol2;
 		_beampart2 = -1;
 	}
 
-	if(pol1.compare("L")){
+	if(pol1.compare("L")==0){
 		_polarization1 = -1;
 	}
 	else{ 
 		_polarization1 = 1;
 	}
-	if(pol2.compare("L")){
+	if(pol2.compare("L")==0){
 		_polarization2 = -1;
 	}
 	else{
@@ -804,6 +939,11 @@ std::string pol2;
 
 
 	FillNtuple(evt);
+
+
+	//determine if event is WW like, if it is do a 5C fit. the fit has to be w.r.t some specific cone and lepton selection
+//	dofit(0);//arg conenumber 0 = muon	
+	
 
  _nEvt++;
 }

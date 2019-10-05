@@ -35,3 +35,23 @@ python runmacro.py 0 8 "datalists/tautauH.list" "tree" "TAUH" "eventSel.root" "U
 python runmacro.py 0 8 "datalists/qqH.list" "tree" "QQH" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
 python runmacro.py 0 8 "datalists/nunuH.list" "tree" "NNH" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
 
+python runmacro.py 0 8 "datalists/4f_singleZsingleWMix_leptonic.list" "tree" "ZWML" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/4f_ZZWWMix_hadronic.list" "tree" "ZZWWH" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/4f_ZZWWMix_leptonic.list" "tree" "ZZWWL" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_eeWW.list" "tree" "EEWW" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_llWW.list" "tree" "LLWW" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_ttbar.list" "tree" "TTB" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_vvWW.list" "tree" "VVWW" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_xxWW.list" "tree" "XXWW" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_xxxxZ.list" "tree" "XXZ" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+python runmacro.py 0 8 "datalists/6f_yyyyZ.list" "tree" "YYZ" "eventSel.root" "UPDATE" "-0.8" "0.3" "1600"
+
+
+
+
+
+
+
+
+
+

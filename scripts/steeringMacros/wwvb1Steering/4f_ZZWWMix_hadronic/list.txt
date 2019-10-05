@@ -1,0 +1,11 @@
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250010.P4f_zzorww_h.eL.pR.n001.d_dstm_10405_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250010.P4f_zzorww_h.eL.pR.n001.d_dstm_10405_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250010.P4f_zzorww_h.eL.pR.n001.d_dstm_10405_2.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250010.P4f_zzorww_h.eL.pR.n002.d_dstm_10405_3.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250010.P4f_zzorww_h.eL.pR.n002.d_dstm_10405_4.slcio
+
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250012.P4f_zzorww_h.eR.pL.n001.d_dstm_10405_0.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250012.P4f_zzorww_h.eR.pL.n001.d_dstm_10405_1.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250012.P4f_zzorww_h.eR.pL.n001.d_dstm_10405_2.slcio
+/afs/desy.de/user/a/anguiano/dbdSamples/4f_ZZWWMix_hadronic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250012.P4f_zzorww_h.eR.pL.n001.d_dstm_10405_3.slcio
+
