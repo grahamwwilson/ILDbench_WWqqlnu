@@ -1,0 +1,5 @@
+$ maxntracks value 
+$ minntracks value 
+$ minpt value 
+$ maxevis value 
+* minevis 10 200 10

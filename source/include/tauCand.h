@@ -46,6 +46,9 @@ class tauCand{
 
 	std::vector< std::vector<float> > _neuCov{};	
 
+	//store the tracks but dont put them on the tree
+	std::vector<Track*> _tracks{};
+	double _bfield{};
 	
 	//tracks
 	std::vector<double> _candTrkd0{};

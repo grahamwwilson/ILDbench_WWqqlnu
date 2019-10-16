@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
  //extract number of events for each pol 
  TFile* ofile = new TFile( ofilename.c_str(), ofileoption.c_str());	
    //Create our ThreadedHistograms and Analysis Class
-   histset h( ofile, tag);
+   histset h( ofile, ofilename,  tag);
   
   //make our parallel tree processor
   // ROOT::TTreeProcessorMT tp(ifilelist,treename.c_str());

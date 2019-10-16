@@ -1,0 +1,5 @@
+* maxntracks 1 20 1
+* minntracks 20 50 1
+* minpt 0.2 10 0.2
+* maxevis 450 600 10
+* minevis 10 200 10

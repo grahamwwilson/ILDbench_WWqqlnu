@@ -13,6 +13,7 @@
 #include <iostream>
 #include "JetFitObject.h"
 #include "NeutrinoFitObject.h"
+#include "LeptonFitObject.h"
 #include "ISRPhotonFitObject.h"
 #include "MassConstraint.h"
 
@@ -25,7 +26,8 @@ class fitJet{
 	fitJet( int id,  TTree* tree);
 
 	//void setParticles( std::vector<TLorentzVector*> jfos, std::vector<TLorentzVector*> lepjfos, TLorentzVector* nufo, TLorentzVector* gfo, double m1,double m2, double fitprob , double chi2 );// std::vector<ReconstructedParticle*>& remainpfos);//, std::vector<LCRelation*>& pfo2mc);
-	void setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitObject*> lepjfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2);
+	//void setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitObject*> lepjfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2);
+	void setParticles(std::vector<JetFitObject*> jfos, std::vector<LeptonFitObject*> lfos, std::vector<JetFitObject*> ljfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2, double nuz, double Eg);
 	void initLocalTree();
 
 	int _id{};
@@ -48,6 +50,15 @@ class fitJet{
 	std::vector<double> _lPy{-999};
 	std::vector<double> _lPz{-999};
 	std::vector<double> _lE{-999};
+	std::vector<double> _lq{-999}; //use this to determine track or neutral
+
+
+	//store the nu pz / isr E calculations prefit
+	double _nuPzISR{-999};
+	double _gEISR{-999};
+	
+
+	//will probably need to eventually store track params/ k,theta,phi + matrix later
 
 	//neutrino piece
 	double _nuPx{-999};

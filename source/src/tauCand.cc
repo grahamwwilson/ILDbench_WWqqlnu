@@ -38,8 +38,11 @@ void tauCand::setParticles( std::vector<ReconstructedParticle*>& taus){// std::v
 	std::vector< std::vector<float> > trCovs{};
 	 std::vector<float> trCov{};
 
+	std::vector<Track*> marlinTrks{};
+
 	//units for track P calcutions
 	double BField = marlin::Global::GEAR->getBField().at(gear::Vector3D(0.,0.,0.)).z();
+	_bfield = BField;
 	const double c = 2.99792458e8; // m*s^-1        
   	const double mm2m = 1e-3;
   	const double eV2GeV = 1e-9;
@@ -90,6 +93,8 @@ void tauCand::setParticles( std::vector<ReconstructedParticle*>& taus){// std::v
 				trom.push_back(tP->getOmega() );
 				trz0.push_back(tP->getZ0() );
 				trtl.push_back(tP->getTanLambda() );
+				//save the trk
+				marlinTrks.push_back(tP);			
 				//make a copy of the const
 				const std::vector<float> tempcov = tP->getCovMatrix();			
 				trCov = tempcov ;
@@ -130,6 +135,9 @@ void tauCand::setParticles( std::vector<ReconstructedParticle*>& taus){// std::v
 	_candTrktlam = trtl;
 	_trkCov = trCovs;
 	
+	_tracks = marlinTrks;
+
+
 /*	_taus = taus;
 	std::vector<TLorentzVector> tlv( _taus.size() );
 	_tlvtaus = tlv;

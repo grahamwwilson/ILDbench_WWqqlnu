@@ -19,7 +19,7 @@
 class histset{
 	
 	public:
-	   histset(TFile* f, std::string tag);	
+	   histset(TFile* f,std::string ofilename,  std::string tag);	
 	   void init(); 
 
 	  //lumi stuff
@@ -78,7 +78,9 @@ class histset{
 	//cut flow stuff
 	bool orderCuts = true;
 	//std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks", "esum","roots","mwlep", "mwhad", "costwl", "costwq"};
-	std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks", "esum", "roots", "mwhad", "qcostw"};
+	//std::vector<std::string> _cutsequence{"nocut", "lepton", "ntracks","ptcut", "esum", "roots", "mwhad","mwlep", "qcostw"};
+	std::vector<std::string> _cutsequence{"nocut","lepton","ntracks","ptcut","esum","roots","mwhad","qcostw"};
+
 	std::vector<int> _nLLpass{};
 	std::vector<int> _nLRpass{};
 	std::vector<int> _nRLpass{};
@@ -90,6 +92,10 @@ class histset{
 	void printtables();
 	void normtables();
 
+
+	//run tau mode
+	bool _tauConeMode=false;
+	
 	//cut descriptions
 	// lepton = ntau0 > 0
 	// ntracks = total track multiplicity > 10
@@ -102,9 +108,13 @@ class histset{
 	
 };
 
-histset::histset(TFile* f, std::string tag = ""){
+histset::histset(TFile* f,std::string ofilename, std::string tag = ""){
 	_tag = tag; 
+	if(ofilename.compare("eventSelTau.root")==0){ _tauConeMode = true;
 
+	std::vector<std::string> cutsequence{"nocut", "lepton","mucone", "ntracks","ptcut", "esum", "roots", "mwhad", "qcostw"};
+	_cutsequence = cutsequence;
+	}
 
    //f1 = TFile::Open("hsimple.root");
   /* TIter keyList(f->GetListOfKeys());
@@ -206,13 +216,13 @@ void histset::printtables(){
 void histset::init(){
 	EvisHist = new TH1D((_tag+"EvisHist").c_str(),"Visible Energy;GeV; Entries per 10 GeV bin", 70, 0 , 700 );
 	PtvisHist = new TH1D((_tag+"PtvisHist").c_str(),"Visible Pt; GeV; Entries per 10 GeV bin",50,0,500);
-	nLepHist = new TH1D((_tag+"nLepHist").c_str(),"Number of Reconstructed Leptons; n #l jets; Entries Per Lepton",11,-0.5,10.5);
+	nLepHist = new TH1D((_tag+"nLepHist").c_str(),"Number of Reconstructed Leptons; N Lep. Jets; Entries Per Lepton",11,-0.5,10.5);
 	mwlepHist = new TH1D((_tag+"mwlepHist").c_str(),"W #rightarrow l #nu Reconstructed Mass; Mass GeV; Entries Per 5 GeV Bin", 50,0,250);
-	mwhadHist = new TH1D((_tag+"mwhadHist").c_str(),"W #rightarrow qq Reconstructed Mass;Mass GeV; Entries Per 5 GeV Bin", 50,0,250);
+	mwhadHist = new TH1D((_tag+"mwhadHist").c_str(),"W #rightarrow qq Reconstructed Mass;Mass GeV; Entries Per 10 GeV Bin", 20,0,200);
 	EcomHist = new TH1D((_tag+"EcomHist").c_str(),"#sqrt{s};GeV; Entries per 10 GeV bin", 70,0, 700);
 	nRemHist = new TH1D((_tag+"nRemHist").c_str(), "Number of Jet Fragments;N Jets",21,-0.5,20.5);
-	vrecoilHist = new TH1D((_tag+"vrecoilHist").c_str(),"Mass^{2} Recoiling from qql;  GeV^{2}; Entries per 1e4 GeV^{2} bin",25,0,250000);
-	wlrecoilHist = new TH1D((_tag+"wlrecoilHist").c_str(),"Mass^{2} Recoiling from qq; GeV^{2}; Entries per 1e4 GeV^{2} bin",25,0,250000);
+	vrecoilHist = new TH1D((_tag+"vrecoilHist").c_str(),"Mass^{2} Recoiling from qql;  GeV^{2}; Entries per 1e4 GeV^{2} bin",25,-100,300000);
+	wlrecoilHist = new TH1D((_tag+"wlrecoilHist").c_str(),"Mass^{2} Recoiling from qq; GeV^{2}; Entries per 1e4 GeV^{2} bin",25,-100,300000);
 	ntracksHist = new TH1D((_tag+"ntracksHist").c_str(),"Total Track Multiplicity; N Tracks",101,-0.5,100.5);
 	costwlHist = new TH1D((_tag+"costwlHist").c_str(),"Leptonic W cos#theta;cos#theta;Entries per .01 bin",200,-1,1);
 	costwqHist = new TH1D((_tag+"costwqHist").c_str(),"Hadronic W cos#theta;cos#theta;Entries per .01 bin",200,-1,1);
@@ -302,7 +312,7 @@ bool rootscut(int& count, double ecom){
 	return false;
 }
 bool mwlepcut(int& count, double wlmass){
-	if( wlmass > 40 && wlmass < 120 ){
+	if( wlmass > 20 && wlmass < 140 ){
 		count++;
 		return true;
 	}
@@ -337,6 +347,23 @@ bool qcostw(int& count,double ql, double qq, double qcostl,double qcostqq){
 	}
 	return false;
 }
+bool ptcut(int& count, double pt){
+        if( pt > 5){
+                count++;
+                return true;
+        }
+        return false;
+}
+bool muconecut(int& count, double nmucone){
+        if( nmucone == 0){
+                count++;
+                return true;
+        }
+        return false;
+
+}
+
+
 std::vector<int>& histset::getPassPol(int pol1, int pol2){
 	if(pol1 == -1 && pol2 == -1) return _nLLpass;
 	if(pol1 == -1 && pol2 == 1) return _nLRpass;
@@ -407,26 +434,46 @@ void histset::AnalyzeEntry(myselector& s){
 	}
 
 
-	auto candE0 = *(s.candE0);	
-	auto& remE0_preclean = s.remE0;
-	auto& remPx0_preclean = s.remPx0;
-	auto& remPy0_preclean = s.remPy0;
-	auto candPx0 = *(s.candPx0);
-	auto candPy0 = *(s.candPy0);
-	auto nlep = *(s.ntau0);
-	auto candPz0 = *(s.candPz0);
-	auto& remPz0_preclean = s.remPz0;
-	auto njets0_preclean = *(s.njets0);
+	auto candE0 = *(s.candE0);
+        auto& remE0_preclean = s.remE0;
+        auto& remPx0_preclean = s.remPx0;
+        auto& remPy0_preclean = s.remPy0;
+        auto candPx0 = *(s.candPx0);
+        auto candPy0 = *(s.candPy0);
+        auto nlep = *(s.ntau0);
+        auto candPz0 = *(s.candPz0);
+        auto& remPz0_preclean = s.remPz0;
+        auto njets0_preclean = *(s.njets0);
+        auto& candTrkOm0 = s.candTrkOm0;
+        auto& candTrktlam0 = s.candTrktlam0;
+
+
+	if(_tauConeMode){
+         candE0 = *(s.candE3);
+         remE0_preclean = s.remE3;
+         remPx0_preclean = s.remPx3;
+         remPy0_preclean = s.remPy3;
+        candPx0 = *(s.candPx3);
+         candPy0 = *(s.candPy3);
+         nlep = *(s.ntau3);
+        candPz0 = *(s.candPz3);
+         remPz0_preclean = s.remPz3;
+         njets0_preclean = *(s.njets3);
+         candTrkOm0 = s.candTrkOm3;
+         candTrktlam0 = s.candTrktlam3;
+
+	}
+	auto nmucone = *(s.ntau0);
 
 	auto nPandoraTrks = *(s.nPandoraTrks);
 
-	ntracksHist->Fill(nPandoraTrks,evtw);
+//	ntracksHist->Fill(nPandoraTrks,evtw);
 
           //locate the histo
 	nLepHist->Fill(nlep, evtw);
 //	nRemHist->Fill(njets0, evtw);
 	if(nlep ==0) return;
-
+	//if(nlep >1) return;
 	//jet preprocessing////////////////////////////////////
 	//make std 4vecs to house jets after preselection cuts (pt>2Gev)	
 	std::vector<double> remPx0{};
@@ -515,8 +562,8 @@ void histset::AnalyzeEntry(myselector& s){
 
 	
 
-	EvisHist->Fill((lep0+Wqq0).E(), evtw);
-	PtvisHist->Fill((lep0+Wqq0).Pt(), evtw);
+//	EvisHist->Fill((lep0+Wqq0).E(), evtw);
+//	PtvisHist->Fill((lep0+Wqq0).Pt(), evtw);
 
 	//TLorentzVector nu0(-(Wqq0+lep0));
 	TLorentzVector nu0;
@@ -524,7 +571,7 @@ void histset::AnalyzeEntry(myselector& s){
 	TLorentzVector Wlep0 = lep0+nu0;
 	mwlepHist->Fill(Wlep0.M(), evtw);
 
-	mwhadHist->Fill(Wqq0.M(), evtw);
+//	mwhadHist->Fill(Wqq0.M(), evtw);
 
 	costwlHist->Fill(Wlep0.CosTheta(),evtw);
 	costwqHist->Fill(Wqq0.CosTheta(),evtw);
@@ -534,7 +581,7 @@ void histset::AnalyzeEntry(myselector& s){
 	//TVector3 cmboost =  Tot.BoostVector();
 	//Tot.Boost(-cmboost);	
         
-	EcomHist->Fill(Tot.E(), evtw);
+//	EcomHist->Fill(Tot.E(), evtw);
 
 	//std::cout<<"TOT: "<<Tot.E()<<" "<<Tot.Px()<<" "<<Tot.Py()<<" "<<Tot.Pz()<<std::endl;
 	//test boost things
@@ -576,8 +623,8 @@ void histset::AnalyzeEntry(myselector& s){
 	//make some charge determination for each W	
 	double qwl;
 	double qwqq;
-	auto& candTrkOm0 = s.candTrkOm0;
-	auto& candTrktlam0 = s.candTrktlam0;
+//	auto& candTrkOm0 = s.candTrkOm0;
+//	auto& candTrktlam0 = s.candTrktlam0;
 
 	double BField = 3.5;
 	const double c = 2.99792458e8; // m*s^-1        
@@ -613,8 +660,8 @@ void histset::AnalyzeEntry(myselector& s){
 		qwl = trackq.at(0) + trackq.at(1) + trackq.at(2);
 		qwqq = qwl*(-1.);
 	}
-	qcostHist->Fill(-qwl*Wlep0.CosTheta());
-	qcostHist->Fill(-qwqq*Wqq0.CosTheta());
+//	qcostHist->Fill(-qwl*Wlep0.CosTheta());
+//	qcostHist->Fill(-qwqq*Wqq0.CosTheta());
 
 // apply cuts
 //
@@ -629,14 +676,20 @@ void histset::AnalyzeEntry(myselector& s){
 		}
 		if( cut.compare("ntracks")==0){// track multiplicity
 			pass = ntrackscut(getPassPol(pol1,pol2)[i], nPandoraTrks);
+			//if(pass)
+			ntracksHist->Fill(nPandoraTrks,evtw);
 			if(!pass & orderCuts) break;
 		}
 		if( cut.compare("esum")==0){ //visible energy sum
 			pass = esumcut(getPassPol(pol1,pol2)[i], Evis);
+			//if(pass) 
+			EvisHist->Fill((lep0+Wqq0).E(), evtw);
 			if(!pass & orderCuts) break;
 		}
 		if( cut.compare("roots")==0){ //rest energy 
 			pass = rootscut(getPassPol(pol1,pol2)[i], Tot.E());
+			//if(pass) 
+			EcomHist->Fill(Tot.E(), evtw);
 			if(!pass & orderCuts) break;
 		}
 		if( cut.compare("mwlep")==0){// leptonic w mass cut
@@ -645,6 +698,8 @@ void histset::AnalyzeEntry(myselector& s){
 		}
 		if( cut.compare("mwhad")==0){// hadronic w mass cut
 			pass = mwhadcut(getPassPol(pol1,pol2)[i], Wqq0.M());
+			//if(pass)
+			mwhadHist->Fill(Wqq0.M(), evtw);
 			if(!pass & orderCuts) break;
 		}
 		if( cut.compare("costwl")==0){// cos thetaW cut
@@ -657,9 +712,30 @@ void histset::AnalyzeEntry(myselector& s){
 		}
 		if( cut.compare("qcostw")==0){// w scattering angle
 			pass = qcostw(getPassPol(pol1,pol2)[i],qwl,qwqq, -qwl*Wlep0.CosTheta(), -qwqq*Wqq0.CosTheta());
+			if( qwl == -1){
+			 //if(pass) 
+			 qcostHist->Fill(-qwl*Wlep0.CosTheta(),evtw);
+			}else{
+		         //if(pass)
+		         qcostHist->Fill(-qwqq*Wqq0.CosTheta(),evtw);
+			}
 
 			if(!pass & orderCuts) break;
 		}
+		 if( cut.compare("ptcut")==0){
+                        pass =  ptcut(getPassPol(pol1,pol2)[i], (lep0+Wqq0).Pt() );
+			//if(pass) 
+			PtvisHist->Fill((lep0+Wqq0).Pt(), evtw);
+                        if(!pass & orderCuts) break;
+                }
+		if( cut.compare("mucone")==0){
+                        pass = muconecut(getPassPol(pol1,pol2)[i], nmucone);
+                        //if(pass)
+                        nLepHist->Fill(nlep, evtw);
+                        if(!pass & orderCuts) break;
+
+                }
+
 
 	}
 

@@ -12,7 +12,9 @@ fitJet::fitJet(int id, TTree* tree){
 	return t;
 }*/
 //void fitJet::setParticles( std::vector<TLorentzVector*> jfos, std::vector<TLorentzVector*> lepjfos, TLorentzVector* nufo, TLorentzVector* gfo, double m1, double m2, double fitprob, double chi2){// std::vector<ReconstructedParticle*>& remainpfos){
-void fitJet::setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitObject*> lepjfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2){
+//void fitJet::setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitObject*> lepjfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2){
+void fitJet::setParticles(std::vector<JetFitObject*> jfos, std::vector<LeptonFitObject*> lfos, std::vector<JetFitObject*> ljfos, NeutrinoFitObject* nufo, ISRPhotonFitObject* gfo, MassConstraint& w, double fitprob, double chi2, double nuz, double Eg){
+
 ///	ntau = taus.size();
 //
 	_fitprob = fitprob;
@@ -39,22 +41,34 @@ void fitJet::setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitOb
 	_qqE = E;
 
 //do lepton
-
-	njfo = lepjfos.size();
-	std::vector<double> lpx(njfo);
-	std::vector<double> lpy(njfo);
-	std::vector<double> lpz(njfo);
-	std::vector<double> lE(njfo);
-	for(unsigned int i=0; i<njfo; i++){
-		lpx.at(i) = lepjfos.at(i)->getPx();
-		lpy.at(i) = lepjfos.at(i)->getPy();
-		lpz.at(i) = lepjfos.at(i)->getPz();
-		lE.at(i) = lepjfos.at(i)->getE();
+	
+	njfo = lfos.size()+ ljfos.size();
+	std::vector<double> lpx{};
+	std::vector<double> lpy{};
+	std::vector<double> lpz{};
+	std::vector<double> lE{};
+	std::vector<double> lq{};
+	
+	for(unsigned int i=0; i< lfos.size(); i++){
+		//double tpx =  doe the pxpypze work for LFO????????
+		lpx.push_back(lfos.at(i)->getPx());
+		lpy.push_back( lfos.at(i)->getPy());
+		lpz.push_back( lfos.at(i)->getPz());
+		lE.push_back( lfos.at(i)->getE());
+		lq.push_back( fabs(lfos.at(i)->getParam(0))/lfos.at(i)->getParam(0) );	
+	}
+	for(unsigned int i=0; i<ljfos.size(); i++){
+		lpx.push_back(ljfos.at(i)->getPx());
+		lpy.push_back(ljfos.at(i)->getPy());
+		lpz.push_back(ljfos.at(i)->getPz());
+		lE.push_back(ljfos.at(i)->getE());
+		lq.push_back( 0.);
 	}
 	_lPx = lpx;
 	_lPy = lpy;
 	_lPz = lpz;
 	_lE = lE;
+	_lq = lq;
 
 //do neutrino
 	_nuPx = nufo->getPx();
@@ -72,6 +86,8 @@ void fitJet::setParticles( std::vector<JetFitObject*> jfos, std::vector<JetFitOb
 	_qqfitMass = w.getMass(1);
 	_lnufitMass = w.getMass(2);
 	
+	_nuPzISR = nuz;
+	_gEISR = Eg;
 
 //	_nTrks = ntrks;
 //	_nPfos = pfos;
@@ -174,7 +190,10 @@ void fitJet::initLocalTree(){
 	_localTree->Branch(("lPy"+id).c_str(), "vector<double>", &_lPy);
 	_localTree->Branch(("lPz"+id).c_str(), "vector<double>", &_lPz);
 	_localTree->Branch(("lE"+id).c_str(), "vector<double>", &_lE);
+	_localTree->Branch(("lq"+id).c_str(), "vector<double>", &_lq);
 
+	_localTree->Branch(("nuPzISR"+id).c_str(), &_nuPzISR);
+	_localTree->Branch(("gEISR"+id).c_str(),&_gEISR);
 
 	_localTree->Branch(("nuPx"+id).c_str(), &_nuPx);
 	_localTree->Branch(("nuPy"+id).c_str(), &_nuPy);

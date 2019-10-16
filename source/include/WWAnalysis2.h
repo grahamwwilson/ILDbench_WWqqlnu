@@ -41,6 +41,7 @@
 #include "jetOverlay.h"
 #include "JetFitObject.h"
 #include "NeutrinoFitObject.h"
+#include "LeptonFitObject.h"
 #include "ISRPhotonFitObject.h"
 #include "MomentumConstraint.h"
 #include "OPALFitterGSL.h"

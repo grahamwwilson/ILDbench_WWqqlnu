@@ -1,0 +1,66 @@
+entries144520
+Running with 1600 0.8 -0.3  37151 58827 11413 37129
+* WS1 cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  685 238 227 225 221 219 193 141 
+ LR  232141 191021 185797 183761 179162 178976 152791 152182 
+ RL  16818 15502 15146 15094 15000 14996 13435 13257 
+ RR  3156 1252 1221 1211 1211 1181 1058 875 
+* WS1 tot  252800 208013 202391 200291 195594 195372 167477 166455 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WS1 eventSelS.root RECREATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root" 
+entries144520
+Running with 1600 0.8 -0.3  37151 58827 11413 37129
+* WSBG cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  77634 25232 24370 24186 24127 23885 20682 18768 
+ LR  204968 126703 123553 122817 121858 121472 105058 101053 
+ RL  4547 4090 4004 3993 3966 3966 3298 3225 
+ RR  374877 121874 118127 117190 117017 115704 100818 91532 
+* WSBG tot  662026 277899 270054 268186 266968 265027 229856 214578 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WSBG eventSelS.root UPDATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root" 
+entries81672
+Running with 1600 0.8 -0.3  0 58883 22789 0
+* WWS1 cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  231561 198083 192732 190477 188910 188693 161717 160957 
+ RL  16743 15943 15604 15546 15522 15518 13937 13783 
+ RR  0 0 0 0 0 0 0 0 
+* WWS1 tot  248304 214026 208336 206023 204432 204211 175654 174740 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWS1 eventSelS.root UPDATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root" 
+entries81672
+Running with 1600 0.8 -0.3  0 58883 22789 0
+* WWS2 cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  233019 136164 132460 130558 130350 129481 109025 108210 
+ RL  16522 10086 9929 9921 9917 9910 8562 8435 
+ RR  0 0 0 0 0 0 0 0 
+* WWS2 tot  249541 146250 142389 140479 140267 139391 117587 116645 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWS2 eventSelS.root UPDATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root" 
+entries81672
+Running with 1600 0.8 -0.3  0 58883 22789 0
+* WWS1BG cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  34563 30561 29809 29456 29257 29248 20374 20338 
+ RL  4668 4378 4277 4260 4245 4245 3523 3435 
+ RR  0 0 0 0 0 0 0 0 
+* WWS1BG tot  39231 34939 34086 33716 33502 33493 23897 23773 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWS1BG eventSelS.root UPDATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root" 
+entries81672
+Running with 1600 0.8 -0.3  0 58883 22789 0
+* WWS2BG cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  34056 20455 20066 19803 19749 19649 14180 14089 
+ RL  4726 3041 2985 2976 2974 2974 2456 2433 
+ RR  0 0 0 0 0 0 0 0 
+* WWS2BG tot  38782 23496 23051 22779 22723 22623 16636 16522 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWS2BG eventSelS.root UPDATE 0.8 -0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root" 

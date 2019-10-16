@@ -1,0 +1,49 @@
+ \begin{tabular}{|p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}|}
+\hline 
+   & Prompt $\mu$ & Prompt $e$ & $\tau$ & Tot. Sig. & 2f & 4f & 6f & Higgs \\ \hline 
+nocut &\num{1.10e+05 } & \num{1.12e+05 } & \num{1.10e+05} &\num{3.32e+05} & \num{5.06e+06} & \num{3.59e+06} & \num{1.59e+04} & \num{2.65e+04} \\ 
+\hline 
+lepton &\num{9.56e+04 } & \num{9.44e+04 } & \num{8.01e+04} &\num{2.70e+05} & \num{2.12e+06} & \num{1.67e+06} & \num{1.30e+04} & \num{1.05e+04} \\ 
+\hline 
+mucone &\num{2.17e+03 } & \num{3.72e+03 } & \num{1.63e+04} &\num{2.22e+04} & \num{2.08e+05} & \num{1.13e+05} & \num{1.20e+03} & \num{2.02e+03} \\ 
+\hline 
+ntracks &\num{2.09e+03 } & \num{3.58e+03 } & \num{1.59e+04} &\num{2.15e+04} & \num{1.68e+05} & \num{6.74e+04} & \num{1.18e+03} & \num{1.91e+03} \\ 
+\hline 
+ptcut &\num{2.06e+03 } & \num{3.54e+03 } & \num{1.57e+04} &\num{2.13e+04} & \num{9.57e+04} & \num{4.39e+04} & \num{1.03e+03} & \num{1.59e+03} \\ 
+\hline 
+esum &\num{2.04e+03 } & \num{3.48e+03 } & \num{1.57e+04} &\num{2.12e+04} & \num{9.05e+04} & \num{4.06e+04} & \num{9.95e+02} & \num{1.53e+03} \\ 
+\hline 
+roots &\num{1.98e+03 } & \num{3.43e+03 } & \num{1.55e+04} &\num{2.09e+04} & \num{7.26e+04} & \num{3.56e+04} & \num{9.94e+02} & \num{1.52e+03} \\ 
+\hline 
+mwhad &\num{1.28e+03 } & \num{2.36e+03 } & \num{1.21e+04} &\num{1.57e+04} & \num{1.89e+04} & \num{4.79e+03} & \num{8.90e+01} & \num{4.80e+02} \\ 
+\hline 
+qcostw &\num{1.13e+03 } & \num{2.25e+03 } & \num{1.18e+04} &\num{1.52e+04} & \num{1.10e+04} & \num{4.01e+03} & \num{8.30e+01} & \num{4.65e+02} \\ 
+\hline 
+ $\epsilon$ & $0.01027 \pm 0.0003$ & $0.02018 \pm 0.00042$ & $0.1069 \pm 0.00093$ &  $0.04577 \pm 0.00036$ & $0.002167 \pm 2.1e-05$ & $0.001117 \pm 1.8e-05$ & $0.005235 \pm 0.00057$ & $0.01758 \pm 0.00081$ \\ 
+ \begin{tabular}{|p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}|}
+\hline 
+   & Prompt $\mu O.S. & Prompt e O.S. & Tau O.S. \\ \hline 
+nocut &\num{1.67e+04 } & \num{2.80e+05 } & \num{1.64e+04}\\ 
+\hline 
+lepton &\num{1.49e+04 } & \num{1.39e+05 } & \num{1.23e+04}\\ 
+\hline 
+mucone &\num{2.36e+02 } & \num{2.37e+04 } & \num{2.56e+03}\\ 
+\hline 
+ntracks &\num{2.27e+02 } & \num{2.24e+04 } & \num{2.50e+03}\\ 
+\hline 
+ptcut &\num{2.27e+02 } & \num{2.22e+04 } & \num{2.47e+03}\\ 
+\hline 
+esum &\num{2.19e+02 } & \num{2.22e+04 } & \num{2.47e+03}\\ 
+\hline 
+roots &\num{2.15e+02 } & \num{2.11e+04 } & \num{2.46e+03}\\ 
+\hline 
+mwhad &\num{1.14e+02 } & \num{9.95e+03 } & \num{1.44e+03}\\ 
+\hline 
+qcostw &\num{1.05e+02 } & \num{9.09e+03 } & \num{1.41e+03}\\ 
+\hline 
+ $\epsilon$ & $0.006297 \pm 0.00061$ & $0.03244 \pm 0.00033$ & $0.08548 \pm 0.0022$ \\ 
+--------------
+ ** allBG 15519.0 8691931.0 0.00178544905614
+ ** S 12934.0 220174.0 0.0587444475733 0.454574210101
+ ** OS 9302.0 313625.0 0.0296596253487
+ ** SOS  22236.0 533799.0 0.0416561289924 0.588955105284
