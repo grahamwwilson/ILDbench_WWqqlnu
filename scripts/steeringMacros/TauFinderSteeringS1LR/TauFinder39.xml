@@ -1,0 +1,781 @@
+<!-- automatically generated steering -->
+
+ <marlin>
+	<execute>
+ 		<processor name= "MyTauFinder1901" />
+		<processor name= "MyTauFinder1902" />
+		<processor name= "MyTauFinder1903" />
+		<processor name= "MyTauFinder1904" />
+		<processor name= "MyTauFinder1905" />
+		<processor name= "MyTauFinder1906" />
+		<processor name= "MyTauFinder1907" />
+		<processor name= "MyTauFinder1908" />
+		<processor name= "MyTauFinder1909" />
+		<processor name= "MyTauFinder1910" />
+		<processor name= "MyTauFinder1911" />
+		<processor name= "MyTauFinder1912" />
+		<processor name= "MyTauFinder1913" />
+		<processor name= "MyTauFinder1914" />
+		<processor name= "MyTauFinder1915" />
+		<processor name= "MyTauFinder1916" />
+		<processor name= "MyTauFinder1917" />
+		<processor name= "MyTauFinder1918" />
+		<processor name= "MyTauFinder1919" />
+		<processor name= "MyTauFinder1920" />
+		<processor name= "MyTauFinder1921" />
+		<processor name= "MyTauFinder1922" />
+		<processor name= "MyTauFinder1923" />
+		<processor name= "MyTauFinder1924" />
+		<processor name= "MyTauFinder1925" />
+		<processor name= "MyTauFinder1926" />
+		<processor name= "MyTauFinder1927" />
+		<processor name= "MyTauFinder1928" />
+		<processor name= "MyTauFinder1929" />
+		<processor name= "MyTauFinder1930" />
+		<processor name= "MyTauFinder1931" />
+		<processor name= "MyTauFinder1932" />
+		<processor name= "MyTauFinder1933" />
+		<processor name= "MyTauFinder1934" />
+		<processor name= "MyTauFinder1935" />
+		<processor name= "MyTauFinder1936" />
+		<processor name= "MyTauFinder1937" />
+		<processor name= "MyTauFinder1938" />
+		<processor name= "MyTauFinder1939" />
+		<processor name= "MyTauFinder1940" />
+		<processor name= "MyTauFinder1941" />
+		<processor name= "MyTauFinder1942" />
+		<processor name= "MyTauFinder1943" />
+		<processor name= "MyTauFinder1944" />
+		<processor name= "MyTauFinder1945" />
+		<processor name= "MyTauFinder1946" />
+		<processor name= "MyTauFinder1947" />
+		<processor name= "MyTauFinder1948" />
+		<processor name= "MyTauFinder1949" />
+		<processor name= "MyTauFinder1950" />
+		<processor name= "MyWWAnalysis" />
+	</execute>
+ 
+	<global>
+		<parameter name="LCIOInputFiles"> /pnfs/desy.de/ilc/prod/ilc/mc-opt-3/ild/dst-merged/500-TDR_ws/4f_WW_semileptonic/ILD_l5_o1_v02/v02-00-01/rv02-00-01.sv02-00-01.mILD_l5_o1_v02.E500-TDR_ws.I250018.P4f_ww_sl.eL.pR.n001.d_dstm_10318_0.slcio </parameter>
+		<parameter name="SkipNEvents " value = "0" />
+		<parameter name="MaxRecordNumber" value = "0" />
+		<parameter name="SupressCheck" value = "false" />
+		<parameter name="GearXMLFile" value = "gear_ILD_l5_v02_dd4hep.xml" />
+		<parameter name="Verbosity"  options = "DEBUG0-4,MESSAGE0-4,WARNING0-4,ERROR0-4,SILENT" > DEBUG </parameter>
+	</global>
+
+	<processor name= "MyTauFinder1901" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1901 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1901 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1901 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1902" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1902 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1902 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1902 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="2.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1903" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1903 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1903 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1903 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1904" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1904 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1904 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1904 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="3.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1905" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1905 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1905 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1905 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1906" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1906 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1906 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1906 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="4.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1907" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1907 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1907 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1907 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1908" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1908 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1908 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1908 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.14" />
+		<parameter name="isolationEnergy" value="5.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1909" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1909 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1909 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1909 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1910" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1910 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1910 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1910 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="0.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1911" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1911 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1911 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1911 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1912" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1912 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1912 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1912 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="1.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1913" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1913 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1913 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1913 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1914" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1914 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1914 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1914 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="2.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1915" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1915 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1915 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1915 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1916" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1916 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1916 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1916 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="3.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1917" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1917 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1917 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1917 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1918" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1918 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1918 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1918 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="4.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1919" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1919 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1919 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1919 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1920" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1920 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1920 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1920 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.09" />
+		<parameter name="isolationConeAngle" value="0.15" />
+		<parameter name="isolationEnergy" value="5.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1921" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1921 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1921 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1921 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1922" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1922 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1922 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1922 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="0.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1923" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1923 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1923 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1923 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1924" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1924 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1924 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1924 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="1.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1925" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1925 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1925 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1925 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1926" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1926 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1926 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1926 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="2.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1927" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1927 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1927 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1927 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1928" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1928 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1928 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1928 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="3.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1929" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1929 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1929 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1929 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1930" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1930 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1930 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1930 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="4.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1931" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1931 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1931 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1931 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1932" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1932 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1932 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1932 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.0" />
+		<parameter name="isolationEnergy" value="5.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1933" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1933 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1933 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1933 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1934" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1934 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1934 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1934 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="0.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1935" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1935 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1935 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1935 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1936" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1936 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1936 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1936 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="1.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1937" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1937 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1937 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1937 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1938" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1938 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1938 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1938 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="2.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1939" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1939 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1939 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1939 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="3.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1940" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1940 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1940 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1940 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="3.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1941" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1941 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1941 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1941 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="4.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1942" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1942 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1942 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1942 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="4.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1943" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1943 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1943 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1943 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="5.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1944" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1944 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1944 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1944 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.01" />
+		<parameter name="isolationEnergy" value="5.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1945" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1945 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1945 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1945 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="0.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1946" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1946 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1946 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1946 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="0.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1947" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1947 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1947 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1947 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="1.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1948" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1948 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1948 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1948 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="1.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1949" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1949 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1949 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1949 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="2.0" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyTauFinder1950" type="TauFinder" >
+		<parameter name="PFOCollection" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="TauRecCollection" type="string" lcioOutType="ReconstructedParticle"> TauJets1950 </parameter>
+		<parameter name="TauRecRestCollection" type="string" lcioOutType="ReconstructedParticle"> RemainPFOs1950 </parameter>
+		<parameter name="TauRecLinkCollectionName" type="string" lcioOutType="LCRelation"> TauLink1950 </parameter>
+		<parameter name="pt_cut" value="0.2" />
+		<parameter name="cosT_cut" value="0.99" />
+		<parameter name="searchConeAngle" value="0.1" />
+		<parameter name="isolationConeAngle" value="0.02" />
+		<parameter name="isolationEnergy" value="2.5" />
+		<parameter name="ptseed" value="5.0" />
+		<parameter name="invariant_mass" value="2.0" />
+	</processor>
+
+	<processor name= "MyWWAnalysis" type="WWAnalysis">
+		<parameter name="McParticleCollectionName" value="MCParticle" />
+		<parameter name="InputParticleColletionName" type="string" lcioInType="ReconstructedParticle"> PandoraPFOs </parameter>
+		<parameter name="InputTrackCollectionName" value="MarlinTrkTracks" />
+		<parameter name="InputRecoRelationCollectionName" value="RecoMCTruthLink" />
+		<parameter name="InputJetCollectionsNames">  TauJets1901 TauJets1902 TauJets1903 TauJets1904 TauJets1905 TauJets1906 TauJets1907 TauJets1908 TauJets1909 TauJets1910 TauJets1911 TauJets1912 TauJets1913 TauJets1914 TauJets1915 TauJets1916 TauJets1917 TauJets1918 TauJets1919 TauJets1920 TauJets1921 TauJets1922 TauJets1923 TauJets1924 TauJets1925 TauJets1926 TauJets1927 TauJets1928 TauJets1929 TauJets1930 TauJets1931 TauJets1932 TauJets1933 TauJets1934 TauJets1935 TauJets1936 TauJets1937 TauJets1938 TauJets1939 TauJets1940 TauJets1941 TauJets1942 TauJets1943 TauJets1944 TauJets1945 TauJets1946 TauJets1947 TauJets1948 TauJets1949 TauJets1950 </parameter>
+		<parameter name="NFermions" value="4" />
+		<parameter name="Nleptons" value="2" />
+		<parameter name="Normalization" value="0.784017" />
+		<parameter name="Njets" value="3" />
+		<parameter name="Ncuts" value="7" />
+		<parameter name="OutPath" value="/nfs/dust/ilc/user/anguiano/WWBenchmark/WWFiles/TauOptimizationFiles/RootFiles/" />
+	</processor>
+
+</marlin>

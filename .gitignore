@@ -1,3 +1,11 @@
 # Don't track content of these folders
 build/
 lib/
+source/src/loader_C.d
+source/src/loader_C.so
+source/src/loader_C_ACLiC_dict_rdict.pcm
+macros/TauOptimzationMacros/Efficiency_Rejection_C.d
+*.root
+*.o
+*.pdf
+scripts/dump.txt

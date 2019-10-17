@@ -3,6 +3,8 @@
 #include "EVENT/ReconstructedParticle.h"
 #include "EVENT/LCRelation.h"
 #include "IMPL/LCCollectionVec.h"
+#include "IMPL/MCParticleImpl.h"
+#include "IMPL/ReconstructedParticleImpl.h"
 #include <marlin/Global.h>
 #include "gear/BField.h"
 #include "lcio.h"
@@ -19,13 +21,19 @@
 #include <iostream>
 #include <fstream>
 #include "EVENT/LCParameters.h"
+#include "TROOT.h"
+#include <string> 
 
 #include "eventVariables.h"
 #include "jetVariables.h"
 #include "PandoraPfoVariables.h"
 #include "anaVariables.h"
+#include "overlayVariables.h"
 #include "HistoManager.h"
-
+#include "tauFinderVariables.h"
+#include "mcVariables.h"
+#include "remainPfos.h"
+#include "jetOverlay.h"
 
 
 //#define ncuts 7
@@ -71,24 +79,18 @@ using namespace lcio;
 
  //collection gathering
   bool FindMCParticles( LCEvent* evt );
- // bool FindJets( LCEvent* evt ) ;
-  bool FindPFOs( LCEvent* evt ) ;
+  bool FindPFOCollection( LCEvent* evt, std::string PfoCollectionName, std::vector<ReconstructedParticle*>& localVec );
   bool FindTracks( LCEvent* evt );
   bool FindRecoToMCRelation( LCEvent* evt );
- // bool FindJetsWithOverlay( LCEvent* evt );
-  bool FindJetCollection( LCEvent* evt, std::string JetCollectionName, std::vector<ReconstructedParticle*>& localVec );
 
-	void processSignalVariableSet(LCEvent* evt, eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar, std::vector<ReconstructedParticle*> jets);
-	void printSignalVariableSet( eventVariables*& evtVar, jetVariables*& jetVar, PandoraPfoVariables*& ppfoVar, anaVariables*& anaVar );
+	
+   void processOverlayVariables(overlayVariables*& oVar, std::vector<ReconstructedParticle*> jets, std::vector<MCParticle*> mcpartvec , std::vector<LCRelation*> pfo2mc);
 
 
 
-	//overlay analysis
-	//TODO redo in separate class
-	void AnalyzeOverlay(LCEvent* evt );
-	void FindMCOverlay( MCParticle* p , std::vector<MCParticle*>& FSP);
-	void AnalyzeOverlayAcceptance(std::vector<TLorentzVector*> _jetswithoverlay, std::vector<TLorentzVector*> _jetsremovedoverlay );
-	void initOverlayEff();
+
+	
+
 
   //jet analysis helpers
  
@@ -107,49 +109,39 @@ using namespace lcio;
 
   protected:
 
- //variable helper classes
- eventVariables* ev_eekt{};
- jetVariables* jv_eekt{};
- anaVariables* ana_eekt{};
 
-	eventVariables* ev_kt15{};
- jetVariables* jv_kt15{};
- anaVariables* ana_kt15{};
-
-	eventVariables* ev_kt08{};
- jetVariables* jv_kt08{};
- anaVariables* ana_kt08{};
-
-
- PandoraPfoVariables* ppfov{};
- HistoManager* h1{};
-//TTree
   TFile* file{};
-  TTree* _tree{};
+
+
+ std::vector<TTree*> _trees{};
+
+//Tau optimization////
+ int _tauoptmode{};
+ void initTauFinderOptimization();
+ void SetTauOptimizationVariables(LCEvent* evt);
+ void initEmptyTau(tauFinderVariables*& t, MCParticle* tau);
+ void initTauWithNoMCLepton(tauFinderVariables*& t);
+ std::vector<tauFinderVariables*> _tf{};
+ std::vector<mcVariables*> _mcv{};
+ std::vector<remainPfos*> _rp{};
+ std::vector<jetOverlay*> _ol1j{};
+ std::vector<jetVariables*> _js{};//2d because we can have mulitple jet collection for one parameter set
+ std::vector<jetOverlay*> _rjOL{};
+
+
+ 
+TTree* _tree{};//single run tree
+//non tau optimization
+
   int _nRun{};
   int _nEvt{};
+  double _xsec{}; 
+  double _xsecerr{};
 
-//event number
-  int nEvt{};
+  double _remainYcut{};
 
+std::string _outpath;
 
-
- //the number of overlay events present in the event
-	int OverlaynTotalEvents=-1;
-	int OverlayPairBgOverlaynEvents=-1;
-	//overlay rejected particle variables separated by flavour
-	//these vectors need to be cleared for each event
-	std::vector<double> uplike_rejects_costheta{};
-	std::vector<double> downlike_rejects_costheta{};
-	std::vector<double> lepton_rejects_costheta{};
-
-	std::vector<double> uplike_rejects_pt{}; 
-	std::vector<double> downlike_rejects_pt{};
-	std::vector<double> lepton_rejects_pt{};
-	
-	std::vector<double> uplike_rejects_P{};
-	std::vector<double> downlike_rejects_P{};
-	std::vector<double> lepton_rejects_P{};
 
 //the total number of unique cuts applied (for histogram indexing)
 
@@ -158,21 +150,14 @@ using namespace lcio;
   
   //vector to hold the particles for the event
   std::vector<MCParticle*> _mcpartvec{};
- // std::vector<ReconstructedParticle*> _jets{};
+
   std::vector<Track*> _trackvec{};
   std::vector<ReconstructedParticle*> _pfovec{};
+  std::vector<ReconstructedParticle*> _purePFOs{};
   std::vector<LCRelation*> _reco2mcvec{};
- // std::vector<ReconstructedParticle*> _jetswithoverlay{};
-  
  
-	//testing
-//  std::vector< std::vector<ReconstructedParticle*> > _jetCollections{};
+
  
- std::vector<ReconstructedParticle*> _eektJets{};
-  std::vector<ReconstructedParticle*> _kt08Jets{};
-//  std::vector<ReconstructedParticle*> _kt10Jets{};
-//  std::vector<ReconstructedParticle*> _kt12Jets{};
-  std::vector<ReconstructedParticle*> _kt15Jets{};
  
  
 	//jet y variabls //log jet variables
@@ -186,43 +171,33 @@ using namespace lcio;
 
 	int   _printing{};
 
+	//running mode
+	int _runSignalMode{};
+
 //input background//number of fermions or leptons
 	int _nfermions{};
 	int _nleptons{};
 
   //input collections
   std::string _inputMcParticleCollectionName{};
-  std::string _inputJetCollectionName{};
-  std::string _inputJetWithOverlayCollectionName{};
-  std::string _inputParticleCollectionName{};
   std::string _inputTrackCollectionName{};
   std::string _inputRecoRelationCollectionName{};
 
- // std::< std::vector<std::string> > jetCollectionNames{};
+  std::vector<std::vector<ReconstructedParticle*> > _particleCollections{};
+  std::vector<std::vector<ReconstructedParticle*> > _remainCollections{};
+  std::vector<std::vector<ReconstructedParticle*> > _remainJetCollections{};
+  
+ // std::vector<std::vector<ReconstructedParticle*> > _inputJetCollections{}
 
-  std::string _JetCollName_eekt = "eektJets";
-  std::string _JetCollName_kt15 = "kt15Jets";
-  std::string _JetCollName_kt08 = "kt08Jets";
+  std::vector<std::string> _inputJetCollectionsNames{};
+  std::vector<std::string> _inputRemainCollectionsNames{};
+  std::vector<std::string> _inputRemainJetsCollNames{};
 
-
-
-	/* special set of histograms for dealing with overlay and forward acceptance */
-	/* each hist in the array is a cut on costheta */
-	/* the cuts are 0.99, 0.95, 0.91, 0.8, 0.6, 0.4, 0.2 */
-	//total of 7 different cuts
-	int overlaycuts = 8;
-	std::vector<double> maxcosthetacuts{ 0.2, 0.4, 0.6, 0.8, 0.91, 0.95, 0.99,99};
-	std::vector<TH1D*> maxcostheta_cut{};
-	//no overlay removal in this plot
-	std::vector<TH1D*> maxcostheta_cut_ovr{};
-
-	//generator level
-	std::vector<TH1D*> maxcostheta_cut_mc{};
-	//mctag mqq - mc mqq
-	std::vector<TH1D*> mctag_mc_dM_ovr{};
-	std::vector<TH1D*> mctag_mc_dM{};
 	
 
-	/* end acceptance */
+
+
+
+
 
 };

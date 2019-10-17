@@ -1,0 +1,10 @@
+ \begin{tabular}{ |p{0.08\textwidth}|p{0.08\textwidth}p{0.08\textwidth}|p{0.08\textwidth}|p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}|} 
+ \hline 
+   &  \multicolumn{3}{|l|}{Tight Selection} &  \multicolumn{3}{|l|}{ Tight + Loose Sel.}  \\  \hline  
+ & Sel. Total & Efficiency & Purity & Sel. Total & Efficiency & Purity \\ 
+ \hline  
+ Bkg. & 1e+05 & & & 1.33e+05 & &  \\ 
+ Signal & 6.06e+05 & 0.579 & 0.858 & 6.67e+05 & 0.638 & 0.834 \\ 
+ Sig.+O.S. & 9.7e+05 & 0.525 & 0.906 & 1.05e+06 & 0.569 & 0.888 \\ 
+\hline 
+\end{tabular} 

@@ -12,7 +12,9 @@ class jetVariables{
 	public:
 
 	jetVariables(eventVariables*& evtvar, std::string inputJetCollectionName);
+	jetVariables(const char* variableSetName, TTree*& tree);
 	void setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets);
+	void setParticles(std::vector<ReconstructedParticle*> jets, LCEvent*& evt, std::string collname);
 	void initLocalTree();
 
 	LCEvent* _localEvt{};
@@ -24,10 +26,14 @@ class jetVariables{
 	unsigned int _nJets{};
 	std::vector<ReconstructedParticle*> _jets{};
 	std::vector<TLorentzVector*> _tlvjets{};
+	std::vector<TLorentzVector> _jetstlv{};
 
 	double _logyMinus{};
 	double _logyPlus{};
+	double _yMinus{};
+	double _yPlus{};
 	std::vector<double> _jetMaxCosPsi{};
+	int _jetLeastNTrks{}; //least tracks not including 0 tracks
 
 	//MC tag jet variables
 	int _mctlepPfoMult{};
@@ -48,6 +54,8 @@ class jetVariables{
 
 	void setLogYVariables(double& logyMinus, double& logyPlus);
 
+	void setjetLeastTrks(int& jetLeastNTrks);
+
 	void setMCTJetMultiplicity(int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi);
 
 	void setMaxCosPsi(std::vector<double>& jetMaxCosPsi); 
@@ -58,6 +66,6 @@ class jetVariables{
 	
 	void printVec(std::vector<double> v);
 
-
+	TLorentzVector* createReconstructedParticleTLV(ReconstructedParticle* p);
 };
 #endif

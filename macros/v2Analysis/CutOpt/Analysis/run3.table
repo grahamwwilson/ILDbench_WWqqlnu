@@ -1,0 +1,45 @@
+ \begin{tabular}{|p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}|}
+\hline 
+   & Prompt $\mu$ & Prompt $e$ & $\tau$ & Tot. Sig. & 2f & 4f & 6f & Higgs \\ \hline 
+nocut &\num{5.21e+05 } & \num{5.24e+05 } & \num{5.25e+05} &\num{1.57e+06} & \num{6.65e+06} & \num{5.71e+06} & \num{3.13e+04} & \num{5.85e+04} \\ 
+\hline 
+lepton &\num{4.46e+05 } & \num{4.31e+05 } & \num{3.07e+05} &\num{1.18e+06} & \num{2.17e+06} & \num{2.24e+06} & \num{2.40e+04} & \num{1.71e+04} \\ 
+\hline 
+ntracks &\num{4.34e+05 } & \num{4.19e+05 } & \num{2.98e+05} &\num{1.15e+06} & \num{4.68e+05} & \num{4.56e+05} & \num{2.20e+04} & \num{1.41e+04} \\ 
+\hline 
+ptcut &\num{4.29e+05 } & \num{4.14e+05 } & \num{2.94e+05} &\num{1.14e+06} & \num{3.02e+05} & \num{3.46e+05} & \num{2.14e+04} & \num{1.24e+04} \\ 
+\hline 
+esum &\num{4.25e+05 } & \num{4.04e+05 } & \num{2.94e+05} &\num{1.12e+06} & \num{2.79e+05} & \num{3.30e+05} & \num{2.13e+04} & \num{1.19e+04} \\ 
+\hline 
+roots &\num{4.25e+05 } & \num{4.04e+05 } & \num{2.92e+05} &\num{1.12e+06} & \num{2.35e+05} & \num{2.51e+05} & \num{2.12e+04} & \num{1.17e+04} \\ 
+\hline 
+mwhad &\num{3.64e+05 } & \num{3.45e+05 } & \num{2.46e+05} &\num{9.54e+05} & \num{6.82e+04} & \num{4.27e+04} & \num{3.22e+03} & \num{4.28e+03} \\ 
+\hline 
+qcostw &\num{3.63e+05 } & \num{3.43e+05 } & \num{2.44e+05} &\num{9.49e+05} & \num{5.58e+04} & \num{3.74e+04} & \num{3.09e+03} & \num{4.11e+03} \\ 
+\hline 
+ $\epsilon$ & $0.6952 \pm 0.00064$ & $0.6543 \pm 0.00066$ & $0.4644 \pm 0.00069$ &  $0.6044 \pm 0.00039$ & $0.008395 \pm 3.5e-05$ & $0.006554 \pm 3.4e-05$ & $0.09857 \pm 0.0017$ & $0.07028 \pm 0.0011$ \\ 
+ \begin{tabular}{|p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}||p{0.08\textwidth}|}
+\hline 
+   & Prompt $\mu O.S. & Prompt e O.S. & Tau O.S. \\ \hline 
+nocut &\num{7.79e+04 } & \num{6.46e+05 } & \num{7.68e+04}\\ 
+\hline 
+lepton &\num{6.89e+04 } & \num{3.45e+05 } & \num{4.61e+04}\\ 
+\hline 
+ntracks &\num{6.72e+04 } & \num{3.36e+05 } & \num{4.52e+04}\\ 
+\hline 
+ptcut &\num{6.64e+04 } & \num{3.34e+05 } & \num{4.46e+04}\\ 
+\hline 
+esum &\num{6.59e+04 } & \num{3.32e+05 } & \num{4.45e+04}\\ 
+\hline 
+roots &\num{6.59e+04 } & \num{3.30e+05 } & \num{4.43e+04}\\ 
+\hline 
+mwhad &\num{4.59e+04 } & \num{2.86e+05 } & \num{3.20e+04}\\ 
+\hline 
+qcostw &\num{4.59e+04 } & \num{2.72e+05 } & \num{3.18e+04}\\ 
+\hline 
+ $\epsilon$ & $0.5887 \pm 0.0018$ & $0.4212 \pm 0.00061$ & $0.4139 \pm 0.0018$ \\ 
+--------------
+ ** allBG 100495.0 12456469.0 0.00806769558853
+ ** S 606243.0 1046228.0 0.579455912096 0.857804448042
+ ** OS 363941.0 802187.0 0.453685985936
+ ** SOS  970184.0 1848415.0 0.524873472678 0.906139001512

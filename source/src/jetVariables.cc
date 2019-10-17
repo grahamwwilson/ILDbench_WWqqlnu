@@ -18,14 +18,58 @@ jetVariables::jetVariables(eventVariables*& evtvar, std::string inputJetCollecti
 
 
 }
+jetVariables::jetVariables(const char* variableSetName, TTree*& tree){
+		_localTree = tree;
+		_variableSetName = variableSetName;
+}
+TLorentzVector* jetVariables::createReconstructedParticleTLV(ReconstructedParticle* p){
+	TLorentzVector* t = new TLorentzVector();
+	t->SetXYZM(p->getMomentum()[0], p->getMomentum()[1], p->getMomentum()[2], p->getMass());
+	return t;
+}
+void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
+	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
+    logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
+}
+void jetVariables::setParticles(std::vector<ReconstructedParticle*> jets, LCEvent*& evt, std::string collname){
+//	std::cout<<" inside set parts"<<std::endl;
+	_jets = jets;
+//	std::cout<<"jets size "<< jets.size()<<std::endl;
+	std::vector<TLorentzVector> tlv(jets.size());
+	for(unsigned int i=0; i< jets.size(); i++){
+		tlv.at(i) = *createReconstructedParticleTLV( jets.at(i) );
+	}
+	_jetstlv = tlv;
+   	//std::cout<<"before setting evt"<<std::endl;
+	_localEvt = evt;
+	//std::cout<<"set evt"<<std::endl;
+//	setLogYVariables(_logyMinus, _logyPlus);
+
+	_yMinus =(double)  evt->getCollection(collname)->getParameters().getFloatVal( "y_{n-1,n}" );
+    _yPlus  =(double) evt->getCollection(collname)->getParameters().getFloatVal( "y_{n,n+1}" );
+}
 void jetVariables::setParticles(LCEvent*& evt, std::vector<ReconstructedParticle*> jets, std::vector<TLorentzVector*> tlvjets){
 	_localEvt = evt;
 	_jets = jets;
 	_tlvjets = tlvjets;
 }
-void jetVariables::setLogYVariables(double& logyMinus, double& logyPlus){
-	logyMinus =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n-1,n}" ));
-    logyPlus  =(double) std::log( _localEvt->getCollection(_inputJetCollectionName)->getParameters().getFloatVal( "y_{n,n+1}" ));
+
+void jetVariables::setjetLeastTrks(int& jetLeastNTrks){
+	int mintrks = 999;
+	int trkcount=0;
+	for(unsigned int i=0; i<_jets.size(); i++){
+		std::vector<ReconstructedParticle*> parts = _jets.at(i)->getParticles();
+		trkcount=0;
+		for(unsigned int j=0; j<parts.size(); j++){
+			if( parts.at(j)->getCharge() != 0 ){
+				trkcount++;
+			}
+		}
+		if(trkcount>0 && trkcount<mintrks){
+			mintrks = trkcount;
+		}
+	}	
+	_jetLeastNTrks = mintrks;
 }
 void jetVariables::setMCTJetMultiplicity( int& mctlepPfoMult, int& mctlepTrkMult, int& mctUpPfoMult, int& mctDwnPfoMult, int& mctUpTrkMult, int& mctDwnTrkMult, double& mctlepMaxCosPsi, double& mctUpMaxCosPsi, double& mctDwnMaxCosPsi){
 
@@ -150,16 +194,18 @@ void jetVariables::printJetVariables(){
 void jetVariables::initLocalTree(){
 
 	std::string vsn(_variableSetName);
-	_localTree->Branch((vsn+"logyMinus").c_str(), &_logyMinus,(vsn+"logyMinus/D").c_str());
-	_localTree->Branch((vsn+"logyPlus").c_str(), &_logyPlus,(vsn+"logyPlus/D").c_str());
-	
-	
+	_localTree->Branch((vsn+"yMinus").c_str(), &_yMinus,(vsn+"yMinus/D").c_str());
+	_localTree->Branch((vsn+"yPlus").c_str(), &_yPlus,(vsn+"yPlus/D").c_str());
+	_localTree->Branch((vsn+"Jets").c_str(), "vector<TLorentzVector>", &_jetstlv);
+//	_localTree->Branch((vsn+"jetLeastNTrks").c_str(),&_jetLeastNTrks,(vsn+"jetLeastNTrks/I").c_str());
+/*	
 	for(unsigned int i=0; i< _nJets; i++){
 		std::stringstream name;
 		name << _variableSetName << "jetMaxCosPsi"<<i;
 		_localTree->Branch(name.str().c_str(), &_jetMaxCosPsi.at(i), (name.str()+"/D").c_str());
 	}
-
+*/
+/*
 	_localTree->Branch((vsn+"mctlepPfoMult").c_str(), &_mctlepPfoMult, (vsn+"mctlepPfoMult/I").c_str());
 	_localTree->Branch((vsn+"mctlepTrkMult").c_str(), &_mctlepTrkMult, (vsn+"mctlepTrkMult/I").c_str());
 	_localTree->Branch((vsn+"mctUpPfoMult").c_str(), &_mctUpPfoMult, (vsn+"mctUpPfoMult/I").c_str());
@@ -173,4 +219,5 @@ void jetVariables::initLocalTree(){
 
 	_localTree->Branch((vsn+"analepPfoMult").c_str(), &_analepPfoMult, (vsn+"analepPfoMult/I").c_str());
 	_localTree->Branch((vsn+"analepTrkMult").c_str(), &_analepTrkMult, (vsn+"analepTrkMult/I").c_str());
+*/
 }

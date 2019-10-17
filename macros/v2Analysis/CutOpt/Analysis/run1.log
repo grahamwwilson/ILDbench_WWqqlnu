@@ -1,0 +1,330 @@
+entries376000
+Running with 1600 -0.8 0.3  94000 94000 94000 94000
+* BHAg cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  1492837 1467840 162496 115202 110184 106864 28760 28189 
+ LR  3411869 3359747 373381 259519 245944 241226 65188 63845 
+ RL  188837 185832 20768 14526 13765 13461 3622 3565 
+ RR  307519 302246 33771 23855 22772 22040 5725 5594 
+* BHAg tot  5401062 5315665 590416 413102 392665 383591 103295 101193 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_bhabhag/2f_Z_bhabhagfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree BHAg eventSel.root RECREATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_bhabhag/2f_Z_bhabhagfile.root" 
+entries103771
+Running with 1600 -0.8 0.3  0 50955 52816 0
+* ZHAD cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  30392388 1812031 1701687 1074216 959696 734236 244546 171779 
+ RL  1007703 60214 56265 35697 32397 23048 8299 4731 
+ RR  0 0 0 0 0 0 0 0 
+* ZHAD tot  31400091 1872245 1757952 1109913 992093 757284 252845 176510 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_hadronic/2f_Z_hadronicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZHAD eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_hadronic/2f_Z_hadronicfile.root" 
+entries324000
+Running with 1600 -0.8 0.3  0 162000 162000 0
+* ZL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  5192534 4089153 468546 271999 263953 221195 43367 40771 
+ RL  243312 184540 21570 12479 12092 10219 2177 2047 
+ RR  0 0 0 0 0 0 0 0 
+* ZL tot  5435846 4273693 490116 284478 276045 231414 45544 42818 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_leptonic/2f_Z_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/2f_Z_leptonic/2f_Z_leptonicfile.root" 
+entries400185
+Running with 1600 -0.8 0.3  126000 144000 4185 126000
+* WL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  127068 97944 9488 9450 9444 7374 556 518 
+ LR  2439028 2204797 238787 236992 236094 221223 32334 32046 
+ RL  468 458 44 44 44 42 7 6 
+ RR  26208 20265 2020 2011 2010 1565 122 114 
+* WL tot  2592772 2323464 250339 248497 247592 230204 33019 32684 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_leptonic/4f_singleW_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_leptonic/4f_singleW_leptonicfile.root" 
+entries144520
+Running with 1600 -0.8 0.3  37151 58827 11413 37129
+* WS cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  379547 123433 119204 118305 117998 116813 101172 91640 
+ LR  7305975 5310546 5170579 5124255 5031357 5021795 4309789 4232664 
+ RL  1278 1172 1145 1141 1134 1134 1001 986 
+ RR  78007 25407 24627 24432 24396 24119 21022 19068 
+* WS tot  7764807 5460558 5315555 5268133 5174885 5163861 4432984 4344358 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WS eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleW_semileptonic/4f_singleW_semileptonicfile.root" 
+entries408000
+Running with 1600 -0.8 0.3  99000 98000 99000 112000
+* ZEEL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  3523468 1603178 183861 161260 159837 70433 16158 13132 
+ LR  6793226 3172436 370854 319073 313458 144875 31401 25439 
+ RL  398030 183769 21425 18562 18301 8213 1728 1395 
+ RR  726439 330484 38079 33494 33124 14853 3281 2620 
+* ZEEL tot  11441163 5289867 614219 532389 524720 238374 52568 42586 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZee_leptonic/4f_singleZee_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZEEL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZee_leptonic/4f_singleZee_leptonicfile.root" 
+entries254736
+Running with 1600 -0.8 0.3  64985 59949 64806 64996
+* ZEES cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  894846 279201 229450 178625 172456 150396 89353 38156 
+ LR  1835617 647820 554521 410670 384980 341623 182585 83959 
+ RL  96686 28946 23530 17585 16735 14486 7670 3613 
+ RR  184913 57269 47087 36532 35334 30742 17991 7948 
+* ZEES tot  3012062 1013236 854588 643412 609505 537247 297599 133676 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZee_semileptonic/4f_singleZee_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZEES eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZee_semileptonic/4f_singleZee_semileptonicfile.root" 
+entries146824
+Running with 1600 -0.8 0.3  0 139399 7425 0
+* ZNUL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  260953 126775 14081 13897 13897 9970 720 668 
+ RL  831 462 56 56 56 50 4 3 
+ RR  0 0 0 0 0 0 0 0 
+* ZNUL tot  261784 127237 14137 13953 13953 10020 724 671 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZnunu_leptonic/4f_singleZnunu_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZNUL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZnunu_leptonic/4f_singleZnunu_leptonicfile.root" 
+entries89417
+Running with 1600 -0.8 0.3  0 59925 29492 0
+* ZNUS cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  890805 71056 66983 66492 66477 64798 50304 47940 
+ RL  3303 185 174 173 173 166 117 99 
+ RR  0 0 0 0 0 0 0 0 
+* ZNUS tot  894108 71241 67157 66665 66650 64964 50421 48039 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZnunu_semileptonic/4f_singleZnunu_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZNUS eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZnunu_semileptonic/4f_singleZnunu_semileptonicfile.root" 
+entries52678
+Running with 1600 -0.8 0.3  0 35917 16761 0
+* WWHAD cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  7189125 720974 720974 420735 370094 365491 26421 21617 
+ RL  1877 218 218 134 113 113 1 0 
+ RR  0 0 0 0 0 0 0 0 
+* WWHAD tot  7191002 721192 721192 420869 370207 365604 26422 21617 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_hadronic/4f_WW_hadronicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWHAD eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_hadronic/4f_WW_hadronicfile.root" 
+entries152085
+Running with 1600 -0.8 0.3  0 150000 2085 0
+* WWL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  740107 684244 79551 79235 79152 77168 9779 9720 
+ RL  233 227 24 24 24 24 1 1 
+ RR  0 0 0 0 0 0 0 0 
+* WWL tot  740340 684471 79575 79259 79176 77192 9780 9721 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_leptonic/4f_WW_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_leptonic/4f_WW_leptonicfile.root" 
+entries81672
+Running with 1600 -0.8 0.3  0 58883 22789 0
+* WWS cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  8912077 6439434 6269012 6189249 6155346 6135368 5102842 5074388 
+ RL  2552 2001 1962 1956 1954 1953 1703 1680 
+ RR  0 0 0 0 0 0 0 0 
+* WWS tot  8914629 6441435 6270974 6191205 6157300 6137321 5104545 5076068 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree WWS eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_WW_semileptonic/4f_WW_semileptonicfile.root" 
+entries51652
+Running with 1600 -0.8 0.3  0 31954 19698 0
+* ZZHAD cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  636690 72507 72487 46326 41723 41564 1793 1275 
+ RL  15225 1626 1625 1021 925 914 33 23 
+ RR  0 0 0 0 0 0 0 0 
+* ZZHAD tot  651915 74133 74112 47347 42648 42478 1826 1298 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_hadronic/4f_ZZ_hadronicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZZHAD eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_hadronic/4f_ZZ_hadronicfile.root" 
+entries46427
+Running with 1600 -0.8 0.3  0 29011 17416 0
+* ZZL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  56180 41738 6454 5298 5234 4856 1373 1245 
+ RL  2062 1481 230 182 179 165 46 41 
+ RR  0 0 0 0 0 0 0 0 
+* ZZL tot  58242 43219 6684 5480 5413 5021 1419 1286 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_leptonic/4f_ZZ_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZZL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_leptonic/4f_ZZ_leptonicfile.root" 
+entries113977
+Running with 1600 -0.8 0.3  0 55986 57991 0
+* ZZS cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  569621 204524 199732 138818 132643 130079 43566 35559 
+ RL  16148 5902 5724 3955 3784 3708 1375 1100 
+ RR  0 0 0 0 0 0 0 0 
+* ZZS tot  585769 210426 205456 142773 136427 133787 44941 36659 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_semileptonic/4f_ZZ_semileptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZZS eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZ_semileptonic/4f_ZZ_semileptonicfile.root" 
+entries45001
+Running with 1600 -0.8 0.3  10000 15001 10000 10000
+* EEH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  2942 2822 2590 1842 1559 1559 307 278 
+ LR  14041 13641 12568 9338 7939 7937 994 909 
+ RL  417 408 375 281 235 235 25 23 
+ RR  607 581 535 383 323 323 60 55 
+* EEH tot  18007 17452 16068 11844 10056 10054 1386 1265 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/eeH/eeHfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree EEH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/eeH/eeHfile.root" 
+entries20000
+Running with 1600 -0.8 0.3  0 10000 10000 0
+* MUH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  5315 5272 4893 3325 3084 3083 130 123 
+ RL  203 201 185 123 115 115 4 4 
+ RR  0 0 0 0 0 0 0 0 
+* MUH tot  5518 5473 5078 3448 3199 3198 134 127 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/mumuH/mumuHfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree MUH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/mumuH/mumuHfile.root" 
+entries20000
+Running with 1600 -0.8 0.3  0 10000 10000 0
+* TAUH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  5304 4582 4226 4184 4177 4176 289 279 
+ RL  203 175 161 159 158 158 11 11 
+ RR  0 0 0 0 0 0 0 0 
+* TAUH tot  5507 4757 4387 4343 4335 4334 300 290 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/tautauH/tautauHfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree TAUH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/tautauH/tautauHfile.root" 
+entries68431
+Running with 1600 -0.8 0.3  0 35464 32967 0
+* QQH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  107358 27199 27160 23845 23061 23061 1589 1559 
+ RL  4111 1037 1036 909 878 878 57 55 
+ RR  0 0 0 0 0 0 0 0 
+* QQH tot  111469 28236 28196 24754 23939 23939 1646 1614 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/qqH/qqHfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree QQH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/qqH/qqHfile.root" 
+entries80557
+Running with 1600 -0.8 0.3  0 58997 21560 0
+* NNH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  270579 59218 39676 39447 39447 37878 27013 26050 
+ RL  1207 243 155 155 155 153 94 93 
+ RR  0 0 0 0 0 0 0 0 
+* NNH tot  271786 59461 39831 39602 39602 38031 27107 26143 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/nunuH/nunuHfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree NNH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/nunuH/nunuHfile.root" 
+entries268056
+Running with 1600 -0.8 0.3  78361 97000 14277 78418
+* ZWML cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  78987 70003 6626 6604 6601 5280 423 403 
+ LR  946230 894734 92662 92018 91335 82234 13793 13666 
+ RL  1598 1314 129 128 128 94 12 12 
+ RR  16311 14461 1397 1394 1393 1115 88 83 
+* ZWML tot  1043126 980512 100814 100144 99457 88723 14316 14164 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZsingleWMix_leptonic/4f_singleZsingleWMix_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZWML eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_singleZsingleWMix_leptonic/4f_singleZsingleWMix_leptonicfile.root" 
+entries56608
+Running with 1600 -0.8 0.3  0 35853 20755 0
+* ZZWWH cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  5990502 616377 616377 344362 298414 296910 20050 16875 
+ RL  4406 500 500 294 249 247 8 5 
+ RR  0 0 0 0 0 0 0 0 
+* ZZWWH tot  5994908 616877 616877 344656 298663 297157 20058 16880 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZWWMix_hadronic/4f_ZZWWMix_hadronicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZZWWH eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZWWMix_hadronic/4f_ZZWWMix_hadronicfile.root" 
+entries165282
+Running with 1600 -0.8 0.3  0 155771 9511 0
+* ZZWWL cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  0 0 0 0 0 0 0 0 
+ LR  767350 667399 76493 75315 75222 72030 11734 11660 
+ RL  1065 668 74 73 73 66 8 7 
+ RR  0 0 0 0 0 0 0 0 
+* ZZWWL tot  768415 668067 76567 75388 75295 72096 11742 11667 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZWWMix_leptonic/4f_ZZWWMix_leptonicfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree ZZWWL eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/4f_ZZWWMix_leptonic/4f_ZZWWMix_leptonicfile.root" 
+entries707437
+Running with 1600 -0.8 0.3  166977 255690 117723 167047
+* EEWW cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  3341 3012 2294 2183 2154 2147 817 740 
+ LR  15417 14390 10594 9769 9474 9453 2292 2115 
+ RL  204 171 113 106 105 104 50 45 
+ RR  687 620 471 449 443 442 168 153 
+* EEWW tot  19649 18193 13472 12507 12176 12146 3327 3053 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_eeWW/6f_eeWWfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree EEWW eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_eeWW/6f_eeWWfile.root" 
+entries299698
+Running with 1600 -0.8 0.3  20000 179698 80000 20000
+* LLWW cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  93 78 43 42 42 42 20 18 
+ LR  8161 7281 6014 5766 5711 5703 1223 1179 
+ RL  12 11 7 7 7 7 1 1 
+ RR  19 16 8 8 8 8 4 3 
+* LLWW tot  8285 7386 6072 5823 5768 5760 1248 1201 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_llWW/6f_llWWfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree LLWW eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_llWW/6f_llWWfile.root" 
+entries228600
+Running with 1600 -0.8 0.3  25000 90600 88000 25000
+* TTB cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  275 211 207 206 206 206 105 96 
+ LR  152867 110719 110594 108294 107817 107805 9455 9253 
+ RL  3396 2458 2456 2406 2393 2393 234 224 
+ RR  56 43 42 42 42 42 21 19 
+* TTB tot  156594 113431 113299 110948 110458 110446 9815 9592 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_ttbar/6f_ttbarfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree TTB eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_ttbar/6f_ttbarfile.root" 
+entries270049
+Running with 1600 -0.8 0.3  30000 121049 89000 30000
+* VVWW cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  91 64 16 16 16 15 10 9 
+ LR  13946 11503 5248 5224 5224 5150 4096 4041 
+ RL  13 10 5 5 5 5 4 4 
+ RR  18 13 3 3 3 3 2 2 
+* VVWW tot  14068 11590 5272 5248 5248 5173 4112 4056 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_vvWW/6f_vvWWfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree VVWW eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_vvWW/6f_vvWWfile.root" 
+entries218159
+Running with 1600 -0.8 0.3  30000 73359 84800 30000
+* XXWW cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  132 92 88 87 87 86 39 36 
+ LR  14695 12100 11811 11650 11583 11568 2252 2154 
+ RL  13 11 11 10 10 10 1 1 
+ RR  27 19 18 18 18 17 8 7 
+* XXWW tot  14867 12222 11928 11765 11698 11681 2300 2198 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_xxWW/6f_xxWWfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree XXWW eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_xxWW/6f_xxWWfile.root" 
+entries140000
+Running with 1600 -0.8 0.3  10000 60000 60000 10000
+* XXZ cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  17 10 10 7 7 6 1 0 
+ LR  59 19 18 13 12 12 1 1 
+ RL  1 0 0 0 0 0 0 0 
+ RR  3 1 1 1 1 1 0 0 
+* XXZ tot  80 30 29 21 20 19 2 1 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_xxxxZ/6f_xxxxZfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree XXZ eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_xxxxZ/6f_xxxxZfile.root" 
+entries400915
+Running with 1600 -0.8 0.3  80000 121115 120000 79800
+* YYZ cut  nocut lepton ntracks ptcut esum roots mwhad qcostw 
+ LL  11 9 5 4 4 3 1 0 
+ LR  693 510 344 255 237 222 40 29 
+ RL  5 3 2 1 1 1 0 0 
+ RR  2 1 1 0 0 0 0 0 
+* YYZ tot  711 523 352 260 242 226 41 29 
+['/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_yyyyZ/6f_yyyyZfile.root']
+('from runmacro numFiles == ', 1, ' nthreads == ', '8')
+./compiledthreads 8 tree YYZ eventSel.root UPDATE -0.8 0.3 1600 "/afs/desy.de/user/a/anguiano/dust/WWBenchmark/WWFiles/v2files/6f_yyyyZ/6f_yyyyZfile.root" 
