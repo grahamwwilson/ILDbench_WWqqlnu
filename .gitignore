@@ -11,3 +11,4 @@ macros/TauOptimzationMacros/Efficiency_Rejection_C.d
 scripts/dump.txt
 *~
 *.bak
+*.out.gz
