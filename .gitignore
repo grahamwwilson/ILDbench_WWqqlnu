@@ -9,3 +9,5 @@ macros/TauOptimzationMacros/Efficiency_Rejection_C.d
 *.o
 *.pdf
 scripts/dump.txt
+*~
+*.bak

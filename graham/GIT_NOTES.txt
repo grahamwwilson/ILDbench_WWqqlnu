@@ -1,0 +1,42 @@
+git remote add JustinFork https://github.com/Jphsx/ILDbench_WWqqlnu.git     Justin's Fork
+git pull JustinFork work                                                    pull all changes in Justin's work branch of his fork.
+
+
+# Copy over all the subBIRD stuff to mydust/subBIRD
+
+(then Justin pushed his local changes wrt to his fork back to his 
+
+
+ON DESY ~/mydust
+
+mkdir MYFORK
+cd MYFORK
+git clone https://github.com/grahamwwilson/ILDbench_WWqqlnu.git
+git branch
+git branch work   # To create work branch
+git checkout work
+
+git remote -v
+   98  git remote add upstream https://github.com/ILDAnaSoft/ILDbench_WWqqlnu.git
+   99  git remote -v
+
+git pull upstream work    (Pull work branch from remote repository called upstream)
+
+
+(What remote repositories can I push/pull to. do "git remote -v")
+origin = MyFork
+upstream = AnaSoft 
+
+1. back-and-forth with just MY (ie graham) fork
+git push origin work
+
+(This didn't work becuase of some authentication issues at DESY.
+ => 
+[wilson@naf-ilc12]~/mydust/MYFORK/ILDbench_WWqqlnu% git push origin work
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/grahamwwilson/ILDbench_WWqqlnu.git/info/refs
+
+fatal: HTTP request failed
+=> Work-around - commit from flc10.desy.de (need to hop to that from NAF inside the DESY network).
+
+2. back-and-forth with upstream (ie AnaSoft).
+git push upstream work
