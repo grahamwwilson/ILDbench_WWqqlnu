@@ -58,8 +58,10 @@ void MakePlotNew(string sname="LR")
    vector<double>  *MCf_Py=0;  tree->SetBranchAddress("MCf_Py", &MCf_Py);
    vector<double>  *MCf_Pz=0;  tree->SetBranchAddress("MCf_Pz", &MCf_Pz);
    vector<double>  *MCf_E=0;   tree->SetBranchAddress("MCf_E",  &MCf_E);
+   Int_t polarization1=0;      tree->SetBranchAddress("polarization1", &polarization1);
+   Int_t polarization2=0;      tree->SetBranchAddress("polarization2", &polarization2);
 
-   int n = min(11400,int(tree->GetEntries()));
+   int n = int(tree->GetEntries());
    cout << "n = " << n << endl;
 
    double Eb = 250.0;
@@ -69,6 +71,8 @@ void MakePlotNew(string sname="LR")
    for (unsigned int ievt=0; ievt<n; ++ievt) {
       tree->GetEntry(ievt);
       
+      if(polarization1==-1 && polarization2==1){  // Require specific helicities for each beam
+
       int id0 = MCf_PDG->at(0);
       int id1 = MCf_PDG->at(1);
       int id2 = MCf_PDG->at(2);
@@ -181,6 +185,7 @@ void MakePlotNew(string sname="LR")
       hMlv->Fill(mlv);
       hMlv2->Fill(mlv);
       hMave->Fill(mave);
+}
 
 /*         cout << "Angles " << endl;
          cout << "cos(u-d) " << cosang01 << endl;
